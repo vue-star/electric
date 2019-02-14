@@ -212,9 +212,9 @@
                 this.getElectricityMeterInfos();
                 this.getOrganizationUnits(2);
             },
-            getSerialPortInformations(OrganizationUnitType){
+            getSerialPortInformations(){
                 return new Promise((resolve, reject) => {
-                    getSerialPortInformationList(OrganizationUnitType).then(
+                    getSerialPortInformationList().then(
                        res => {
                             const data = res.data.result;
                             this.serialPortNumberList=data;
@@ -228,9 +228,9 @@
                     })
                 })   
             },
-            getRouterInformations(OrganizationUnitType){
+            getRouterInformations(){
                 return new Promise((resolve, reject) => {
-                    getRouterInformationList(OrganizationUnitType).then(
+                    getRouterInformationList().then(
                        res => {
                             const data = res.data.result;
                             this.snList=data;
@@ -244,9 +244,9 @@
                     })
                 })   
             },
-            getElectricityMeterInfos(OrganizationUnitType){
+            getElectricityMeterInfos(){
                 return new Promise((resolve, reject) => {
-                    getElectricityMeterInfoList(OrganizationUnitType).then(
+                    getElectricityMeterInfoList().then(
                        res => {
                             const data = res.data.result;
                             this.aliasList=data;

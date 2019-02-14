@@ -131,26 +131,18 @@ export default [{
                     icon: 'md-add',
                     title: '配电室信息'
                 },
-                component: () => import('@/view/equipment/power-distribution.vue')
+                component: () => import('@/view/equipment/power-distribution/power-distribution.vue')
             },
             {
-                path: 'power_distri',
-                name: 'power_distri',
+                path: 'box_transformer',
+                name: 'box_transformer',
                 meta: {
                     icon: 'md-add',
-                    title: '美式箱变信息'
+                    title: '箱变信息'
                 },
-                component: () => import('@/view/equipment/meter-information.vue')
-            },
-            {
-                path: 'power_distributi',
-                name: 'power_distributi',
-                meta: {
-                    icon: 'md-add',
-                    title: '欧式箱变信息'
-                },
-                component: () => import('@/view/equipment/meter-information.vue')
-            },
+                component: () => import('@/view/equipment/box-transformer/box-transformer.vue')
+            }
+            
             // {
             //     path: 'meter_information',
             //     name: 'meter_information',
