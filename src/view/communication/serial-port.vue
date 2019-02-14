@@ -57,8 +57,8 @@
                         </Col>
                         <Col span="10" class='col-wrap'>
                         <FormItem label="是否报警" prop="isAlarm">
-                             <RadioGroup v-model="formValidate.isAlarm">
-                                    <Radio v-for="item in isAlarmData" :key='item.value' 
+                            <RadioGroup v-model="formValidate.isAlarm">
+                                    <Radio v-for="item in isAlarmData" :key='item.value'
                                     :label="item.value">
                                     {{item.name}}
                                 </Radio>
@@ -87,248 +87,245 @@
     </div>
 </template>
 <script>
-    import search from '@/view/components/search/search.vue';
-    import operate from '@/view/components/button-group/index.vue';
-    import { formatData } from '@/libs/tools'
-    import { getSerialPortList,addSerialPort,delSerialPort,updataSerialPort } from '@/api/serialPort'
-    export default {
-        name: 'serial_port',
-        data() {
-            return {
-                columns1: [{
-						title: '序号',
-						key: 'index',
-                        width: 60,
-                        align: 'center'
-                    },
-                    {
-                        title: '串口编号',
-                        key: 'serialPortNumber',
-                        align: 'center',
+import search from '@/view/components/search/search.vue'
+import operate from '@/view/components/button-group/index.vue'
+import { formatData } from '@/libs/tools'
+import { getSerialPortList, addSerialPort, delSerialPort, updataSerialPort } from '@/api/serialPort'
+export default {
+  name: 'serial_port',
+  data () {
+    return {
+      columns1: [{
+        title: '序号',
+        key: 'index',
+        width: 60,
+        align: 'center'
+      },
+      {
+        title: '串口编号',
+        key: 'serialPortNumber',
+        align: 'center'
 
-                    },
-                    {
-                        title: '别名',
-                        key: 'alias',
-                        align: 'center',
-                    },
-                    {
-                        title: '绑定类型',
-                        key: 'bindType',
-                        align: 'center',
-                    },
-                    {
-                        title: '是否报警',
-                        key: 'isAlarmData',
-                        align: 'center',
-                    },
-                    {
-                        title: '创建时间',
-                        key: 'creationTime',
-                        align: 'center',
-                    },
-                    {
-                        title: '备注',
-                        key: 'remark',
-                        align: 'center',
-                    }
-                ],
-                listData: [],
-                isAlarmData:[
-                    {
-                        value:1,
-                        name:'是'
-                    },
-                    {
-                        value:0,
-                        name:'否'
-                    }
-                ],
-                data: {},
-                total: 1,
-                showList: true, //显示列表
-                showLog: false,
-                isSelect: false,
-                add: false,
-                titleText: '串口信息列表',
-                modelTitle: '',
-                placeholderValue: '请输入串口名称',
-                isLoading: false,
-                isEdit: false, // 点击编辑切换
-                queryParam: {
-                    "maxResultCount": 10,
-                    "filter": '',
-                    "pageNumber": 0,
-                    "skipCount": 0
-                },
-                removeInputFlag: 0,
-                addBtn: true, //新增按钮权限
-                deleteBtn: false, //删除按钮权限
-                editBtn: false,
-                isAddSerialPort: false,
-                formValidate: {
-                    isAlarm:1
-                },
-                saving: false,
-                ruleValidate: {
-                    serialPortNumber: [
-                        { required: true, message: '请输入串口编号', trigger: 'blur' }
-                    ],
-                    bindType: [
-                        { required: true, message: '请输入绑定类型', trigger: 'blur' }
-                    ],
-                    alias: [
-                        { required: true, message: '请输入名称', trigger: 'blur' }
-                    ]
-                }
-            }
+      },
+      {
+        title: '别名',
+        key: 'alias',
+        align: 'center'
+      },
+      {
+        title: '绑定类型',
+        key: 'bindType',
+        align: 'center'
+      },
+      {
+        title: '是否报警',
+        key: 'isAlarmData',
+        align: 'center'
+      },
+      {
+        title: '创建时间',
+        key: 'creationTime',
+        align: 'center'
+      },
+      {
+        title: '备注',
+        key: 'remark',
+        align: 'center'
+      }
+      ],
+      listData: [],
+      isAlarmData: [
+        {
+          value: 1,
+          name: '是'
         },
-        methods: {
-            init() {
-                this.getListData();
-            },
-            getListData(){
-                return new Promise((resolve, reject) => {
-                    getSerialPortList(this.queryParam).then(
-                        res => {
-                            const data = res.data.result;
-                            this.isLoading = false;
-                            this.listData = data.items;
-                            let size=this.queryParam.skipCount+1;
-                            this.listData.forEach(element=>{
-                                element.index=size++;
-                                element.creationTime=formatData(element.creationTime,"day");
-                                if(element.isAlarm){
-                                    element.isAlarmData='是';
-                                    element.isAlarm=1;
-                                }else{
-                                    element.isAlarmData='否';
-                                    element.isAlarm=0;
-                                }
-                            })
-                            this.total = data.totalCount;
-                            resolve()
-                        },
-                        error => {
-                            this.$Message.error(error.error.message);
-                            resolve();
-                    }).catch(err => {
-                        reject(err)
-                    })
-                })     
-            },
-            query(data) {
-                this.queryParam.pageNumber = 0;
-                this.queryParam.skipCount = 0;
-                this.queryParam.filter = data.filter;
-                this.getListData();
-            },
-
-            selectItem(data, index) {
-                this.deleteBtn = true;
-                this.editBtn = true;
-                this.data = data;
-                this.selectIndex = index;
-                this.isSelect = true;
-            },
-            pageChange(data) {
-                this.queryParam.pageNumber = data - 1;
-                this.queryParam.skipCount = (data - 1) * this.queryParam.maxResultCount;
-                this.getListData();
-            },
-            // 刷新页面
-            refreshHandler() {
-                this.queryParam.filter = '';
-                this.isSelect = false;
-                this.getListData();
-            },
-            deleteHandler(data) {
-                return new Promise((resolve, reject) => {
-                    delSerialPort(data.id).then(
-                        res => {
-                            this.$Message.success('删除串口成功');
-                            this.isSelect = false;
-                            this.getListData();
-                            resolve()
-                        },
-                        error => {
-                            this.$Message.error(error.error.message);
-                            resolve();
-                    }).catch(err => {
-                        reject(err)
-                    })
-                })     
-                
-            },
-             addHandler() {
-                this.isAddSerialPort = true;
-                this.modelTitle = '新增串口';
-            },
-            //编辑
-            editHandler(index) {
-                this.isEdit = true;
-                this.isAddSerialPort = true;
-                this.modelTitle = '编辑串口信息';
-                this.formValidate = this.data;
-            },
-            handleCancle(name) {
-                this.isAddSerialPort = false;
-                this.$refs[name].resetFields();
-            },
-            handelSave(name) {
-                this.$refs[name].validate((valid) => {
-                    if (valid) {
-                        if(this.isEdit){
-                            return new Promise((resolve, reject) => {
-                            updataSerialPort(this.formValidate).then(
-                                res => {
-                                    this.$Message.success('修改设备成功');
-                                    this.isAddSerialPort = false;
-                                    this.isEdit=false;
-                                    this.formValidate = {};
-                                    this.getListData();
-                                    resolve()
-                                },
-                                error => {
-                                    this.$Message.error(error.error.message);
-                                    resolve();
-                            }).catch(err => {
-                                reject(err)
-                            })
-                        })    
-                        }
-                        return new Promise((resolve, reject) => {
-                            addSerialPort(this.formValidate).then(
-                                res => {
-                                    this.$Message.success('新增设备成功');
-                                    this.isAddSerialPort = false;
-                                    this.formValidate = {};
-                                    this.getListData();
-                                    resolve()
-                                },
-                                error => {
-                                    this.$Message.error(error.error.message);
-                                    resolve();
-                            }).catch(err => {
-                                reject(err)
-                            })
-                        })  
-                    } else {
-                        this.$Message.error('输入有误!');
-                    }
-                })
-                   
-                
-            }
-        },
-        components: {
-            search,
-            operate,
-        },
-        mounted() {
-            this.init();
+        {
+          value: 0,
+          name: '否'
         }
-    };
+      ],
+      data: {},
+      total: 1,
+      showList: true, // 显示列表
+      showLog: false,
+      isSelect: false,
+      add: false,
+      titleText: '串口信息列表',
+      modelTitle: '',
+      placeholderValue: '请输入串口名称',
+      isLoading: false,
+      isEdit: false, // 点击编辑切换
+      queryParam: {
+        'maxResultCount': 10,
+        'filter': '',
+        'pageNumber': 0,
+        'skipCount': 0
+      },
+      removeInputFlag: 0,
+      addBtn: true, // 新增按钮权限
+      deleteBtn: false, // 删除按钮权限
+      editBtn: false,
+      isAddSerialPort: false,
+      formValidate: {
+        isAlarm: 1
+      },
+      saving: false,
+      ruleValidate: {
+        serialPortNumber: [
+          { required: true, message: '请输入串口编号', trigger: 'blur' }
+        ],
+        bindType: [
+          { required: true, message: '请输入绑定类型', trigger: 'blur' }
+        ],
+        alias: [
+          { required: true, message: '请输入名称', trigger: 'blur' }
+        ]
+      }
+    }
+  },
+  methods: {
+    init () {
+      this.getListData()
+    },
+    getListData () {
+      return new Promise((resolve, reject) => {
+        getSerialPortList(this.queryParam).then(
+          res => {
+            const data = res.data.result
+            this.isLoading = false
+            this.listData = data.items
+            let size = this.queryParam.skipCount + 1
+            this.listData.forEach(element => {
+              element.index = size++
+              element.creationTime = formatData(element.creationTime, 'day')
+              if (element.isAlarm) {
+                element.isAlarmData = '是'
+                element.isAlarm = 1
+              } else {
+                element.isAlarmData = '否'
+                element.isAlarm = 0
+              }
+            })
+            this.total = data.totalCount
+            resolve()
+          },
+          error => {
+            this.$Message.error(error.error.message)
+            resolve()
+          }).catch(err => {
+          reject(err)
+        })
+      })
+    },
+    query (data) {
+      this.queryParam.pageNumber = 0
+      this.queryParam.skipCount = 0
+      this.queryParam.filter = data.filter
+      this.getListData()
+    },
+
+    selectItem (data, index) {
+      this.deleteBtn = true
+      this.editBtn = true
+      this.data = data
+      this.selectIndex = index
+      this.isSelect = true
+    },
+    pageChange (data) {
+      this.queryParam.pageNumber = data - 1
+      this.queryParam.skipCount = (data - 1) * this.queryParam.maxResultCount
+      this.getListData()
+    },
+    // 刷新页面
+    refreshHandler () {
+      this.queryParam.filter = ''
+      this.isSelect = false
+      this.getListData()
+    },
+    deleteHandler (data) {
+      return new Promise((resolve, reject) => {
+        delSerialPort(data.id).then(
+          res => {
+            this.$Message.success('删除串口成功')
+            this.isSelect = false
+            this.getListData()
+            resolve()
+          },
+          error => {
+            this.$Message.error(error.error.message)
+            resolve()
+          }).catch(err => {
+          reject(err)
+        })
+      })
+    },
+    addHandler () {
+      this.isAddSerialPort = true
+      this.modelTitle = '新增串口'
+    },
+    // 编辑
+    editHandler (index) {
+      this.isEdit = true
+      this.isAddSerialPort = true
+      this.modelTitle = '编辑串口信息'
+      this.formValidate = this.data
+    },
+    handleCancle (name) {
+      this.isAddSerialPort = false
+      this.$refs[name].resetFields()
+    },
+    handelSave (name) {
+      this.$refs[name].validate((valid) => {
+        if (valid) {
+          if (this.isEdit) {
+            return new Promise((resolve, reject) => {
+              updataSerialPort(this.formValidate).then(
+                res => {
+                  this.$Message.success('修改设备成功')
+                  this.isAddSerialPort = false
+                  this.isEdit = false
+                  this.formValidate = {}
+                  this.getListData()
+                  resolve()
+                },
+                error => {
+                  this.$Message.error(error.error.message)
+                  resolve()
+                }).catch(err => {
+                reject(err)
+              })
+            })
+          }
+          return new Promise((resolve, reject) => {
+            addSerialPort(this.formValidate).then(
+              res => {
+                this.$Message.success('新增设备成功')
+                this.isAddSerialPort = false
+                this.formValidate = {}
+                this.getListData()
+                resolve()
+              },
+              error => {
+                this.$Message.error(error.error.message)
+                resolve()
+              }).catch(err => {
+              reject(err)
+            })
+          })
+        } else {
+          this.$Message.error('输入有误!')
+        }
+      })
+    }
+  },
+  components: {
+    search,
+    operate
+  },
+  mounted () {
+    this.init()
+  }
+}
 
 </script>
 <style lang='less'>

@@ -31,64 +31,58 @@
                 @on-change='pageChange'>
             </Page>
         </div>
-        <distribution-form v-if='add' 
-			:isEdit='isEdit' 
-			:editData='data' 
-			@back='back'>
-		</distribution-form>
-        <distribution-detail v-if='add' 
-			:isEdits='isEdits' 
-			:powerDistributionRoomId='powerDistributionRoomId' 
-			@back='back'>
-		</distribution-detail>
+        <distribution-form v-if='add' :isEdit='isEdit' :editData='data' @back='back'>
+        </distribution-form>
+        <distribution-detail v-if='add' :isEdits='isEdits' :powerDistributionRoomId='powerDistributionRoomId' @back='back'>
+        </distribution-detail>
     </div>
 </template>
 <script>
-    import search from '@/view/components/search/search.vue';
-    import operate from '@/view/components/button-group/index.vue';
-    import { formatData, objEqual } from '@/libs/tools';
-    import distributionForm from './distribution-form.vue';
-    import distributionDetail from './distribution-detail.vue';
-    import { getPowerDistributionList,delPowerDistribution } from '@/api/powerDistribution'
-    import { getOrganizationList } from '@/api/data'
+    import search from '@/view/components/search/search.vue'
+    import operate from '@/view/components/button-group/index.vue'
+    import distributionForm from './distribution-form.vue'
+    import distributionDetail from './distribution-detail.vue'
+    import {
+        getPowerDistributionList,
+        delPowerDistribution
+    } from '@/api/powerDistribution'
     export default {
         name: 'power_distribution',
         data() {
             return {
                 columns1: [{
-						title: '序号',
-						key: 'index',
+                        title: '序号',
+                        key: 'index',
                         width: 60,
                         align: 'center'
                     },
                     {
                         title: '配电室编号',
                         key: 'distributionRoomNumber',
-                        align: 'center',
-                        
+                        align: 'center'
+
                     },
-                     {
+                    {
                         title: '配电室名称',
                         key: 'distributionRoomName',
-                        align: 'center',
+                        align: 'center'
                     },
                     {
                         title: '表计户号',
                         key: 'meterNumber',
-                        align: 'center',
+                        align: 'center'
                     },
                     {
                         title: '组织名称',
                         key: 'organizationUnitName',
-                        align: 'center',
+                        align: 'center'
                     }
                 ],
                 listData: [],
-                organizationUnitIdList:[],
                 data: {},
                 total: 1,
                 page: 1,
-                showList: true, //显示列表
+                showList: true, // 显示列表
                 showLog: false,
                 isSelect: false,
                 add: false,
@@ -101,140 +95,123 @@
                 isEdit: false, // 点击编辑切换
                 isEdits: false, // 点击编辑切换
                 queryParam: {
-                    "maxResultCount": 10,
-                    "filter": '',
-                    "pageNumber": 0,
-                    "skipCount": 0
+                    'maxResultCount': 10,
+                    'filter': '',
+                    'pageNumber': 0,
+                    'skipCount': 0
                 },
                 removeInputFlag: 0,
-                addBtn: true, //新增按钮权限
-                deleteBtn: false, //删除按钮权限
+                addBtn: true, // 新增按钮权限
+                deleteBtn: false, // 删除按钮权限
                 editBtn: false,
                 isAddPowerDistribution: false,
                 formValidate: {},
                 ruleValidate: {
-                    distributionRoomNumber: [
-                        { required: true, message: '请输入电力设施名称', trigger: 'blur' },
-                    ],
-                    distributionRoomName: [
-                        { required: true, message: '请输入进线电源', trigger: 'blur' }
-                    ]
+                    distributionRoomNumber: [{
+                        required: true,
+                        message: '请输入电力设施名称',
+                        trigger: 'blur'
+                    }],
+                    distributionRoomName: [{
+                        required: true,
+                        message: '请输入进线电源',
+                        trigger: 'blur'
+                    }]
                 },
                 saving: false,
-                powerDistributionRoomId:''
+                powerDistributionRoomId: ''
             }
         },
         methods: {
             init() {
-                this.getListData();
-                this.getOrganizationUnits(2);
+                this.getListData()
             },
-            getOrganizationUnits(OrganizationUnitType){
-                return new Promise((resolve, reject) => {
-                    getOrganizationList(OrganizationUnitType).then(
-                       res => {
-                            const data = res.data.result.items;
-                            this.organizationUnitIdList=data;
-                            resolve()
-                        },
-                        error => {
-                            this.$Message.error(error.error.message);
-                            resolve();
-                    }).catch(err => {
-                        reject(err)
-                    })
-                })   
-            },
-            getListData(){
+            getListData() {
                 return new Promise((resolve, reject) => {
                     getPowerDistributionList(this.queryParam).then(
                         res => {
-                            const data = res.data.result;
-                            this.isLoading = false;
-                            this.isSelect=false;
-                            this.listData = data.items;
-                            let size=this.queryParam.skipCount+1;
-                            this.listData.forEach(element=>{
-                                element.index=size++;
+                            const data = res.data.result
+                            this.isLoading = false
+                            this.isSelect = false
+                            this.listData = data.items
+                            let size = this.queryParam.skipCount + 1
+                            this.listData.forEach(element => {
+                                element.index = size++
                             })
-                            this.total = data.totalCount;
+                            this.total = data.totalCount
                             resolve()
                         },
-                            error => {
-                                this.$Message.error(error.error.message);
-                                resolve();
-                    }).catch(err => {
+                        error => {
+                            this.$Message.error(error.error.message)
+                            resolve()
+                        }).catch(err => {
                         reject(err)
                     })
-                })     
+                })
             },
             query(data) {
-                this.queryParam.pageNumber = 0;
-                this.queryParam.skipCount = 0;
-                this.queryParam.filter = data.filter;
-                this.getListData();
+                this.queryParam.pageNumber = 0
+                this.queryParam.skipCount = 0
+                this.queryParam.filter = data.filter
+                this.getListData()
             },
 
             selectItem(data, index) {
-                this.deleteBtn = true;
-                this.editBtn = true;
-                this.data = data;
-                this.selectIndex = index;
-                this.isSelect = true;
+                this.deleteBtn = true
+                this.editBtn = true
+                this.data = data
+                this.selectIndex = index
+                this.isSelect = true
             },
             pageChange(data) {
-                this.queryParam.pageNumber = data - 1;
-                this.queryParam.skipCount = (data - 1) * this.queryParam.maxResultCount;
-                this.getListData();
+                this.queryParam.pageNumber = data - 1
+                this.queryParam.skipCount = (data - 1) * this.queryParam.maxResultCount
+                this.getListData()
             },
             // 刷新页面
             refreshHandler() {
-                this.queryParam.filter = '';
-                this.isSelect = false;
-                this.getListData();
+                this.queryParam.filter = ''
+                this.isSelect = false
+                this.getListData()
             },
             deleteHandler(data) {
                 return new Promise((resolve, reject) => {
                     delPowerDistribution(data.id).then(res => {
-                        this.$Message.success('删除电力设施成功');
-                        this.isSelect = false;
-                        this.getListData();
+                        this.$Message.success('删除电力设施成功')
+                        this.isSelect = false
+                        this.getListData()
                         resolve()
                     }).catch(err => {
                         reject(err)
                     })
-                })     
-                
+                })
             },
             addHandler() {
-                this.add = true;
-                this.isEdit = false;
-                this.showList = false;
-                this.titleText = '新增配电室';
-
+                this.add = true
+                this.isEdit = false
+                this.showList = false
+                this.titleText = '新增配电室'
             },
-            //编辑
+            // 编辑
             editHandler(index) {
-                this.add = true;
-                this.isEdit = true;
-                this.isEdits = true;
-                this.showList = false;
-                this.titleText = '编辑配电室';
-                this.powerDistributionRoomId=this.data.id;
-
-               
+                this.add = true
+                this.isEdit = true
+                this.isEdits = true
+                this.showList = false
+                this.titleText = '编辑配电室'
+                this.powerDistributionRoomId = this.data.id
             },
             back() {
-				this.add = false;
-				this.showLog = false;
-                this.showList = true;
-                this.isEdit = false;
-                this.isEdits = false;
-				this.powerDistributionRoomId = '';
-				this.isSelect = false;
-				this.getListData();
-				this.titleText = '方案列表';
-			},
+                this.add = false
+                this.showLog = false
+                this.showList = true
+                this.isEdit = false
+                this.isEdits = false
+                this.powerDistributionRoomId = ''
+                this.isSelect = false
+                this.getListData()
+                this.titleText = '方案列表'
+            }
         },
         components: {
             search,
@@ -243,9 +220,9 @@
             distributionDetail
         },
         mounted() {
-            this.init();
+            this.init()
         }
-    };
+    }
 
 </script>
 <style lang='less'>

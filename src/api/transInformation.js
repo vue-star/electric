@@ -1,11 +1,11 @@
 import axios from '@/libs/api.request'
-//获取高压列表
-export const getTransInformationList = (id,data) => {
-    const BoxTransformerOrPowerDistributionRoomId=id;
-    const BelongType=1;
-    const MaxResultCount=data.maxResultCount;
-    const SkipCount=data.skipCount;
-    const Filter=data.filter
+// 获取变压列表
+export const getTransInformationList = (id, data, type) => {
+    const BoxTransformerOrPowerDistributionRoomId = id
+    const BelongType = type
+    const MaxResultCount = data.maxResultCount
+    const SkipCount = data.skipCount
+    const Filter = data.filter
 
     return axios.request({
         url: 'services/app/TransformerInformation/GetPaged',
@@ -19,16 +19,16 @@ export const getTransInformationList = (id,data) => {
         method: 'get'
     })
 }
-//新增高压
+// 新增变压
 export const addTransInformation = (TransformerInformation) => {
-    const data = TransformerInformation;
+    const data = TransformerInformation
     return axios.request({
         url: 'services/app/TransformerInformation/Create',
         data,
         method: 'post'
     })
 }
-//删除高压
+// 删除变压
 export const delTransInformation = (id) => {
     return axios.request({
         url: 'services/app/TransformerInformation/Delete',
@@ -38,9 +38,9 @@ export const delTransInformation = (id) => {
         method: 'delete'
     })
 }
-//修改高压
+// 修改变压
 export const updataTransInformation = (TransformerInformation) => {
-    const data = TransformerInformation;
+    const data = TransformerInformation
     return axios.request({
         url: 'services/app/TransformerInformation/Update',
         data,

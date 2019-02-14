@@ -12,6 +12,8 @@ module.exports = {
         'vue/no-parsing-error': [4, {
             'x-invalid-end-tag': false
         }],
-        'no-undef': 'off'
+        'no-undef': 'off',
+        'indent': 'off',
+        "space-before-function-paren": 0,
     }
 }
