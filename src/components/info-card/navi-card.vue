@@ -84,6 +84,7 @@ export default {
     .size;
     position: relative;
     .card-top-area{
+      padding: 5px;
       .icon{
         float: left;
         margin: 3px;

@@ -963,7 +963,7 @@ export default {
       delType: 0,
       type: 2,
       formHighValidate: {
-        BoxTransformerOrPowerDistributionRoomId: 2,
+        BoxTransformerOrPowerDistributionRoomId: this.boxTransformerId,
         belongType: 2
       },
       formLowValidate: {

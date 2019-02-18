@@ -2,7 +2,7 @@
     <Card :shadow="shadow" class="info-card-wrapper" :padding="0">
         <div class="content-con">
             <div class="left-area" :style="{background: color, width: leftWidth}">
-                <common-icon class="icon" :type="icon" :size="iconSize" color="#fff" />
+                <common-icon class="icon" :type="icon" :size="iconSize" :color="iconColor" />
             </div>
             <div class="right-area" :style="{background: color,width: rightWidth}">
                 <div>
@@ -37,6 +37,10 @@
                 type: Number,
                 default: 20
             },
+            iconColor: {
+                type: String,
+                default: '#2d8cf0'
+            },
             shadow: {
                 type: Boolean,
                 default: false
@@ -47,7 +51,7 @@
                 return `${this.left}%`
             },
             rightWidth() {
-                return `${100 - this.left+1}%`
+                return `${100 - this.left + 1}%`
             }
         }
     }

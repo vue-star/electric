@@ -9,7 +9,7 @@
                         <p>数据实时指标</p>
                     </div>
                     <div v-for="(infor, i) in inforCardData" :key="`infor-${i}`" class="info-div" style="height: 120px;">
-                        <infor-card shadow :color="infor.color" :icon="infor.icon" :icon-size="42">
+                        <infor-card shadow :color="infor.color" :icon="infor.icon" :icon-size="42" :icon-color="infor.iconColor">
                             <count-to :end="infor.count" count-class="count-style"/>
                             <p style="color:#fff">{{ infor.title }}</p>
                         </infor-card>
@@ -18,7 +18,7 @@
 
             </i-col>
         </Row>
-        
+
         <Row style="margin-top: 20px;">
             <div class="card-area">
                 <div class="top-style"></div>
@@ -58,6 +58,7 @@
                 inforCardData: [{
                         title: '已接入客户数',
                         icon: 'md-person-add',
+                        iconColor: '#fff',
                         count: 0,
                         color: '#2d8cf0'
                     },
@@ -65,24 +66,28 @@
                         title: '已接入设备数',
                         icon: 'md-locate',
                         count: 0,
+                        iconColor: '#fff',
                         color: '#19be6b'
                     },
                     {
                         title: '使用电量数',
                         icon: 'md-calculator',
                         count: 0,
+                        iconColor: '#fff',
                         color: '#ff9900'
                     },
                     {
                         title: '离线设备数',
                         icon: 'md-eye-off',
                         count: 0,
+                        iconColor: '#fff',
                         color: '#ed3f14'
                     },
                     {
                         title: '故障设备数',
                         icon: 'md-medkit',
                         count: 0,
+                        iconColor: '#fff',
                         color: '#E46CBB'
                     }
                 ],
@@ -116,7 +121,7 @@
                     Sat: 1322,
                     Sun: 1324
                 },
-                giveData: { //vue2.0将数据定位对象的形式，实现父子组件的通信
+                giveData: { // vue2.0将数据定位对象的形式，实现父子组件的通信
                     height: 300,
                     longitude: 116.404,
                     latitude: 39.915
@@ -128,31 +133,31 @@
                 }
             }
         },
-        methods:{
-            init(){
-                this.getStatisticalData();
+        methods: {
+            init() {
+                this.getStatisticalData()
             },
-            getStatisticalData(){
+            getStatisticalData() {
                 return new Promise((resolve, reject) => {
                     getData().then(res => {
                         const data = res.data.result
-                        this.inforCardData.forEach((element, index)=>{
-                            switch(index){
+                        this.inforCardData.forEach((element, index) => {
+                            switch (index) {
                                 case 0:
-                                    element.count=data.customerCount;
-                                    break;
+                                    element.count = data.customerCount
+                                    break
                                 case 1:
-                                    element.count=data.equipmentCount;
-                                    break;
+                                    element.count = data.equipmentCount
+                                    break
                                 case 2:
-                                    element.count=data.equipmentOfflineCount;
-                                    break;
+                                    element.count = data.equipmentOfflineCount
+                                    break
                                 case 3:
-                                    element.count=data.failureToBeProcessedCount;
-                                    break;
+                                    element.count = data.failureToBeProcessedCount
+                                    break
                                 case 4:
-                                    element.count=data.urgentRepairsToBeProcessed;
-                                    break;
+                                    element.count = data.urgentRepairsToBeProcessed
+                                    break
                             }
                         })
                         resolve()
@@ -164,7 +169,7 @@
 
         },
         mounted() {
-            this.init();
+            this.init()
         }
     }
 

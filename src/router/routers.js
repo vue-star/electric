@@ -67,34 +67,7 @@ export default [{
                     title: '代理商信息'
                 },
                 component: () => import('@/view/customer/agent-info.vue')
-            },
-            // {
-            //     path: 'electricity_distribution_room_info',
-            //     name: 'electricity_distribution_room_info',
-            //     meta: {
-            //         icon: 'ios-infinite',
-            //         title: '配电室信息'
-            //     },
-            //     component: () => import('@/view/customer/electricity-distribution-room-info.vue')
-            // },
-            // {
-            //     path: 'ledger_info',
-            //     name: 'ledger_info',
-            //     meta: {
-            //         icon: 'md-grid',
-            //         title: '台账信息'
-            //     },
-            //     component: () => import('@/view/customer/ledger-info.vue')
-            // },
-            // {
-            //     path: 'video_info',
-            //     name: 'video_info',
-            //     meta: {
-            //         icon: 'md-pause',
-            //         title: '视频信息'
-            //     },
-            //     component: () => import('@/view/customer/video-info.vue')
-            // }
+            }
         ]
     },
     {
@@ -142,43 +115,6 @@ export default [{
                 },
                 component: () => import('@/view/equipment/box-transformer/box-transformer.vue')
             }
-            
-            // {
-            //     path: 'meter_information',
-            //     name: 'meter_information',
-            //     meta: {
-            //         icon: 'md-add',
-            //         title: '电表信息'
-            //     },
-            //     component: () => import('@/view/equipment/meter-information.vue')
-            // },
-            // {
-            //     path: 'equipment_off_line_list',
-            //     name: 'equipment_off_line_list',
-            //     meta: {
-            //         icon: 'md-download',
-            //         title: '设备离线列表'
-            //     },
-            //     component: () => import('@/view/equipment/equipment-off-line-list.vue')
-            // },
-            // {
-            //     path: 'message_recording',
-            //     name: 'message_recording',
-            //     meta: {
-            //         icon: 'md-download',
-            //         title: '短信记录'
-            //     },
-            //     component: () => import('@/view/equipment/message-recording.vue')
-            // },
-            // {
-            //     path: 'fault_record',
-            //     name: 'fault_record',
-            //     meta: {
-            //         icon: 'md-download',
-            //         title: '故障记录'
-            //     },
-            //     component: () => import('@/view/equipment/fault-record.vue')
-            // }
         ]
     },
     {
@@ -256,41 +192,51 @@ export default [{
         ]
     },
     {
+        path: '/EPU-statistics',
+        name: 'EPU-statistics',
+        meta: {
+            icon: 'md-cloud-upload',
+            title: '电力设备统计'
+        },
+        component: Main,
+        children: [{
+                path: 'power_statistics',
+                name: 'power_statistics',
+                meta: {
+                    icon: 'ios-document',
+                    title: '配电房'
+                },
+                component: () => import('@/view/EPU-Statistics/power-distribution.vue')
+            },
+            {
+                path: 'europe_box_transformer',
+                name: 'europe_box_transformer',
+                meta: {
+                    icon: 'md-clipboard',
+                    title: '欧式箱变'
+                },
+                component: () => import('@/view/EPU-Statistics/europe-box-transformer.vue')
+            },
+            {
+                path: 'american_box_transformer',
+                name: 'american_box_transformer',
+                meta: {
+                    icon: 'md-clipboard',
+                    title: '美式箱变'
+                },
+                component: () => import('@/view/EPU-Statistics/american-box-transformer.vue')
+            }
+        ]
+    },
+    {
         path: '/report',
         name: 'report',
         meta: {
             icon: 'ios-stats',
-            title: '统计报表'
+            title: '电能统计'
         },
         component: Main,
         children: [{
-                path: 'demand_curve',
-                name: 'demand_curve',
-                meta: {
-                    icon: 'md-add',
-                    title: '需量曲线'
-                },
-                component: () => import('@/view/report/demand-curve.vue')
-            },
-            {
-                path: 'basic_data',
-                name: 'basic_data',
-                meta: {
-                    icon: 'md-download',
-                    title: '基础数据'
-                },
-                component: () => import('@/view/report/basic-data.vue')
-            },
-            {
-                path: 'energy_analysis',
-                name: 'energy_analysis',
-                meta: {
-                    icon: 'md-download',
-                    title: '能耗统计分析'
-                },
-                component: () => import('@/view/report/energy-analysis.vue')
-            },
-            {
                 path: 'survey_survey',
                 name: 'survey_survey',
                 meta: {
@@ -304,10 +250,57 @@ export default [{
                 name: 'energy_profile',
                 meta: {
                     icon: 'md-download',
-                    title: '用能概况'
+                    title: '用电概括'
                 },
                 component: () => import('@/view/report/energy-profile.vue')
             },
+            {
+                path: 'functional_factors',
+                name: 'functional_factors',
+                meta: {
+                    icon: 'md-download',
+                    title: '功能因素'
+                },
+                component: () => import('@/view/report/functional-factors.vue')
+            }, 
+            {
+                path: 'energy_analysis',
+                name: 'energy_analysis',
+                meta: {
+                    icon: 'md-download',
+                    title: '能耗分析'
+                },
+                component: () => import('@/view/report/energy-analysis.vue')
+            },
+            {
+                path: 'current_analysis',
+                name: 'current_analysis',
+                meta: {
+                    icon: 'md-add',
+                    title: '电流分析'
+                },
+                component: () => import('@/view/report/current-analysis.vue')
+            },
+            {
+                path: 'voltage_analysis',
+                name: 'voltage_analysis',
+                meta: {
+                    icon: 'md-download',
+                    title: '电压分析'
+                },
+                component: () => import('@/view/report/voltage-analysis.vue')
+            },
+            {
+                path: 'fault_analysis',
+                name: 'fault_analysis',
+                meta: {
+                    icon: 'md-download',
+                    title: '故障分析'
+                },
+                component: () => import('@/view/report/fault-analysis.vue')
+            },
+           
+            
         ]
     },
     {
@@ -429,95 +422,6 @@ export default [{
             },
         ]
     },
-    // {
-    //     path: '/multilevel',
-    //     name: 'multilevel',
-    //     meta: {
-    //         icon: 'md-menu',
-    //         title: '综合信息'
-    //     },
-    //     component: Main,
-    //     children: [{
-    //             path: 'level_2_1',
-    //             name: 'level_2_1',
-    //             meta: {
-    //                 icon: 'md-funnel',
-    //                 title: '客户信息'
-    //             },
-    //             component: () => import('@/view/multilevel/level-2-1.vue')
-    //         },
-    //         {
-    //             path: 'level_2_2',
-    //             name: 'level_2_2',
-    //             meta: {
-    //                 access: ['super_admin'],
-    //                 icon: 'md-funnel',
-    //                 showAlways: true,
-    //                 title: '设备信息'
-    //             },
-    //             component: parentView,
-    //             children: [{
-    //                     path: 'level_2_2_1',
-    //                     name: 'level_2_2_1',
-    //                     meta: {
-    //                         icon: 'md-funnel',
-    //                         title: '故障记录'
-    //                     },
-    //                     component: () => import('@/view/multilevel/level-2-2/level-3-1.vue')
-    //                 },
-    //                 {
-    //                     path: 'level_2_2_2',
-    //                     name: 'level_2_2_2',
-    //                     meta: {
-    //                         icon: 'md-funnel',
-    //                         title: 'SCADA'
-    //                     },
-    //                     component: () => import('@/view/multilevel/level-2-3.vue')
-    //                 },
-    //                 {
-    //                     path: 'level_2_2_3',
-    //                     name: 'level_2_2_3',
-    //                     meta: {
-    //                         icon: 'md-funnel',
-    //                         title: '电表信息'
-    //                     },
-    //                     component: () => import('@/view/multilevel/level-2-2/level-2-1.vue')
-    //                 }
-    //             ]
-    //         },
-    //         {
-    //             path: 'level_2_3',
-    //             name: 'level_2_3',
-    //             meta: {
-    //                 access: ['super_admin'],
-    //                 icon: 'md-funnel',
-    //                 showAlways: true,
-    //                 title: '统计报表'
-    //             },
-    //             component: parentView,
-    //             children: [{
-    //                     path: 'level_2_3_1',
-    //                     name: 'level_2_3_1',
-    //                     meta: {
-    //                         icon: 'md-funnel',
-    //                         title: '计量概况'
-    //                     },
-    //                     component: () => import('@/view/multilevel/level-2-2/level-2-3.vue')
-    //                 },
-    //                 {
-    //                     path: 'level_2_3_2',
-    //                     name: 'level_2_3_2',
-    //                     meta: {
-    //                         icon: 'md-funnel',
-    //                         title: '容量曲线'
-    //                     },
-    //                     component: () => import('@/view/multilevel/level-2-2/level-2-4.vue')
-    //                 }
-    //             ]
-    //         },
-
-    //     ]
-    // },
     {
         path: '/argu',
         name: 'argu',

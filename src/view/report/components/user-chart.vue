@@ -1,0 +1,59 @@
+<template>
+    <div ref="dom" class="charts chart-bar"></div>
+</template>
+
+<script>
+    import echarts from 'echarts'
+    import tdTheme from './theme.json'
+    echarts.registerTheme('tdTheme', tdTheme)
+    export default {
+        name: 'StatisticsBar',
+        props: {
+            value: Object,
+            text: String,
+            subtext: String
+        },
+        mounted() {
+            this.$nextTick(() => {
+                let xAxisData = Object.keys(this.value)
+                let seriesData = Object.values(this.value)
+                let option = {
+                    title: {
+                        text: this.text,
+                        subtext: this.subtext,
+                        x: 'center'
+                    },
+                    xAxis: {
+                        type: 'category',
+                        data: xAxisData
+                    },
+                    yAxis: {
+                        type: 'value',
+                        name: '功率',
+                        axisLabel: {
+                            formatter: function (value) {
+                                var texts = []
+                                texts.push(value + ' kwh')
+                                return texts
+                            }
+                        }
+                    },
+                    series: [{
+                        data: seriesData,
+                        type: 'line'
+                    }]
+                }
+                let dom = echarts.init(this.$refs.dom, 'tdTheme')
+                dom.setOption(option)
+            })
+        }
+    }
+
+</script>
+
+<style lang="less">
+    .charts {
+        //
+    }
+
+</style>
