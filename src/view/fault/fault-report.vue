@@ -1,12 +1,14 @@
 <template>
     <div>
         <div v-show='showList' class='query-wrap'>
-            <div class="operate-wrap" style="margin-left: 5px">电表选择：
+            <div class="operate-wrap" style="margin-left: 5px">客户选择：
                 <Select v-model="electricityMeterInfoId" @on-change='selectedChange' class='operate' style="width:200px">
-                    <OptionGroup v-for="items in customerList" :value="items.customerId" :key="items.customerId" :label="items.customerName">
-                        <Option v-for="item in items.meterInfosDtoList" :value="item.id" :key="item.id">{{
-                            item.equipmentName }}</Option>
-                    </OptionGroup>
+                    <Option v-for="item in itemList" :value="item.id" :key="item.id">{{ item.name }}</Option>
+                </Select>
+            </div>
+            <div class="operate-wrap" style="margin-left: 5px">电表选择：
+                <Select v-model="electricityMeterInfoId" @on-change='selectedChange' :disabled="able"  class='operate' style="width:200px">
+                    <Option v-for="item in itemList" :value="item.value" :key="item.value">{{ item.label }}</Option>
                 </Select>
             </div>
             <div class="operate-wrap" style="margin-left: 20px">时间选择：
@@ -38,27 +40,19 @@
 </template>
 <script>
     import FaultChart from './components/fault-chart.vue'
-    import {
-        getFaultList
-    } from '@/api/faultReport'
-    import {
-        getGetAllCustomer,
-        getCapacityData
-    } from '@/api/demandCurve'
-    import {
-        formatData,
-        addDate
-    } from '@/libs/tools'
+    import { getFaultList } from '@/api/faultReport'
+    import { formatData, addDate } from '@/libs/tools'
+    import { getDragList, getDataList } from '@/api/data'
     export default {
-        name: 'fault_analysis',
+        name: 'fault_report',
         components: {
             FaultChart
         },
         data() {
             return {
                 columns1: [{
-                        title: '序号',
-                        key: 'index',
+						title: '序号',
+						key: 'index',
                         width: 60,
                         align: 'center'
                     },
@@ -103,6 +97,7 @@
                 electricityMeterInfoId: 0,
                 showList: true,
                 isLoading: false,
+                able: true,
                 dateTime: [addDate(new Date(), -7), addDate(new Date(), 0)],
                 lineText: '',
                 total: 1,
@@ -116,18 +111,66 @@
                     'skipCount': 0
                 },
                 barData: {
-                    电压故障: 225,
-                    电流故障: 132,
-                    采集故障: 153,
-                    网络故障: 133,
-                    功能因素: 453
-                }
+                    客户1: 225,
+                    客户2: 132,
+                    客户3: 153,
+                    客户4: 133,
+                    客户5: 453
+                },
+                itemList: [],
+                series: [
+                        // {
+                        // data: seriesData,
+                        // type: 'line'
+                        // },
+                        {
+                            name: '电压故障',
+                            type: 'bar',
+                            stack: '客户1',
+                            data: [120, 132, 101, 134, 90]
+                        },
+                        {
+                            name: '电流故障',
+                            type: 'bar',
+                            stack: '客户2',
+                            data: [220, 182, 191, 234, 290]
+                        },
+                        {
+                            name: '采集故障',
+                            type: 'bar',
+                            stack: '客户3',
+                            data: [220, 182, 191, 234, 290]
+                        },
+                        {
+                            name: '网络故障',
+                            type: 'bar',
+                            stack: '客户4',
+                            data: [220, 182, 191, 234, 290]
+                        },
+                        {
+                            name: '功能因素',
+                            type: 'bar',
+                            stack: '客户5',
+                            data: [201, 154, 190, 330, 410]
+                        }
+                    ]
             }
         },
         methods: {
             init() {
-                // this.getCustomerList();
+                this.getSelectData()
                 this.getListData()
+            },
+            getSelectData() {
+                return new Promise((resolve, reject) => {
+                    getDragList().then(res => {
+                        const data = res.data
+                        this.itemList = data
+                        resolve()
+                    }).catch(err => {
+                        reject(err)
+                    })
+                })
             },
             getListData() {
                 return new Promise((resolve, reject) => {
@@ -161,14 +204,7 @@
                 })
             },
             selectedChange(val) {
-                this.customerList.forEach(element => {
-                    element.meterInfosDtoList.forEach(item => {
-                        if (item.id === val) {
-                            this.lineText = element.customerName + item.equipmentName
-                        }
-                    })
-                })
-                this.getCapacityData()
+                this.able = false
             },
             getCapacityData() {
                 return new Promise((resolve, reject) => {
@@ -177,8 +213,7 @@
                         var capacity = []
                         var hour = []
                         data.items.forEach(element => {
-                            let date = formatData(this.dateTime, 'day') + ' ' + element.hour +
-                                '时'
+                            let date = formatData(this.dateTime, 'day') + ' ' + element.hour + '时'
                             capacity.push(element.capacity / 1000)
                             hour.push(date)
                         })

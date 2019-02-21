@@ -2,13 +2,17 @@ import Mock from 'mockjs'
 import { doCustomTimes } from '@/libs/util'
 const Random = Mock.Random
 
-export const getTableData = req => {
+export const getFaultList = req => {
   let tableData = []
   doCustomTimes(5, () => {
     tableData.push(Mock.mock({
       name: '@name',
-      email: '@email',
-      createTime: '@date'
+      faultType: Random.csentence(10, 13),
+      faultDescribe: Random.csentence(10, 13),
+      alarmNumber: Random.increment(10), // ^1[385][1-9]\d{8}/,//手机号
+      faultContent: Random.csentence(10, 13),
+      isAlarm: '@boolean',
+      faultTime: '@date'
     }))
   })
   return tableData
@@ -18,17 +22,8 @@ export const getDragList = req => {
   let dragList = []
   doCustomTimes(5, () => {
     dragList.push(Mock.mock({
-      name: '@name',
+      name: Random.csentence(10, 13),
       id: Random.increment(10)
-    }))
-  })
-  return dragList
-}
-export const getDataList = req => {
-  let dragList = []
-  doCustomTimes(5, () => {
-    dragList.push(Mock.mock({
-      'number|1-100': 100
     }))
   })
   return dragList

@@ -13,6 +13,12 @@ export const getDragList = () => {
         method: 'get'
     })
 }
+export const getDataList = () => {
+    return axios.request({
+        url: 'get_data_list',
+        method: 'get'
+    })
+}
 export const uploadImg = formData => {
     return axios.request({
       url: 'PowerQualification/UploadPowerQualification',
@@ -28,7 +34,7 @@ export const sureUploadImg = imgData => {
     })
   }
 
-  //获取字典列表
+  // 获取字典列表
 export const getDataDicConfigList = (DictionaryType) => {
     return axios.request({
         url: 'services/app/DataDicConfig/GetPaged',
@@ -38,7 +44,7 @@ export const getDataDicConfigList = (DictionaryType) => {
         method: 'get'
     })
 }
-  //获取组织列表
+  // 获取组织列表
 export const getOrganizationList = (OrganizationUnitType) => {
     return axios.request({
         url: 'services/app/OrganizationUnit/GetOrganizationUnits',
@@ -48,21 +54,21 @@ export const getOrganizationList = (OrganizationUnitType) => {
         method: 'get'
     })
 }
-  //获取串口下拉列表
+  // 获取串口下拉列表
 export const getSerialPortInformationList = () => {
     return axios.request({
         url: 'services/app/SerialPortInformation/GetRouterInformationForDropdownList',
         method: 'get'
     })
 }
-  //获取路由器下拉列表
+  // 获取路由器下拉列表
 export const getRouterInformationList = () => {
     return axios.request({
         url: 'services/app/RouterInformation/GetRouterInformationForDropdownList',
         method: 'get'
     })
 }
-  //获取电表下拉列表
+  // 获取电表下拉列表
 export const getElectricityMeterInfoList = () => {
     return axios.request({
         url: 'services/app/ElectricityMeterInfo/GetRouterInformationForDropdownList',

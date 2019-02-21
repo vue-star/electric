@@ -153,6 +153,23 @@ export const getRelativeTime = timeStamp => {
     return resStr
 }
 
+/*
+ * 方法作用：【计算某个日期几天后或者几天前的日期】  也可以用作时间format，可用用。第二个参数传入为0就是转换
+ * 传入格式：yyyy-mm-dd 或者 date
+ * 使用方法：dateUtil.addDate(date,days);
+ * @date {Date}起始日期
+ * @days {number}天数
+ * @return yyyy-mm-dd -
+ */
+export const addDate = (date, days) => {
+    var d = new Date(date)
+    // setDate() 方法用于设置一个月的某一天。
+    d.setDate(d.getDate() + days)
+    var m = (d.getMonth() + 1) < 10 ? '0' + (d.getMonth() + 1) : d.getMonth() + 1,
+         day = (d.getDate()) < 10 ? '0' + (d.getDate()) : d.getDate(),
+         year = d.getFullYear()
+    return year + '-' + m + '-' + day
+}
 /**
  * @returns {String} 当前浏览器名称
  */

@@ -263,15 +263,15 @@ export default [{
                 },
                 component: () => import('@/view/report/functional-factors.vue')
             }, 
-            {
-                path: 'energy_analysis',
-                name: 'energy_analysis',
-                meta: {
-                    icon: 'md-download',
-                    title: '能耗分析'
-                },
-                component: () => import('@/view/report/energy-analysis.vue')
-            },
+            // {
+            //     path: 'energy_analysis',
+            //     name: 'energy_analysis',
+            //     meta: {
+            //         icon: 'md-download',
+            //         title: '能耗分析'
+            //     },
+            //     component: () => import('@/view/report/energy-analysis.vue')
+            // },
             {
                 path: 'current_analysis',
                 name: 'current_analysis',
@@ -302,6 +302,42 @@ export default [{
            
             
         ]
+    },
+    {
+        path: '/message',
+        name: 'message',
+        meta: {
+            icon: 'md-cloud-upload',
+            title: '短信统计'
+        },
+        component: Main,
+        children: [{
+            path: 'message_report',
+            name: 'message_report',
+            meta: {
+                icon: 'ios-hammer',
+                title: '短信发送报告',
+            },
+            component: () => import('@/view/message/message-report.vue')
+        }]
+    },
+    {
+        path: '/fault',
+        name: 'fault',
+        meta: {
+            icon: 'md-cloud-upload',
+            title: '故障管理'
+        },
+        component: Main,
+        children: [{
+            path: 'fault_report',
+            name: 'fault_report',
+            meta: {
+                icon: 'ios-hammer',
+                title: '故障统计',
+            },
+            component: () => import('@/view/fault/fault-report.vue')
+        }]
     },
     {
         path: '/system_manage',

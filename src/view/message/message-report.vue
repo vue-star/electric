@@ -1,7 +1,7 @@
 <template>
     <div>
         <div v-show='showList' class='query-wrap'>
-            <div class="operate-wrap" style="margin-left: 5px">监测点选择：
+            <div class="operate-wrap" style="margin-left: 5px">客户选择：
                 <Select v-model="electricityMeterInfoId" @on-change='selectedChange' class='operate' style="width:200px">
                     <OptionGroup  v-for="items in customerList" :value="items.customerId" :key="items.customerId" :label="items.customerName">
                         <Option v-for="item in items.meterInfosDtoList" :value="item.id" :key="item.id">{{ item.equipmentName }}</Option>
@@ -14,32 +14,119 @@
                 </DatePicker>
             </div>
         </div>
-        <Row style="margin-top: 20px;">
-            <Card shadow>
-                <current-chart style="height: 700px;" :value="barData" text="电流分析" />
-            </Card>
+        <Row :gutter="20">
+            <i-col :xs="12" :md="8" :lg="4" v-for="(infor, i) in inforCardData" :key="`infor-${i}`" class="infor-div">
+                <infor-card :color="infor.color" :icon="infor.icon" :icon-size="42" :icon-color="infor.iconColor">
+                    <p style="color: #000; padding-bottom: 20px;">{{ infor.title }}</p>
+                    <count-to :end="infor.count" count-class="count-style"/>
+                </infor-card>
+            </i-col>
         </Row>
+        <div class="list" v-show='showList'>
+            <div class='table-wrap'>
+                <i-table stripe highlight-row :columns="columns1" :data="listData" @on-row-click='selectItem'>
+                </i-table>
+                <Spin :fix='true' v-show='isLoading'>
+                    <Icon type="load-c" size=18 class="demo-spin-icon-load"></Icon>
+                    <div>Loading</div>
+                </Spin>
+            </div>
+            <Page class='page-wrap' show-elevator show-total :total="total" :current="queryParam.pageNumber+1"
+                @on-change='pageChange'>
+            </Page>
+        </div>
     </div>
 
 </template>
 <script>
-    import CurrentChart from './components/current-chart.vue'
+    import { InforCard } from '_c/info-card'
+    import CountTo from '_c/count-to'
     import { getGetAllCustomer, getCapacityData } from '@/api/demandCurve'
     import { formatData, addDate } from '@/libs/tools'
     export default {
         name: 'current_analysis',
         components: {
-            CurrentChart
+            InforCard,
+            CountTo
         },
         data() {
             return {
+                columns1: [{
+						title: '序号',
+						key: 'index',
+                        width: 60,
+                        align: 'center'
+                    },
+                    {
+                        title: '客户名称',
+                        key: 'manufacturer',
+                        align: 'center'
+
+                    },
+                    {
+                        title: '故障类型',
+                        key: 'productType',
+                        align: 'center'
+                    },
+                    {
+                        title: '通知内容',
+                        key: 'sn',
+                        align: 'center'
+                    },
+                    {
+                        title: '通知号码',
+                        key: 'connectStatusTxt',
+                        align: 'center'
+                    },
+                    {
+                        title: '发送状态',
+                        key: 'creationTime',
+                        align: 'center'
+                    },
+                    {
+                        title: '通知时间',
+                        key: 'organizationUnitName',
+                        align: 'center'
+                    }
+                ],
+                listData: [],
                 electricityMeterInfoId: 0,
                 showList: true,
+                isLoading: false,
                 dateTime: [addDate(new Date(), -7), addDate(new Date(), 0)],
                 lineText: '',
+                total: 1,
+                queryParam: {
+                    'maxResultCount': 10,
+                    'filter': '',
+                    'pageNumber': 0,
+                    'skipCount': 0
+                },
                 xAxisData: [],
                 seriesData: [],
                 customerList: [],
+                inforCardData: [{
+                        title: '短信总量（条）',
+                        icon: 'md-person-add',
+                        count: 550,
+                        iconColor: '#2d8cf0',
+                        color: '#fff'
+                    },
+                    {
+                        title: '已用短信（条）',
+                        icon: 'md-locate',
+                        count: 450,
+                        iconColor: '#2d8cf0',
+                        color: '#fff'
+                    },
+                    {
+                        title: '剩余短信（条）',
+                        icon: 'md-eye-off',
+                        count: 300,
+                        iconColor: '#2d8cf0',
+                        color: '#fff'
+                    }
+                ],
                 barData: {
                     '10.00': 225,
                     '10.30': 132,
@@ -113,6 +200,18 @@
             dateChange(val) {
                 this.dateTime = val
                 this.getCapacityData()
+            },
+            selectItem(data, index) {
+                this.deleteBtn = true
+                this.editBtn = true
+                this.data = data
+                this.selectIndex = index
+                this.isSelect = true
+            },
+            pageChange(data) {
+                this.queryParam.pageNumber = data - 1
+                this.queryParam.skipCount = (data - 1) * this.queryParam.maxResultCount
+                this.getListData()
             }
         },
         mounted() {
@@ -138,6 +237,20 @@
     .top-style {
         height: 5px;
         background-color: darkcyan;
+    }
+
+    .infor-div {
+        width: 23%;
+        height: 150px;
+        padding-bottom: 10px;
+        padding-left: 10px;
+        margin: 10px;
+    }
+
+    .count-style {
+        font-size: 35px;
+        color: #2d8cf0;
+        margin-left: 20px;
     }
 
 </style>
