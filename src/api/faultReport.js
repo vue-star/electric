@@ -15,6 +15,13 @@ export const getFaultList = (data) => {
         method: 'get'
     })
 }
+// 获取客户列表
+export const getEchartData = () => {
+    return axios.request({
+        url: 'get_echart_data',
+        method: 'get'
+    })
+}
 // 新增客户
 export const addCustomer = (Customer) => {
     const data = Customer

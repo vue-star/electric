@@ -2,13 +2,13 @@
     <div>
         <div v-show='showList' class='query-wrap'>
             <div class="operate-wrap" style="margin-left: 5px">客户选择：
-                <Select v-model="electricityMeterInfoId" @on-change='selectedChange' class='operate' style="width:200px">
-                    <Option v-for="item in itemList" :value="item.id" :key="item.id">{{ item.name }}</Option>
+                <Select v-model="customerId" @on-change='selectedCusChange' class='operate' style="width:200px">
+                    <Option v-for="item in itemList" :value="item.name" :key="item.name">{{ item.name }}</Option>
                 </Select>
             </div>
             <div class="operate-wrap" style="margin-left: 5px">电表选择：
-                <Select v-model="electricityMeterInfoId" @on-change='selectedChange' :disabled="able"  class='operate' style="width:200px">
-                    <Option v-for="item in itemList" :value="item.value" :key="item.value">{{ item.label }}</Option>
+                <Select v-model="electricityMeterInfoId" @on-change='selectedEleChange' class='operate' style="width:200px">
+                    <Option v-for="item in barData" :value="item.name" :key="item.name">{{ item.name }}</Option>
                 </Select>
             </div>
             <div class="operate-wrap" style="margin-left: 20px">时间选择：
@@ -17,11 +17,17 @@
                 </DatePicker>
             </div>
         </div>
-        <Row style="margin-top: 20px;">
+        <Row v-if="showCustomerEchart" style="margin-top: 20px;">
             <Card shadow>
-                <fault-chart style="height: 300px;" :value="barData" text="故障类型统计" />
+                <fault-chart style="height: 300px;" :value="barData" :text="textTitle+'故障类型统计'" />
             </Card>
         </Row>
+        <Row v-else style="margin-top: 20px;">
+            <Card shadow>
+                <fault-chart1 style="height: 300px;" :value="eleData" :text="textTitle+'故障类型统计'" />
+            </Card>
+        </Row>
+
         <div class="list" v-show='showList'>
             <div class='table-wrap'>
                 <i-table stripe highlight-row :columns="columns1" :data="listData" @on-row-click='selectItem'>
@@ -40,19 +46,30 @@
 </template>
 <script>
     import FaultChart from './components/fault-chart.vue'
-    import { getFaultList } from '@/api/faultReport'
-    import { formatData, addDate } from '@/libs/tools'
-    import { getDragList, getDataList } from '@/api/data'
+    import FaultChart1 from './components/fault-chart1.vue'
+    import {
+        getFaultList,
+        getEchartData
+    } from '@/api/faultReport'
+    import {
+        formatData,
+        addDate
+    } from '@/libs/tools'
+    import {
+        getDragList,
+        getDataList
+    } from '@/api/data'
     export default {
         name: 'fault_report',
         components: {
-            FaultChart
+            FaultChart,
+            FaultChart1
         },
         data() {
             return {
                 columns1: [{
-						title: '序号',
-						key: 'index',
+                        title: '序号',
+                        key: 'index',
                         width: 60,
                         align: 'center'
                     },
@@ -94,15 +111,15 @@
                     }
                 ],
                 listData: [],
-                electricityMeterInfoId: 0,
+                electricityMeterInfoId: '',
+                customerId: '',
                 showList: true,
                 isLoading: false,
-                able: true,
+                showCustomerEchart: true,
                 dateTime: [addDate(new Date(), -7), addDate(new Date(), 0)],
                 lineText: '',
+                textTitle: '',
                 total: 1,
-                xAxisData: [],
-                seriesData: [],
                 customerList: [],
                 queryParam: {
                     'maxResultCount': 10,
@@ -110,62 +127,36 @@
                     'pageNumber': 0,
                     'skipCount': 0
                 },
-                barData: {
-                    客户1: 225,
-                    客户2: 132,
-                    客户3: 153,
-                    客户4: 133,
-                    客户5: 453
-                },
+                barData: [],
+                eleData: {},
                 itemList: [],
-                series: [
-                        // {
-                        // data: seriesData,
-                        // type: 'line'
-                        // },
-                        {
-                            name: '电压故障',
-                            type: 'bar',
-                            stack: '客户1',
-                            data: [120, 132, 101, 134, 90]
-                        },
-                        {
-                            name: '电流故障',
-                            type: 'bar',
-                            stack: '客户2',
-                            data: [220, 182, 191, 234, 290]
-                        },
-                        {
-                            name: '采集故障',
-                            type: 'bar',
-                            stack: '客户3',
-                            data: [220, 182, 191, 234, 290]
-                        },
-                        {
-                            name: '网络故障',
-                            type: 'bar',
-                            stack: '客户4',
-                            data: [220, 182, 191, 234, 290]
-                        },
-                        {
-                            name: '功能因素',
-                            type: 'bar',
-                            stack: '客户5',
-                            data: [201, 154, 190, 330, 410]
-                        }
-                    ]
+                itemList1: []
             }
         },
         methods: {
             init() {
                 this.getSelectData()
                 this.getListData()
+                this.getBarData()
             },
             getSelectData() {
                 return new Promise((resolve, reject) => {
                     getDragList().then(res => {
                         const data = res.data
                         this.itemList = data
+                        this.customerId = this.itemList[0].name
+                        this.textTitle = this.itemList[0].name
+                        resolve()
+                    }).catch(err => {
+                        reject(err)
+                    })
+                })
+            },
+            getSelectEleData() {
+                return new Promise((resolve, reject) => {
+                    getDragList().then(res => {
+                        const data = res.data
+                        this.itemList1 = data
                         resolve()
                     }).catch(err => {
                         reject(err)
@@ -189,6 +180,28 @@
                     })
                 })
             },
+            getBarData() {
+                return new Promise((resolve, reject) => {
+                    getEchartData().then(res => {
+                        const data = res.data
+                        this.barData = data
+                        resolve()
+                    }).catch(err => {
+                        reject(err)
+                    })
+                })
+            },
+            getEleData() {
+                return new Promise((resolve, reject) => {
+                    getDataList().then(res => {
+                        const data = res.data
+                        this.eleData = data[0]
+                        resolve()
+                    }).catch(err => {
+                        reject(err)
+                    })
+                })
+            },
             getCustomerList() {
                 return new Promise((resolve, reject) => {
                     getGetAllCustomer().then(res => {
@@ -203,8 +216,21 @@
                     })
                 })
             },
-            selectedChange(val) {
-                this.able = false
+            selectedEleChange(val) {
+                this.textTitle = val
+                this.getEleData()
+                if (typeof (val) === 'undefined') {
+                    this.showCustomerEchart = true
+                } else {
+                    this.showCustomerEchart = false
+                }
+            },
+            selectedCusChange(val) {
+                this.textTitle = val
+                this.getBarData()
+                this.getListData()
+                this.getSelectEleData()
+                this.showCustomerEchart = true
             },
             getCapacityData() {
                 return new Promise((resolve, reject) => {
@@ -213,7 +239,8 @@
                         var capacity = []
                         var hour = []
                         data.items.forEach(element => {
-                            let date = formatData(this.dateTime, 'day') + ' ' + element.hour + '时'
+                            let date = formatData(this.dateTime, 'day') + ' ' + element.hour +
+                                '时'
                             capacity.push(element.capacity / 1000)
                             hour.push(date)
                         })
@@ -227,7 +254,7 @@
             },
             dateChange(val) {
                 this.dateTime = val
-                this.getCapacityData()
+                this.getBarData()
             },
             selectItem(data, index) {
                 this.deleteBtn = true

@@ -26,9 +26,13 @@ export const getDragList = req => {
 }
 export const getDataList = req => {
   let dragList = []
-  doCustomTimes(5, () => {
+  doCustomTimes(1, () => {
     dragList.push(Mock.mock({
-      'number|1-100': 100
+      电压故障: Random.integer(0,1000),
+      电流故障: Random.integer(0,1000),
+      采集故障: Random.integer(0,1000),
+      网络故障: Random.integer(0,1000),
+      功能因素: Random.integer(0,1000),
     }))
   })
   return dragList

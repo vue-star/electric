@@ -4,10 +4,7 @@
 
 <script>
     import echarts from 'echarts'
-    import {
-        on,
-        off
-    } from '@/libs/tools'
+    import { on, off } from '@/libs/tools'
     export default {
         name: 'serviceRequests',
         data() {

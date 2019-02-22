@@ -21,7 +21,7 @@ import '@/assets/java-script/svg-pan-zoom.js'
 // 实际打包时应该不引入mock
 /* eslint-disable */
 
-util.ajax.get('/AbpUserConfiguration/GetAll').then(result => {
+// util.ajax.get('/AbpUserConfiguration/GetAll').then(result => {
     Object.defineProperty(Vue.prototype, '$moment', { value: moment });
     if (process.env.NODE_ENV !== 'production') require('@/mock')
 
@@ -167,4 +167,4 @@ util.ajax.get('/AbpUserConfiguration/GetAll').then(result => {
         //     };
         // }
     });
-})
+// })

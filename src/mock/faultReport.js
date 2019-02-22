@@ -28,3 +28,17 @@ export const getDragList = req => {
   })
   return dragList
 }
+export const getEchartData = req => {
+  let echartData = []
+  doCustomTimes(5, () => {
+    echartData.push(Mock.mock({
+      name: '@cname',
+      voltage: Random.integer(0,100),
+      current: Random.integer(0,100),
+      intelnet: Random.integer(0,100),
+      collection: Random.integer(0,100),
+      function: Random.integer(0,100),
+    }))
+  })
+  return echartData
+}
