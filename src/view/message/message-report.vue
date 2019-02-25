@@ -2,10 +2,8 @@
     <div>
         <div v-show='showList' class='query-wrap'>
             <div class="operate-wrap" style="margin-left: 5px">客户选择：
-                <Select v-model="electricityMeterInfoId" @on-change='selectedChange' class='operate' style="width:200px">
-                    <OptionGroup  v-for="items in customerList" :value="items.customerId" :key="items.customerId" :label="items.customerName">
-                        <Option v-for="item in items.meterInfosDtoList" :value="item.id" :key="item.id">{{ item.equipmentName }}</Option>
-                    </OptionGroup>
+                <Select v-model="customerId" @on-change='selectedChange' class='operate' style="width:200px">
+                    <Option v-for="item in itemList" :value="item.name" :key="item.name">{{ item.name }}</Option>
                 </Select>
             </div>
             <div class="operate-wrap" style="margin-left: 20px">时间选择：
@@ -41,10 +39,13 @@
 <script>
     import { InforCard } from '_c/info-card'
     import CountTo from '_c/count-to'
-    import { getGetAllCustomer, getCapacityData } from '@/api/demandCurve'
+    import { getMessageList } from '@/api/messageReport'
     import { formatData, addDate } from '@/libs/tools'
+    import { getDragList, getDataList } from '@/api/data'
+    import Mock from 'mockjs'
+    
     export default {
-        name: 'current_analysis',
+        name: 'message_report',
         components: {
             InforCard,
             CountTo
@@ -59,33 +60,33 @@
                     },
                     {
                         title: '客户名称',
-                        key: 'manufacturer',
+                        key: 'name',
                         align: 'center'
 
                     },
                     {
                         title: '故障类型',
-                        key: 'productType',
+                        key: 'faultType',
                         align: 'center'
                     },
                     {
                         title: '通知内容',
-                        key: 'sn',
+                        key: 'msgContent',
                         align: 'center'
                     },
                     {
                         title: '通知号码',
-                        key: 'connectStatusTxt',
+                        key: 'msgNumber',
                         align: 'center'
                     },
                     {
                         title: '发送状态',
-                        key: 'creationTime',
+                        key: 'sendState',
                         align: 'center'
                     },
                     {
                         title: '通知时间',
-                        key: 'organizationUnitName',
+                        key: 'msgTime',
                         align: 'center'
                     }
                 ],
@@ -105,6 +106,7 @@
                 xAxisData: [],
                 seriesData: [],
                 customerList: [],
+                itemList: [],
                 inforCardData: [{
                         title: '短信总量（条）',
                         icon: 'md-person-add',
@@ -126,33 +128,50 @@
                         iconColor: '#2d8cf0',
                         color: '#fff'
                     }
-                ],
-                barData: {
-                    '10.00': 225,
-                    '10.30': 132,
-                    '11.00': 153,
-                    '11.30': 133,
-                    '12.00': 453,
-                    '12.30': 153,
-                    '13.00': 353,
-                    '13.30': 183,
-                    '14.00': 123,
-                    '14.30': 166,
-                    '15.00': 199,
-                    '15.30': 133,
-                    '16.00': 243,
-                    '16.30': 333,
-                    '17.00': 223,
-                    '17.30': 193,
-                    '18.00': 122,
-                    '18.30': 163,
-                    '19.00': 133
-                }
+                ]
             }
         },
         methods: {
             init() {
                 // this.getCustomerList();
+                this.getSelectData()
+                this.getListData()
+            },
+            getSelectData() {
+                return new Promise((resolve, reject) => {
+                    getDragList().then(res => {
+                        const data = res.data
+                        this.itemList = data
+                        this.customerId = this.itemList[0].name
+                        this.textTitle = this.itemList[0].name
+                        resolve()
+                    }).catch(err => {
+                        reject(err)
+                    })
+                })
+            },
+            getListData() {
+                return new Promise((resolve, reject) => {
+                    getMessageList(this.queryParam).then(res => {
+                        const data = res.data
+                        this.listData = data
+                        let size = this.queryParam.skipCount + 1
+                        this.listData.forEach(element => {
+                            element.index = size++
+                            // element.creationTime=formatData(element.creationTime,"day");
+                        })
+                        this.total = data.length
+                        resolve()
+                    }).catch(err => {
+                        reject(err)
+                    })
+                })
+            },
+            getCountData(){
+                const Random = Mock.Random
+                this.inforCardData.forEach(element=>{
+                    element.count = Random.integer(100,1000)
+                })
             },
             getCustomerList() {
                 return new Promise((resolve, reject) => {
@@ -169,14 +188,8 @@
                 })
             },
             selectedChange(val) {
-                this.customerList.forEach(element => {
-                    element.meterInfosDtoList.forEach(item => {
-                        if (item.id == val) {
-                            this.lineText = element.customerName + item.equipmentName
-                        }
-                    })
-                })
-                this.getCapacityData()
+                this.getListData()
+                this.getCountData()
             },
             getCapacityData() {
                 return new Promise((resolve, reject) => {
@@ -199,7 +212,8 @@
             },
             dateChange(val) {
                 this.dateTime = val
-                this.getCapacityData()
+                this.getListData()
+                this.getCountData()
             },
             selectItem(data, index) {
                 this.deleteBtn = true

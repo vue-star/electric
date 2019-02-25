@@ -47,18 +47,9 @@
 <script>
     import FaultChart from './components/fault-chart.vue'
     import FaultChart1 from './components/fault-chart1.vue'
-    import {
-        getFaultList,
-        getEchartData
-    } from '@/api/faultReport'
-    import {
-        formatData,
-        addDate
-    } from '@/libs/tools'
-    import {
-        getDragList,
-        getDataList
-    } from '@/api/data'
+    import { getFaultList, getEchartData } from '@/api/faultReport'
+    import { formatData, addDate } from '@/libs/tools'
+    import { getDragList, getDataList } from '@/api/data'
     export default {
         name: 'fault_report',
         components: {
@@ -217,12 +208,13 @@
                 })
             },
             selectedEleChange(val) {
-                this.textTitle = val
+                
                 this.getEleData()
                 if (typeof (val) === 'undefined') {
                     this.showCustomerEchart = true
                 } else {
                     this.showCustomerEchart = false
+                    this.textTitle = val
                 }
             },
             selectedCusChange(val) {

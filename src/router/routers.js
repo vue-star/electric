@@ -412,53 +412,6 @@ export default [{
         }]
     },
     {
-        path: '/system',
-        name: 'system',
-        meta: {
-            hide: true
-        },
-        component: Main,
-        children: [{
-            path: 'system_safety',
-            name: 'system_safety',
-            meta: {
-                icon: 'ios-navigate',
-                title: '系统安全'
-            },
-            component: () => import('@/view/system/system-safety.vue')
-        }]
-    },
-   
-    {
-        path: '/examples',
-        name: 'examples',
-        component: Main,
-        meta: {
-            icon: 'ios-stats',
-            title: '常用实例'
-        },
-        component: Main,
-        children: [{
-                path: 'file_download',
-                name: 'file_download',
-                meta: {
-                    icon: 'ios-navigate',
-                    title: '文件下载'
-                },
-                component: () => import('@/view/examples/file-download.vue')
-            },
-            {
-                path: 'code_generation',
-                name: 'code_generation',
-                meta: {
-                    icon: 'ios-navigate',
-                    title: '二维码生成'
-                },
-                component: () => import('@/view/examples/code-generation.vue')
-            },
-        ]
-    },
-    {
         path: '/argu',
         name: 'argu',
         meta: {
