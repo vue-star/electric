@@ -2,10 +2,8 @@
     <div>
         <div v-show='showList' class='query-wrap'>
             <div class="operate-wrap" style="margin-left: 5px">监测点选择：
-                <Select v-model="electricityMeterInfoId" @on-change='selectedChange' class='operate' style="width:200px">
-                    <OptionGroup  v-for="items in customerList" :value="items.customerId" :key="items.customerId" :label="items.customerName">
-                        <Option v-for="item in items.meterInfosDtoList" :value="item.id" :key="item.id">{{ item.equipmentName }}</Option>
-                    </OptionGroup>
+                <Select v-model="customerId" @on-change='selectedChange' class='operate' style="width:200px">
+                    <Option v-for="item in itemList" :value="item.name" :key="item.name">{{ item.name }}</Option>
                 </Select>
             </div>
             <div class="operate-wrap" style="margin-left: 20px">时间选择：
@@ -16,7 +14,7 @@
         </div>
         <Row style="margin-top: 20px;">
             <Card shadow>
-                <current-chart style="height: 700px;" :value="barData" text="电流分析" />
+                <current-chart style="height: 700px;" :value="barData" :text="textTitle+'电流分析'" />
             </Card>
         </Row>
     </div>
@@ -24,8 +22,12 @@
 </template>
 <script>
     import CurrentChart from './components/current-chart.vue'
-    import { getGetAllCustomer, getCapacityData } from '@/api/demandCurve'
+    import { getEchartData } from '@/api/currentAnalysis'
     import { formatData, addDate } from '@/libs/tools'
+    import {
+        getDragList,
+        getDataList
+    } from '@/api/data'
     export default {
         name: 'current_analysis',
         components: {
@@ -37,35 +39,43 @@
                 showList: true,
                 dateTime: [addDate(new Date(), -7), addDate(new Date(), 0)],
                 lineText: '',
+                customerId: '',
+                textTitle: '',
                 xAxisData: [],
                 seriesData: [],
                 customerList: [],
-                barData: {
-                    '10.00': 225,
-                    '10.30': 132,
-                    '11.00': 153,
-                    '11.30': 133,
-                    '12.00': 453,
-                    '12.30': 153,
-                    '13.00': 353,
-                    '13.30': 183,
-                    '14.00': 123,
-                    '14.30': 166,
-                    '15.00': 199,
-                    '15.30': 133,
-                    '16.00': 243,
-                    '16.30': 333,
-                    '17.00': 223,
-                    '17.30': 193,
-                    '18.00': 122,
-                    '18.30': 163,
-                    '19.00': 133
-                }
+                itemList: [],
+                barData: []
             }
         },
         methods: {
             init() {
-                // this.getCustomerList();
+                this.getSelectData();
+                this.getBarData()
+            },
+            getSelectData() {
+                return new Promise((resolve, reject) => {
+                    getDragList().then(res => {
+                        const data = res.data
+                        this.itemList = data
+                        this.customerId = this.itemList[0].name
+                        this.textTitle = this.itemList[0].name
+                        resolve()
+                    }).catch(err => {
+                        reject(err)
+                    })
+                })
+            },
+            getBarData() {
+                return new Promise((resolve, reject) => {
+                    getEchartData().then(res => {
+                        const data = res.data
+                        this.barData = data
+                        resolve()
+                    }).catch(err => {
+                        reject(err)
+                    })
+                })
             },
             getCustomerList() {
                 return new Promise((resolve, reject) => {
@@ -82,14 +92,8 @@
                 })
             },
             selectedChange(val) {
-                this.customerList.forEach(element => {
-                    element.meterInfosDtoList.forEach(item => {
-                        if (item.id == val) {
-                            this.lineText = element.customerName + item.equipmentName
-                        }
-                    })
-                })
-                this.getCapacityData()
+                this.getBarData()
+                this.textTitle = val
             },
             getCapacityData() {
                 return new Promise((resolve, reject) => {
@@ -112,7 +116,7 @@
             },
             dateChange(val) {
                 this.dateTime = val
-                this.getCapacityData()
+                this.getBarData()
             }
         },
         mounted() {

@@ -9,62 +9,71 @@
     export default {
         name: 'CurrentChart',
         props: {
-            value: Object,
+            value: Array,
             text: String,
             subtext: String
         },
+        watch: {
+            value() {
+                this.loadLine()
+            }
+        },
+        methods:{
+            loadLine(){
+                this.$nextTick(() => {
+                    let xAxisData = this.value.map(_ => _.time)
+                    let currentA = this.value.map(_ => _.currentA)
+                    let currentB = this.value.map(_ => _.currentB)
+                    let currentC = this.value.map(_ => _.currentC)
+                    let option = {
+                        title: {
+                            text: this.text,
+                            subtext: this.subtext,
+                            x: 'left'
+                        },
+                        dataZoom: [{
+                            type: 'inside',
+                            throttle: 50
+                        }],
+                        legend: {
+                            data: ['A相电流', 'B相电流', 'C相电流']
+                        },
+                        xAxis: {
+                            type: 'category',
+                            data: xAxisData
+                        },
+                        yAxis: {
+                            type: 'value',
+                            name: 'A'
+                        },
+                        series: [
+                            {
+                                name: 'A相电流',
+                                type: 'line',
+                                stack: '总量',
+                                data: currentA
+                            },
+                            {
+                                name: 'B相电流',
+                                type: 'line',
+                                stack: '总量',
+                                data: currentB
+                            },
+                            {
+                                name: 'C相电流',
+                                type: 'line',
+                                stack: '总量',
+                                data: currentC
+                            }
+                        ]
+                    }
+                    let dom = echarts.init(this.$refs.dom, 'tdTheme')
+                    dom.setOption(option)
+                })
+            }
+        },
         mounted() {
-            this.$nextTick(() => {
-                let xAxisData = Object.keys(this.value)
-                let seriesData = Object.values(this.value)
-                let option = {
-                    title: {
-                        text: this.text,
-                        subtext: this.subtext,
-                        x: 'left'
-                    },
-                     dataZoom: [{
-                        type: 'inside',
-                        throttle: 50
-                    }],
-                    legend: {
-                        data: ['A相电流', 'B相电流', 'C相电流']
-                    },
-                    xAxis: {
-                        type: 'category',
-                        data: xAxisData
-                    },
-                    yAxis: {
-                        type: 'value'
-                    },
-                    series: [
-                        // {
-                        // data: seriesData,
-                        // type: 'line'
-                        // },
-                        {
-                            name: 'A相电流',
-                            type: 'line',
-                            stack: '总量',
-                            data: [120, 132, 101, 134, 90, 230, 210, 132, 101, 134, 90, 230, 210, 132, 101, 134, 90, 230, 210]
-                        },
-                        {
-                            name: 'B相电流',
-                            type: 'line',
-                            stack: '总量',
-                            data: [220, 182, 191, 234, 290, 330, 310, 182, 191, 234, 290, 330, 310, 182, 191, 234, 290, 330, 310]
-                        },
-                        {
-                            name: 'C相电流',
-                            type: 'line',
-                            stack: '总量',
-                            data: [150, 232, 201, 154, 190, 330, 410, 232, 201, 154, 190, 330, 410, 232, 201, 154, 190, 330, 410]
-                        }
-                    ]
-                }
-                let dom = echarts.init(this.$refs.dom, 'tdTheme')
-                dom.setOption(option)
-            })
+            this.loadLine()
         }
     }
 

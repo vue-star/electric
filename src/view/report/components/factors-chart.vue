@@ -9,39 +9,51 @@
     export default {
         name: 'FactorsChart',
         props: {
-            value: Object,
+            value: Array,
             text: String,
             subtext: String
         },
+        watch: {
+            value() {
+                this.echartsData()
+            }
+        },
+        methods: {
+            echartsData() {
+                this.$nextTick(() => {
+                    let xAxisData = this.value.map(_ => _.time)
+                    let seriesData = this.value.map(_ => _.value)
+                    let option = {
+                        title: {
+                            text: this.text,
+                            subtext: this.subtext,
+                            x: 'center'
+                        },
+                        dataZoom: [{
+                            type: 'inside',
+                            throttle: 50
+                        }],
+                        xAxis: {
+                            type: 'category',
+                            data: xAxisData
+                        },
+                        yAxis: {
+                            type: 'value',
+                            name: '数量'
+                        },
+                        series: [{
+                            data: seriesData,
+                            type: 'bar'
+                        }]
+                    }
+                    let dom = echarts.init(this.$refs.dom, 'tdTheme')
+                    dom.setOption(option)
+                })
+
+            }
+        },
         mounted() {
-            this.$nextTick(() => {
-                let xAxisData = Object.keys(this.value)
-                let seriesData = Object.values(this.value)
-                let option = {
-                    title: {
-                        text: this.text,
-                        subtext: this.subtext,
-                        x: 'center'
-                    },
-                     dataZoom: [{
-                        type: 'inside',
-                        throttle: 50
-                    }],
-                    xAxis: {
-                        type: 'category',
-                        data: xAxisData
-                    },
-                    yAxis: {
-                        type: 'value'
-                    },
-                    series: [{
-                        data: seriesData,
-                        type: 'line'
-                    }]
-                }
-                let dom = echarts.init(this.$refs.dom, 'tdTheme')
-                dom.setOption(option)
-            })
+            this.echartsData()
         }
     }
 

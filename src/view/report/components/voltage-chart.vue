@@ -9,62 +9,71 @@
     export default {
         name: 'VoltageChart',
         props: {
-            value: Object,
+            value: Array,
             text: String,
             subtext: String
         },
+        watch: {
+            value() {
+                this.loadLine()
+            }
+        },
+        methods:{
+            loadLine(){
+                this.$nextTick(() => {
+                    let xAxisData = this.value.map(_ => _.time)
+                    let voltageAB = this.value.map(_ => _.voltageAB)
+                    let voltageBC = this.value.map(_ => _.voltageBC)
+                    let voltageCA = this.value.map(_ => _.voltageCA)
+                    let option = {
+                        title: {
+                            text: this.text,
+                            subtext: this.subtext,
+                            x: 'left'
+                        },
+                        dataZoom: [{
+                            type: 'inside',
+                            throttle: 50
+                        }],
+                        legend: {
+                            data: ['AB线电压', 'BC线电压', 'CA线电压']
+                        },
+                        xAxis: {
+                            type: 'category',
+                            data: xAxisData
+                        },
+                        yAxis: {
+                            type: 'value',
+                            name: 'V'
+                        },
+                        series: [
+                            {
+                                name: 'AB线电压',
+                                type: 'line',
+                                stack: '总量',
+                                data: voltageAB
+                            },
+                            {
+                                name: 'BC线电压',
+                                type: 'line',
+                                stack: '总量',
+                                data: voltageBC
+                            },
+                            {
+                                name: 'CA线电压',
+                                type: 'line',
+                                stack: '总量',
+                                data: voltageCA
+                            }
+                        ]
+                    }
+                    let dom = echarts.init(this.$refs.dom, 'tdTheme')
+                    dom.setOption(option)
+                })
+            }
+        },
         mounted() {
-            this.$nextTick(() => {
-                let xAxisData = Object.keys(this.value)
-                let seriesData = Object.values(this.value)
-                let option = {
-                    title: {
-                        text: this.text,
-                        subtext: this.subtext,
-                        x: 'left'
-                    },
-                     dataZoom: [{
-                        type: 'inside',
-                        throttle: 50
-                    }],
-                    legend: {
-                        data: ['AB线电压', 'BC线电压', 'CA线电压']
-                    },
-                    xAxis: {
-                        type: 'category',
-                        data: xAxisData
-                    },
-                    yAxis: {
-                        type: 'value'
-                    },
-                    series: [
-                        // {
-                        // data: seriesData,
-                        // type: 'line'
-                        // },
-                        {
-                            name: 'AB线电压',
-                            type: 'line',
-                            stack: '总量',
-                            data: [120, 132, 101, 134, 90, 230, 210, 132, 101, 134, 90, 230, 210, 132, 101, 134, 90, 230, 210]
-                        },
-                        {
-                            name: 'BC线电压',
-                            type: 'line',
-                            stack: '总量',
-                            data: [220, 182, 191, 234, 290, 330, 310, 182, 191, 234, 290, 330, 310, 182, 191, 234, 290, 330, 310]
-                        },
-                        {
-                            name: 'CA线电压',
-                            type: 'line',
-                            stack: '总量',
-                            data: [150, 232, 201, 154, 190, 330, 410, 232, 201, 154, 190, 330, 410, 232, 201, 154, 190, 330, 410]
-                        }
-                    ]
-                }
-                let dom = echarts.init(this.$refs.dom, 'tdTheme')
-                dom.setOption(option)
-            })
+            this.loadLine()
         }
     }
 

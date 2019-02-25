@@ -2,11 +2,8 @@
     <div>
         <div v-show='showList' class='query-wrap'>
             <div class="operate-wrap" style="margin-left: 5px">电表选择：
-                <Select v-model="electricityMeterInfoId" @on-change='selectedChange' class='operate' style="width:200px">
-                    <OptionGroup v-for="items in customerList" :value="items.customerId" :key="items.customerId" :label="items.customerName">
-                        <Option v-for="item in items.meterInfosDtoList" :value="item.id" :key="item.id">{{
-                            item.equipmentName }}</Option>
-                    </OptionGroup>
+                <Select v-model="customerId" @on-change='selectedChange' class='operate' style="width:200px">
+                    <Option v-for="item in itemList" :value="item.name" :key="item.name">{{ item.name }}</Option>
                 </Select>
             </div>
             <div class="operate-wrap" style="margin-left: 20px">时间选择：
@@ -17,7 +14,7 @@
         </div>
         <Row style="margin-top: 20px;">
             <Card shadow>
-                <fault-chart style="height: 300px;" :value="barData" text="故障类型统计" />
+                <fault-chart style="height: 300px;" :value="barData" :text="textTitle+'故障类型统计'" />
             </Card>
         </Row>
         <div class="list" v-show='showList'>
@@ -49,6 +46,10 @@
         formatData,
         addDate
     } from '@/libs/tools'
+    import {
+        getDragList,
+        getDataList
+    } from '@/api/data'
     export default {
         name: 'fault_analysis',
         components: {
@@ -105,10 +106,13 @@
                 isLoading: false,
                 dateTime: [addDate(new Date(), -7), addDate(new Date(), 0)],
                 lineText: '',
+                customerId: '',
+                textTitle: '',
                 total: 1,
                 xAxisData: [],
                 seriesData: [],
                 customerList: [],
+                itemList: [],
                 queryParam: {
                     'maxResultCount': 10,
                     'filter': '',
@@ -128,6 +132,20 @@
             init() {
                 // this.getCustomerList();
                 this.getListData()
+                this.getSelectData()
+            },
+            getSelectData() {
+                return new Promise((resolve, reject) => {
+                    getDragList().then(res => {
+                        const data = res.data
+                        this.itemList = data
+                        this.customerId = this.itemList[0].name
+                        this.textTitle = this.itemList[0].name
+                        resolve()
+                    }).catch(err => {
+                        reject(err)
+                    })
+                })
             },
             getListData() {
                 return new Promise((resolve, reject) => {
@@ -140,6 +158,17 @@
                             // element.creationTime=formatData(element.creationTime,"day");
                         })
                         this.total = data.length
+                        resolve()
+                    }).catch(err => {
+                        reject(err)
+                    })
+                })
+            },
+            getEleData() {
+                return new Promise((resolve, reject) => {
+                    getDataList().then(res => {
+                        const data = res.data
+                        this.barData = data[0]
                         resolve()
                     }).catch(err => {
                         reject(err)
@@ -161,14 +190,9 @@
                 })
             },
             selectedChange(val) {
-                this.customerList.forEach(element => {
-                    element.meterInfosDtoList.forEach(item => {
-                        if (item.id === val) {
-                            this.lineText = element.customerName + item.equipmentName
-                        }
-                    })
-                })
-                this.getCapacityData()
+                this.getEleData()
+                this.getListData()
+                this.textTitle = val
             },
             getCapacityData() {
                 return new Promise((resolve, reject) => {
@@ -192,7 +216,8 @@
             },
             dateChange(val) {
                 this.dateTime = val
-                this.getCapacityData()
+                this.getEleData()
+                this.getListData()
             },
             selectItem(data, index) {
                 this.deleteBtn = true
