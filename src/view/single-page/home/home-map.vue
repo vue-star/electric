@@ -2,7 +2,7 @@
     <div class="box">
         <div class="map-example" @change="fullscreenChange" :fullscreen.sync="fullscreen" ref="fullscreen">
             <div id="allmap" class="map-container"></div>
-            <Icon @click.native="toggleFullScreen" :type="[fullscreen ? 'md-contract' : 'md-expand']" class="btn btn-default btn-map-fullscreen"
+            <Icon @click.native="toggleFullScreen" :type="fullscreen ? 'md-contract' : 'md-expand'" class="btn btn-default btn-map-fullscreen"
                 :size="23"></Icon>
         </div>
     </div>

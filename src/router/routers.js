@@ -358,6 +358,42 @@ export default [{
                 component: () => import('@/view/system/data-dictionary.vue')
             },
             {
+                path: 'message_setting',
+                name: 'message_setting',
+                meta: {
+                    icon: 'md-download',
+                    title: '短信设置'
+                },
+                component: () => import('@/view/system/message-setting.vue')
+            },
+            {
+                path: 'account_infor',
+                name: 'account_infor',
+                meta: {
+                    icon: 'md-download',
+                    title: '账号信息'
+                },
+                component: () => import('@/view/system/account-infor.vue')
+            },
+            {
+                path: 'Acquisition_strategy',
+                name: 'Acquisition_strategy',
+                meta: {
+                    icon: 'md-download',
+                    title: '采集策略'
+                },
+                component: () => import('@/view/system/Acquisition-strategy.vue')
+            },
+            {
+                path: 'alarm_parameters',
+                name: 'alarm_parameters',
+                meta: {
+                    icon: 'md-download',
+                    title: '报警参数'
+                },
+                component: () => import('@/view/system/alarm-parameters.vue')
+            },
+            {
                 path: 'user_info',
                 name: 'user_info',
                 meta: {

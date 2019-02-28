@@ -2,7 +2,7 @@ import axios from '@/libs/api.request'
 
 export const getData = () => {
   return axios.request({
-    url: 'Home/GetStatisticalData',
+    url: 'services/app/HomePage/GetHomePageInformationInfoAsync',
     method: 'get'
   })
 }

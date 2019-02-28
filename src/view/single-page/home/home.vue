@@ -38,7 +38,7 @@
 </template>
 
 <script>
-    import { InforCard, NaviCard } from '_c/info-card'
+    import { InforCard } from '_c/info-card'
     import CountTo from '_c/count-to'
     import { ChartPie, ChartBar } from '_c/charts'
     import HomeMap from './home-map.vue'
@@ -47,10 +47,7 @@
         name: 'home',
         components: {
             InforCard,
-            NaviCard,
             CountTo,
-            ChartPie,
-            ChartBar,
             HomeMap
         },
         data() {
@@ -91,41 +88,6 @@
                         color: '#E46CBB'
                     }
                 ],
-                pieData: [{
-                        value: 335,
-                        name: '直接访问'
-                    },
-                    {
-                        value: 310,
-                        name: '邮件营销'
-                    },
-                    {
-                        value: 234,
-                        name: '联盟广告'
-                    },
-                    {
-                        value: 135,
-                        name: '视频广告'
-                    },
-                    {
-                        value: 1548,
-                        name: '搜索引擎'
-                    }
-                ],
-                barData: {
-                    Mon: 13253,
-                    Tue: 34235,
-                    Wed: 26321,
-                    Thu: 12340,
-                    Fri: 24643,
-                    Sat: 1322,
-                    Sun: 1324
-                },
-                giveData: { // vue2.0将数据定位对象的形式，实现父子组件的通信
-                    height: 300,
-                    longitude: 116.404,
-                    latitude: 39.915
-                },
                 giveOutData: {
                     height: 600,
                     longitude: 120.427232,
@@ -144,19 +106,19 @@
                         this.inforCardData.forEach((element, index) => {
                             switch (index) {
                                 case 0:
-                                    element.count = data.customerCount
+                                    element.count = data.numberofAccessCustomers
                                     break
                                 case 1:
-                                    element.count = data.equipmentCount
+                                    element.count = data.numberofAccessDevices
                                     break
                                 case 2:
-                                    element.count = data.equipmentOfflineCount
+                                    element.count = data.numberofElectricityUsed
                                     break
                                 case 3:
-                                    element.count = data.failureToBeProcessedCount
+                                    element.count = data.numberofOfflineDevices
                                     break
                                 case 4:
-                                    element.count = data.urgentRepairsToBeProcessed
+                                    element.count = data.numberofFaultyDevices
                                     break
                             }
                         })
