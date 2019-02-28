@@ -15,11 +15,11 @@
         },
         watch: {
             value() {
-                this.loadLine();
+                this.loadLine()
             }
         },
-        methods:{
-            loadLine(){
+        methods: {
+            loadLine() {
                 this.$nextTick(() => {
                     // let legend = this.value.map(_ => _.name)
                     let xAxisData = this.value.map(_ => _.name)
@@ -44,11 +44,23 @@
                         toolbox: {
                             show: true,
                             feature: {
-                                mark: { show: true },
-                                dataView: { show: true, readOnly: false },
-                                magicType: { show: true, type: ['line', 'bar', 'stack', 'tiled'] },
-                                restore: { show: true },
-                                saveAsImage: { show: true }
+                                mark: {
+                                    show: true
+                                },
+                                dataView: {
+                                    show: true,
+                                    readOnly: false
+                                },
+                                magicType: {
+                                    show: true,
+                                    type: ['line', 'bar', 'stack', 'tiled']
+                                },
+                                restore: {
+                                    show: true
+                                },
+                                saveAsImage: {
+                                    show: true
+                                }
                             }
                         },
                         xAxis: {
@@ -58,8 +70,7 @@
                         yAxis: {
                             type: 'value'
                         },
-                        series: [
-                            {
+                        series: [{
                                 name: '电压故障',
                                 type: 'bar',
                                 stack: '客户1',
@@ -97,7 +108,7 @@
             }
         },
         mounted() {
-            this.loadLine();
+            this.loadLine()
         }
     }
 

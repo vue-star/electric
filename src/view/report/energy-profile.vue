@@ -1,13 +1,6 @@
 <template>
     <div>
         <div v-show='showList' class='query-wrap'>
-            <div class="operate-wrap" style="margin-left: 5px">监测点选择：
-                <Select v-model="electricityMeterInfoId" @on-change='selectedChange' class='operate' style="width:200px">
-                    <OptionGroup  v-for="items in customerList" :value="items.customerId" :key="items.customerId" :label="items.customerName">
-                        <Option v-for="item in items.meterInfosDtoList" :value="item.id" :key="item.id">{{ item.equipmentName }}</Option>
-                    </OptionGroup>
-                </Select>
-            </div>
             <div class="operate-wrap" style="margin-left: 20px">时间选择：
                 <DatePicker class='operate' type="daterange" :value="dateTime" placeholder="请选择时间" @on-change='dateChange'
                     style="width: 200px">

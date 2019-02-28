@@ -9,7 +9,7 @@
     export default {
         name: 'FaultChart',
         props: {
-            value: Object,
+            value: Array,
             text: String,
             subtext: String
         },
@@ -21,8 +21,8 @@
         methods: {
             echartsData() {
                 this.$nextTick(() => {
-                    let xAxisData = Object.keys(this.value)
-                    let seriesData = Object.values(this.value)
+                    let xAxisData = this.value.map(_ => _.faultType)
+                    let seriesData = this.value.map(_ => _.faultCount)
                     let option = {
                         title: {
                             text: this.text,
@@ -45,7 +45,6 @@
                     let dom = echarts.init(this.$refs.dom, 'tdTheme')
                     dom.setOption(option)
                 })
-
             }
         },
         mounted() {

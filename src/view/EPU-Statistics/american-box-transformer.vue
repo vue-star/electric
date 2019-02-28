@@ -34,13 +34,8 @@ export default {
     return {
       naviCardData: [
           { title: '负荷开关', icon: 'md-pulse', count: 0.0, color: '#2d8cf0' },
-          { title: '电流互感器', icon: 'md-pulse', count: 0.0, color: '#2d8cf0' },
-          { title: '电压互感器', icon: 'md-pulse', count: 0.0, color: '#2d8cf0' },
           { title: '高压熔断器', icon: 'md-pulse', count: 0.0, color: '#2d8cf0' },
           { title: '电缆', icon: 'md-pulse', count: 0.0, color: '#2d8cf0' },
-          { title: '变压', icon: 'md-pulse', count: 0.0, color: '#2d8cf0' },
-          { title: '低压', icon: 'md-pulse', count: 0.0, color: '#2d8cf0' },
-          { title: '隔离开关', icon: 'md-pulse', count: 0.0, color: '#2d8cf0' },
           { title: '断路器', icon: 'md-pulse', count: 0.0, color: '#2d8cf0' },
           { title: '出线电缆', icon: 'md-pulse', count: 0.0, color: '#2d8cf0' },
           { title: '电容器', icon: 'md-pulse', count: 0.0, color: '#2d8cf0' }

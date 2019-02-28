@@ -32,7 +32,7 @@
             </Page>
         </div>
         <Modal v-model="isAddRouterInfo" :closable="false" width="800">
-            <p slot="header" style="color:#2db7f5;text-align:left">
+            <p slot="header" style="color:#2db7f5text-align:left">
                 <span>{{modelTitle}}</span>
             </p>
             <div>
@@ -41,7 +41,8 @@
                         <Col span="10" class='col-wrap'>
                         <FormItem label="生产厂商" prop="manufacturer">
                             <Select v-model="formValidate.manufacturer">
-                                <Option v-for="item in manufacturerList" :value="item.name" :key="item.id">{{ item.name }}</Option>
+                                <Option v-for="item in manufacturerList" :value="item.name" :key="item.id">{{ item.name
+                                    }}</Option>
                             </Select>
                         </FormItem>
                         </Col>
@@ -67,7 +68,8 @@
                         <Col span="10" class='col-wrap'>
                         <FormItem label="组织" prop="organizationUnitId">
                             <Select v-model="formValidate.organizationUnitId">
-                                <Option v-for="item in organizationUnitIdList" :value="item.id" :key="item.id">{{ item.displayName }}</Option>
+                                <Option v-for="item in organizationUnitIdList" :value="item.id" :key="item.id">{{
+                                    item.displayName }}</Option>
                             </Select>
                         </FormItem>
                         </Col>
@@ -81,8 +83,7 @@
                         <Col span="10" class='col-wrap'>
                         <FormItem label="是否连接" prop="connectStatus">
                             <RadioGroup v-model="formValidate.connectStatus">
-                                <Radio v-for="item in connectStatusData" :key='item.value' 
-                                    :label="item.value">
+                                <Radio v-for="item in connectStatusData" :key='item.value' :label="item.value">
                                     {{item.name}}
                                 </Radio>
                             </RadioGroup>
@@ -108,79 +109,88 @@
     </div>
 </template>
 <script>
-    import search from '@/view/components/search/search.vue';
-    import operate from '@/view/components/button-group/index.vue';
-    import { formatData, objEqual } from '@/libs/tools'
-    import { getRouterInfoList,addRouterInfo,delRouterInfo,updataRouterInfo } from '@/api/routerInfo'
-    import { getDataDicConfigList,getOrganizationList } from '@/api/data'
+    import search from '@/view/components/search/search.vue'
+    import operate from '@/view/components/button-group/index.vue'
+    import {
+        formatData,
+        objEqual
+    } from '@/libs/tools'
+    import {
+        getRouterInfoList,
+        addRouterInfo,
+        delRouterInfo,
+        updataRouterInfo
+    } from '@/api/routerInfo'
+    import {
+        getDataDicConfigList,
+        getOrganizationList
+    } from '@/api/data'
     export default {
         name: 'router_info',
         data() {
             return {
                 columns1: [{
-						title: '序号',
-						key: 'index',
+                        title: '序号',
+                        key: 'index',
                         width: 60,
                         align: 'center'
                     },
                     {
                         title: '生产厂商',
                         key: 'manufacturer',
-                        align: 'center',
-
+                        align: 'center'
                     },
                     {
                         title: '产品型号',
                         key: 'productType',
-                        align: 'center',
+                        align: 'center'
                     },
                     {
                         title: '路由器设备ID',
                         key: 'sn',
-                        align: 'center',
+                        align: 'center'
                     },
                     {
                         title: '别名',
                         key: 'connectStatusTxt',
-                        align: 'center',
+                        align: 'center'
                     },
                     {
                         title: '创建时间',
                         key: 'creationTime',
-                        align: 'center',
+                        align: 'center'
                     },
                     {
                         title: '别名',
                         key: 'alias',
-                        align: 'center',
+                        align: 'center'
                     },
                     {
                         title: '组织',
                         key: 'organizationUnitName',
-                        align: 'center',
+                        align: 'center'
                     },
                     {
                         title: '备注',
                         key: 'remark',
-                        align: 'center',
+                        align: 'center'
                     }
                 ],
                 listData: [],
-                manufacturerList:[],
-                connectStatusData:[
-                    {
-                        value:1,
-                        name:'是'
+                manufacturerList: [],
+                connectStatusData: [{
+                        value: 1,
+                        name: '是'
                     },
                     {
-                        value:0,
-                        name:'否'
+                        value: 0,
+                        name: '否'
                     }
                 ],
-                organizationUnitIdList:[],
+                organizationUnitIdList: [],
                 data: {},
                 total: 1,
-                showList: true, //显示列表
+                showList: true, // 显示列表
                 showLog: false,
                 isSelect: false,
                 add: false,
@@ -190,226 +200,234 @@
                 isLoading: false,
                 isEdit: false, // 点击编辑切换
                 queryParam: {
-                    "maxResultCount": 10,
-                    "filter": '',
-                    "pageNumber": 0,
-                    "skipCount": 0
+                    'maxResultCount': 10,
+                    'filter': '',
+                    'pageNumber': 0,
+                    'skipCount': 0
                 },
                 removeInputFlag: 0,
-                addBtn: true, //新增按钮权限
-                deleteBtn: false, //删除按钮权限
+                addBtn: true, // 新增按钮权限
+                deleteBtn: false, // 删除按钮权限
                 editBtn: false,
                 isAddRouterInfo: false,
                 formValidate: {
-                    connectStatus:1
+                    connectStatus: 1
                 },
                 saving: false,
                 ruleValidate: {
-                    manufacturer: [
-                        { required: true, message: '请选择生产商', trigger: 'blur' },
-                    ],
-                    productType: [
-                        { required: true, message: '请输入产品类型', trigger: 'blur' }
-                    ],
-                    sn: [
-                        { required: true, message: '请输入地址', trigger: 'blur' }
-                    ],
-                    organizationUnitId: [
-                        { required: true, type:'number', message: '请选择组织', trigger: 'blur' }
-                    ],
-                    alias: [
-                        { required: true, message: '请输入名称', trigger: 'blur' }
-                    ]
+                    manufacturer: [{
+                        required: true,
+                        message: '请选择生产商',
+                        trigger: 'blur'
+                    }],
+                    productType: [{
+                        required: true,
+                        message: '请输入产品类型',
+                        trigger: 'blur'
+                    }],
+                    sn: [{
+                        required: true,
+                        message: '请输入地址',
+                        trigger: 'blur'
+                    }],
+                    organizationUnitId: [{
+                        required: true,
+                        type: 'number',
+                        message: '请选择组织',
+                        trigger: 'blur'
+                    }],
+                    alias: [{
+                        required: true,
+                        message: '请输入名称',
+                        trigger: 'blur'
+                    }]
                 }
             }
         },
         methods: {
             init() {
-                this.getListData();
-                this.getDataDicConfigList(17);
-                this.getOrganizationUnits(2);
+                this.getListData()
+                this.getDataDicConfigList(17)
+                this.getOrganizationUnits(2)
             },
-            getOrganizationUnits(OrganizationUnitType){
+            getOrganizationUnits(OrganizationUnitType) {
                 return new Promise((resolve, reject) => {
                     getOrganizationList(OrganizationUnitType).then(
-                       res => {
-                            const data = res.data.result.items;
-                            this.organizationUnitIdList=data;
+                        res => {
+                            const data = res.data.result.items
+                            this.organizationUnitIdList = data
                             resolve()
                         },
                         error => {
-                            this.$Message.error(error.error.message);
-                            resolve();
-                    }).catch(err => {
+                            this.$Message.error(error.error.message)
+                            resolve()
+                        }).catch(err => {
                         reject(err)
                     })
-                })   
+                })
             },
-            getDataDicConfigList(dictionaryType){
-               return new Promise((resolve, reject) => {
-                   getDataDicConfigList(dictionaryType).then(
-                       res => {
-                            const data = res.data.result.items;
-                            this.manufacturerList=data;
+            getDataDicConfigList(dictionaryType) {
+                return new Promise((resolve, reject) => {
+                    getDataDicConfigList(dictionaryType).then(
+                        res => {
+                            const data = res.data.result.items
+                            this.manufacturerList = data
                             resolve()
                         },
                         error => {
-                            this.$Message.error(error.error.message);
-                            resolve();
-                    }).catch(err => {
+                            this.$Message.error(error.error.message)
+                            resolve()
+                        }).catch(err => {
                         reject(err)
                     })
-                })   
+                })
             },
-            getListData(){
+            getListData() {
                 return new Promise((resolve, reject) => {
                     getRouterInfoList(this.queryParam).then(
                         res => {
-                            const data = res.data.result;
-                            this.isLoading = false;
-                            this.isSelect=false;
-                            this.listData = data.items;
-                            let size=this.queryParam.skipCount+1;
-                            this.listData.forEach(element=>{
-                                element.index=size++;
-                                element.creationTime=formatData(element.creationTime,"day");
-                                if(element.connectStatus){
-                                    element.connectStatusTxt='是';
-                                    element.connectStatus=1;
-                                }else{
-                                    element.connectStatusTxt='否';
-                                    element.connectStatus=0;
+                            const data = res.data.result
+                            this.isLoading = false
+                            this.isSelect = false
+                            this.listData = data.items
+                            let size = this.queryParam.skipCount + 1
+                            this.listData.forEach(element => {
+                                element.index = size++
+                                element.creationTime = formatData(element.creationTime, 'day')
+                                if (element.connectStatus) {
+                                    element.connectStatusTxt = '是'
+                                    element.connectStatus = 1
+                                } else {
+                                    element.connectStatusTxt = '否'
+                                    element.connectStatus = 0
                                 }
                             })
-                            this.total = data.totalCount;
+                            this.total = data.totalCount
                             resolve()
                         },
                         error => {
-                            this.$Message.error(error.error.message);
-                            resolve();
-                    }).catch(err => {
+                            this.$Message.error(error.error.message)
+                            resolve()
+                        }).catch(err => {
                         reject(err)
                     })
-                })     
+                })
             },
             query(data) {
-                this.queryParam.pageNumber = 0;
-                this.queryParam.skipCount = 0;
-                this.queryParam.filter = data.filter;
-                this.getListData();
+                this.queryParam.pageNumber = 0
+                this.queryParam.skipCount = 0
+                this.queryParam.filter = data.filter
+                this.getListData()
             },
 
             selectItem(data, index) {
-                this.deleteBtn = true;
-                this.editBtn = true;
-                this.data = data;
-                this.selectIndex = index;
-                this.isSelect = true;
+                this.deleteBtn = true
+                this.editBtn = true
+                this.data = data
+                this.selectIndex = index
+                this.isSelect = true
             },
             pageChange(data) {
-                this.queryParam.pageNumber = data - 1;
-                this.queryParam.skipCount = (data - 1) * this.queryParam.maxResultCount;
-                this.getListData();
+                this.queryParam.pageNumber = data - 1
+                this.queryParam.skipCount = (data - 1) * this.queryParam.maxResultCount
+                this.getListData()
             },
             // 刷新页面
             refreshHandler() {
-                this.queryParam.filter = '';
-                this.isSelect = false;
-                this.getListData();
+                this.queryParam.filter = ''
+                this.isSelect = false
+                this.getListData()
             },
             deleteHandler(data) {
                 return new Promise((resolve, reject) => {
                     delRouterInfo(data.id).then(
                         res => {
-                            this.$Message.success('删除设备成功');
-                            this.isSelect = false;
-                            this.getListData();
+                            this.$Message.success('删除设备成功')
+                            this.isSelect = false
+                            this.getListData()
                             resolve()
                         },
                         error => {
-                            this.$Message.error(error.error.message);
-                            resolve();
-                    }).catch(err => {
+                            this.$Message.error(error.error.message)
+                            resolve()
+                        }).catch(err => {
                         reject(err)
                     })
-                })     
-                
+                })
             },
-             addHandler() {
-                this.isAddRouterInfo = true;
-                this.modelTitle = '新增路由器';
+            addHandler() {
+                this.isAddRouterInfo = true
+                this.modelTitle = '新增路由器'
             },
-            //编辑
+            // 编辑
             editHandler(index) {
-                this.isEdit = true;
-                this.isAddRouterInfo = true;
-                this.modelTitle = '编辑路由器信息';
-                this.formValidate = this.data;
-                this.organizationUnitIdList.forEach(element=>{
-                    if(objEqual(this.formValidate.organizationUnitName, element.displayName)){
-                        this.formValidate.organizationUnitId=element.id;
+                this.isEdit = true
+                this.isAddRouterInfo = true
+                this.modelTitle = '编辑路由器信息'
+                this.formValidate = this.data
+                this.organizationUnitIdList.forEach(element => {
+                    if (objEqual(this.formValidate.organizationUnitName, element.displayName)) {
+                        this.formValidate.organizationUnitId = element.id
                     }
                 })
             },
             handleCancle(name) {
-                this.isAddRouterInfo = false;
-                this.isSelect=false;
-                this.$refs[name].resetFields();
+                this.isAddRouterInfo = false
+                this.isSelect = false
+                this.$refs[name].resetFields()
             },
             handelSave(name) {
                 this.$refs[name].validate((valid) => {
                     if (valid) {
-                        if(this.isEdit){
+                        if (this.isEdit) {
                             return new Promise((resolve, reject) => {
-                            updataRouterInfo(this.formValidate).then(
-                                res => {
-                                    this.$Message.success('修改设备成功');
-                                    this.isAddRouterInfo = false;
-                                    this.isEdit=false;
-                                    this.$refs[name].resetFields();
-                                    this.getListData();
-                                    resolve()
-                                },
-                                error => {
-                                    this.$Message.error(error.error.message);
-                                    resolve();
-                            }).catch(err => {
-                                reject(err)
+                                updataRouterInfo(this.formValidate).then(
+                                    res => {
+                                        this.$Message.success('修改设备成功')
+                                        this.isAddRouterInfo = false
+                                        this.isEdit = false
+                                        this.$refs[name].resetFields()
+                                        this.getListData()
+                                        resolve()
+                                    },
+                                    error => {
+                                        this.$Message.error(error.error.message)
+                                        resolve()
+                                    }).catch(err => {
+                                    reject(err)
+                                })
                             })
-                        })    
                         }
                         return new Promise((resolve, reject) => {
                             addRouterInfo(this.formValidate).then(
                                 res => {
-                                    this.$Message.success('新增设备成功');
-                                    this.isAddRouterInfo = false;
-                                    this.$refs[name].resetFields();
-                                    this.getListData();
+                                    this.$Message.success('新增设备成功')
+                                    this.isAddRouterInfo = false
+                                    this.$refs[name].resetFields()
+                                    this.getListData()
                                     resolve()
                                 },
                                 error => {
-                                    this.$Message.error(error.error.message);
-                                    resolve();
-                            }).catch(err => {
+                                    this.$Message.error(error.error.message)
+                                    resolve()
+                                }).catch(err => {
                                 reject(err)
                             })
-                        })  
+                        })
                     } else {
-                        this.$Message.error('输入有误!');
+                        this.$Message.error('输入有误!')
                     }
                 })
-                   
-                
             }
         },
         components: {
             search,
-            operate,
+            operate
         },
         mounted() {
-            this.init();
+            this.init()
         }
-    };
+    }
 
 </script>
 <style lang='less'>
@@ -420,7 +438,7 @@
 
         .error_text {
             color: red;
-            padding-left: 10px;
+            padding-left: 10px
         }
     }
 
@@ -432,7 +450,7 @@
         height: 25px;
         line-height: 25px;
         font-size: 14px;
-        margin-right: 10px;
+        margin-right: 10px
     }
 
 </style>

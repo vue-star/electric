@@ -15,10 +15,6 @@
         <span class='operate-btn' v-show='edit'>
             <Button type="warning" icon="edit" shape="circle" @click='editHandler'>编辑</Button>
         </span>
-        <!-- <span class='operate-btn' v-show='returBtn'>
-			<Button type="warning" icon="edit" shape="circle" 
-				@click='returBtnHandler'>返回</Button>
-		</span> -->
         <span class='operate-btn' v-show='deployStatus'>
             <Button type="warning" icon="edit" shape="circle" @click='deployHandler'>配置订单</Button>
         </span>
@@ -68,7 +64,7 @@
 
         <!--弹出层确认删除等等-->
         <Modal v-model="deletteModelStatus" width="310" :styles="{top: '250px'}">
-            <p slot="header" style="color:#2db7f5;text-align:left">
+            <p slot="header" style="color:#2db7f5text-align:left">
                 <span>提示</span>
             </p>
             <div>
@@ -84,7 +80,7 @@
             </div>
         </Modal>
         <Modal v-model="operatModelStatus" width="310" :styles="{top: '250px'}">
-            <p slot="header" style="color:#2db7f5;text-align:left">
+            <p slot="header" style="color:#2db7f5text-align:left">
                 <span>提示</span>
             </p>
             <div>
@@ -100,7 +96,7 @@
             </div>
         </Modal>
         <Modal v-model="sureModelStatus" width="310" :styles="{top: '250px'}">
-            <p slot="header" style="color:#2db7f5;text-align:left">
+            <p slot="header" style="color:#2db7f5text-align:left">
                 <span>提示</span>
             </p>
             <div>
@@ -123,24 +119,24 @@
 <script>
     export default {
         props: {
-            //删除按钮
+            // 删除按钮
             deleteStatus: {
                 type: Boolean,
                 default: false
 
             },
-            //刷新按钮
+            // 刷新按钮
             refreshStatus: {
                 type: Boolean,
                 default: false
             },
-            //出货按钮
+            // 出货按钮
             shipmentStatus: {
                 type: Boolean,
                 default: false
 
             },
-            //操作按钮 这个按钮是针对动态弹出model 动态显示提示语
+            // 操作按钮 这个按钮是针对动态弹出model 动态显示提示语
             operate: {
                 type: Object,
                 default: function () {
@@ -153,38 +149,38 @@
 
             },
 
-            //添加按钮
+            // 添加按钮
             addStatus: {
                 type: Boolean,
                 default: true
 
             },
-            //返回按钮
+            // 返回按钮
             // returBtn: {
-            // 	type: Boolean,
-            // 	default: true
+            // type: Boolean,
+            // default: true
             // },
-            //配置订单
+            // 配置订单
             deployStatus: {
                 type: Boolean,
                 default: false
             },
-            //已忽略
+            // 已忽略
             ignoredStatus: {
                 type: Boolean,
                 default: false
             },
-            //确认按钮
+            // 确认按钮
             confirmStatus: {
                 type: Boolean,
                 default: false
             },
-            //编辑按钮
+            // 编辑按钮
             edit: {
                 type: Boolean,
                 default: false
             },
-            //授权按钮
+            // 授权按钮
             permissions: {
                 type: Boolean,
                 default: false
@@ -193,19 +189,19 @@
                 type: Object,
                 required: false
             },
-            //更多操作传入的数据
+            // 更多操作传入的数据
             moreOperations: {
                 type: Array,
                 default: function () {
-                    return [];
+                    return []
                 }
             },
-            //回库按钮
+            // 回库按钮
             backLibraryStatus: {
                 type: Boolean,
                 default: false
             },
-            //补充订单状态
+            // 补充订单状态
             supplyStatus: {
                 type: Boolean,
                 default: false
@@ -236,98 +232,98 @@
         methods: {
 
             clickMore() {
-                this.showDown = !this.showDown;
+                this.showDown = !this.showDown
             },
-            //点击动态按钮事件
+            // 点击动态按钮事件
             handleOperateClick() {
-                this.operatModelStatus = true;
+                this.operatModelStatus = true
             },
-            //取消确然删除,确认弹出层
+            // 取消确然删除,确认弹出层
             handleCancel() {
-                this.deletteModelStatus = false;
-                this.sureModelStatus = false;
-                this.operatModelStatus = false;
+                this.deletteModelStatus = false
+                this.sureModelStatus = false
+                this.operatModelStatus = false
             },
-            //			刷新事件
+            // 刷新事件
             refreshHandler() {
-                this.$emit('refreshHandler');
+                this.$emit('refreshHandler')
             },
-            //出货触发的事件
+            // 出货触发的事件
             shipmentHandler() {
-                this.$emit('shipmentHandler');
+                this.$emit('shipmentHandler')
             },
-            //确认删除
+            // 确认删除
             confirmDeleteHandler() {
-                this.deletteModelStatus = false;
-                this.$emit('deleteHandler', this.deleteItem);
+                this.deletteModelStatus = false
+                this.$emit('deleteHandler', this.deleteItem)
             },
-            //返回
+            // 返回
             // returBtnHandler(){
-            // 	this.$emit('returnBtnHandler');
+            // this.$emit('returnBtnHandler')
             // },
-            //确认操作向负组件通知事件
+            // 确认操作向负组件通知事件
             sureOperate() {
-                this.operatModelStatus = false;
-                this.$emit('operate', );
+                this.operatModelStatus = false
+                this.$emit('operate')
             },
-            //处理点击生成工单按钮事件
+            // 处理点击生成工单按钮事件
             workOrderHandler() {
-                this.$emit('workOrderHandler');
+                this.$emit('workOrderHandler')
             },
-            //处理点击确定工单按钮事件
+            // 处理点击确定工单按钮事件
             sureOrderHandler() {
-                this.$emit('sureOrderHandler');
+                this.$emit('sureOrderHandler')
             },
-            //处理点击已忽略按钮事件
+            // 处理点击已忽略按钮事件
             ignoredHandler() {
-                this.$emit('ignoredHandler');
+                this.$emit('ignoredHandler')
             },
-            //确认出货
+            // 确认出货
             sureShipment() {
-                this.sureModelStatus = false;
-                this.$emit('handleConfirmClick');
+                this.sureModelStatus = false
+                this.$emit('handleConfirmClick')
             },
-            //处理点击删除按钮事件
+            // 处理点击删除按钮事件
             deleteHandler(data) {
-                this.deletteModelStatus = true;
-                this.deleteItem = data;
+                this.deletteModelStatus = true
+                this.deleteItem = data
             },
-            //处理点击添加按钮事件
+            // 处理点击添加按钮事件
             addHandler() {
-                this.$emit('addHandler');
+                this.$emit('addHandler')
             },
-            //处理编辑点击事件
+            // 处理编辑点击事件
             editHandler() {
-                this.$emit('editHandler');
+                this.$emit('editHandler')
             },
             deployHandler() {
                 this.$emit('deployHandler')
             },
             permissionsHandler() {
-                this.$emit('permissionsHandler');
+                this.$emit('permissionsHandler')
             },
             handleBodyClick() {
-                this.showDown = false;
+                this.showDown = false
             },
-            //点击更多操作返回的回掉函数
+            // 点击更多操作返回的回掉函数
             handmoreclick(name) {
-                this.$emit('handmoreclick', name);
+                this.$emit('handmoreclick', name)
             },
-            //处理回库的毁掉事件
+            // 处理回库的毁掉事件
             handleBackLibrary() {
-                this.$emit('handleBackLibrary');
+                this.$emit('handleBackLibrary')
             },
-            //处理确认的回掉事件
+            // 处理确认的回掉事件
             handleConfirmClick() {
-                this.sureModelStatus = true;
+                this.sureModelStatus = true
             },
             // 处理补充订单
             supplyHandler() {
-                this.$emit('supplyHandler');
+                this.$emit('supplyHandler')
             },
             // 动态按钮
             dynamicBtnHandler() {
-                this.$emit('dynamicBtnHandler');
+                this.$emit('dynamicBtnHandler')
             },
             tofinishOrder() {
                 this.$emit('finishOrder')
@@ -341,13 +337,13 @@
                         event.target.parentElement.className.indexOf('hide_wrap') < 0 &&
                         event.target.parentElement.parentElement.className.indexOf('hide_wrap') < 0
                     ) {
-                        this.handleBodyClick();
+                        this.handleBodyClick()
                     }
-                });
+                })
             })
         },
         beforeDestroy() {
-			document.querySelector('body').removeEventListener('click', this.handleBodyClick);
+            document.querySelector('body').removeEventListener('click', this.handleBodyClick)
         }
 
     }
@@ -356,7 +352,7 @@
 
 <style scoped>
     .add {
-        margin-left: 10px;
+        margin-left: 10px
     }
 
     .operate-btn {
@@ -364,20 +360,20 @@
         vertical-align: middle;
         height: 32px;
         min-width: 75px;
-        position: relative;
+        position: relative
     }
 
     .more {
         position: absolute;
         top: 37px;
         left: 0;
-        z-index: 888;
+        z-index: 888
     }
 
     .more li {
         margin: 5px 0;
         padding-left: 0;
-        margin-left: -10px;
+        margin-left: -10px
     }
 
 </style>

@@ -8,8 +8,8 @@ import iView from 'iview'
 import i18n from '@/locale'
 import config from '@/config'
 import axios from 'axios'
-import moment from 'moment';
-import util from './libs/util';
+import moment from 'moment'
+import util from './libs/util'
 import importDirective from '@/directive'
 import VueLazyLoad from 'vue-lazyload'
 // import Icon from 'vue-svg-icon/Icon.vue'
@@ -17,6 +17,7 @@ import 'iview/dist/styles/iview.css'
 import './index.less'
 import '@/assets/icons/iconfont.css'
 import '@/assets/java-script/svg-pan-zoom.js'
+// import '@/assets/java-script/three.js'
 
 // 实际打包时应该不引入mock
 /* eslint-disable */

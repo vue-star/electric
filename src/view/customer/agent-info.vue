@@ -54,7 +54,7 @@
             </Page>
         </div>
         <Modal v-model="isAddAgent" :closable="false" width="800">
-            <p slot="header" style="color:#2db7f5;text-align:left">
+            <p slot="header" style="color:#2db7f5text-align:left">
                 <span>{{modelTitle}}</span>
             </p>
             <div>
@@ -193,43 +193,56 @@
     </div>
 </template>
 <script>
-    import search from '@/view/components/search/search.vue';
-    import operate from '@/view/components/button-group/index.vue';
-    import { bankCardAttribution } from '@/assets/java-script/checkCard.js';
-    import { formatData } from '@/libs/tools';
-    import { getAgentList, addAgent, delAgent, updataAgent, getPowerQualification } from '@/api/agent';
+    import search from '@/view/components/search/search.vue'
+    import operate from '@/view/components/button-group/index.vue'
+    import {
+        bankCardAttribution
+    } from '@/assets/java-script/checkCard.js'
+    import {
+        formatData
+    } from '@/libs/tools'
+    import {
+        getAgentList,
+        addAgent,
+        delAgent,
+        updataAgent,
+        getPowerQualification
+    } from '@/api/agent'
     import Cropper from '@/components/cropper'
-    import { uploadImg, sureUploadImg } from '@/api/data'
+    import {
+        uploadImg,
+        sureUploadImg
+    } from '@/api/data'
     export default {
         name: 'agent-info',
         data() {
             var validateMobilePhone = (rule, value, callback) => {
                 if (value === '') {
-                    callback(new Error('请输入联系电话'));
+                    callback(new Error('请输入联系电话'))
                 } else {
                     if (value !== '') {
-                        var reg = /^1[3456789]\d{9}$/;
+                        var reg = /^1[3456789]\d{9}$/
                         if (!reg.test(value)) {
-                            callback(new Error('请输入有效的手机号码'));
+                            callback(new Error('请输入有效的手机号码'))
                         }
                     }
-                    callback();
+                    callback()
                 }
-            };
+            }
             const validateNumber = (rule, value, callback) => {
                 if (!Number.isInteger(+value)) {
-                    callback(new Error('请输入数字值'));
+                    callback(new Error('请输入数字值'))
                 } else {
-                    callback();
+                    callback()
                 }
-            };
+            }
             const validatePowerQualification = (rule, value, callback) => {
-                if (this.formValidate.powerQualification=== '') {
-                    callback(new Error('请上传电力资质'));
+                if (this.formValidate.powerQualification === '') {
+                    callback(new Error('请上传电力资质'))
                 } else {
-                    callback();
+                    callback()
                 }
-            };
+            }
             return {
                 FileName: '',
                 FileType: '',
@@ -257,7 +270,7 @@
                 data: {},
                 total: 1,
                 page: 1,
-                showList: true, //显示列表
+                showList: true, // 显示列表
                 showLog: false,
                 isSelect: false,
                 add: false,
@@ -269,10 +282,10 @@
                 isGroup: false,
                 isEdit: false, // 点击编辑切换
                 queryParam: {
-                    "maxResultCount": 10,
-                    "filter": '',
-                    "pageNumber": 0,
-                    "skipCount": 0
+                    'maxResultCount': 10,
+                    'filter': '',
+                    'pageNumber': 0,
+                    'skipCount': 0
                 },
                 addGroupBtn: {
                     status: true,
@@ -280,8 +293,8 @@
                 },
                 numberParam: '',
                 removeInputFlag: 0,
-                addBtn: true, //新增按钮权限
-                deleteBtn: false, //删除按钮权限
+                addBtn: true, // 新增按钮权限
+                deleteBtn: false, // 删除按钮权限
                 editBtn: false,
                 isAddAgent: false,
                 formValidate: {
@@ -292,7 +305,7 @@
                         required: true,
                         message: '公司名称不能为空',
                         trigger: 'blur'
-                    }, ],
+                    } ],
                     email: [{
                         type: 'email',
                         message: '请正确输入邮箱',
@@ -304,8 +317,8 @@
                         trigger: 'blur'
                     }],
                     powerQualification: [{
-                        validator:validatePowerQualification,
-                        trigger:'blur'
+                        validator: validatePowerQualification,
+                        trigger: 'blur'
                     }],
                     unifiedSocialCreditCode: [{
                         required: true,
@@ -338,41 +351,41 @@
             guid() {
                 return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function (c) {
                     var r = Math.random() * 16 | 0,
-                        v = c == 'x' ? r : (r & 0x3 | 0x8);
-                    return v.toString(16);
-                });
+                        v = c == 'x' ? r : (r & 0x3 | 0x8)
+                    return v.toString(16)
+                })
             },
             beforeUpload(file) {
-                this.isUpdata = false;
-                this.FileName = file.name;
-                this.FileType = file.type;
-                this.FileToken = this.guid();
+                this.isUpdata = false
+                this.FileName = file.name
+                this.FileType = file.type
+                this.FileToken = this.guid()
             },
             handleCroped(blob, insideSrc) {
-                this.insideSrc = insideSrc;
+                this.insideSrc = insideSrc
                 const formData = new FormData()
                 formData.append('croppedImg', blob)
                 formData.append('FileName', this.FileName)
                 formData.append('FileType', this.FileType)
                 formData.append('FileToken', this.FileToken)
                 uploadImg(formData).then((res) => {
-                    let data = res.data.result;
-                    this.powerQualificationData.fileToken = data.fileToken;
-                    this.powerQualificationData.height = data.height;
-                    this.powerQualificationData.width = data.width;
-                    this.isUpdata = true;
+                    let data = res.data.result
+                    this.powerQualificationData.fileToken = data.fileToken
+                    this.powerQualificationData.height = data.height
+                    this.powerQualificationData.width = data.width
+                    this.isUpdata = true
                     this.$Message.success('提交成功~')
                 })
             },
             handelSaveImg() {
                 if (this.isUpdata) {
-                    this.uploading = true;
+                    this.uploading = true
                     sureUploadImg(this.powerQualificationData).then((res) => {
-                        let data = res.data.result;
-                        this.formValidate.powerQualification = data;
-                        this.cutVisible = false;
-                        this.isUpdata = false;
-                        this.uploading = false;
+                        let data = res.data.result
+                        this.formValidate.powerQualification = data
+                        this.cutVisible = false
+                        this.isUpdata = false
+                        this.uploading = false
                         this.$Message.success('上传成功~')
                     })
                 } else {
@@ -380,56 +393,56 @@
                 }
             },
             handleCancleImg() {
-                this.cutVisible = false;
+                this.cutVisible = false
                 this.powerQualificationData = {}
             },
 
             cutPicture() {
-                this.cutVisible = true;
+                this.cutVisible = true
             },
             handleView(name) {
-                this.imgName = name;
-                this.visible = true;
+                this.imgName = name
+                this.visible = true
             },
             handleRemove() {
-                this.insideSrc = '';
+                this.insideSrc = ''
             },
 
             init() {
-                this.getListData();
+                this.getListData()
             },
             getListData() {
                 return new Promise((resolve, reject) => {
                     getAgentList(this.queryParam).then(
                         res => {
-                            const data = res.data.result;
-                            this.isLoading = false;
-                            this.listData = data.items;
-                            let size = this.queryParam.skipCount + 1;
+                            const data = res.data.result
+                            this.isLoading = false
+                            this.listData = data.items
+                            let size = this.queryParam.skipCount + 1
                             this.listData.forEach(element => {
-                                element.index = size++;
-                                element.creationTime = formatData(element.creationTime, "day");
+                                element.index = size++
+                                element.creationTime = formatData(element.creationTime, 'day')
                             })
-                            this.total = data.totalCount;
+                            this.total = data.totalCount
                             resolve()
                         },
                         error => {
-                            this.$Message.error(error.error.message);
-                            resolve();
-                    }).catch(err => {
+                            this.$Message.error(error.error.message)
+                            resolve()
+                        }).catch(err => {
                         reject(err)
                     })
                 })
             },
             query(data) {
-                this.queryParam.pageNumber = 0;
-                this.queryParam.skipCount = 0;
-                this.queryParam.filter = data.filter;
-                this.getListData();
+                this.queryParam.pageNumber = 0
+                this.queryParam.skipCount = 0
+                this.queryParam.filter = data.filter
+                this.getListData()
             },
-            //界面跳转
+            // 界面跳转
             toReport(val) {
-                console.info("传递参数值：", val)
+                console.info('传递参数值：', val)
                 this.$router.push({
                     name: 'survey_survey',
                     params: {
@@ -437,15 +450,15 @@
                     }
                 })
             },
-            //银行账户校验
+            // 银行账户校验
             inputChange() {
-                this.bank_account = this.bank_account.toString().replace(/\s/g, '');
-                var carInfo = bankCardAttribution(this.bank_account);
-                this.formValidate.bankAccount = carInfo.bankName;
+                this.bank_account = this.bank_account.toString().replace(/\s/g, '')
+                var carInfo = bankCardAttribution(this.bank_account)
+                this.formValidate.bankAccount = carInfo.bankName
             },
-            //格式化银行卡号
+            // 格式化银行卡号
             handleBankCardInput(e) {
-                this.bank_account = e.target.value;
+                this.bank_account = e.target.value
                 this.formValidate.bankAccountNO = this.bank_account.replace(/\s/g, '').replace(/(\d{4})(?=\d)/g, '$1 ')
             },
             getTable2Columns() {
@@ -467,11 +480,11 @@
 
                                     on: {
                                         click: () => {
-                                            this.toReport(params.row.id);
+                                            this.toReport(params.row.id)
                                         }
                                     }
                                 }, params.row.companyName)
-                            ]);
+                            ])
                         },
                         sortable: true
                     },
@@ -551,125 +564,124 @@
                         title: '备注',
                         key: 'remark',
                         align: 'center'
-                    },
-                };
+                    }
+                }
 
-                let data = [table2ColumnList.index];
+                let data = [table2ColumnList.index]
 
-                this.tableColumnsChecked.forEach(col => data.push(table2ColumnList[col]));
+                this.tableColumnsChecked.forEach(col => data.push(table2ColumnList[col]))
 
-                return data;
+                return data
             },
             changeTableColumns() {
-                this.tableColumns = this.getTable2Columns();
+                this.tableColumns = this.getTable2Columns()
             },
 
             selectItem(data, index) {
-                this.deleteBtn = true;
-                this.editBtn = true;
-                this.data = data;
-                this.selectIndex = index;
-                this.isSelect = true;
+                this.deleteBtn = true
+                this.editBtn = true
+                this.data = data
+                this.selectIndex = index
+                this.isSelect = true
             },
             pageChange(data) {
-                this.queryParam.pageNumber = data - 1;
-                this.queryParam.skipCount = (data - 1) * this.queryParam.maxResultCount;
-                this.getListData();
+                this.queryParam.pageNumber = data - 1
+                this.queryParam.skipCount = (data - 1) * this.queryParam.maxResultCount
+                this.getListData()
             },
             // 刷新页面
             refreshHandler() {
-                this.queryParam.filter = '';
-                this.isSelect = false;
-                this.getListData();
+                this.queryParam.filter = ''
+                this.isSelect = false
+                this.getListData()
             },
             deleteHandler(data) {
                 return new Promise((resolve, reject) => {
                     delAgent(data.id).then(
                         res => {
-                            this.$Message.success('删除代理商成功');
-                            this.isSelect = false;
-                            this.getListData();
+                            this.$Message.success('删除代理商成功')
+                            this.isSelect = false
+                            this.getListData()
                             resolve()
                         },
                         error => {
-                            this.$Message.error(error.error.message);
-                            resolve();
-                    }).catch(err => {
+                            this.$Message.error(error.error.message)
+                            resolve()
+                        }).catch(err => {
                         reject(err)
                     })
                 })
-
             },
             addHandler() {
-                this.isAddAgent = true;
-                this.modelTitle = '新增代理商';
+                this.isAddAgent = true
+                this.modelTitle = '新增代理商'
             },
-            //编辑
+            // 编辑
             editHandler(index) {
-                this.isEdit = true;
-                this.isAddAgent = true;
-                this.modelTitle = '编辑代理商';
-                this.formValidate = this.data;
-                this.insideSrc = 'http://www.86y.org/images/loading.gif';
-                this.getImgById(this.data.id);
+                this.isEdit = true
+                this.isAddAgent = true
+                this.modelTitle = '编辑代理商'
+                this.formValidate = this.data
+                this.insideSrc = 'http://www.86y.org/images/loading.gif'
+                this.getImgById(this.data.id)
             },
             getImgById(agentId) {
                 getPowerQualification(agentId).then((res) => {
-                    let data = res.data.result;
-                    this.insideSrc = 'data:image/jpeg;base64,' + data.powerQualification;
+                    let data = res.data.result
+                    this.insideSrc = 'data:image/jpegbase64,' + data.powerQualification
                 })
             },
             handleCancle() {
-                this.isAddAgent = false;
-                this.insideSrc = '';
-                this.formValidate = {};
+                this.isAddAgent = false
+                this.insideSrc = ''
+                this.formValidate = {}
             },
             handelSave(name) {
                 this.$refs[name].validate((valid) => {
                     if (valid) {
-                        this.saving = true;
+                        this.saving = true
                         if (this.isEdit) {
                             return new Promise((resolve, reject) => {
                                 updataAgent(this.formValidate.id, this.formValidate).then(
                                     res => {
-                                        this.$Message.success('修改代理商成功');
-                                        this.isAddAgent = false;
-                                        this.isEdit = false;
-                                        this.saving = false;
-                                        this.formValidate = {};
-                                        this.getListData();
+                                        this.$Message.success('修改代理商成功')
+                                        this.isAddAgent = false
+                                        this.isEdit = false
+                                        this.saving = false
+                                        this.formValidate = {}
+                                        this.getListData()
                                         resolve()
                                     },
                                     error => {
-                                        this.$Message.error(error.error.message);
-                                        this.saving = false;
-                                        resolve();
-                                }).catch(err => {
+                                        this.$Message.error(error.error.message)
+                                        this.saving = false
+                                        resolve()
+                                    }).catch(err => {
                                     reject(err)
                                 })
                             })
-                        }else{
+                        } else {
                             return new Promise((resolve, reject) => {
                                 addAgent(this.formValidate).then(
                                     res => {
-                                        this.$Message.success('新增代理商成功');
-                                        this.isAddAgent = false;
-                                        this.saving = false;
-                                        this.formValidate = {};
-                                        this.getListData();
+                                        this.$Message.success('新增代理商成功')
+                                        this.isAddAgent = false
+                                        this.saving = false
+                                        this.formValidate = {}
+                                        this.getListData()
                                         resolve()
                                     },
                                     error => {
-                                        this.$Message.error(error.error.message);
-                                        this.saving = false;
-                                        resolve();
-                                }).catch(err => {
+                                        this.$Message.error(error.error.message)
+                                        this.saving = false
+                                        resolve()
+                                    }).catch(err => {
                                     reject(err)
                                 })
                             })
                         }
                     } else {
-                        this.$Message.error('输入有误!');
+                        this.$Message.error('输入有误!')
                     }
                 })
             }
@@ -680,10 +692,10 @@
             Cropper
         },
         mounted() {
-            this.changeTableColumns();
-            this.init();
+            this.changeTableColumns()
+            this.init()
         }
-    };
+    }
 
 </script>
 <style lang='less'>
@@ -694,7 +706,7 @@
 
         .error_text {
             color: red;
-            padding-left: 11px;
+            padding-left: 11px
         }
     }
 
@@ -706,12 +718,12 @@
         height: 25px;
         line-height: 25px;
         font-size: 14px;
-        margin-right: 11px;
+        margin-right: 11px
     }
 
     .more-col-div {
         text-align: right;
-        padding-right: 11px;
+        padding-right: 11px
     }
 
     .vertical-center-modal {
@@ -721,7 +733,7 @@
 
         .ivu-modal {
             top: 0;
-            left: 110;
+            left: 110
         }
     }
 
@@ -741,12 +753,12 @@
         background: #fff;
         position: relative;
         box-shadow: 0 1px 1px rgba(0, 0, 0, .2);
-        margin-right: 4px;
+        margin-right: 4px
     }
 
     .demo-upload-list img {
         width: 100%;
-        height: 100%;
+        height: 100%
     }
 
     .demo-upload-list-cover {
@@ -756,18 +768,18 @@
         bottom: 0;
         left: 0;
         right: 0;
-        background: rgba(0, 0, 0, .6);
+        background: rgba(0, 0, 0, .6)
     }
 
     .demo-upload-list:hover .demo-upload-list-cover {
-        display: block;
+        display: block
     }
 
     .demo-upload-list-cover i {
         color: #fff;
         font-size: 20px;
         cursor: pointer;
-        margin: 0 2px;
+        margin: 0 2px
     }
 
 </style>

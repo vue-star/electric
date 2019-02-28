@@ -1,5 +1,5 @@
 <template>
-    <div ref="dom" class="charts chart-bar"></div>
+    <div ref="dom" class="charts chart-line"></div>
 </template>
 
 <script>
@@ -7,7 +7,7 @@
     import tdTheme from './theme.json'
     echarts.registerTheme('tdTheme', tdTheme)
     export default {
-        name: 'ChartBar',
+        name: 'SurveyChart',
         props: {
             xAxisData: Array,
             seriesData: Array,
@@ -18,13 +18,12 @@
             xAxisData() {
                 this.echartsShow()
             }
-
         },
         methods: {
             echartsShow() {
+                let xAxisData = this.xAxisData
+                let seriesData = this.seriesData
                 this.$nextTick(() => {
-                    let xAxisData = this.xAxisData
-                    let seriesData = this.seriesData
                     let option = {
                         title: {
                             text: this.text,
@@ -43,22 +42,20 @@
                                 var htmlStr = ''
                                 for (var i = 0; i < params.length; i++) {
                                     var param = params[i]
-                                    var xName = param.name // x轴的名称
-                                    var seriesName = param.seriesName // 图例名称
-                                    var value = param.value // y轴值
-                                    var color = param.color // 图例颜色
+                                    var xName = param.name// x轴的名称
+                                    var seriesName = param.seriesName// 图例名称
+                                    var value = param.value.toFixed(2)// y轴值
+                                    var color = param.color// 图例颜色
 
                                     if (i === 0) {
-                                        htmlStr += xName + '<br/>' // x轴的名称
+                                    htmlStr += xName + '点<br/>'// x轴的名称
                                     }
                                     htmlStr += '<div>'
                                     // 为了保证和原来的效果一样，这里自己实现了一个点的效果
-                                    htmlStr +=
-                                        '<span style="margin-right:5pxdisplay:inline-blockwidth:10pxheight:10pxborder-radius:5pxbackground-color:' +
-                                        color + '"></span>'
+                                    htmlStr += '<span style="margin-right:5px;display:inline-block;width:10px;height:10px;border-radius:5px;background-color:' + color + ';"></span>'
 
                                     // 圆点后面显示的文本
-                                    htmlStr += seriesName + '：' + value + '%'
+                                    htmlStr += seriesName + '：' + value + 'kw'
 
                                     htmlStr += '</div>'
                                 }
@@ -66,37 +63,48 @@
                             }
                         },
                         xAxis: {
-                            name: '时间',
+                            name: '时辰',
+                            boundaryGap: false,
                             type: 'category',
                             data: xAxisData
                         },
                         yAxis: {
+                            name: '功率',
+                            type: 'value',
                             axisLabel: {
                                 formatter: function (value) {
                                     var texts = []
-                                    texts.push(value + ' %')
+                                    texts.push(value + ' kw')
                                     return texts
                                 }
-                            },
-                            name: '用电趋势',
-                            type: 'value'
+                            }
                         },
                         series: [{
-                            data: seriesData,
-                            name: '趋势',
+                            name: '功率',
                             stack: '总量',
-                            areaStyle: {
-                                normal: {
-                                    color: '#2d8cf0'
-                                }
+                            areaStyle: { normal: {
+                                color: '#2d8cf0'
+                            } },
+                            data: seriesData,
+                            type: 'line',
+                            markPoint: {
+                                data: [
+                                    { type: 'max', name: '最大值' },
+                                    { type: 'min', name: '最小值' }
+                                ]
                             },
-                            type: 'bar'
+                            markLine: {
+                                data: [
+                                    { type: 'average', name: '平均值' }
+                                ]
+                            }
                         }]
                     }
                     let dom = echarts.init(this.$refs.dom, 'tdTheme')
                     dom.setOption(option)
                 })
             }
+
         },
         mounted() {
             this.echartsShow()

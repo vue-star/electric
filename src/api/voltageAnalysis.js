@@ -8,9 +8,9 @@ export const getElectricityDropdownList = () => {
     })
 }
 // 获取功率因素曲线
-export const getPowerFactor = (StartDate, EndData, ElectricityMeterInfoId) => {
+export const getVoltageAnalysis = (StartDate, EndData, ElectricityMeterInfoId) => {
     return axios.request({
-        url: 'services/app/PowerStatistics/GetPowerFactorAsync',
+        url: 'services/app/PowerStatistics/GetVoltageAnalysisAsync',
         params: {
             StartDate,
             EndData,

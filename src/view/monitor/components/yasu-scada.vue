@@ -15,9 +15,9 @@
 </template>
 
 <script type="text/ecmascript-6">
-    import yasuCom1 from './yasu-com1.vue';
-    import yasuCom2 from './yasu-com2.vue';
-    import yasuCom3 from './yasu-com3.vue';
+    import yasuCom1 from './yasu-com1.vue'
+    import yasuCom2 from './yasu-com2.vue'
+    import yasuCom3 from './yasu-com3.vue'
     import {
         getCustomerList,
         addCustomer,
@@ -39,20 +39,20 @@
         },
         watch: {},
         methods: {
-            init() {},
+            init() {}
         },
-        mounted() {},
+        mounted() {}
     }
 
 </script>
 
 <style lang='less'>
-.couplet-card{
-    height: 100%;
-}
+    .couplet-card {
+        height: 100%
+    }
 
-.ivu-tabs-content-animated{
-    height: 100%;
-}
+    .ivu-tabs-content-animated {
+        height: 100%
+    }
+
 </style>
-

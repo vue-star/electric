@@ -1,52 +1,44 @@
 import axios from '@/libs/api.request'
-// 获取客户列表
-export const getFaultList = (data) => {
-    const MaxResultCount = data.maxResultCount
-    const SkipCount = data.skipCount
-    const Filter = data.filter
-
+// 获取下拉列表
+export const getElectricityDropdownList = () => {
     return axios.request({
-        url: 'services_app_Fault_GetPaged',
+        url: '/services/app/ElectricityMeterInfo/GetRouterInformationForDropdownList',
+        method: 'get'
+    })
+}
+// 获取故障汇总曲线
+export const getFaultSummary = (StartDate, EndData, ElectricityMeterInfoId) => {
+    return axios.request({
+        url: 'services/app/PowerStatistics/GetFaultSummaryAsync',
         params: {
-            MaxResultCount,
-            SkipCount,
-            Filter
+            StartDate,
+            EndData,
+            ElectricityMeterInfoId
         },
         method: 'get'
     })
 }
-// 获取客户列表
-export const getEchartData = () => {
+// 获取故障汇总曲线
+export const getFaultList = (StartDate, EndData, ElectricityMeterInfoId) => {
+    return axios.request({
+        url: 'services/app/PowerStatistics/GetFaultInformationAsync',
+        params: {
+            StartDate,
+            EndData,
+            ElectricityMeterInfoId
+        },
+        method: 'get'
+    })
+}
+// 获取故障汇总曲线
+export const getEchartData = (StartDate, EndData, ElectricityMeterInfoId) => {
     return axios.request({
         url: 'get_echart_data',
-        method: 'get'
-    })
-}
-// 新增客户
-export const addCustomer = (Customer) => {
-    const data = Customer
-    return axios.request({
-        url: 'services/app/Customer/Create',
-        data,
-        method: 'post'
-    })
-}
-// 删除客户
-export const delCustomer = (id) => {
-    return axios.request({
-        url: 'services/app/Customer/Delete',
         params: {
-            id
+            StartDate,
+            EndData,
+            ElectricityMeterInfoId
         },
-        method: 'delete'
-    })
-}
-// 修改客户
-export const updataCustomer = (Customer) => {
-    const data = Customer
-    return axios.request({
-        url: 'services/app/Customer/Update',
-        data,
-        method: 'put'
+        method: 'get'
     })
 }

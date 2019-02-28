@@ -30,21 +30,21 @@ export const getDragList = req => {
 }
 export const getEchartData = req => {
   let echartData = []
-  doCustomTimes(50, () => {
+  doCustomTimes(5, () => {
     echartData.push(Mock.mock({
       name: '@cname',
       time: '@time',
-      voltage: Random.integer(0,100),
-      current: Random.integer(0,100),
-      intelnet: Random.integer(0,100),
-      collection: Random.integer(0,100),
-      function: Random.integer(0,100),
-      currentA: Random.integer(0,100),
-      currentB: Random.integer(0,100),
-      currentC: Random.integer(0,100),
-      voltageAB: Random.integer(0,100),
-      voltageBC: Random.integer(0,100),
-      voltageCA: Random.integer(0,100),
+      voltage: Random.integer(0, 100),
+      current: Random.integer(0, 100),
+      intelnet: Random.integer(0, 100),
+      collection: Random.integer(0, 100),
+      function: Random.integer(0, 100),
+      currentA: Random.integer(0, 100),
+      currentB: Random.integer(0, 100),
+      currentC: Random.integer(0, 100),
+      voltageAB: Random.integer(0, 100),
+      voltageBC: Random.integer(0, 100),
+      voltageCA: Random.integer(0, 100)
     }))
   })
   return echartData

@@ -1,9 +1,9 @@
 <template>
     <div>
         <div v-show='showList' class='query-wrap'>
-            <div class="operate-wrap" style="margin-left: 5px">监测点选择：
-                <Select v-model="customerId" @on-change='selectedChange' class='operate' style="width:200px">
-                    <Option v-for="item in itemList" :value="item.name" :key="item.name">{{ item.name }}</Option>
+            <div class="operate-wrap" style="margin-left: 5px">选择电表：
+                <Select v-model="electricityMeterInfoId" @on-change='selectedChange' class='operate' style="width:200px">
+                    <Option v-for="item in electricityList" :value="item.id" :key="item.id">{{ item.alias }}</Option>
                 </Select>
             </div>
             <div class="operate-wrap" style="margin-left: 20px">时间选择：
@@ -14,7 +14,7 @@
         </div>
         <Row style="margin-top: 20px;">
             <Card shadow>
-                <factors-chart style="height: 700px;" :value="barData" :text="textTitle+'功能因素'" />
+                <factors-chart style="height: 700px;" :value="barData" :text="textTitle+'功率因数'" />
             </Card>
         </Row>
     </div>
@@ -22,9 +22,17 @@
 </template>
 <script>
     import FactorsChart from './components/factors-chart.vue'
-    import { getFactorsData } from '@/api/functionalFactors'
-    import { formatData, addDate } from '@/libs/tools'
-    import { getDragList } from '@/api/data'
+    import {
+        getElectricityDropdownList,
+        getPowerFactor
+    } from '@/api/functionalFactors'
+    import {
+        formatData,
+        addDate
+    } from '@/libs/tools'
+    import {
+        getDragList
+    } from '@/api/data'
     export default {
         name: 'functional_factors',
         components: {
@@ -34,10 +42,10 @@
             return {
                 electricityMeterInfoId: 0,
                 showList: true,
-                dateTime: [addDate(new Date(), -7), addDate(new Date(), 0)],
-                lineText: '',
+                dateTime: [addDate(new Date(), -1), addDate(new Date(), 0)],
                 customerId: '',
                 textTitle: '',
+                electricityList: [],
                 itemList: [],
                 xAxisData: [],
                 seriesData: [],
@@ -48,39 +56,14 @@
         methods: {
             init() {
                 this.getSelectData()
-                this.getEleData()
             },
             getSelectData() {
                 return new Promise((resolve, reject) => {
-                    getDragList().then(res => {
-                        const data = res.data
-                        this.itemList = data
-                        this.customerId = this.itemList[0].name
-                        this.textTitle = this.itemList[0].name
-                        resolve()
-                    }).catch(err => {
-                        reject(err)
-                    })
-                })
-            },
-            getEleData() {
-                return new Promise((resolve, reject) => {
-                    getFactorsData().then(res => {
-                        const data = res.data
-                        this.barData = data
-                        resolve()
-                    }).catch(err => {
-                        reject(err)
-                    })
-                })
-            },
-            getCustomerList() {
-                return new Promise((resolve, reject) => {
-                    getGetAllCustomer().then(res => {
+                    getElectricityDropdownList().then(res => {
                         const data = res.data.result
-                        this.customerList = data
-                        this.electricityMeterInfoId = data[0].meterInfosDtoList[0].id
-                        this.lineText = data[0].customerName + data[0].meterInfosDtoList[0].equipmentName
+                        this.electricityList = data
+                        this.electricityMeterInfoId = data[0].id
+                        this.textTitle = data[0].alias
                         this.getCapacityData()
                         resolve()
                     }).catch(err => {
@@ -89,22 +72,22 @@
                 })
             },
             selectedChange(val) {
-                this.getEleData()
-                this.textTitle = val
+                this.getCapacityData()
+                this.electricityMeterInfoId = val
+                this.electricityList.forEach(element => {
+                    if (element.id === val) {
+                        this.textTitle = element.alias
+                    }
+                })
             },
             getCapacityData() {
                 return new Promise((resolve, reject) => {
-                    getCapacityData(this.electricityMeterInfoId, this.dateTime, 30, 0).then(res => {
+                    getPowerFactor(this.dateTime[0], this.dateTime[1], this.electricityMeterInfoId).then(res => {
                         const data = res.data.result
-                        var capacity = []
-                        var hour = []
-                        data.items.forEach(element => {
-                            let date = formatData(this.dateTime, 'day') + ' ' + element.hour + '时'
-                            capacity.push(element.capacity / 1000)
-                            hour.push(date)
+                        this.barData = data
+                        this.barData.forEach(element => {
+                            element.creationTime = formatData(element.creationTime, 'min')
                         })
-                        this.seriesData = capacity
-                        this.xAxisData = hour
                         resolve()
                     }).catch(err => {
                         reject(err)
@@ -113,7 +96,7 @@
             },
             dateChange(val) {
                 this.dateTime = val
-                this.getEleData()
+                this.getCapacityData()
             }
         },
         mounted() {

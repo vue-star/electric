@@ -16,7 +16,7 @@
         },
         watch: {
             xAxisData() {
-                this.echartsShow();
+                this.echartsShow()
             }
         },
         methods: {
@@ -39,63 +39,63 @@
                                 }
                             },
                             formatter: function (params, ticket, callback) {
-                                var htmlStr = '';
-                                for(var i=0;i<params.length;i++){
-                                    var param = params[i];
-                                    var xName = param.name;//x轴的名称
-                                    var seriesName = param.seriesName;//图例名称
-                                    var value = param.value;//y轴值
-                                    var color = param.color;//图例颜色
-                                    
-                                    if(i===0){
-                                    htmlStr += xName + '点<br/>';//x轴的名称
+                                var htmlStr = ''
+                                for (var i = 0; i < params.length; i++) {
+                                    var param = params[i]
+                                    var xName = param.name// x轴的名称
+                                    var seriesName = param.seriesName// 图例名称
+                                    var value = param.value.toFixed(2)// y轴值
+                                    var color = param.color// 图例颜色
+
+                                    if (i === 0) {
+                                    htmlStr += xName + '点<br/>'// x轴的名称
                                     }
-                                    htmlStr +='<div>';
-                                    //为了保证和原来的效果一样，这里自己实现了一个点的效果
-                                    htmlStr += '<span style="margin-right:5px;display:inline-block;width:10px;height:10px;border-radius:5px;background-color:'+color+';"></span>';
-                                    
-                                    //圆点后面显示的文本
-                                    htmlStr += seriesName + '：' + value + 'kw';
-                                    
-                                    htmlStr += '</div>';
+                                    htmlStr += '<div>'
+                                    // 为了保证和原来的效果一样，这里自己实现了一个点的效果
+                                    htmlStr += '<span style="margin-right:5px;display:inline-block;width:10px;height:10px;border-radius:5px;background-color:' + color + ';"></span>'
+
+                                    // 圆点后面显示的文本
+                                    htmlStr += seriesName + '：' + value + 'kw'
+
+                                    htmlStr += '</div>'
                                 }
-                                return htmlStr;
+                                return htmlStr
                             }
                         },
                         xAxis: {
-                            name:'时辰',
+                            name: '时辰',
                             boundaryGap: false,
                             type: 'category',
                             data: xAxisData
                         },
                         yAxis: {
-                            name:'功率',
+                            name: '功率',
                             type: 'value',
                             axisLabel: {
                                 formatter: function (value) {
-                                    var texts = [];
-                                    texts.push(value + ' kw');
-                                    return texts;
+                                    var texts = []
+                                    texts.push(value + ' kw')
+                                    return texts
                                 }
                             }
                         },
                         series: [{
                             name: '功率',
                             stack: '总量',
-                            areaStyle: {normal: {
+                            areaStyle: { normal: {
                                 color: '#2d8cf0'
-                            }},
+                            } },
                             data: seriesData,
                             type: 'line',
                             markPoint: {
                                 data: [
-                                    {type: 'max', name: '最大值'},
-                                    {type: 'min', name: '最小值'}
+                                    { type: 'max', name: '最大值' },
+                                    { type: 'min', name: '最小值' }
                                 ]
                             },
                             markLine: {
                                 data: [
-                                    {type: 'average', name: '平均值'}
+                                    { type: 'average', name: '平均值' }
                                 ]
                             }
                         }]
@@ -107,7 +107,7 @@
 
         },
         mounted() {
-            this.echartsShow();
+            this.echartsShow()
         }
     }
 

@@ -32,7 +32,7 @@
             </Page>
         </div>
         <Modal v-model="isAddPowerFacility" :closable="false" width="800">
-            <p slot="header" style="color:#2db7f5;text-align:left">
+            <p slot="header" style="color:#2db7f5text-align:left">
                 <span>{{modelTitle}}</span>
             </p>
             <div>
@@ -82,7 +82,8 @@
                         <Col span="10" class='col-wrap'>
                         <FormItem label="组织" prop="organizationUnitId">
                             <Select v-model="formValidate.organizationUnitId">
-                                <Option v-for="item in organizationUnitIdList" :value="item.id" :key="item.id">{{ item.displayName }}</Option>
+                                <Option v-for="item in organizationUnitIdList" :value="item.id" :key="item.id">{{
+                                    item.displayName }}</Option>
                             </Select>
                         </FormItem>
                         </Col>
@@ -108,84 +109,94 @@
     </div>
 </template>
 <script>
-    import search from '@/view/components/search/search.vue';
-    import operate from '@/view/components/button-group/index.vue';
-    import { formatData, objEqual } from '@/libs/tools'
-    import { getPowerFacilityList,addPowerFacility,delPowerFacility,updataPowerFacility } from '@/api/powerFacility'
-    import { getOrganizationList } from '@/api/data'
+    import search from '@/view/components/search/search.vue'
+    import operate from '@/view/components/button-group/index.vue'
+    import {
+        formatData,
+        objEqual
+    } from '@/libs/tools'
+    import {
+        getPowerFacilityList,
+        addPowerFacility,
+        delPowerFacility,
+        updataPowerFacility
+    } from '@/api/powerFacility'
+    import {
+        getOrganizationList
+    } from '@/api/data'
     export default {
         name: 'power_facility',
         data() {
             const validateNumber = (rule, value, callback) => {
                 if (value === '') {
-                callback(new Error('请输入,不能为空'));
+                    callback(new Error('请输入,不能为空'))
                 } else {
-                if (!Number.isInteger(+value)) { 
-                    callback(new Error('请输入数字值'));
+                    if (!Number.isInteger(+value)) {
+                        callback(new Error('请输入数字值'))
+                    }
+                    callback()
                 }
-                callback();
-                }
-            };
+            }
             return {
                 columns1: [{
-						title: '序号',
-						key: 'index',
+                        title: '序号',
+                        key: 'index',
                         width: 60,
                         align: 'center'
                     },
                     {
                         title: '电力设施',
                         key: 'powerFacilityName',
-                        align: 'center',
-                        
+                        align: 'center'
+
                     },
                     {
                         title: '容量',
                         key: 'capacity',
-                        align: 'center',
+                        align: 'center'
                     },
                     {
                         title: '变压器台数',
                         key: 'transformerNumbers',
-                        align: 'center',
+                        align: 'center'
                     },
                     {
                         title: '高压柜数量',
                         key: 'highVoltageCabinetNumber',
-                        align: 'center',
+                        align: 'center'
                     },
                     {
                         title: '低压柜数量',
                         key: 'lowVoltageCabinetNumber',
-                        align: 'center',
+                        align: 'center'
                     },
                     {
                         title: '投运日期',
                         key: 'commissioningDate',
-                        align: 'center',
+                        align: 'center'
                     },
                     {
                         title: '进线电源',
                         key: 'incomingPowerSupply',
-                        align: 'center',
+                        align: 'center'
                     },
                     {
                         title: '组织',
                         key: 'organizationUnitName',
-                        align: 'center',
+                        align: 'center'
                     },
                     {
                         title: '备注',
                         key: 'remark',
-                        align: 'center',
+                        align: 'center'
                     }
                 ],
                 listData: [],
-                organizationUnitIdList:[],
+                organizationUnitIdList: [],
                 data: {},
                 total: 1,
                 page: 1,
-                showList: true, //显示列表
+                showList: true, // 显示列表
                 showLog: false,
                 isSelect: false,
                 add: false,
@@ -197,209 +208,225 @@
                 isGroup: false,
                 isEdit: false, // 点击编辑切换
                 queryParam: {
-                    "maxResultCount": 10,
-                    "filter": '',
-                    "pageNumber": 0,
-                    "skipCount": 0
+                    'maxResultCount': 10,
+                    'filter': '',
+                    'pageNumber': 0,
+                    'skipCount': 0
                 },
                 removeInputFlag: 0,
-                addBtn: true, //新增按钮权限
-                deleteBtn: false, //删除按钮权限
+                addBtn: true, // 新增按钮权限
+                deleteBtn: false, // 删除按钮权限
                 editBtn: false,
                 isAddPowerFacility: false,
                 formValidate: {},
                 ruleValidate: {
-                    powerFacilityName: [
-                        { required: true, message: '请输入电力设施名称', trigger: 'blur' },
-                    ],
-                    capacity: [
-                        {required: true,validator: validateNumber, trigger: 'change'}
-                    ],
-                    transformerNumbers: [
-                        {required: true,validator: validateNumber, trigger: 'change'}
-                    ],
-                    highVoltageCabinetNumber: [
-                        {required: true,validator: validateNumber, trigger: 'change'}
-                    ],
-                    lowVoltageCabinetNumber: [
-                       {required: true,validator: validateNumber, trigger: 'change'}
-                    ],
-                    commissioningDate: [
-                        { required: true, type: 'date', message: '请选择投运日期', trigger: 'change' }
-                    ],
-                    organizationUnitId: [
-                        { required: true, type:'number', message: '请选择组织', trigger: 'blur' }
-                    ],
-                    incomingPowerSupply: [
-                        { required: true, message: '请输入进线电源', trigger: 'blur' }
-                    ]
+                    powerFacilityName: [{
+                        required: true,
+                        message: '请输入电力设施名称',
+                        trigger: 'blur'
+                    }],
+                    capacity: [{
+                        required: true,
+                        validator: validateNumber,
+                        trigger: 'change'
+                    }],
+                    transformerNumbers: [{
+                        required: true,
+                        validator: validateNumber,
+                        trigger: 'change'
+                    }],
+                    highVoltageCabinetNumber: [{
+                        required: true,
+                        validator: validateNumber,
+                        trigger: 'change'
+                    }],
+                    lowVoltageCabinetNumber: [{
+                        required: true,
+                        validator: validateNumber,
+                        trigger: 'change'
+                    }],
+                    commissioningDate: [{
+                        required: true,
+                        type: 'date',
+                        message: '请选择投运日期',
+                        trigger: 'change'
+                    }],
+                    organizationUnitId: [{
+                        required: true,
+                        type: 'number',
+                        message: '请选择组织',
+                        trigger: 'blur'
+                    }],
+                    incomingPowerSupply: [{
+                        required: true,
+                        message: '请输入进线电源',
+                        trigger: 'blur'
+                    }]
                 },
-                saving: false,
+                saving: false
             }
         },
         methods: {
             init() {
-                this.getListData();
-                this.getOrganizationUnits(2);
+                this.getListData()
+                this.getOrganizationUnits(2)
             },
-            getOrganizationUnits(OrganizationUnitType){
+            getOrganizationUnits(OrganizationUnitType) {
                 return new Promise((resolve, reject) => {
                     getOrganizationList(OrganizationUnitType).then(
-                       res => {
-                            const data = res.data.result.items;
-                            this.organizationUnitIdList=data;
+                        res => {
+                            const data = res.data.result.items
+                            this.organizationUnitIdList = data
                             resolve()
                         },
                         error => {
-                            this.$Message.error(error.error.message);
-                            resolve();
-                    }).catch(err => {
+                            this.$Message.error(error.error.message)
+                            resolve()
+                        }).catch(err => {
                         reject(err)
                     })
-                })   
+                })
             },
-            getListData(){
+            getListData() {
                 return new Promise((resolve, reject) => {
                     getPowerFacilityList(this.queryParam).then(
                         res => {
-                            const data = res.data.result;
-                            this.isLoading = false;
-                            this.isSelect=false;
-                            this.listData = data.items;
-                            let size=this.queryParam.skipCount+1;
-                            this.listData.forEach(element=>{
-                                element.index=size++;
-                                element.commissioningDate=formatData(element.commissioningDate,"day");
+                            const data = res.data.result
+                            this.isLoading = false
+                            this.isSelect = false
+                            this.listData = data.items
+                            let size = this.queryParam.skipCount + 1
+                            this.listData.forEach(element => {
+                                element.index = size++
+                                element.commissioningDate = formatData(element.commissioningDate,
+                                    'day')
                             })
-                            this.total = data.totalCount;
+                            this.total = data.totalCount
                             resolve()
                         },
-                            error => {
-                                this.$Message.error(error.error.message);
-                                resolve();
+                        error => {
+                            this.$Message.error(error.error.message)
+                            resolve()
                         }).catch(err => {
-                            reject(err)
-                        })
-                })     
+                        reject(err)
+                    })
+                })
             },
             query(data) {
-                this.queryParam.pageNumber = 0;
-                this.queryParam.skipCount = 0;
-                this.queryParam.filter = data.filter;
-                this.getListData();
+                this.queryParam.pageNumber = 0
+                this.queryParam.skipCount = 0
+                this.queryParam.filter = data.filter
+                this.getListData()
             },
 
             selectItem(data, index) {
-                this.deleteBtn = true;
-                this.editBtn = true;
-                this.data = data;
-                this.selectIndex = index;
-                this.isSelect = true;
+                this.deleteBtn = true
+                this.editBtn = true
+                this.data = data
+                this.selectIndex = index
+                this.isSelect = true
             },
             pageChange(data) {
-                this.queryParam.pageNumber = data - 1;
-                this.queryParam.skipCount = (data - 1) * this.queryParam.maxResultCount;
-                this.getListData();
+                this.queryParam.pageNumber = data - 1
+                this.queryParam.skipCount = (data - 1) * this.queryParam.maxResultCount
+                this.getListData()
             },
             // 刷新页面
             refreshHandler() {
-                this.queryParam.filter = '';
-                this.isSelect = false;
-                this.getListData();
+                this.queryParam.filter = ''
+                this.isSelect = false
+                this.getListData()
             },
             deleteHandler(data) {
                 return new Promise((resolve, reject) => {
                     delPowerFacility(data.id).then(
                         res => {
-                            this.$Message.success('删除电力设施成功');
-                            this.isSelect = false;
-                            this.getListData();
+                            this.$Message.success('删除电力设施成功')
+                            this.isSelect = false
+                            this.getListData()
                             resolve()
                         },
-                            error => {
-                                this.$Message.error(error.error.message);
-                                resolve();
+                        error => {
+                            this.$Message.error(error.error.message)
+                            resolve()
                         }).catch(err => {
-                            reject(err)
-                        })
-                })     
-                
+                        reject(err)
+                    })
+                })
             },
             addHandler() {
-                this.isAddPowerFacility = true;
-                this.modelTitle = '新增电力设施';
+                this.isAddPowerFacility = true
+                this.modelTitle = '新增电力设施'
             },
-            //编辑
+            // 编辑
             editHandler(index) {
-                this.isEdit = true;
-                this.isAddPowerFacility = true;
-                this.modelTitle = '编辑电力设施';
-                this.formValidate = this.data;
-                this.organizationUnitIdList.forEach(element=>{
-                    if(objEqual(this.formValidate.organizationUnitName, element.displayName)){
-                        this.formValidate.organizationUnitId=element.id;
+                this.isEdit = true
+                this.isAddPowerFacility = true
+                this.modelTitle = '编辑电力设施'
+                this.formValidate = this.data
+                this.organizationUnitIdList.forEach(element => {
+                    if (objEqual(this.formValidate.organizationUnitName, element.displayName)) {
+                        this.formValidate.organizationUnitId = element.id
                     }
                 })
             },
             handleCancle(name) {
-                this.isAddPowerFacility = false;
-                this.isSelect=false;
-                this.$refs[name].resetFields();
+                this.isAddPowerFacility = false
+                this.isSelect = false
+                this.$refs[name].resetFields()
             },
             handelSave(name) {
                 this.$refs[name].validate((valid) => {
                     if (valid) {
-                        if(this.isEdit){
+                        if (this.isEdit) {
                             return new Promise((resolve, reject) => {
                                 updataPowerFacility(this.formValidate).then(
                                     res => {
-                                        this.$Message.success('修改成功');
-                                        this.isAddPowerFacility = false;
-                                        this.isEdit=false;
-                                        this.$refs[name].resetFields();
-                                        this.getListData();
+                                        this.$Message.success('修改成功')
+                                        this.isAddPowerFacility = false
+                                        this.isEdit = false
+                                        this.$refs[name].resetFields()
+                                        this.getListData()
                                         resolve()
                                     },
                                     error => {
-                                        this.$Message.error(error.error.message);
-                                        resolve();
-                            }).catch(err => {
-                                reject(err)
+                                        this.$Message.error(error.error.message)
+                                        resolve()
+                                    }).catch(err => {
+                                    reject(err)
+                                })
                             })
-                        })    
                         }
                         return new Promise((resolve, reject) => {
                             addPowerFacility(this.formValidate).then(
                                 res => {
-                                    this.$Message.success('新增成功');
-                                    this.isAddPowerFacility = false;
-                                    this.$refs[name].resetFields();
-                                    this.getListData();
+                                    this.$Message.success('新增成功')
+                                    this.isAddPowerFacility = false
+                                    this.$refs[name].resetFields()
+                                    this.getListData()
                                     resolve()
                                 },
                                 error => {
-                                    this.$Message.error(error.error.message);
-                                    resolve();
-                            }).catch(err => {
+                                    this.$Message.error(error.error.message)
+                                    resolve()
+                                }).catch(err => {
                                 reject(err)
                             })
-                                }) 
-                        } else {
-                            this.$Message.error('输入有误!');
-                        }
+                        })
+                    } else {
+                        this.$Message.error('输入有误!')
+                    }
                 })
-                    
-                
             }
         },
         components: {
             search,
-            operate,
+            operate
         },
         mounted() {
-            this.init();
+            this.init()
         }
-    };
+    }
 
 </script>
 <style lang='less'>
@@ -410,7 +437,7 @@
 
         .error_text {
             color: red;
-            padding-left: 10px;
+            padding-left: 10px
         }
     }
 
@@ -422,7 +449,7 @@
         height: 25px;
         line-height: 25px;
         font-size: 14px;
-        margin-right: 10px;
+        margin-right: 10px
     }
 
 </style>

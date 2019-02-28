@@ -1,9 +1,9 @@
 import axios from '@/libs/api.request'
-//获取客户列表
+// 获取客户列表
 export const getElectricityMeterList = (data) => {
-    const MaxResultCount=data.maxResultCount;
-    const SkipCount=data.skipCount;
-    const Filter=data.filter;
+    const MaxResultCount = data.maxResultCount
+    const SkipCount = data.skipCount
+    const Filter = data.filter
     return axios.request({
         url: 'services/app/ElectricityMeterInfo/GetPaged',
         params: {
@@ -14,16 +14,16 @@ export const getElectricityMeterList = (data) => {
         method: 'get'
     })
 }
-//新增客户
+// 新增客户
 export const addElectricityMeter = (ElectricityMeter) => {
-    const data = ElectricityMeter;
+    const data = ElectricityMeter
     return axios.request({
         url: 'services/app/ElectricityMeterInfo/Create',
         data,
         method: 'post'
     })
 }
-//删除客户
+// 删除客户
 export const delElectricityMeter = (id) => {
     return axios.request({
         url: 'services/app/ElectricityMeterInfo/Delete',
@@ -33,9 +33,9 @@ export const delElectricityMeter = (id) => {
         method: 'delete'
     })
 }
-//修改客户
+// 修改客户
 export const updataElectricityMeter = (ElectricityMeter) => {
-    const data = ElectricityMeter;
+    const data = ElectricityMeter
     return axios.request({
         url: 'services/app/ElectricityMeterInfo/Update',
         data,

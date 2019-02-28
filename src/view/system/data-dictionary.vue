@@ -32,7 +32,7 @@
             </Page>
         </div>
         <Modal v-model="isAddDataDicConfig" :closable="false" width="800">
-            <p slot="header" style="color:#2db7f5;text-align:left">
+            <p slot="header" style="color:#2db7f5text-align:left">
                 <span>{{modelTitle}}</span>
             </p>
             <div>
@@ -45,8 +45,9 @@
                         </Col>
                         <Col span="10" class='col-wrap'>
                         <FormItem label="客户编号" prop="dictionaryType">
-                             <Select v-model="formValidate.dictionaryType" clearable>
-                                <Option v-for="item in dictionaryList" :value="item.value" :key="item.value">{{ item.label }}</Option>
+                            <Select v-model="formValidate.dictionaryType" clearable>
+                                <Option v-for="item in dictionaryList" :value="item.value" :key="item.value">{{
+                                    item.label }}</Option>
                             </Select>
                         </FormItem>
                         </Col>
@@ -65,40 +66,46 @@
     </div>
 </template>
 <script>
-    import search from '@/view/components/search/search.vue';
-    import operate from '@/view/components/button-group/index.vue';
-    import { getDate } from '@/libs/tools'
-    import { getDataDicConfigList,addDataDicConfig,delDataDicConfig,updataDataDicConfig } from '@/api/dataDicConfig'
+    import search from '@/view/components/search/search.vue'
+    import operate from '@/view/components/button-group/index.vue'
+    import {
+        getDate
+    } from '@/libs/tools'
+    import {
+        getDataDicConfigList,
+        addDataDicConfig,
+        delDataDicConfig,
+        updataDataDicConfig
+    } from '@/api/dataDicConfig'
     export default {
         name: 'data_dictionary',
         data() {
             return {
                 columns1: [{
-						title: '序号',
-						key: 'index',
+                        title: '序号',
+                        key: 'index',
                         width: 60,
                         align: 'center'
                     },
                     {
                         title: '名称',
                         key: 'name',
-                        align: 'center',
-                        
+                        align: 'center'
+
                     },
                     {
                         title: '字典类型',
                         key: 'dictionaryType',
-                        align: 'center',
+                        align: 'center'
                     },
                     {
                         title: '创建时间',
                         key: 'creationTime',
-                        align: 'center',
+                        align: 'center'
                     }
                 ],
                 listData: [],
-                dictionaryList:[
-                    {
+                dictionaryList: [{
                         value: 1,
                         label: '代理商名称'
                     },
@@ -182,7 +189,7 @@
                 data: {},
                 total: 1,
                 page: 1,
-                showList: true, //显示列表
+                showList: true, // 显示列表
                 showLog: false,
                 isSelect: false,
                 add: false,
@@ -194,147 +201,145 @@
                 isGroup: false,
                 isEdit: false, // 点击编辑切换
                 queryParam: {
-                    "maxResultCount": 10,
-                    "filter": '',
-                    "pageNumber": 0,
-                    "skipCount": 0
+                    'maxResultCount': 10,
+                    'filter': '',
+                    'pageNumber': 0,
+                    'skipCount': 0
                 },
                 removeInputFlag: 0,
-                addBtn: true, //新增按钮权限
-                deleteBtn: false, //删除按钮权限
+                addBtn: true, // 新增按钮权限
+                deleteBtn: false, // 删除按钮权限
                 editBtn: false,
                 isAddDataDicConfig: false,
                 formValidate: {},
-                saving: false,
+                saving: false
             }
         },
         methods: {
             init() {
-                this.getListData();
+                this.getListData()
             },
-            getListData(){
+            getListData() {
                 return new Promise((resolve, reject) => {
                     getDataDicConfigList(this.queryParam).then(res => {
-                        const data = res.data.result;
-                        this.isLoading = false;
-                        this.listData = data.items;
-                        let size=this.queryParam.skipCount+1;
-                        this.listData.forEach(element=>{
-                            element.index=size++;
-                            element.creationTime=getDate(element.creationTime,"year");
+                        const data = res.data.result
+                        this.isLoading = false
+                        this.listData = data.items
+                        let size = this.queryParam.skipCount + 1
+                        this.listData.forEach(element => {
+                            element.index = size++
+                            element.creationTime = getDate(element.creationTime, 'year')
                         })
-                        this.total = data.totalCount;
+                        this.total = data.totalCount
                         resolve()
                     }).catch(err => {
                         reject(err)
                     })
-                })     
+                })
             },
             query(data) {
-                this.queryParam.pageNumber = 0;
-                this.queryParam.skipCount = 0;
-                this.queryParam.filter = data.filter;
-                this.getListData();
+                this.queryParam.pageNumber = 0
+                this.queryParam.skipCount = 0
+                this.queryParam.filter = data.filter
+                this.getListData()
             },
-            //界面跳转
-            toReport(val){
-                console.info("传递参数值：",val)
+            // 界面跳转
+            toReport(val) {
+                console.info('传递参数值：', val)
                 this.$router.push({
                     name: 'survey_survey',
-                    params: { 
+                    params: {
                         dataObj: val
                     }
                 })
             },
 
             selectItem(data, index) {
-                this.deleteBtn = true;
-                this.editBtn = true;
-                this.data = data;
-                this.selectIndex = index;
-                this.isSelect = true;
+                this.deleteBtn = true
+                this.editBtn = true
+                this.data = data
+                this.selectIndex = index
+                this.isSelect = true
             },
             pageChange(data) {
-                this.queryParam.pageNumber = data - 1;
-                this.queryParam.skipCount = (data - 1) * this.queryParam.maxResultCount;
-                this.getListData();
+                this.queryParam.pageNumber = data - 1
+                this.queryParam.skipCount = (data - 1) * this.queryParam.maxResultCount
+                this.getListData()
             },
             // 刷新页面
             refreshHandler() {
-                this.queryParam.filter = '';
-                this.isSelect = false;
-                this.getListData();
+                this.queryParam.filter = ''
+                this.isSelect = false
+                this.getListData()
             },
             deleteHandler(data) {
                 return new Promise((resolve, reject) => {
                     delDataDicConfig(data.id).then(res => {
-                        this.$Message.success('删除客户成功');
-                        this.isSelect = false;
-                        this.getListData();
+                        this.$Message.success('删除客户成功')
+                        this.isSelect = false
+                        this.getListData()
                         resolve()
                     }).catch(err => {
                         reject(err)
                     })
-                })     
-                
+                })
             },
             addHandler() {
-                this.isAddDataDicConfig = true;
-                this.modelTitle = '新增字典';
+                this.isAddDataDicConfig = true
+                this.modelTitle = '新增字典'
             },
-            //编辑
+            // 编辑
             editHandler(index) {
-                this.isEdit = true;
-                this.isAddDataDicConfig = true;
-                this.modelTitle = '编辑字典';
-                this.formValidate = this.data;
+                this.isEdit = true
+                this.isAddDataDicConfig = true
+                this.modelTitle = '编辑字典'
+                this.formValidate = this.data
                 this.dictionaryList.forEach(element => {
-                    if(element.label==this.formValidate.dictionaryType){
-                        this.formValidate.dictionaryType=element.value;
+                    if (element.label === this.formValidate.dictionaryType) {
+                        this.formValidate.dictionaryType = element.value
                     }
-                });
+                })
             },
             handleCancle() {
-                this.isAddDataDicConfig = false;
-                this.formValidate = {};
+                this.isAddDataDicConfig = false
+                this.formValidate = {}
             },
             handelSave() {
-                if(this.isEdit){
+                if (this.isEdit) {
                     return new Promise((resolve, reject) => {
-                    updataDataDicConfig(this.formValidate.id,this.formValidate).then(res => {
-                        this.$Message.success('修改成功');
-                        this.isAddDataDicConfig = false;
-                        this.isEdit=false;
-                        this.formValidate = {};
-                        this.getListData();
-                        resolve()
-                    }).catch(err => {
-                        reject(err)
+                        updataDataDicConfig(this.formValidate.id, this.formValidate).then(res => {
+                            this.$Message.success('修改成功')
+                            this.isAddDataDicConfig = false
+                            this.isEdit = false
+                            this.formValidate = {}
+                            this.getListData()
+                            resolve()
+                        }).catch(err => {
+                            reject(err)
+                        })
                     })
-                })    
                 }
                 return new Promise((resolve, reject) => {
                     addDataDicConfig(this.formValidate).then(res => {
-                        this.$Message.success('新增成功');
-                        this.isAddDataDicConfig = false;
-                        this.formValidate = {};
-                        this.getListData();
+                        this.$Message.success('新增成功')
+                        this.isAddDataDicConfig = false
+                        this.formValidate = {}
+                        this.getListData()
                         resolve()
                     }).catch(err => {
                         reject(err)
                     })
-                })     
-                
+                })
             }
         },
         components: {
             search,
-            operate,
+            operate
         },
         mounted() {
-            this.init();
+            this.init()
         }
-    };
+    }
 
 </script>
 <style lang='less'>
@@ -345,7 +350,7 @@
 
         .error_text {
             color: red;
-            padding-left: 10px;
+            padding-left: 10px
         }
     }
 
@@ -357,7 +362,7 @@
         height: 25px;
         line-height: 25px;
         font-size: 14px;
-        margin-right: 10px;
+        margin-right: 10px
     }
 
 </style>

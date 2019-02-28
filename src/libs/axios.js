@@ -1,5 +1,5 @@
 import axios from 'axios'
-import store from '../store';
+import store from '../store'
 // import { Spin } from 'iview'
 class HttpRequest {
     constructor(baseUrl = baseURL) {
@@ -30,7 +30,7 @@ class HttpRequest {
             }
             this.queue[url] = true
             if (store.state.user.token) {
-                config.headers['authorization'] = 'Bearer ' + store.state.user.token; // 让每个请求携带自定义token 请根据实际情况自行修改
+                config.headers['authorization'] = 'Bearer ' + store.state.user.token // 让每个请求携带自定义token 请根据实际情况自行修改
             }
             return config
         }, error => {

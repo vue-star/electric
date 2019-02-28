@@ -1,9 +1,9 @@
 <template>
     <div>
         <div v-show='showList' class='query-wrap'>
-            <div class="operate-wrap" style="margin-left: 5px">电表选择：
-                <Select v-model="customerId" @on-change='selectedChange' class='operate' style="width:200px">
-                    <Option v-for="item in itemList" :value="item.name" :key="item.name">{{ item.name }}</Option>
+            <div class="operate-wrap" style="margin-left: 5px">选择电表：
+                <Select v-model="electricityMeterInfoId" @on-change='selectedChange' class='operate' style="width:200px">
+                    <Option v-for="item in electricityList" :value="item.id" :key="item.id">{{ item.alias }}</Option>
                 </Select>
             </div>
             <div class="operate-wrap" style="margin-left: 20px">时间选择：
@@ -19,7 +19,7 @@
         </Row>
         <div class="list" v-show='showList'>
             <div class='table-wrap'>
-                <i-table stripe highlight-row :columns="columns1" :data="listData" @on-row-click='selectItem'>
+                <i-table stripe highlight-row :columns="columns1" :data="listData">
                 </i-table>
                 <Spin :fix='true' v-show='isLoading'>
                     <Icon type="load-c" size=18 class="demo-spin-icon-load"></Icon>
@@ -35,21 +35,10 @@
 </template>
 <script>
     import FaultChart from './components/fault-chart.vue'
-    import {
-        getFaultList
-    } from '@/api/faultReport'
-    import {
-        getGetAllCustomer,
-        getCapacityData
-    } from '@/api/demandCurve'
-    import {
-        formatData,
-        addDate
-    } from '@/libs/tools'
-    import {
-        getDragList,
-        getDataList
-    } from '@/api/data'
+    import { getElectricityDropdownList, getFaultSummary, getFaultList } from '@/api/faultReport'
+    import { getGetAllCustomer, getCapacityData } from '@/api/demandCurve'
+    import { formatData, addDate } from '@/libs/tools'
+    import { getDragList, getDataList } from '@/api/data'
     export default {
         name: 'fault_analysis',
         components: {
@@ -64,26 +53,16 @@
                         align: 'center'
                     },
                     {
-                        title: '设备名称',
-                        key: 'name',
+                        title: '故障名称',
+                        key: 'equipmentName',
                         align: 'center'
-
                     },
                     {
                         title: '故障类型',
                         key: 'faultType',
                         align: 'center'
                     },
-                    {
-                        title: '故障描述',
-                        key: 'faultDescribe',
-                        align: 'center'
-                    },
-                    {
-                        title: '报警号码',
-                        key: 'alarmNumber',
-                        align: 'center'
-                    },
+
                     {
                         title: '故障内容',
                         key: 'faultContent',
@@ -93,11 +72,6 @@
                         title: '是否报警',
                         key: 'isAlarm',
                         align: 'center'
-                    },
-                    {
-                        title: '故障时间',
-                        key: 'faultTime',
-                        align: 'center'
                     }
                 ],
                 listData: [],
@@ -105,10 +79,10 @@
                 showList: true,
                 isLoading: false,
                 dateTime: [addDate(new Date(), -7), addDate(new Date(), 0)],
-                lineText: '',
                 customerId: '',
                 textTitle: '',
                 total: 1,
+                electricityList: [],
                 xAxisData: [],
                 seriesData: [],
                 customerList: [],
@@ -119,28 +93,22 @@
                     'pageNumber': 0,
                     'skipCount': 0
                 },
-                barData: {
-                    电压故障: 225,
-                    电流故障: 132,
-                    采集故障: 153,
-                    网络故障: 133,
-                    功能因素: 453
-                }
+                barData: []
             }
         },
         methods: {
             init() {
-                // this.getCustomerList();
-                this.getListData()
                 this.getSelectData()
             },
             getSelectData() {
                 return new Promise((resolve, reject) => {
-                    getDragList().then(res => {
-                        const data = res.data
-                        this.itemList = data
-                        this.customerId = this.itemList[0].name
-                        this.textTitle = this.itemList[0].name
+                    getElectricityDropdownList().then(res => {
+                        const data = res.data.result
+                        this.electricityList = data
+                        this.electricityMeterInfoId = data[0].id
+                        this.textTitle = data[0].alias
+                        this.getCapacityData()
+                        this.getListData()
                         resolve()
                     }).catch(err => {
                         reject(err)
@@ -149,40 +117,19 @@
             },
             getListData() {
                 return new Promise((resolve, reject) => {
-                    getFaultList(this.queryParam).then(res => {
-                        const data = res.data
-                        this.listData = data
+                    getFaultList(this.dateTime[0], this.dateTime[1], this.electricityMeterInfoId).then(res => {
+                        const data = res.data.result
+                        this.listData = data.items
                         let size = this.queryParam.skipCount + 1
                         this.listData.forEach(element => {
                             element.index = size++
-                            // element.creationTime=formatData(element.creationTime,"day");
+                            if (element.isAlarm) {
+                                element.isAlarm = '是'
+                            } else {
+                                element.isAlarm = '否'
+                            }
                         })
-                        this.total = data.length
-                        resolve()
-                    }).catch(err => {
-                        reject(err)
-                    })
-                })
-            },
-            getEleData() {
-                return new Promise((resolve, reject) => {
-                    getDataList().then(res => {
-                        const data = res.data
-                        this.barData = data[0]
-                        resolve()
-                    }).catch(err => {
-                        reject(err)
-                    })
-                })
-            },
-            getCustomerList() {
-                return new Promise((resolve, reject) => {
-                    getGetAllCustomer().then(res => {
-                        const data = res.data.result
-                        this.customerList = data
-                        this.electricityMeterInfoId = data[0].meterInfosDtoList[0].id
-                        this.lineText = data[0].customerName + data[0].meterInfosDtoList[0].equipmentName
-                        this.getCapacityData()
+                        this.total = data.totalCount
                         resolve()
                     }).catch(err => {
                         reject(err)
@@ -190,24 +137,20 @@
                 })
             },
             selectedChange(val) {
-                this.getEleData()
+                this.getCapacityData()
                 this.getListData()
-                this.textTitle = val
+                this.electricityMeterInfoId = val
+                this.electricityList.forEach(element => {
+                    if (element.id === val) {
+                        this.textTitle = element.alias
+                    }
+                })
             },
             getCapacityData() {
                 return new Promise((resolve, reject) => {
-                    getCapacityData(this.electricityMeterInfoId, this.dateTime, 30, 0).then(res => {
+                    getFaultSummary(this.dateTime[0], this.dateTime[1], this.electricityMeterInfoId).then(res => {
                         const data = res.data.result
-                        var capacity = []
-                        var hour = []
-                        data.items.forEach(element => {
-                            let date = formatData(this.dateTime, 'day') + ' ' + element.hour +
-                                '时'
-                            capacity.push(element.capacity / 1000)
-                            hour.push(date)
-                        })
-                        this.seriesData = capacity
-                        this.xAxisData = hour
+                        this.barData = data
                         resolve()
                     }).catch(err => {
                         reject(err)
@@ -216,15 +159,8 @@
             },
             dateChange(val) {
                 this.dateTime = val
-                this.getEleData()
+                this.getCapacityData()
                 this.getListData()
-            },
-            selectItem(data, index) {
-                this.deleteBtn = true
-                this.editBtn = true
-                this.data = data
-                this.selectIndex = index
-                this.isSelect = true
             },
             pageChange(data) {
                 this.queryParam.pageNumber = data - 1

@@ -60,7 +60,7 @@
                 <text fill="#ffffff" stroke-width="0" stroke-opacity="null" x="124.52715" y="318.31406" id="svg_70"
                     font-size="6" font-family="Helvetica, Arial, sans-serif" text-anchor="start" xml:space="preserve"
                     stroke="red">V</text>
-                <text style="cursor: move;" fill="#ffffff" stroke-width="0" stroke-opacity="null" x="103.02797" y="347.61927"
+                <text style="cursor: move" fill="#ffffff" stroke-width="0" stroke-opacity="null" x="103.02797" y="347.61927"
                     id="svg_82" font-size="6" font-family="Helvetica, Arial, sans-serif" text-anchor="start" xml:space="preserve"
                     stroke="red">{{COS}}</text>
                 <line fill="none" fill-opacity="null" x1="132.65391" y1="312.07786" x2="132.65391" y2="357.45432" id="svg_281"
@@ -316,17 +316,17 @@
                     font-size="6" font-family="Helvetica, Arial, sans-serif" text-anchor="start" xml:space="preserve">IC:</text>
                 <text fill="#ffffff" stroke-width="0" x="95.35476" y="329.47966" id="svg_1116" font-size="6"
                     font-family="Helvetica, Arial, sans-serif" text-anchor="start" xml:space="preserve" stroke="#ffff56">IB:</text>
-                <text style="cursor: move;" fill="#ffffff" stroke-width="0" x="103.02694" y="323.93501" id="svg_1117"
+                <text style="cursor: move" fill="#ffffff" stroke-width="0" x="103.02694" y="323.93501" id="svg_1117"
                     font-size="6" font-family="Helvetica, Arial, sans-serif" text-anchor="start" xml:space="preserve"
                     stroke="#ffff56">{{IA}}</text>
                 <text fill="#ffffff" stroke-width="0" x="124.52714" y="323.43502" id="svg_1118" font-size="6"
                     font-family="Helvetica, Arial, sans-serif" text-anchor="start" xml:space="preserve" stroke="#ffff56">A</text>
-                <text style="cursor: move;" fill="#ffffff" stroke-width="0" x="103.02694" y="329.75231" id="svg_1119"
+                <text style="cursor: move" fill="#ffffff" stroke-width="0" x="103.02694" y="329.75231" id="svg_1119"
                     font-size="6" font-family="Helvetica, Arial, sans-serif" text-anchor="start" xml:space="preserve"
                     stroke="#ffff56">{{IB}}</text>
                 <text fill="#ffffff" stroke-width="0" x="124.52715" y="329.75231" id="svg_1120" font-size="6"
                     font-family="Helvetica, Arial, sans-serif" text-anchor="start" xml:space="preserve" stroke="#ffff56">A</text>
-                <text style="cursor: move;" fill="#ffffff" stroke-width="0" stroke-opacity="null" x="103.02693" y="335.56299"
+                <text style="cursor: move" fill="#ffffff" stroke-width="0" stroke-opacity="null" x="103.02693" y="335.56299"
                     id="svg_1121" font-size="6" font-family="Helvetica, Arial, sans-serif" text-anchor="start"
                     xml:space="preserve" stroke="red">{{IC}}</text>
                 <text fill="#ffffff" stroke-width="0" stroke-opacity="null" x="124.52715" y="336.06298" id="svg_1122"
@@ -838,68 +838,65 @@
                     zoomEnabled: true,
                     controlIconsEnabled: true,
                     fit: true,
-                    center: true,
+                    center: true
                     // viewportSelector: document.getElementById('yasu2').querySelector('#g4') // this option will make library to misbehave. Viewport should have no transform attribute
-                });
+                })
             },
             chengedData() {
                 if (this.ElectricityMeterList.length > 0) {
                     this.ElectricityMeterList.forEach(element => {
-                        this.getHistoryData(element.id, element.equipmentNumber);
-                    });
+                        this.getHistoryData(element.id, element.equipmentNumber)
+                    })
                 }
-
             },
             getElectricityMeterInfo() {
                 return new Promise((resolve, reject) => {
                     getElectricityMeter(this.customerId).then(res => {
-                        const data = res.data.result.items;
-                        this.ElectricityMeterList = data;
-                        this.chengedData();
+                        const data = res.data.result.items
+                        this.ElectricityMeterList = data
+                        this.chengedData()
                         resolve()
                     }).catch(err => {
                         reject(err)
                     })
                 })
-
             },
             getHistoryData(ElectricityMeterInfoId, ElectricityMeterNumber) {
                 return new Promise((resolve, reject) => {
                     getHistoryData(ElectricityMeterInfoId, this.MaxResultCount).then(res => {
-                        const data = res.data.result.items;
+                        const data = res.data.result.items
                         if (ElectricityMeterNumber == 'no.005') {
-                            this.UA = isNaN(data[0].uabVoltage) ? '' : data[0].uabVoltage;
-                            this.UB = isNaN(data[0].ubcVoltage) ? '' : data[0].ubcVoltage;
-                            this.UC = isNaN(data[0].ucaVoltage) ? '' : data[0].ucaVoltage;
+                            this.UA = isNaN(data[0].uabVoltage) ? '' : data[0].uabVoltage
+                            this.UB = isNaN(data[0].ubcVoltage) ? '' : data[0].ubcVoltage
+                            this.UC = isNaN(data[0].ucaVoltage) ? '' : data[0].ucaVoltage
                             this.P = isNaN(data[0].totalActivePower / 1000) ? '' : data[0].totalActivePower /
-                                1000;
-                            this.IA = isNaN(data[0].aPhaseCurrent) ? '' : data[0].aPhaseCurrent;
-                            this.IB = isNaN(data[0].bPhaseCurrent) ? '' : data[0].bPhaseCurrent;
-                            this.IC = isNaN(data[0].cPhaseCurrent) ? '' : data[0].cPhaseCurrent;
-                            this.COS = isNaN(data[0].totalPhasePowerFactor) ? '' : data[0].totalPhasePowerFactor;
+                                1000
+                            this.IA = isNaN(data[0].aPhaseCurrent) ? '' : data[0].aPhaseCurrent
+                            this.IB = isNaN(data[0].bPhaseCurrent) ? '' : data[0].bPhaseCurrent
+                            this.IC = isNaN(data[0].cPhaseCurrent) ? '' : data[0].cPhaseCurrent
+                            this.COS = isNaN(data[0].totalPhasePowerFactor) ? '' : data[0].totalPhasePowerFactor
                         }
                         resolve()
                     }).catch(err => {
                         reject(err)
                     })
                 })
-
             }
 
         },
         mounted() {
-            this.getElectricityMeterInfo();
+            this.getElectricityMeterInfo()
             if (this.timer) {
-                clearInterval(this.timer);
+                clearInterval(this.timer)
             } else {
                 this.timer = setInterval(() => {
-                    this.chengedData();
+                    this.chengedData()
                 }, 60000)
-            };
-            this.scadaInit();
+            }
+            this.scadaInit()
         },
         beforeDestroy() {
-            clearInterval(this.timer);
+            clearInterval(this.timer)
         }
     }
 

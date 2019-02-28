@@ -18,13 +18,13 @@
                 this.loadLine()
             }
         },
-        methods:{
-            loadLine(){
+        methods: {
+            loadLine() {
                 this.$nextTick(() => {
-                    let xAxisData = this.value.map(_ => _.time)
-                    let currentA = this.value.map(_ => _.currentA)
-                    let currentB = this.value.map(_ => _.currentB)
-                    let currentC = this.value.map(_ => _.currentC)
+                    let xAxisData = this.value.map(_ => _.creationTime)
+                    let currentA = this.value.map(_ => _.aPhaseCurrent)
+                    let currentB = this.value.map(_ => _.bPhaseCurrent)
+                    let currentC = this.value.map(_ => _.cPhaseCurrent)
                     let option = {
                         title: {
                             text: this.text,
@@ -44,7 +44,14 @@
                         },
                         yAxis: {
                             type: 'value',
-                            name: 'A'
+                            name: '电流',
+                            axisLabel: {
+                                formatter: function (value) {
+                                    var texts = []
+                                    texts.push(value + ' A')
+                                    return texts
+                                }
+                            }
                         },
                         series: [
                             {

@@ -164,34 +164,6 @@ export default [{
         ]
     },
     {
-        path: '/monitor',
-        name: 'monitor',
-        meta: {
-            icon: 'md-cloud-upload',
-            title: '监测管理'
-        },
-        component: Main,
-        children: [{
-                path: 'scada',
-                name: 'scada',
-                meta: {
-                    icon: 'ios-document',
-                    title: 'scada'
-                },
-                component: () => import('@/view/monitor/scada.vue')
-            },
-            {
-                path: 'real_time_state',
-                name: 'real_time_state',
-                meta: {
-                    icon: 'md-clipboard',
-                    title: '实时状态'
-                },
-                component: () => import('@/view/monitor/real-time-state.vue')
-            }
-        ]
-    },
-    {
         path: '/EPU-statistics',
         name: 'EPU-statistics',
         meta: {
@@ -229,6 +201,34 @@ export default [{
         ]
     },
     {
+        path: '/monitor',
+        name: 'monitor',
+        meta: {
+            icon: 'md-cloud-upload',
+            title: '监测管理'
+        },
+        component: Main,
+        children: [{
+                path: 'scada',
+                name: 'scada',
+                meta: {
+                    icon: 'ios-document',
+                    title: 'scada'
+                },
+                component: () => import('@/view/monitor/scada.vue')
+            },
+            {
+                path: 'real_time_state',
+                name: 'real_time_state',
+                meta: {
+                    icon: 'md-clipboard',
+                    title: '实时状态'
+                },
+                component: () => import('@/view/monitor/real-time-state.vue')
+            }
+        ]
+    },
+    {
         path: '/report',
         name: 'report',
         meta: {
@@ -259,19 +259,19 @@ export default [{
                 name: 'functional_factors',
                 meta: {
                     icon: 'md-download',
-                    title: '功能因素'
+                    title: '功率因数'
                 },
                 component: () => import('@/view/report/functional-factors.vue')
             }, 
-            // {
-            //     path: 'energy_analysis',
-            //     name: 'energy_analysis',
-            //     meta: {
-            //         icon: 'md-download',
-            //         title: '能耗分析'
-            //     },
-            //     component: () => import('@/view/report/energy-analysis.vue')
-            // },
+            {
+                path: 'energy_analysis',
+                name: 'energy_analysis',
+                meta: {
+                    icon: 'md-download',
+                    title: '能耗分析'
+                },
+                component: () => import('@/view/report/energy-analysis.vue')
+            },
             {
                 path: 'current_analysis',
                 name: 'current_analysis',

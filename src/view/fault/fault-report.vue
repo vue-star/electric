@@ -176,6 +176,7 @@
                     getEchartData().then(res => {
                         const data = res.data
                         this.barData = data
+                        console.info('bardata', data)
                         resolve()
                     }).catch(err => {
                         reject(err)
@@ -208,7 +209,6 @@
                 })
             },
             selectedEleChange(val) {
-                
                 this.getEleData()
                 if (typeof (val) === 'undefined') {
                     this.showCustomerEchart = true

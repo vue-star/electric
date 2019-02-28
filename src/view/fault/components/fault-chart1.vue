@@ -13,38 +13,37 @@
             text: String,
             subtext: String
         },
-        watch:{
-            value(){
+        watch: {
+            value() {
                 this.echartsData()
             }
         },
-        methods:{
-            echartsData(){
+        methods: {
+            echartsData() {
                 this.$nextTick(() => {
-                let xAxisData = Object.keys(this.value)
-                let seriesData = Object.values(this.value)
-                let option = {
-                    title: {
-                        text: this.text,
-                        subtext: this.subtext,
-                        x: 'center'
-                    },
-                    xAxis: {
-                        type: 'category',
-                        data: xAxisData
-                    },
-                    yAxis: {
-                        type: 'value'
-                    },
-                    series: [{
-                        data: seriesData,
-                        type: 'bar'
-                    }]
-                }
-                let dom = echarts.init(this.$refs.dom, 'tdTheme')
-                dom.setOption(option)
-            })
-
+                    let xAxisData = Object.keys(this.value)
+                    let seriesData = Object.values(this.value)
+                    let option = {
+                        title: {
+                            text: this.text,
+                            subtext: this.subtext,
+                            x: 'center'
+                        },
+                        xAxis: {
+                            type: 'category',
+                            data: xAxisData
+                        },
+                        yAxis: {
+                            type: 'value'
+                        },
+                        series: [{
+                            data: seriesData,
+                            type: 'bar'
+                        }]
+                    }
+                    let dom = echarts.init(this.$refs.dom, 'tdTheme')
+                    dom.setOption(option)
+                })
             }
         },
         mounted() {

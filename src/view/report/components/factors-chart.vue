@@ -21,8 +21,8 @@
         methods: {
             echartsData() {
                 this.$nextTick(() => {
-                    let xAxisData = this.value.map(_ => _.time)
-                    let seriesData = this.value.map(_ => _.value)
+                    let xAxisData = this.value.map(_ => _.creationTime)
+                    let seriesData = this.value.map(_ => _.totalPhasePowerFactor)
                     let option = {
                         title: {
                             text: this.text,
@@ -38,18 +38,16 @@
                             data: xAxisData
                         },
                         yAxis: {
-                            type: 'value',
-                            name: '数量'
+                            type: 'value'
                         },
                         series: [{
                             data: seriesData,
-                            type: 'bar'
+                            type: 'line'
                         }]
                     }
                     let dom = echarts.init(this.$refs.dom, 'tdTheme')
                     dom.setOption(option)
                 })
-
             }
         },
         mounted() {

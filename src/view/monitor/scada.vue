@@ -1,4 +1,4 @@
-<template >
+<template>
     <div class="couplet-card">
         <Tabs active-key="key1" type="card" style="height: 100%">
             <Tab-pane label="东方魅力SCADA" key="key1">
@@ -12,8 +12,8 @@
 </template>
 
 <script type="text/ecmascript-6">
-    import dongfangScada from './components/dongfang-scada.vue';
-    import yasuScada from './components/yasu-scada.vue';
+    import dongfangScada from './components/dongfang-scada.vue'
+    import yasuScada from './components/yasu-scada.vue'
     import {
         getCustomerList,
         addCustomer,
@@ -35,19 +35,20 @@
         },
         watch: {},
         methods: {
-            init() {},
+            init() {}
         },
-        mounted() {},
+        mounted() {}
     }
 
 </script>
 
 <style lang='less'>
-.couplet-card{
-    height: 100%;
-}
+    .couplet-card {
+        height: 100%
+    }
 
-.ivu-tabs-content-animated{
-    height: 100%;
-}
+    .ivu-tabs-content-animated {
+        height: 100%
+    }
+
 </style>

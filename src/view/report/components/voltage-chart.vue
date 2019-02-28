@@ -18,13 +18,13 @@
                 this.loadLine()
             }
         },
-        methods:{
-            loadLine(){
+        methods: {
+            loadLine() {
                 this.$nextTick(() => {
-                    let xAxisData = this.value.map(_ => _.time)
-                    let voltageAB = this.value.map(_ => _.voltageAB)
-                    let voltageBC = this.value.map(_ => _.voltageBC)
-                    let voltageCA = this.value.map(_ => _.voltageCA)
+                    let xAxisData = this.value.map(_ => _.creationTime)
+                    let voltageAB = this.value.map(_ => _.uabVoltage)
+                    let voltageBC = this.value.map(_ => _.ubcVoltage)
+                    let voltageCA = this.value.map(_ => _.ucaVoltage)
                     let option = {
                         title: {
                             text: this.text,
@@ -44,7 +44,14 @@
                         },
                         yAxis: {
                             type: 'value',
-                            name: 'V'
+                            name: '电压',
+                            axisLabel: {
+                                formatter: function (value) {
+                                    var texts = []
+                                    texts.push(value + ' V')
+                                    return texts
+                                }
+                            }
                         },
                         series: [
                             {

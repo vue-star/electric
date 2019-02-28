@@ -1,36 +1,36 @@
 import axios from '@/libs/api.request'
 
-//获取客户列表
-export const getGetAllCustomer = () => {
+// 获取下拉列表
+export const getElectricityDropdownList = () => {
     return axios.request({
-        url: 'Customer/GetAllCustomer',
+        url: '/services/app/ElectricityMeterInfo/GetRouterInformationForDropdownList',
         method: 'get'
     })
 }
-//获取获取电表数据
-export const getCapacityData = (ElectricityMeterInfoId,Date,MaxResultCount,SkipCount) => {
+// 获取当日负荷曲线
+export const getPowerTrendList = (ElectricityMeterInfoId) => {
     return axios.request({
-        url: 'CapacityTrend/CapacityTrend',
+        url: 'services/app/PowerStatistics/GetPowerTrendListAsync',
         params: {
-            ElectricityMeterInfoId,
-            Date,
-            MaxResultCount,
-            SkipCount
+            ElectricityMeterInfoId
         },
         method: 'get'
     })
 }
-//获取获取电表对比趋势数据
-export const getElectricityRingRatio = (electricityMeterId) => {
+// 获取电表对比趋势数据
+export const getElectricityRingRatio = (electricityMeterInfoId) => {
     return axios.request({
-        url: 'DataStatistics/GetElectricityRingRatio/'+electricityMeterId,
+        url: 'services/app/PowerStatistics/GetPowerRingRatioAsync',
+        params: {
+            electricityMeterInfoId
+        },
         method: 'get'
     })
 }
-//获取获取电表对比数据分析
-export const getDataStatistics = (ElectricityMeterInfoId) => {
+// 获取用电趋势
+export const getUsePowerTrend = (ElectricityMeterInfoId) => {
     return axios.request({
-        url: 'DataStatistics/ElectricityMeters',
+        url: 'services/app/PowerStatistics/GetUsePowerTrendDtoAsync',
         params: {
             ElectricityMeterInfoId
         },
