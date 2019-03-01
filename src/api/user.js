@@ -23,6 +23,13 @@ export const getUserInfo = (userId) => {
   })
 }
 
+export const getOrganization = () => {
+  return axios.request({
+    url: 'services/app/OrganizationUnit/GetOrganizationUnits',
+    method: 'get'
+  })
+}
+
 export const logout = (token) => {
   return axios.request({
     url: 'logout',

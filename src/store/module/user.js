@@ -1,17 +1,12 @@
-import {
-    login,
-    logout,
-    getUserInfo
-} from '@/api/user'
-import {
-    setToken,
-    getToken
-} from '@/libs/util'
+import { login, logout, getUserInfo, getOrganization } from '@/api/user'
+import { setToken, getToken } from '@/libs/util'
 
 export default {
     state: {
         userNameOrEmailAddress: '',
         userId: '',
+        organizationId: 0,
+        organizationList: [],
         avatorImgPath: '',
         token: getToken(),
         access: '',
@@ -23,6 +18,12 @@ export default {
         },
         setUserId(state, id) {
             state.userId = id
+        },
+        setOrganizationId(state, id) {
+            state.organizationId = id
+        },
+        setOrganizationList(state, data) {
+            state.organizationList = data
         },
         setUserName(state, name) {
             state.userNameOrEmailAddress = name
@@ -96,6 +97,25 @@ export default {
                         commit('setUserId', data.user_id)
                         commit('setAccess', data.access)
                         commit('setHasGetInfo', true)
+                        resolve(data)
+                    }).catch(err => {
+                        reject(err)
+                    })
+                } catch (error) {
+                    reject(error)
+                }
+            })
+        },
+        //获取组织相关信息
+        getOrganizationInfo({
+            commit
+        }) {
+            return new Promise((resolve, reject) => {
+                try {
+                    getOrganization().then(res => {
+                        const data = res.data.result.items
+                        commit('setOrganizationList', data)
+                        commit('setOrganizationId', data[0].id)
                         resolve(data)
                     }).catch(err => {
                         reject(err)

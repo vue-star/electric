@@ -15,6 +15,7 @@
           <user :user-avator="userAvator"/>
           <language @on-lang-change="setLocal" style="margin-right: 10px;" :lang="local"/>
           <fullscreen v-model="isFullscreen" style="margin-right: 10px;"/>
+          <organization style="margin-right: 10px;"/>
         </header-bar>
       </Header>
       <Content class="main-content-con">
@@ -37,7 +38,9 @@ import SideMenu from './components/side-menu'
 import HeaderBar from './components/header-bar'
 import TagsNav from './components/tags-nav'
 import User from './components/user'
+import routers from '@/router/routers'
 import Fullscreen from './components/fullscreen'
+import Organization from './components/organization'
 import Language from './components/language'
 import { mapMutations, mapActions } from 'vuex'
 import { getNewTagList, getNextRoute, routeEqual } from '@/libs/util'
@@ -52,6 +55,7 @@ export default {
     Language,
     TagsNav,
     Fullscreen,
+    Organization,
     User
   },
   data () {
@@ -87,10 +91,12 @@ export default {
       'setBreadCrumb',
       'setTagNavList',
       'addTag',
-      'setLocal'
+      'setLocal',
+      'setHomeRoute'
     ]),
     ...mapActions([
-      'handleLogin'
+      'handleLogin',
+      'getOrganizationInfo'
     ]),
     turnToPage (route) {
       let { name, params, query } = {}
@@ -146,6 +152,8 @@ export default {
      * @description 初始化设置面包屑导航和标签导航
      */
     this.setTagNavList()
+    this.getOrganizationInfo()
+    this.setHomeRoute(routers)
     this.addTag({
       route: this.$store.state.app.homeRoute
     })

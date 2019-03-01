@@ -12,6 +12,8 @@ export default {
   /**
    * @description api请求基础路径
    */
+  homeName: 'home',
+
   baseUrl: {
     dev: '/api',
     pro: 'http://172.16.100.36:22742/api/'

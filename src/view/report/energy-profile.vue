@@ -49,8 +49,9 @@
     import YearChart from './components/year-chart.vue'
     import UserChart from './components/user-chart.vue'
     import { formatData, addDate } from '@/libs/tools'
+    import { getUsePowerSummary } from '@/api/energyProfile'
     export default {
-        name: 'power_statistics',
+        name: 'energy_profile',
         components: {
             InforCard,
             CountTo,
@@ -139,8 +140,32 @@
                 }
             }
         },
+        computed: {
+            organizationUnitId () {
+                return this.$store.state.user.organizationId
+            }
+        },
+        methods:{
+            init() {
+                this.getUsePowerData()
+            },
+            getUsePowerData() {
+                return new Promise((resolve, reject) => {
+                    getUsePowerSummary(this.organizationUnitId).then(res => {
+                        const data = res.data.result
+                        this.inforCardData[0].count = data.measurementType
+                        this.inforCardData[1].count = data.electricityCategory
+                        this.inforCardData[2].count = data.capacity
+                        this.inforCardData[3].count = data.measurementPoints
+                        resolve()
+                    }).catch(err => {
+                        reject(err)
+                    })
+                })
+            },
+        },
         mounted() {
-            //
+            this.init()
         }
     }
 

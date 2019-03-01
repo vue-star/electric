@@ -12,6 +12,8 @@ import {
 import beforeClose from '@/router/before-close'
 import router from '@/router'
 import routers from '@/router/routers'
+import config from '@/config'
+const { homeName } = config
 
 const closePage = (state, route) => {
   const nextRoute = getNextRoute(state.tagNavList, route)
@@ -25,7 +27,7 @@ export default {
   state: {
     breadCrumbList: [],
     tagNavList: [],
-    homeRoute: getHomeRoute(routers),
+    homeRoute: {},
     local: ''
   },
   getters: {
@@ -34,6 +36,9 @@ export default {
   mutations: {
     setBreadCrumb (state, route) {
       state.breadCrumbList = getBreadCrumbList(route, state.homeRoute)
+    },
+    setHomeRoute (state, routes) {
+      state.homeRoute = getHomeRoute(routes, homeName)
     },
     setTagNavList (state, list) {
       if (list) {
