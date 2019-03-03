@@ -1262,37 +1262,37 @@
             },
             selectedData(data, dictionaryType) {
                 switch (dictionaryType) {
-                    case 5:
+                    case 6:
                         this.manufacturerLoadSwitchList = data
                         break
-                    case 6:
+                    case 7:
                         this.manufacturerCurrentTransList = data
                         break
-                    case 7:
+                    case 8:
                         this.manufacturerVoltageTransList = data
                         break
-                    case 8:
+                    case 9:
                         this.manufacturerHighVoltageFuseList = data
                         break
-                    case 9:
+                    case 10:
                         this.manufacturerTransList = data
                         break
-                    case 10:
+                    case 11:
                         this.manufacturerHighList = data
                         break
-                    case 11:
-                        this.manufacturerLowList = data
-                        break
                     case 12:
-                        this.manufacturerIsolationSwitchList = data
+                        this.manufacturerLowList = data 
                         break
                     case 13:
-                        this.manufacturerBreakerList = data
+                        this.manufacturerIsolationSwitchList = data
                         break
                     case 14:
-                        this.manufacturerOutCableList = data
+                        this.manufacturerBreakerList = data
                         break
                     case 15:
+                        this.manufacturerOutCableList = data
+                        break
+                    case 16:
                         this.manufacturerCapacitorList = data
                         break
                     default:

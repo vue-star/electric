@@ -113,7 +113,6 @@
         },
         watch: {
             organizationUnitId () {
-                console.info('对不起，让你失望了')
                 this.init()
             }
         },

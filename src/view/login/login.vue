@@ -9,7 +9,7 @@
             <Card icon="log-in" title="欢迎登录" :bordered="false">
                 <div class="form-con">
                     <login-form @on-success-valid="handleSubmit"></login-form>
-                    <!-- <p class="login-tip">输入任意用户名和密码即可</p> -->
+                    <p class="login-tip">建议选择使用Chrome或者Firefox浏览器</p>
                 </div>
             </Card>
         </div>
@@ -32,9 +32,6 @@
             ]),
             handleSubmit({ userNameOrEmailAddress, password, rememberClient }) {
                 this.handleLogin({ userNameOrEmailAddress, password, rememberClient }).then(res => {
-                    console.info('res',res)
-
-                   
                     this.getUserInfo().then(res => {
                         this.$router.push({
                             name: 'home'

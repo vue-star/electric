@@ -31,7 +31,7 @@
                 @on-change='pageChange'>
             </Page>
         </div>
-        <distribution-form v-if='add' :isEdit='isEdit' :editData='data' @back='back'>
+        <distribution-form v-if='add' :isEdit='isEdit' :editData='data' @save='save' @back='back'>
         </distribution-form>
         <distribution-detail v-if='add' :isEdits='isEdits' :powerDistributionRoomId='powerDistributionRoomId' @back='back'>
         </distribution-detail>
@@ -211,6 +211,9 @@
                 this.isSelect = false
                 this.getListData()
                 this.titleText = '方案列表'
+            },
+            save(powerDistributionRoomId) {
+                this.powerDistributionRoomId = powerDistributionRoomId
             }
         },
         components: {

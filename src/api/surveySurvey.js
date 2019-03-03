@@ -1,9 +1,12 @@
 import axios from '@/libs/api.request'
 
 // 获取下拉列表
-export const getElectricityDropdownList = () => {
+export const getElectricityDropdownList = (organizationUnitId) => {
     return axios.request({
-        url: '/services/app/ElectricityMeterInfo/GetRouterInformationForDropdownList',
+        url: 'services/app/ElectricityMeterInfo/GetCustomerElectricityMeterInfoDropdownList',
+        params: {
+            organizationUnitId
+        },
         method: 'get'
     })
 }

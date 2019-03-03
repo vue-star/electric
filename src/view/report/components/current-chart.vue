@@ -57,19 +57,16 @@
                             {
                                 name: 'A相电流',
                                 type: 'line',
-                                stack: '总量',
                                 data: currentA
                             },
                             {
                                 name: 'B相电流',
                                 type: 'line',
-                                stack: '总量',
                                 data: currentB
                             },
                             {
                                 name: 'C相电流',
                                 type: 'line',
-                                stack: '总量',
                                 data: currentC
                             }
                         ]

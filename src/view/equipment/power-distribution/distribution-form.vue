@@ -138,7 +138,9 @@
                             return new Promise((resolve, reject) => {
                                 addPowerDistribution(this.formValidate).then(
                                     res => {
+                                        const powerDistributionRoomId = res.data.result
                                         this.$Message.success('创建成功')
+                                        this.$emit('save', powerDistributionRoomId)
                                         resolve()
                                     },
                                     error => {

@@ -4,7 +4,7 @@ import { setToken, getToken } from '@/libs/util'
 export default {
     state: {
         userNameOrEmailAddress: '',
-        userId: '',
+        userId: 0,
         organizationId: 0,
         organizationList: [],
         avatorImgPath: '',
@@ -92,7 +92,8 @@ export default {
                 try {
                     getUserInfo(state.userId).then(res => {
                         const data = res.data
-                        commit('setAvator', data.avator)
+                        // commit('setAvator', data.avator)
+                        commit('setAvator', 'https://o5wwk8baw.qnssl.com/bc7521e033abdd1e92222d733590f104/avatar')
                         commit('setUserName', data.user_name)
                         commit('setUserId', data.user_id)
                         commit('setAccess', data.access)

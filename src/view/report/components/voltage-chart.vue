@@ -57,19 +57,16 @@
                             {
                                 name: 'AB线电压',
                                 type: 'line',
-                                stack: '总量',
                                 data: voltageAB
                             },
                             {
                                 name: 'BC线电压',
                                 type: 'line',
-                                stack: '总量',
                                 data: voltageBC
                             },
                             {
                                 name: 'CA线电压',
                                 type: 'line',
-                                stack: '总量',
                                 data: voltageCA
                             }
                         ]

@@ -72,11 +72,10 @@
                             axisLabel: {
                                 formatter: function (value) {
                                     var texts = []
-                                    texts.push(value + ' %')
+                                    texts.push(value + ' kwh')
                                     return texts
                                 }
                             },
-                            name: '用电趋势',
                             type: 'value'
                         },
                         series: [{

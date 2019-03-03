@@ -1,7 +1,7 @@
 <template>
     <div>
         <div v-show='showList' class='query-wrap'>
-            <div class="operate-wrap" style="margin-left: 5px">选择电表：
+            <div class="operate-wrap" style="margin-left: 5px">选择检测点：
                 <Select v-model="electricityMeterInfoId" @on-change='selectedChange' class='operate' style="width:200px">
                     <Option v-for="item in electricityList" :value="item.id" :key="item.id">{{ item.alias }}</Option>
                 </Select>
@@ -48,13 +48,23 @@
                 barData: []
             }
         },
+        computed: {
+            organizationUnitId () {
+                return this.$store.state.user.organizationId
+            }
+        },
+        watch: {
+            organizationUnitId () {
+                this.init()
+            }
+        },
         methods: {
             init() {
                 this.getSelectData()
             },
             getSelectData() {
                 return new Promise((resolve, reject) => {
-                    getElectricityDropdownList().then(res => {
+                    getElectricityDropdownList(this.organizationUnitId).then(res => {
                         const data = res.data.result
                         this.electricityList = data
                         this.electricityMeterInfoId = data[0].id
