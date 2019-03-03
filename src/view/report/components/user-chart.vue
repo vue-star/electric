@@ -13,39 +13,61 @@
             text: String,
             subtext: String
         },
-        mounted() {
-            this.$nextTick(() => {
-                let xAxisData = Object.keys(this.value)
-                let seriesData = Object.values(this.value)
-                let option = {
-                    title: {
-                        text: this.text,
-                        subtext: this.subtext,
-                        x: 'center'
-                    },
-                    xAxis: {
-                        type: 'category',
-                        data: xAxisData
-                    },
-                    yAxis: {
-                        type: 'value',
-                        name: '功率',
-                        axisLabel: {
-                            formatter: function (value) {
-                                var texts = []
-                                texts.push(value + ' kwh')
-                                return texts
+        watch: {
+            value() {
+                this.echartsData()
+            }
+        },
+        methods:{
+            echartsData(){
+                this.$nextTick(() => {
+                    let keysData = Object.values(this.value)
+                    let xAxisData = keysData[0].map(_ => _.belongs)
+                    let legendData = Object.keys(this.value)
+                    let seriesData = []
+                    legendData.forEach((element,index)=>{
+                        let seriesItem={}
+                        seriesItem.name = element
+                        seriesItem.type = 'line'
+                        seriesItem.data = keysData[index].map(_ => _.electricity)
+                        seriesData.push(seriesItem)
+                    })
+                    let option = {
+                        title: {
+                            text: this.text,
+                            subtext: this.subtext,
+                            x: 'left'
+                        },
+                        dataZoom: [{
+                            type: 'inside',
+                            throttle: 50
+                        }],
+                        legend: {
+                            data: legendData
+                        },
+                        xAxis: {
+                            type: 'category',
+                            data: xAxisData
+                        },
+                        yAxis: {
+                            type: 'value',
+                            axisLabel: {
+                                formatter: function (value) {
+                                    var texts = []
+                                    texts.push(value + ' kwh')
+                                    return texts
+                                }
                             }
-                        }
-                    },
-                    series: [{
-                        data: seriesData,
-                        type: 'line'
-                    }]
-                }
-                let dom = echarts.init(this.$refs.dom, 'tdTheme')
-                dom.setOption(option)
-            })
+                        },
+                        series: seriesData
+                    }
+                    let dom = echarts.init(this.$refs.dom, 'tdTheme')
+                    dom.setOption(option)
+                })
+            }
+        },
+        mounted() {
+            
         }
     }
 

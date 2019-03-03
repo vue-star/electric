@@ -48,7 +48,10 @@
                         </Col>
                         <Col span="10" class='col-wrap'>
                         <FormItem label="产品型号" prop="productType">
-                            <Input v-model="formValidate.productType" :maxlength=20 placeholder="请输入产品型号"></Input>
+                            <Select v-model="formValidate.productType">
+                                <Option v-for="item in productTypeList" :value="item.name" :key="item.name">{{
+                                    item.name }}</Option>
+                            </Select>
                         </FormItem>
                         </Col>
                     </Row>
@@ -163,6 +166,7 @@
                 ],
                 listData: [],
                 manufacturerList: [],
+                productTypeList: [],
                 organizationUnitIdList: [],
                 data: {},
                 total: 1,
@@ -222,6 +226,7 @@
             init() {
                 this.getListData()
                 this.getDataDicConfigList(18)
+                this.getDataDicConfigList(21)
                 this.getOrganizationUnits(2)
             },
             getOrganizationUnits(OrganizationUnitType) {
@@ -245,7 +250,7 @@
                     getDataDicConfigList(dictionaryType).then(
                         res => {
                             const data = res.data.result.items
-                            this.manufacturerList = data
+                            this.selectedData(data, dictionaryType)
                             resolve()
                         },
                         error => {
@@ -255,6 +260,19 @@
                         reject(err)
                     })
                 })
+            },
+            selectedData(data, dictionaryType) {
+                switch (dictionaryType) {
+                    case 18:
+                        this.manufacturerList = data
+                        break
+                    case 21:
+                        this.productTypeList = data
+                        break
+
+                    default:
+                        break
+                }
             },
             getListData() {
                 return new Promise((resolve, reject) => {

@@ -4,7 +4,7 @@
         <Input v-model="value" :placeholder="placeholderValue" style="width: 300px" @keyup.enter.native="query"></Input>
         <Button type="primary" icon="ios-search" class='query search-btn' @click="query">查询</Button>
         <Button type="primary" @click='empty' class="search-btn">清空</Button>
-        <Button type="primary" class='more hide_wrap search-btn' @click='showMore'>高级查询</Button>
+        <!-- <Button type="primary" class='more hide_wrap search-btn' @click='showMore'>高级查询</Button> -->
         <div class="more-wrap show_wrap" v-show='isShowMore'>
             <div v-for='( item, index ) in searchdata' style='margin-bottom: 5px;' class='show_wrap'>
                 <span class='select-text show_wrap'>
@@ -154,7 +154,7 @@
 <style scoped lang='less'>
     .search {
         position: relative;
-        width: 520px;
+        width: 440px;
     }
 
     .text {

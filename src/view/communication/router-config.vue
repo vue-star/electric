@@ -5,7 +5,7 @@
             <span class='title_text'>{{titleText}}</span>
         </div>
 
-        <!--路由配置列表-->
+        <!--配置列表-->
         <div v-show='showList' class='query-wrap'>
 
             <div class="operate-wrap">
@@ -180,7 +180,7 @@
                 showLog: false,
                 isSelect: false,
                 add: false,
-                titleText: '路由器信息列表',
+                titleText: '配置信息列表',
                 modelTitle: '',
                 placeholderValue: '请输入路由器名称',
                 isLoading: false,
@@ -359,7 +359,7 @@
                 return new Promise((resolve, reject) => {
                     delRouterConfig(data.id).then(
                         res => {
-                            this.$Message.success('删除路由器成功')
+                            this.$Message.success('删除配置成功')
                             this.isSelect = false
                             this.getListData()
                             resolve()
@@ -374,13 +374,13 @@
             },
             addHandler() {
                 this.isAddRouterConfig = true
-                this.modelTitle = '新增路由器配置'
+                this.modelTitle = '新增配置'
             },
             // 编辑
             editHandler(index) {
                 this.isEdit = true
                 this.isAddRouterConfig = true
-                this.modelTitle = '编辑路由器配置信息'
+                this.modelTitle = '编辑配置信息'
                 this.formValidate = this.data
                 this.organizationUnitIdList.forEach(element => {
                     if (objEqual(this.formValidate.organizationUnitName, element.displayName)) {
@@ -415,7 +415,7 @@
                             return new Promise((resolve, reject) => {
                                 updataRouterConfig(this.formValidate).then(
                                     res => {
-                                        this.$Message.success('修改设备成功')
+                                        this.$Message.success('修改配置成功')
                                         this.isAddRouterConfig = false
                                         this.isEdit = false
                                         this.$refs[name].resetFields()
@@ -433,7 +433,7 @@
                             return new Promise((resolve, reject) => {
                                 addRouterConfig(this.formValidate).then(
                                     res => {
-                                        this.$Message.success('新增设备成功')
+                                        this.$Message.success('新增配置成功')
                                         this.isAddRouterConfig = false
                                         this.$refs[name].resetFields()
                                         this.getListData()

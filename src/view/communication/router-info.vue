@@ -55,7 +55,7 @@
                     <Row :gutter="24" class='row-wrap'>
                         <Col span="10" class='col-wrap'>
                         <FormItem label="路由器设备ID" prop="sn">
-                            <Input v-model="formValidate.sn" :maxlength=3 placeholder="请输入路由器设备ID"></Input>
+                            <Input v-model="formValidate.sn" :maxlength=20 placeholder="请输入路由器设备ID"></Input>
                         </FormItem>
                         </Col>
                         <Col span="10" class='col-wrap'>

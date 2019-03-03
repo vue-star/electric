@@ -1,5 +1,5 @@
 import axios from '@/libs/api.request'
-// 获取客户列表
+// 获取用电概况
 export const getUsePowerSummary = (organizationUnitId) => {
     return axios.request({
         url: 'services/app/PowerStatistics/GetUsePowerSummaryDtoAsync',
@@ -9,31 +9,45 @@ export const getUsePowerSummary = (organizationUnitId) => {
         method: 'get'
     })
 }
-// 新增客户
-export const addElectricityMeter = (ElectricityMeter) => {
-    const data = ElectricityMeter
+// 获取日累积电力
+export const getTodayPowerSummary = (organizationUnitId) => {
     return axios.request({
-        url: 'services/app/ElectricityMeterInfo/Create',
-        data,
-        method: 'post'
-    })
-}
-// 删除客户
-export const delElectricityMeter = (id) => {
-    return axios.request({
-        url: 'services/app/ElectricityMeterInfo/Delete',
+        url: 'services/app/PowerStatistics/GetTodayPowerSummaryAsync',
         params: {
-            id
+            organizationUnitId
         },
-        method: 'delete'
+        method: 'get'
     })
 }
-// 修改客户
-export const updataElectricityMeter = (ElectricityMeter) => {
-    const data = ElectricityMeter
+// 获取月累积电力
+export const getMonthPowerSummary = (organizationUnitId) => {
     return axios.request({
-        url: 'services/app/ElectricityMeterInfo/Update',
-        data,
-        method: 'put'
+        url: 'services/app/PowerStatistics/GetThisMonthPowerSummaryAsync',
+        params: {
+            organizationUnitId
+        },
+        method: 'get'
+    })
+}
+// 获取年累积电力
+export const getYearPowerSummary = (organizationUnitId) => {
+    return axios.request({
+        url: 'services/app/PowerStatistics/GetThisYearPowerSummaryAsync',
+        params: {
+            organizationUnitId
+        },
+        method: 'get'
+    })
+}
+// 获取居民用电统计
+export const getElectricitySummary = (organizationUnitId, StartDate, EndTime) => {
+    return axios.request({
+        url: 'services/app/PowerStatistics/GetElectricityConsumptionStatisticsDtoAsync',
+        params: {
+            organizationUnitId,
+            StartDate,
+            EndTime
+        },
+        method: 'get'
     })
 }

@@ -18,23 +18,23 @@
         <Row :gutter="20">
             <i-col :xs="12" :md="8" :lg="4" class="power-div">
                 <Card shadow style="box-shadow:5px 5px 5px #708194">
-                    <day-chart style="height: 200px;" :value="barData" text="本日电量" subtext="1888"/>
+                    <day-chart style="height: 200px;" :value="dayData" text="本日电量" :subtext="dayTitle"/>
                 </Card>
             </i-col>
             <i-col :xs="12" :md="8" :lg="4" class="power-div">
                 <Card shadow style="box-shadow:5px 5px 5px #708194">
-                    <mon-chart style="height: 200px;" :value="barData" text="本月电量" subtext="1888"/>
+                    <mon-chart style="height: 200px;" :value="monthData" text="本月电量" :subtext="monthTitle"/>
                 </Card>
             </i-col>
             <i-col :xs="12" :md="8" :lg="4" class="power-div">
                 <Card shadow style="box-shadow:5px 5px 5px #708194">
-                    <year-chart style="height: 200px;" :value="barData" text="本年电量" subtext="1888"/>
+                    <year-chart style="height: 200px;" :value="yearData" text="本年电量" :subtext="yearTitle"/>
                 </Card>
             </i-col>
         </Row>
         <Row style="margin-top: 20px;">
             <Card shadow>
-                <user-chart style="height: 300px;" :value="barData" text="居民用电统计图" />
+                <user-chart style="height: 300px;" :value="electricityData" text="居民用电统计图" />
             </Card>
         </Row>
     </div>
@@ -49,7 +49,7 @@
     import YearChart from './components/year-chart.vue'
     import UserChart from './components/user-chart.vue'
     import { formatData, addDate } from '@/libs/tools'
-    import { getUsePowerSummary } from '@/api/energyProfile'
+    import { getUsePowerSummary, getTodayPowerSummary, getMonthPowerSummary, getYearPowerSummary, getElectricitySummary } from '@/api/energyProfile'
     export default {
         name: 'energy_profile',
         components: {
@@ -96,48 +96,14 @@
                         color: '#fff'
                     }
                 ],
-                pieData: [{
-                        value: 335,
-                        name: '直接访问'
-                    },
-                    {
-                        value: 310,
-                        name: '邮件营销'
-                    },
-                    {
-                        value: 234,
-                        name: '联盟广告'
-                    },
-                    {
-                        value: 135,
-                        name: '视频广告'
-                    },
-                    {
-                        value: 1548,
-                        name: '搜索引擎'
-                    }
-                ],
-                barData: {
-                    '10.00': 225,
-                    '10.30': 132,
-                    '11.00': 153,
-                    '11.30': 133,
-                    '12.00': 453,
-                    '12.30': 153,
-                    '13.00': 353,
-                    '13.30': 183,
-                    '14.00': 123,
-                    '14.30': 166,
-                    '15.00': 199,
-                    '15.30': 133,
-                    '16.00': 243,
-                    '16.30': 333,
-                    '17.00': 223,
-                    '17.30': 193,
-                    '18.00': 122,
-                    '18.30': 163,
-                    '19.00': 133
-                }
+                dayData: [],
+                monthData: [],
+                yearData: [],
+                electricityData: {},
+                dayTitle: 0,
+                monthTitle: 0,
+                yearTitle: 0,
+                electricityTitle: 0,
             }
         },
         computed: {
@@ -145,9 +111,19 @@
                 return this.$store.state.user.organizationId
             }
         },
+        watch: {
+            organizationUnitId () {
+                console.info('对不起，让你失望了')
+                this.init()
+            }
+        },
         methods:{
             init() {
                 this.getUsePowerData()
+                this.getTodayPowerData()
+                this.getMonthPowerData()
+                this.getYearPowerData()
+                this.getElectricityData()
             },
             getUsePowerData() {
                 return new Promise((resolve, reject) => {
@@ -163,6 +139,57 @@
                     })
                 })
             },
+            getTodayPowerData() {
+                return new Promise((resolve, reject) => {
+                    getTodayPowerSummary(this.organizationUnitId).then(res => {
+                        const data = res.data.result
+                        this.dayData=data.electricityConsumptionStatisticsDtoList
+                        this.dayTitle=data.totalConsumption
+                        resolve()
+                    }).catch(err => {
+                        reject(err)
+                    })
+                })
+            },
+            getMonthPowerData() {
+                return new Promise((resolve, reject) => {
+                    getMonthPowerSummary(this.organizationUnitId).then(res => {
+                        const data = res.data.result
+                        this.monthData=data.electricityConsumptionStatisticsDtoList
+                        this.monthTitle=data.totalConsumption
+                        resolve()
+                    }).catch(err => {
+                        reject(err)
+                    })
+                })
+            },
+            getYearPowerData() {
+                return new Promise((resolve, reject) => {
+                    getYearPowerSummary(this.organizationUnitId).then(res => {
+                        const data = res.data.result
+                        this.yearData=data.electricityConsumptionStatisticsDtoList
+                        this.yearTitle=data.totalConsumption
+                        resolve()
+                    }).catch(err => {
+                        reject(err)
+                    })
+                })
+            },
+            getElectricityData() {
+                return new Promise((resolve, reject) => {
+                    getElectricitySummary(this.organizationUnitId,this.dateTime[0],this.dateTime[1]).then(res => {
+                        const data = res.data.result
+                        this.electricityData=data
+                        resolve()
+                    }).catch(err => {
+                        reject(err)
+                    })
+                })
+            },
+            dateChange(val){
+                this.dateTime=val
+                this.getElectricityData()
+            }
         },
         mounted() {
             this.init()

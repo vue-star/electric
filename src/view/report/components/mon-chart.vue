@@ -7,53 +7,64 @@
     export default {
         name: 'MonChart',
         props: {
-            value: Object,
+            value: Array,
             text: String,
-            subtext: String
+            subtext: Number
+        },
+        watch: {
+            value() {
+                this.echartsData()
+            }
+        },
+        methods:{
+            echartsData(){
+                this.$nextTick(() => {
+                    let xAxisData = this.value.map(_ => _.belongs)
+                    let seriesData = this.value.map(_ => _.electricity)
+                    let option = {
+                        title: {
+                            text: this.text,
+                            subtext: this.subtext,
+                            subtextStyle: {
+                                fontSize: 30
+                            },
+                            x: '50'
+                        },
+                        grid: [{
+                            x: 10,
+                            x2: 10,
+                            y: 100,
+                            y2: 10
+                        }],
+                        xAxis: {
+                            type: 'category',
+                            data: xAxisData,
+                            show: false,
+                            splitLine: {
+                                show: false
+                            }
+                        },
+                        yAxis: {
+                            type: 'value',
+                            show: false,
+                            splitLine: {
+                                show: false
+                            }
+                        },
+                        series: [{
+                            data: seriesData,
+                            areaStyle: {},
+                            type: 'bar'
+                        }]
+                    }
+                    let dom = echarts.init(this.$refs.dom, 'tdTheme')
+                    dom.setOption(option)
+                })
+            }
         },
         mounted() {
-            this.$nextTick(() => {
-                let xAxisData = Object.keys(this.value)
-                let seriesData = Object.values(this.value)
-                let option = {
-                    title: {
-                        text: this.text,
-                        subtext: this.subtext,
-                        subtextStyle: {
-                            fontSize: 30
-                        },
-                        x: '50'
-                    },
-                    grid: [{
-                        x: 10,
-                        x2: 10,
-                        y: 100,
-                        y2: 10
-                    }],
-                    xAxis: {
-                        type: 'category',
-                        data: xAxisData,
-                        show: false,
-                        splitLine: {
-                            show: false
-                        }
-                    },
-                    yAxis: {
-                        type: 'value',
-                        show: false,
-                        splitLine: {
-                            show: false
-                        }
-                    },
-                    series: [{
-                        data: seriesData,
-                        areaStyle: {},
-                        type: 'bar'
-                    }]
-                }
-                let dom = echarts.init(this.$refs.dom, 'tdTheme')
-                dom.setOption(option)
-            })
+            this.echartsData()
+            
         }
     }
 

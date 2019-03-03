@@ -184,6 +184,10 @@
                     {
                         value: 20,
                         label: '计量方式'
+                    },
+                    {
+                        value: 21,
+                        label: '电表型号'
                     }
                 ],
                 data: {},

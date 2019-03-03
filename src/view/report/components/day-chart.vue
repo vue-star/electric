@@ -7,65 +7,75 @@
     export default {
         name: 'DayChart',
         props: {
-            value: Object,
+            value: Array,
             text: String,
-            subtext: String
+            subtext: Number
         },
-        mounted() {
-            this.$nextTick(() => {
-                let xAxisData = Object.keys(this.value)
-                let seriesData = Object.values(this.value)
-                let option = {
-                    title: {
-                        text: this.text,
-                        subtext: this.subtext,
-                        subtextStyle: {
-                            fontSize: 30,
-                            color: '#000'
+        watch: {
+            value() {
+                this.echartsData()
+            }
+        },
+        methods:{
+            echartsData(){
+                this.$nextTick(() => {
+                    let xAxisData = this.value.map(_ => _.belongs)
+                    let seriesData = this.value.map(_ => _.electricity)
+                    let option = {
+                        title: {
+                            text: this.text,
+                            subtext: this.subtext,
+                            subtextStyle: {
+                                fontSize: 30,
+                                color: '#000'
+                            },
+                            x: '50'
                         },
-                        x: '50'
-                    },
-                    grid: [{
-                        x: 10,
-                        x2: 10,
-                        y: 100,
-                        y2: 10
-                    }],
-                    xAxis: {
-                        type: 'category',
-                        data: xAxisData,
-                        boundaryGap: false,
-                        show: false,
-                        splitLine: {
-                            show: false
-                        }
-                    },
-                    yAxis: {
-                        type: 'value',
-                        show: false,
-                        splitLine: {
-                            show: false
-                        }
-                    },
-                    series: [{
-                        data: seriesData,
-                        areaStyle: {
-                            color: '#2d8cf0'
-                        },
-                        symbol: 'none',
-                        itemStyle: {
-                            normal: {
-                                lineStyle: {
-                                    color: '#2d8cf0'
-                                }
+                        grid: [{
+                            x: 10,
+                            x2: 10,
+                            y: 100,
+                            y2: 10
+                        }],
+                        xAxis: {
+                            type: 'category',
+                            data: xAxisData,
+                            boundaryGap: false,
+                            show: false,
+                            splitLine: {
+                                show: false
                             }
                         },
-                        type: 'line'
-                    }]
-                }
-                let dom = echarts.init(this.$refs.dom, 'tdTheme')
-                dom.setOption(option)
-            })
+                        yAxis: {
+                            type: 'value',
+                            show: false,
+                            splitLine: {
+                                show: false
+                            }
+                        },
+                        series: [{
+                            data: seriesData,
+                            areaStyle: {
+                                color: '#2d8cf0'
+                            },
+                            symbol: 'none',
+                            itemStyle: {
+                                normal: {
+                                    lineStyle: {
+                                        color: '#2d8cf0'
+                                    }
+                                }
+                            },
+                            type: 'line'
+                        }]
+                    }
+                    let dom = echarts.init(this.$refs.dom, 'tdTheme')
+                    dom.setOption(option)
+                })
+            }
+        },
+        mounted() {
+            this.echartsData()
         }
     }
 

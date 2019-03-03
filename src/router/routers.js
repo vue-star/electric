@@ -135,15 +135,6 @@ export default [{
                 component: () => import('@/view/communication/serial-port.vue')
             },
             {
-                path: 'router_config',
-                name: 'router_config',
-                meta: {
-                    icon: 'md-download',
-                    title: '配置信息'
-                },
-                component: () => import('@/view/communication/router-config.vue')
-            },
-            {
                 path: 'meter_information',
                 name: 'meter_information',
                 meta: {
@@ -160,6 +151,15 @@ export default [{
                     title: '路由器信息'
                 },
                 component: () => import('@/view/communication/router-info.vue')
+            },
+            {
+                path: 'router_config',
+                name: 'router_config',
+                meta: {
+                    icon: 'md-download',
+                    title: '配置信息'
+                },
+                component: () => import('@/view/communication/router-config.vue')
             }
         ]
     },
