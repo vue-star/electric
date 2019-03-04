@@ -10,44 +10,124 @@
         
 
         <Row :gutter="20">
-            <i-col :xs="12" :md="8" :lg="4" v-for="(navi, i) in naviCardData" :key="`navi-${i}`" class="navi-div">
-                <navi-card shadow :color="navi.color" :title="navi.title" :icon="navi.icon" :icon-size="14">
-                    <Icon v-if="i==5 && navi.count<100" class="count-style-navi" type="md-arrow-round-down" color="#9A66E4" />
-                    <Icon v-if="i==5 && navi.count>=100" class="count-style-navi" type="md-arrow-round-up" color="#9A66E4" />
-                    <Icon v-if="i==2 && navi.count<100" class="count-style-navi" type="md-arrow-round-down" color="#9A66E4" />
-                    <Icon v-if="i==2 && navi.count>=100" class="count-style-navi" type="md-arrow-round-up" color="red" />
-                    <p :style="{color:navi.color}" class="count-style-navi">{{navi.count}}</p>
-                </navi-card>
+            <i-col :xs="2" :md="4" :lg="12">
+                <div class="card-area">
+                <!-- <div class="top-style"></div> -->
+                <div class="top-area">
+                    <Icon type="md-trending-up" size="20" style="float:left" color="#436EEE" />
+                    <p>日环比</p>
+                </div>
+                <div>
+                    <i-col :xs="12" :md="8" :lg="4" v-for="(navi, i) in naviCardData" :key="`navi-${i}`" class="navi-div">
+                        <navi-card shadow :color="navi.color" :title="navi.title" :icon="navi.icon" :icon-size="14">
+                            <Icon v-if="i==5 && navi.count<100" class="count-style-navi" type="md-arrow-round-down" color="#9A66E4" size="30"/>
+                            <Icon v-if="i==5 && navi.count>=100" class="count-style-navi" type="md-arrow-round-up" color="#9A66E4"  size="30"/>
+                            <Icon v-if="i==2 && navi.count<100" class="count-style-navi" type="md-arrow-round-down" color="#9A66E4" size="30" />
+                            <Icon v-if="i==2 && navi.count>=100" class="count-style-navi" type="md-arrow-round-up" color="red"  size="30"/>
+                            <p v-if="i!=2 && i!=5" :style="{color:navi.color}" class="count-style-navi">{{navi.count+'kwh'}}</p>
+                            <p v-else :style="{color:navi.color}" class="count-style-navi">{{navi.count}}</p>
+                        </navi-card>
+                    </i-col>
+                </div>
+            </div>
+            </i-col>
+            
+            <i-col :xs="2" :md="4" :lg="12">
+                <div class="card-area">
+                <!-- <div class="top-style"></div> -->
+                <div class="top-area">
+                    <Icon type="md-trending-up" size="20" style="float:left" color="#436EEE" />
+                    <p>月环比</p>
+                </div>
+                <div>
+                    <i-col :xs="12" :md="8" :lg="4" v-for="(navi, i) in naviCardData1" :key="`navi-${i}`" class="navi-div">
+                        <navi-card shadow :color="navi.color" :title="navi.title" :icon="navi.icon" :icon-size="14">
+                            <Icon v-if="i==5 && navi.count<100" class="count-style-navi" type="md-arrow-round-down" color="#9A66E4" size="30"/>
+                            <Icon v-if="i==5 && navi.count>=100" class="count-style-navi" type="md-arrow-round-up" color="#9A66E4"  size="30"/>
+                            <Icon v-if="i==2 && navi.count<100" class="count-style-navi" type="md-arrow-round-down" color="#9A66E4" size="30" />
+                            <Icon v-if="i==2 && navi.count>=100" class="count-style-navi" type="md-arrow-round-up" color="red"  size="30"/>
+                            <p v-if="i!=2 && i!=5" :style="{color:navi.color}" class="count-style-navi">{{navi.count+'kwh'}}</p>
+                            <p v-else :style="{color:navi.color}" class="count-style-navi">{{navi.count}}</p>
+                        </navi-card>
+                    </i-col>
+                </div>
+            </div>
             </i-col>
         </Row>
         <Row :gutter="20" style="margin-top: 20px;">
-            <i-col span="24">
+            <div class="card-area">
+                <!-- <div class="top-style"></div> -->
+                <div class="top-area">
+                    <Icon type="md-trending-up" size="20" style="float:left" color="#436EEE" />
+                    <p>日负荷曲线</p>
+                </div>
+                <i-col span="24">
+                    <Card shadow style="float:right;width: 90%;">
+                        <trend-chart style="height: 350px" :xAxisData="statisticXData" :seriesData="statisticSData" :text="lineText" />
+                    </Card>
+                    <div class="btn-div1"><Button class='operate-navi' type="primary">
+                            <p style="fontSize:32px" @click="hourClick()">8</p>
+                            <p>最大值</p>
+                        </Button></div>
+                    <div class="btn-div1"><Button class='operate-navi' type="primary">
+                            <p style="fontSize:32px" @click="dayClick()">3</p>
+                            <p>最小值</p>
+                        </Button></div>
+                    <div class="btn-div1"><Button class='operate-navi' type="primary">
+                            <p style="fontSize:32px" @click="monthClick()">4</p>
+                            <p>平均值</p>
+                        </Button>
+                    </div>
+                    <div class="btn-div1"><Button class='operate-navi' type="primary">
+                        <p style="fontSize:32px" @click="monthClick()">10</p>
+                        <p>当前值</p>
+                        </Button>
+                    </div>
+                </i-col>
+            </div>
+        </Row>
+        <!-- <Row :gutter="20" style="margin-top: 20px;">
+            <div class="card-area">
+                <div class="top-style"></div>
+                <div class="top-area">
+                    <Icon type="md-trending-up" size="20" style="float:left" color="#436EEE" />
+                    <p>日负荷曲线</p>
+                </div>
+                <i-col span="24">
                 <div>
                     <Card shadow>
                         <survey-chart style="height: 300px;" :xAxisData="xAxisData" :seriesData="seriesData" :text="lineText" />
                     </Card>
                 </div>
             </i-col>
-        </Row>
+            </div>
+        </Row> -->
         <Row :gutter="20" style="margin-top: 20px;">
-            <i-col span="24">
-                <Card shadow style="float:right;width: 90%;">
-                    <trend-chart style="height: 350px" :xAxisData="statisticXData" :seriesData="statisticSData" :text="lineText" />
-                </Card>
-                <div class="btn-div"><Button class='operate-navi' type="primary">
-                        <p style="fontSize:32px" @click="hourClick()">48</p>
-                        <p>过去48时</p>
-                    </Button></div>
-                <div class="btn-div"><Button class='operate-navi' type="primary">
-                        <p style="fontSize:32px" @click="dayClick()">31</p>
-                        <p>过去31天</p>
-                    </Button></div>
-                <div class="btn-div"><Button class='operate-navi' type="primary">
-                        <p style="fontSize:32px" @click="monthClick()">12</p>
-                        <p>过去12月</p>
-                    </Button>
+            <div class="card-area">
+                <!-- <div class="top-style"></div> -->
+                <div class="top-area">
+                    <Icon type="md-trending-up" size="20" style="float:left" color="#436EEE" />
+                    <p>用电趋势</p>
                 </div>
-            </i-col>
+                <i-col span="24">
+                    <Card shadow style="float:right;width: 90%;">
+                        <trend-chart style="height: 350px" :xAxisData="statisticXData" :seriesData="statisticSData" :text="lineText" />
+                    </Card>
+                    <div class="btn-div"><Button class='operate-navi' type="primary">
+                            <p style="fontSize:32px" @click="hourClick()">48</p>
+                            <p>过去48时</p>
+                        </Button></div>
+                    <div class="btn-div"><Button class='operate-navi' type="primary">
+                            <p style="fontSize:32px" @click="dayClick()">31</p>
+                            <p>过去31天</p>
+                        </Button></div>
+                    <div class="btn-div"><Button class='operate-navi' type="primary">
+                            <p style="fontSize:32px" @click="monthClick()">12</p>
+                            <p>过去12月</p>
+                        </Button>
+                    </div>
+                </i-col>
+            </div>
         </Row>
     </div>
 </template>
@@ -99,7 +179,9 @@
                         icon: 'md-pulse',
                         count: 0.0,
                         color: '#ff9900'
-                    },
+                    }
+                ],
+                naviCardData1: [
                     {
                         title: '当月用电',
                         icon: 'md-pulse',
@@ -123,7 +205,7 @@
                 seriesData: [],
                 statisticXData: [],
                 statisticSData: [],
-                lineData: {}
+                lineData: {},
             }
         },
         computed: {
@@ -256,9 +338,11 @@
             //         this.getCustomerList();
             //     }
             // }
+            
         },
         mounted() {
             this.init()
+    //         
         }
     }
 
@@ -268,7 +352,7 @@
     @import "../components/search/searchAndOperate.less";
 
     .count-style-navi {
-        font-size: 30px;
+        font-size: 25px;
         float: right;
         margin-top: 15px;
         margin-right: 10px
@@ -276,7 +360,8 @@
 
     .navi-div {
         width: 13%;
-        height: 120px;
+        min-width: 150px;
+        height: 125px;
         padding-bottom: 10px;
         padding-left: 10px;
         margin: 10px;
@@ -287,5 +372,38 @@
         margin: 1%;
         float: left;
     }
+
+    .btn-div1 {
+        width: 5%;
+        height: 10%;
+        margin: 1%;
+        float: left;
+    }
+
+   .card-area {
+        float: left;
+        width: 98.5%;
+        background-color: #F2F2F2;
+        margin-top: 5px;
+        margin-left: 10px;
+        //border: 1px solid;
+
+        .ivu-card-body {
+            padding: 0px;
+        }
+
+        ;
+
+        .top-area {
+            background-color: rgb(223, 230, 230);
+            padding: 5px;
+        }
+
+        .top-style {
+            height: 5px;
+            background-color: darkcyan;
+        }
+    }
+
 
 </style>

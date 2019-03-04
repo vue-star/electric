@@ -69,7 +69,7 @@
                             data: xAxisData
                         },
                         yAxis: {
-                            name: '功率',
+                            //name: '功率',
                             type: 'value',
                             axisLabel: {
                                 formatter: function (value) {
