@@ -91,6 +91,11 @@
                         align: 'center'
                     },
                     {
+                        title: '组织名称',
+                        key: 'organizationUnitName',
+                        align: 'center'
+                    },
+                    {
                         title: '备注',
                         key: 'reamrk',
                         align: 'center'
@@ -140,13 +145,23 @@
                 boxTransformerId: ''
             }
         },
+        computed: {
+            organizationUnitId () {
+                return this.$store.state.user.organizationId
+            }
+        },
+        watch: {
+            organizationUnitId () {
+                this.init()
+            }
+        },
         methods: {
             init() {
                 this.getListData()
             },
             getListData() {
                 return new Promise((resolve, reject) => {
-                    getBoxTransformerList(this.queryParam).then(
+                    getBoxTransformerList(this.organizationUnitId,this.queryParam).then(
                         res => {
                             const data = res.data.result
                             this.isLoading = false

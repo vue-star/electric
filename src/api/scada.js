@@ -1,11 +1,10 @@
 import axios from '@/libs/api.request'
 
-export const getHistoryData = (ElectricityMeterInfoId, MaxResultCount) => {
+export const getEleHistoryData = (organizationUnitId) => {
     return axios.request({
-        url: 'HistoryData/GetHistoryData',
+        url: 'services/app/PowerStatistics/GetHistoryDataDtoListAsync',
         params: {
-            ElectricityMeterInfoId,
-            MaxResultCount
+            organizationUnitId
         },
         method: 'get'
     })

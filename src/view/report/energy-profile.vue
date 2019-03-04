@@ -18,23 +18,23 @@
         <Row :gutter="20">
             <i-col :xs="12" :md="8" :lg="4" class="power-div">
                 <Card shadow style="box-shadow:5px 5px 5px #708194">
-                    <day-chart style="height: 200px;" :value="dayData" text="本日电量" :subtext="dayTitle"/>
+                    <day-chart style="height: 200px;" :value="dayData" text="本日电量" :subtext="dayTitle + 'kwh'"/>
                 </Card>
             </i-col>
             <i-col :xs="12" :md="8" :lg="4" class="power-div">
                 <Card shadow style="box-shadow:5px 5px 5px #708194">
-                    <mon-chart style="height: 200px;" :value="monthData" text="本月电量" :subtext="monthTitle"/>
+                    <mon-chart style="height: 200px;" :value="monthData" text="本月电量" :subtext="monthTitle + 'kwh'"/>
                 </Card>
             </i-col>
             <i-col :xs="12" :md="8" :lg="4" class="power-div">
                 <Card shadow style="box-shadow:5px 5px 5px #708194">
-                    <year-chart style="height: 200px;" :value="yearData" text="本年电量" :subtext="yearTitle"/>
+                    <year-chart style="height: 200px;" :value="yearData" text="本年电量" :subtext="yearTitle + 'kwh'"/>
                 </Card>
             </i-col>
         </Row>
         <Row style="margin-top: 20px;">
             <Card shadow>
-                <user-chart style="height: 300px;" :value="electricityData" text="居民用电统计图" />
+                <user-chart style="height: 300px;" :value="electricityData" text="电表统计图" />
             </Card>
         </Row>
     </div>

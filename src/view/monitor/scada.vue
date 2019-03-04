@@ -1,13 +1,11 @@
 <template>
     <div class="couplet-card">
-        <Tabs active-key="key1" type="card" style="height: 100%">
-            <Tab-pane label="东方魅力SCADA" key="key1">
-                <dongfang-scada :isViews="isViews"></dongfang-scada>
-            </Tab-pane>
-            <Tab-pane label="亚设塑业SCADA" key="key2">
-                <yasu-scada :isView="isView"></yasu-scada>
-            </Tab-pane>
-        </Tabs>
+        <div v-if="organizationUnitId=== 3" style="height: 100%">
+            <dongfang-scada :ele-data="electricityList"></dongfang-scada>
+        </div> 
+        <div v-else-if="organizationUnitId=== 4" style="height: 100%">
+            <yasu-scada :ele-data="electricityList"></yasu-scada>
+        </div> 
     </div>
 </template>
 
@@ -18,7 +16,8 @@
         getCustomerList,
         addCustomer,
         delCustomer,
-        updataCustomer
+        updataCustomer,
+        getEleHistoryData
     } from '@/api/scada'
     export default {
         name: 'scada',
@@ -29,17 +28,49 @@
         props: {},
         data() {
             return {
-                isView: true,
-                isViews: false
+                electricityList: []
             }
         },
-        watch: {},
-        methods: {
-            init() {}
+        computed: {
+            organizationUnitId () {
+                return this.$store.state.user.organizationId
+            }
         },
-        mounted() {}
+        watch: {
+            organizationUnitId () {
+                this.init()
+            }
+        },
+        methods: {
+            init() {
+                this.getScadaData()
+            },
+            getScadaData(){
+                return new Promise((resolve, reject) => {
+                    getEleHistoryData(this.organizationUnitId).then(res => {
+                        const data = res.data.result
+                        this.electricityList = data
+                        resolve()
+                    }).catch(err => {
+                        reject(err)
+                    })
+                })
+            }
+        },
+        mounted() {
+            this.init()
+            if (this.timer) {
+                clearInterval(this.timer)
+            } else {
+                this.timer = setInterval(() => {
+                    this.init()
+                }, 60000)
+            }
+        },
+        beforeDestroy() {
+            clearInterval(this.timer)
+        }
     }
-
 </script>
 
 <style lang='less'>

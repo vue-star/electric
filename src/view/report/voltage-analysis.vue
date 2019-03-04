@@ -14,7 +14,7 @@
         </div>
         <Row style="margin-top: 20px;">
             <Card shadow>
-                <voltage-chart style="height: 700px;" :value="barData" :text="textTitle+'电压分析'" />
+                <voltage-chart style="height: 500px;" :value="barData" :text="textTitle+'电压分析'" />
             </Card>
         </Row>
     </div>

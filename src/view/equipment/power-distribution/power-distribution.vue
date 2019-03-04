@@ -122,13 +122,23 @@
                 powerDistributionRoomId: ''
             }
         },
+        computed: {
+            organizationUnitId () {
+                return this.$store.state.user.organizationId
+            }
+        },
+        watch: {
+            organizationUnitId () {
+                this.init()
+            }
+        },
         methods: {
             init() {
                 this.getListData()
             },
             getListData() {
                 return new Promise((resolve, reject) => {
-                    getPowerDistributionList(this.queryParam).then(
+                    getPowerDistributionList(this.organizationUnitId,this.queryParam).then(
                         res => {
                             const data = res.data.result
                             this.isLoading = false

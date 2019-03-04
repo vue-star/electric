@@ -26,7 +26,8 @@
                             text: this.text,
                             subtext: this.subtext,
                             subtextStyle: {
-                                fontSize: 30
+                                fontSize: 30,
+                                color: '#000'
                             },
                             x: '50'
                         },

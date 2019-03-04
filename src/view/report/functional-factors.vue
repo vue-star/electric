@@ -14,7 +14,7 @@
         </div>
         <Row style="margin-top: 20px;">
             <Card shadow>
-                <factors-chart style="height: 700px;" :value="barData" :text="textTitle+'功率因数'" />
+                <factors-chart style="height: 500px;" :value="barData" text= '功率因数' />
             </Card>
         </Row>
     </div>

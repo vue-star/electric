@@ -47,6 +47,7 @@
                         },
                         xAxis: {
                             type: 'category',
+                            boundaryGap : false,
                             data: xAxisData
                         },
                         yAxis: {

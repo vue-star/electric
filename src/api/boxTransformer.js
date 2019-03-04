@@ -1,6 +1,6 @@
 import axios from '@/libs/api.request'
 // 获取箱变列表
-export const getBoxTransformerList = (data) => {
+export const getBoxTransformerList = (OrganizationUnitId,data) => {
     const MaxResultCount = data.maxResultCount
     const SkipCount = data.skipCount
     const Filter = data.filter
@@ -8,6 +8,7 @@ export const getBoxTransformerList = (data) => {
     return axios.request({
         url: 'services/app/BoxTransformer/GetPaged',
         params: {
+            OrganizationUnitId,
             MaxResultCount,
             SkipCount,
             Filter

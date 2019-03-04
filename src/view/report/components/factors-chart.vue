@@ -27,7 +27,7 @@
                         title: {
                             text: this.text,
                             subtext: this.subtext,
-                            x: 'center'
+                            x: 'left'
                         },
                         dataZoom: [{
                             type: 'inside',
@@ -35,6 +35,7 @@
                         }],
                         xAxis: {
                             type: 'category',
+                            boundaryGap : false,
                             data: xAxisData
                         },
                         yAxis: {

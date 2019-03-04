@@ -1221,6 +1221,9 @@
     } from '@/api/scada'
     export default {
         name: 'level_2_3',
+        props: {
+            eleData: Array
+        },
         data() {
             return {
                 UA: 0,
@@ -1246,7 +1249,36 @@
                 ElectricityMeterList: []
             }
         },
+        watch: {
+            eleData () {
+                this.init()
+            }
+        },
         methods: {
+            init(){
+                const data=this.eleData
+                data.forEach(element=>{
+                    if(element.electricityMeterInfoId===1){
+                        this.UA = isNaN(element.uabVoltage) ? '' : element.uabVoltage
+                        this.UB = isNaN(element.ubcVoltage) ? '' : element.ubcVoltage
+                        this.UC = isNaN(element.ucaVoltage) ? '' : element.ucaVoltage
+                        this.P = isNaN(element.totalActivePower / 1000) ? '' : element.totalActivePower / 1000
+                        this.IA = isNaN(element.aPhaseCurrent) ? '' : element.aPhaseCurrent
+                        this.IB = isNaN(element.bPhaseCurrent) ? '' : element.bPhaseCurrent
+                        this.IC = isNaN(element.cPhaseCurrent) ? '' : element.cPhaseCurrent
+                        this.COS = isNaN(element.totalPhasePowerFactor) ? '' : element.totalPhasePowerFactor
+                    }else if(element.electricityMeterInfoId===2){
+                        this.UA1 = isNaN(element.uabVoltage) ? '' : element.uabVoltage
+                        this.UB1 = isNaN(element.ubcVoltage) ? '' : element.ubcVoltage
+                        this.UC1 = isNaN(element.ucaVoltage) ? '' : element.ucaVoltage
+                        this.P1 = isNaN(element.totalActivePower / 1000) ? '' : element.totalActivePower / 1000
+                        this.IA1 = isNaN(element.aPhaseCurrent) ? '' : element.aPhaseCurrent
+                        this.IB1 = isNaN(element.bPhaseCurrent) ? '' : element.bPhaseCurrent
+                        this.IC1 = isNaN(element.cPhaseCurrent) ? '' : element.cPhaseCurrent
+                        this.COS1 = isNaN(element.totalPhasePowerFactor) ? '' : element.totalPhasePowerFactor
+                    }
+                })
+            },
             scadaInit() {
                 window.zoomTiger = svgPanZoom('#dongfang', {
                     zoomEnabled: true,
@@ -1308,19 +1340,10 @@
             }
         },
         mounted() {
-            this.getElectricityMeterInfo()
-            if (this.timer) {
-                clearInterval(this.timer)
-            } else {
-                this.timer = setInterval(() => {
-                    this.chengedData()
-                }, 60000)
-            }
+            this.init()
             this.scadaInit()
         },
-        beforeDestroy() {
-            clearInterval(this.timer)
-        }
+        
     }
 
 </script>

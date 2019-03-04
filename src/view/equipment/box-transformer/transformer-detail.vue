@@ -957,7 +957,7 @@
                 showAddOrEditTransformer: false,
                 showAddOrEditHighItems: false,
                 showAddOrEditLowItems: false,
-                selectData: [5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15],
+                selectData: [6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16],
                 deletteModelStatus: false, // 删除弹出框控制
                 delIndex: '', // 删除选项的index
                 delType: 0,

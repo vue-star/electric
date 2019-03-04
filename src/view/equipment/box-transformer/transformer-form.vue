@@ -51,6 +51,16 @@
                 </FormItem>
                 </Col>
                 <Col span="10" class='col-wrap'>
+                <FormItem label="组织" prop="organizationUnitId">
+                    <Select v-model="formValidate.organizationUnitId">
+                        <Option v-for="item in organizationUnitIdList" :value="item.id" :key="item.id">{{
+                            item.displayName }}</Option>
+                    </Select>
+                </FormItem>
+                </Col>
+            </Row>
+            <Row :gutter="24" class='row-wrap'>
+                <Col span="10" class='col-wrap'>
                 <FormItem label="备注" prop="reamrk">
                     <Input type="textarea" :rows="3" v-model="formValidate.remark" :maxlength=200 placeholder=""></Input>
                 </FormItem>
@@ -64,7 +74,7 @@
     </div>
 </template>
 <script>
-    import { getDataDicConfigList } from '@/api/data'
+    import { getDataDicConfigList,getOrganizationList } from '@/api/data'
     import { objEqual } from '@/libs/tools'
     import {
         addBoxTransformer,
@@ -137,12 +147,14 @@
                         name: '美式'
                     }
                 ],
-                boxTransformerManufacturerList: []
+                boxTransformerManufacturerList: [],
+                organizationUnitIdList: []
             }
         },
         mounted() {
             this.init()
             this.getDataDicConfigs(5)
+            this.getOrganizationUnits(1)
         },
         methods: {
             init() {
@@ -154,7 +166,29 @@
                             this.formValidate.boxTransformerManufacturer = element.id
                         }
                     })
+                    this.organizationUnitIdList.forEach(element => {
+                        if (objEqual(this.formValidate.organizationUnitName, element.displayName)) {
+                            this.formValidate.organizationUnitId = element.id
+                        }
+                    })
                 }
+            },
+            getOrganizationUnits(OrganizationUnitType) {
+                return new Promise((resolve, reject) => {
+                    getOrganizationList(OrganizationUnitType).then(
+                        res => {
+                            const data = res.data.result.items
+                            this.organizationUnitIdList = data
+                            this.init()
+                            resolve()
+                        },
+                        error => {
+                            this.$Message.error(error.error.message)
+                            resolve()
+                        }).catch(err => {
+                        reject(err)
+                    })
+                })
             },
             getDataDicConfigs(dictionaryType) {
                 return new Promise((resolve, reject) => {

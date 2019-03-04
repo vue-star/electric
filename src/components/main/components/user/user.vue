@@ -23,7 +23,7 @@ export default {
     },
     loginName: {
       type: String,
-      default: ''
+      default: '你好'
     }
   },
   methods: {

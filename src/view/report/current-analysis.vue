@@ -14,7 +14,7 @@
         </div>
         <Row style="margin-top: 20px;">
             <Card shadow>
-                <current-chart style="height: 700px;" :value="barData" :text="textTitle+'电流分析'" />
+                <current-chart style="height: 500px;" :value="barData" :text="textTitle+'电流分析'" />
             </Card>
         </Row>
     </div>

@@ -1,6 +1,6 @@
 import axios from '@/libs/api.request'
 // 获取配电室列表
-export const getPowerDistributionList = (data) => {
+export const getPowerDistributionList = (OrganizationUnitId,data) => {
     const MaxResultCount = data.maxResultCount
     const SkipCount = data.skipCount
     const Filter = data.filter
@@ -8,6 +8,7 @@ export const getPowerDistributionList = (data) => {
     return axios.request({
         url: 'services/app/PowerDistributionRoom/GetPaged',
         params: {
+            OrganizationUnitId,
             MaxResultCount,
             SkipCount,
             Filter

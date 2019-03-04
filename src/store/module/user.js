@@ -91,18 +91,23 @@ export default {
             return new Promise((resolve, reject) => {
                 try {
                     getUserInfo(state.userId).then(res => {
-                        const data = res.data
+                        const data = res.data.result.user
                         // commit('setAvator', data.avator)
                         commit('setAvator', 'https://o5wwk8baw.qnssl.com/bc7521e033abdd1e92222d733590f104/avatar')
-                        commit('setUserName', data.user_name)
-                        commit('setUserId', data.user_id)
+                        commit('setUserName', data.name)
+                        commit('setUserId', data.id)
                         commit('setAccess', data.access)
                         commit('setHasGetInfo', true)
                         resolve(data)
-                    }).catch(err => {
-                        reject(err)
+                    },error => {
+                        this.$Message.error(error.error.message)
+                        resolve()
+                    }).catch(error => {
+                        console.info('11111111111',error)
+                        reject(error)
                     })
                 } catch (error) {
+                    console.info('2222222222222222')
                     reject(error)
                 }
             })

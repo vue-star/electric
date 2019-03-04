@@ -40,6 +40,7 @@
                         },
                         xAxis: {
                             type: 'category',
+                            boundaryGap : false,
                             data: xAxisData
                         },
                         yAxis: {
@@ -57,16 +58,19 @@
                             {
                                 name: 'AB线电压',
                                 type: 'line',
+                                color: '#FF8C00',
                                 data: voltageAB
                             },
                             {
                                 name: 'BC线电压',
                                 type: 'line',
+                                color: '#76EE00',
                                 data: voltageBC
                             },
                             {
                                 name: 'CA线电压',
                                 type: 'line',
+                                color: 'red',
                                 data: voltageCA
                             }
                         ]

@@ -40,6 +40,7 @@
                         },
                         xAxis: {
                             type: 'category',
+                            boundaryGap : false,
                             data: xAxisData
                         },
                         yAxis: {
@@ -57,16 +58,19 @@
                             {
                                 name: 'A相电流',
                                 type: 'line',
+                                color: '#FF8C00',
                                 data: currentA
                             },
                             {
                                 name: 'B相电流',
                                 type: 'line',
+                                color: '#76EE00',
                                 data: currentB
                             },
                             {
                                 name: 'C相电流',
                                 type: 'line',
+                                color: 'red',
                                 data: currentC
                             }
                         ]
