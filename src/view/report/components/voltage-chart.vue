@@ -5,6 +5,7 @@
 <script>
     import echarts from 'echarts'
     import tdTheme from './theme.json'
+    import { on, off } from '@/libs/tools'
     echarts.registerTheme('tdTheme', tdTheme)
     export default {
         name: 'VoltageChart',
@@ -13,12 +14,20 @@
             text: String,
             subtext: String
         },
+        data () {
+            return {
+                dom: null
+            }
+        },
         watch: {
             value() {
                 this.loadLine()
             }
         },
         methods: {
+            resize () {
+                this.dom.resize()
+            },
             loadLine() {
                 this.$nextTick(() => {
                     let xAxisData = this.value.map(_ => _.creationTime)
@@ -75,13 +84,17 @@
                             }
                         ]
                     }
-                    let dom = echarts.init(this.$refs.dom, 'tdTheme')
-                    dom.setOption(option)
+                    this.dom = echarts.init(this.$refs.dom, 'tdTheme')
+                    this.dom.setOption(option)
+                    on(window, 'resize', this.resize)
                 })
             }
         },
         mounted() {
             this.loadLine()
+        },
+        beforeDestroy () {
+            off(window, 'resize', this.resize)
         }
     }
 

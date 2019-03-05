@@ -5,6 +5,7 @@
 <script>
     import echarts from 'echarts'
     import tdTheme from './theme.json'
+    import { on, off } from '@/libs/tools'
     echarts.registerTheme('tdTheme', tdTheme)
     export default {
         name: 'SurveyChart',
@@ -14,12 +15,20 @@
             text: String,
             subtext: String
         },
+        data () {
+            return {
+                dom: null
+            }
+        },
         watch: {
             xAxisData() {
                 this.echartsShow()
             }
         },
         methods: {
+            resize () {
+                this.dom.resize()
+            },
             echartsShow() {
                 let xAxisData = this.xAxisData
                 let seriesData = this.seriesData
@@ -69,7 +78,7 @@
                             data: xAxisData
                         },
                         yAxis: {
-                            name: '功率',
+                            //name: '功率',
                             type: 'value',
                             axisLabel: {
                                 formatter: function (value) {
@@ -100,14 +109,17 @@
                             }
                         }]
                     }
-                    let dom = echarts.init(this.$refs.dom, 'tdTheme')
-                    dom.setOption(option)
+                    this.dom = echarts.init(this.$refs.dom, 'tdTheme')
+                    this.dom.setOption(option)
+                    on(window, 'resize', this.resize)
                 })
             }
-
         },
         mounted() {
             this.echartsShow()
+        },
+        beforeDestroy () {
+            off(window, 'resize', this.resize)
         }
     }
 

@@ -72,8 +72,8 @@
                     getElectricityDropdownList(this.organizationUnitId).then(res => {
                         const data = res.data.result
                         this.electricityList = data
-                        this.electricityMeterInfoId = data[0].id
-                        this.textTitle = data[0].alias
+                        this.electricityMeterInfoId = data.length===0 ? 0 : data[0].id
+                        this.textTitle =  data.length===0 ? '' : data[0].alias
                         this.getCapacityData()
                         resolve()
                     }).catch(err => {

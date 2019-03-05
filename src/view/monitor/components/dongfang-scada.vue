@@ -1215,12 +1215,8 @@
     </div>
 </template>
 <script>
-    import {
-        getHistoryData,
-        getElectricityMeter
-    } from '@/api/scada'
     export default {
-        name: 'level_2_3',
+        name: 'dongfangScada',
         props: {
             eleData: Array
         },
@@ -1286,56 +1282,6 @@
                     fit: true,
                     center: true
                     // viewportSelector: document.getElementById('dongfang').querySelector('#g4') // this option will make library to misbehave. Viewport should have no transform attribute
-                })
-            },
-            chengedData() {
-                if (this.ElectricityMeterList.length > 0) {
-                    this.ElectricityMeterList.forEach(element => {
-                        this.getHistoryData(element.id, element.equipmentNumber)
-                    })
-                }
-            },
-            getElectricityMeterInfo() {
-                return new Promise((resolve, reject) => {
-                    getElectricityMeter(this.customerId).then(res => {
-                        const data = res.data.result.items
-                        this.ElectricityMeterList = data
-                        this.chengedData()
-                        resolve()
-                    }).catch(err => {
-                        reject(err)
-                    })
-                })
-            },
-            getHistoryData(ElectricityMeterInfoId, ElectricityMeterNumber) {
-                return new Promise((resolve, reject) => {
-                    getHistoryData(ElectricityMeterInfoId, this.MaxResultCount).then(res => {
-                        const data = res.data.result.items
-                        if (ElectricityMeterNumber === 'no.001') {
-                            this.UA = isNaN(data[0].uabVoltage) ? '' : data[0].uabVoltage
-                            this.UB = isNaN(data[0].ubcVoltage) ? '' : data[0].ubcVoltage
-                            this.UC = isNaN(data[0].ucaVoltage) ? '' : data[0].ucaVoltage
-                            this.P = isNaN(data[0].totalActivePower / 1000) ? '' : data[0].totalActivePower /
-                                1000
-                            this.IA = isNaN(data[0].aPhaseCurrent) ? '' : data[0].aPhaseCurrent
-                            this.IB = isNaN(data[0].bPhaseCurrent) ? '' : data[0].bPhaseCurrent
-                            this.IC = isNaN(data[0].cPhaseCurrent) ? '' : data[0].cPhaseCurrent
-                            this.COS = isNaN(data[0].totalPhasePowerFactor) ? '' : data[0].totalPhasePowerFactor
-                        } else {
-                            this.UA1 = isNaN(data[0].uabVoltage) ? '' : data[0].uabVoltage
-                            this.UB1 = isNaN(data[0].ubcVoltage) ? '' : data[0].ubcVoltage
-                            this.UC1 = isNaN(data[0].ucaVoltage) ? '' : data[0].ucaVoltage
-                            this.P1 = isNaN(data[0].totalActivePower / 1000) ? '' : data[0].totalActivePower /
-                                1000
-                            this.IA1 = isNaN(data[0].aPhaseCurrent) ? '' : data[0].aPhaseCurrent
-                            this.IB1 = isNaN(data[0].bPhaseCurrent) ? '' : data[0].bPhaseCurrent
-                            this.IC1 = isNaN(data[0].cPhaseCurrent) ? '' : data[0].cPhaseCurrent
-                            this.COS1 = isNaN(data[0].totalPhasePowerFactor) ? '' : data[0].totalPhasePowerFactor
-                        }
-                        resolve()
-                    }).catch(err => {
-                        reject(err)
-                    })
                 })
             }
         },

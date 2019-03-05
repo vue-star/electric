@@ -5,6 +5,7 @@
 <script>
     import echarts from 'echarts'
     import tdTheme from './theme.json'
+    import { on, off } from '@/libs/tools'
     echarts.registerTheme('tdTheme', tdTheme)
     export default {
         name: 'StatisticsBar',
@@ -13,16 +14,24 @@
             text: String,
             subtext: String
         },
+        data () {
+            return {
+                dom: null
+            }
+        },
         watch: {
             value() {
                 this.echartsData()
             }
         },
         methods:{
+            resize () {
+                this.dom.resize()
+            },
             echartsData(){
                 this.$nextTick(() => {
                     let keysData = Object.values(this.value)
-                    let xAxisData = keysData[0].map(_ => _.belongs)
+                    let xAxisData = keysData.length===0 ? [] : keysData[0].map(_ => _.belongs)
                     let legendData = Object.keys(this.value)
                     let seriesData = []
                     legendData.forEach((element,index)=>{
@@ -62,13 +71,17 @@
                         },
                         series: seriesData
                     }
-                    let dom = echarts.init(this.$refs.dom, 'tdTheme')
-                    dom.setOption(option)
+                    this.dom = echarts.init(this.$refs.dom, 'tdTheme')
+                    this.dom.setOption(option)
+                    on(window, 'resize', this.resize)
                 })
             }
         },
         mounted() {
-            
+            // this.echartsData()
+        },
+        beforeDestroy () {
+            off(window, 'resize', this.resize)
         }
     }
 

@@ -64,7 +64,7 @@
         },
         data() {
             return {
-                dateTime: [addDate(new Date(), -7), addDate(new Date(), 0)],
+                dateTime: [addDate(new Date(), -1), addDate(new Date(), 0)],
                 showList: true,
 
                 inforCardData: [{
@@ -102,7 +102,7 @@
                 electricityData: {},
                 dayTitle: 0,
                 monthTitle: 0,
-                yearTitle: 0,
+                yearTitle: '',
                 electricityTitle: 0,
             }
         },
@@ -206,6 +206,7 @@
 
     .infor-div {
         width: 23%;
+        min-width: 250px;
         height: 150px;
         padding-bottom: 10px;
         padding-left: 10px;
@@ -213,6 +214,7 @@
     }
     .power-div {
         width: 30%;
+        min-width: 250px;
         height: 240px;
         padding-left: 10px;
         margin: 20px;

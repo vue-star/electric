@@ -18,13 +18,8 @@
     import yasuCom1 from './yasu-com1.vue'
     import yasuCom2 from './yasu-com2.vue'
     import yasuCom3 from './yasu-com3.vue'
-    import {
-        getCustomerList,
-        addCustomer,
-        delCustomer,
-        updataCustomer
-    } from '@/api/scada'
     export default {
+        name:'yasuScada',
         components: {
             yasuCom1,
             yasuCom2,

@@ -831,12 +831,8 @@
     </div>
 </template>
 <script>
-    import {
-        getHistoryData,
-        getElectricityMeter
-    } from '@/api/scada'
     export default {
-        name: 'level_2_3',
+        name: 'yasuCom3',
         data() {
             return {
                 UA: 0,

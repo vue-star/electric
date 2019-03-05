@@ -5,6 +5,7 @@
 <script>
     import echarts from 'echarts'
     import tdTheme from './theme.json'
+    import { on, off } from '@/libs/tools'
     echarts.registerTheme('tdTheme', tdTheme)
     export default {
         name: 'TrendChart',
@@ -14,13 +15,20 @@
             text: String,
             subtext: String
         },
+        data () {
+            return {
+                dom: null
+            }
+        },
         watch: {
             xAxisData() {
                 this.echartsShow()
             }
-
         },
         methods: {
+            resize () {
+                this.dom.resize()
+            },
             echartsShow() {
                 this.$nextTick(() => {
                     let xAxisData = this.xAxisData
@@ -64,7 +72,7 @@
                             }
                         },
                         xAxis: {
-                            name: '时间',
+                            //name: '时间',
                             type: 'category',
                             data: xAxisData
                         },
@@ -88,14 +96,18 @@
                             type: 'bar'
                         }]
                     }
-                    let dom = echarts.init(this.$refs.dom, 'tdTheme')
-                    dom.setOption(option)
+                    this.dom = echarts.init(this.$refs.dom, 'tdTheme')
+                    this.dom.setOption(option)
+                    on(window, 'resize', this.resize)
                 })
             }
 
         },
         mounted() {
             this.echartsShow()
+        },
+        beforeDestroy () {
+            off(window, 'resize', this.resize)
         }
     }
 
