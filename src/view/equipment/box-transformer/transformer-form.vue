@@ -53,7 +53,7 @@
                 <Col span="10" class='col-wrap'>
                 <FormItem label="组织" prop="organizationUnitId">
                     <Select v-model="formValidate.organizationUnitId">
-                        <Option v-for="item in organizationUnitIdList" :value="item.id" :key="item.id">{{
+                        <Option v-for="item in organizationUnitIdList" :value="item.displayName" :key="item.id">{{
                             item.displayName }}</Option>
                     </Select>
                 </FormItem>
@@ -136,7 +136,12 @@
                     boxTransformerCapacity: [{
                         validator: validateNumber,
                         trigger: 'change'
-                    }]
+                    }],
+                    organizationUnitId: [{
+                        required: true,
+                        message: '请选择组织名称',
+                        trigger: 'change'
+                    }],
                 },
                 boxData: [{
                         value: 1,

@@ -7,44 +7,42 @@
                 </Select>
             </div>
         </div>
-        <Row :gutter="20">
-            <i-col :xs="2" :md="4" :lg="12" style="padding:0px">
+        <Row :gutter="20" style="margin-right:0px">
+            <i-col :xs="24" :md="18" :lg="12" style="padding:0px">
                 <div class="card-area">
                     <!-- <div class="top-style"></div> -->
                     <div class="top-area">
                         <Icon type="md-trending-up" size="20" style="float:left" color="#436EEE" />
                         <p>日环比</p>
                     </div>
-                        <i-col :xs="12" :md="8" :lg="4" v-for="(navi, i) in naviCardData" :key="`navi-${i}`" class="navi-div">
-                            <navi-card shadow :color="navi.color" :title="navi.title" :icon="navi.icon" :icon-size="14">
-                                <Icon v-if="i==2 && navi.count<100" class="count-style-navi" type="md-arrow-round-down"
-                                    color="#9A66E4" size="30" />
-                                <Icon v-if="i==2 && navi.count>=100" class="count-style-navi" type="md-arrow-round-up"
-                                    color="red" size="30" />
-                                <p v-if="i!=2" :style="{color:navi.color}" class="count-style-navi">{{navi.count+'kwh'}}</p>
-                                <p v-else :style="{color:navi.color}" class="count-style-navi">{{navi.count}}</p>
-                            </navi-card>
-                        </i-col>
+                    <div :xs="12" :md="8" :lg="4" v-for="(navi, i) in naviCardData" :key="`navi-${i}`" class="navi-div">
+                        <navi-card shadow :color="navi.color" :title="navi.title" :icon="navi.icon" :icon-size="14">
+                            <Icon v-if="i==2 && navi.count<100" class="count-style-navi" style="margin-top:20px" type="md-arrow-round-down"
+                                color="#9A66E4" size="30" />
+                            <Icon v-if="i==2 && navi.count>=100" class="count-style-navi" style="margin-top:20px" type="md-arrow-round-up"
+                                color="red" size="30" />
+                            <p :style="{color:navi.color}" class="count-style-navi">{{navi.count}}</p>
+                        </navi-card>
+                    </div>
                 </div>
             </i-col>
 
-            <i-col :xs="2" :md="4" :lg="12" style="padding-left:12px;padding-right:0px">
+            <i-col :xs="24" :md="18" :lg="12" style="padding-left:12px;padding-right:0px">
                 <div class="card-area">
                     <!-- <div class="top-style"></div> -->
                     <div class="top-area">
                         <Icon type="md-trending-up" size="20" style="float:left" color="#436EEE" />
                         <p>月环比</p>
                     </div>
-                        <i-col :xs="12" :md="8" :lg="4" v-for="(navi, i) in naviCardData1" :key="`navi-${i}`" class="navi-div">
-                            <navi-card shadow :color="navi.color" :title="navi.title" :icon="navi.icon" :icon-size="14">
-                                <Icon v-if="i==2 && navi.count<100" class="count-style-navi" type="md-arrow-round-down"
-                                    color="#9A66E4" size="30" />
-                                <Icon v-if="i==2 && navi.count>=100" class="count-style-navi" type="md-arrow-round-up"
-                                    color="red" size="30" />
-                                <p v-if="i!=2" :style="{color:navi.color}" class="count-style-navi">{{navi.count+'kwh'}}</p>
-                                <p v-else :style="{color:navi.color}" class="count-style-navi">{{navi.count}}</p>
-                            </navi-card>
-                        </i-col>
+                    <div :xs="12" :md="8" :lg="4" v-for="(navi, i) in naviCardData1" :key="`navi-${i}`" class="navi-div">
+                        <navi-card shadow :color="navi.color" :title="navi.title" :icon="navi.icon" :icon-size="14">
+                            <Icon v-if="i==2 && navi.count<100" class="count-style-navi" style="margin-top:20px" type="md-arrow-round-down"
+                                color="#9A66E4" size="30" />
+                            <Icon v-if="i==2 && navi.count>=100" class="count-style-navi" style="margin-top:20px" type="md-arrow-round-up"
+                                color="red" size="30" />
+                            <p :style="{color:navi.color}" class="count-style-navi">{{navi.count}}</p>
+                        </navi-card>
+                    </div>
                 </div>
             </i-col>
         </Row>
@@ -56,26 +54,32 @@
                     <p>日负荷曲线</p>
                 </div>
                 <i-col span="24">
-                    <Card shadow style="float:right;width: 90%;">
-                        <survey-chart style="height: 350px" :xAxisData="xAxisData" :seriesData="seriesData" :text="lineText" />
+                    <Card shadow class="load-card">
+                        <survey-chart style="height: 340px;" :xAxisData="xAxisData" :seriesData="seriesData" :text="lineText" />
                     </Card>
-                    <div class="btn-div1"><Button class='operate-navi' type="primary">
-                            <p style="fontSize:32px" @click="hourClick()">8</p>
+                    <div class="card-div">
+                        <card class='operate-navi' style="background:#2d8cf0;" type="primary">
+                            <count-to :end="8" count-class="count-style" />
                             <p>最大值</p>
-                        </Button></div>
-                    <div class="btn-div1"><Button class='operate-navi' type="primary">
-                            <p style="fontSize:32px" @click="dayClick()">3</p>
-                            <p>最小值</p>
-                        </Button></div>
-                    <div class="btn-div1"><Button class='operate-navi' type="primary">
-                            <p style="fontSize:32px" @click="monthClick()">4</p>
-                            <p>平均值</p>
-                        </Button>
+                        </card>
                     </div>
-                    <div class="btn-div1"><Button class='operate-navi' type="primary">
-                            <p style="fontSize:32px" @click="monthClick()">10</p>
-                            <p>当前值</p>
-                        </Button>
+                    <div class="card-div">
+                        <card class='operate-navi' style="background:#2d8cf0;" type="primary">
+                            <count-to :end="8" count-class="count-style" />
+                            <p>最大值</p>
+                        </card>
+                    </div>
+                    <div class="card-div">
+                        <card class='operate-navi' style="background:#2d8cf0;" type="primary">
+                            <count-to :end="8" count-class="count-style" />
+                            <p>最大值</p>
+                        </card>
+                    </div>
+                    <div class="card-div">
+                        <card class='operate-navi' style="background:#2d8cf0;" type="primary">
+                            <count-to :end="8" count-class="count-style" />
+                            <p>最大值</p>
+                        </card>
                     </div>
                 </i-col>
             </div>
@@ -88,20 +92,23 @@
                     <p>用电趋势</p>
                 </div>
                 <i-col span="24">
-                    <Card shadow style="float:right;width: 90%;">
-                        <trend-chart style="height: 350px" :xAxisData="statisticXData" :seriesData="statisticSData"
+                    <Card shadow class="trend-card" style="">
+                        <trend-chart style="height: 315px;margin-right:10px" :xAxisData="statisticXData" :seriesData="statisticSData"
                             :text="lineText" />
                     </Card>
-                    <div class="btn-div"><Button class='operate-navi' type="primary">
-                            <p style="fontSize:32px" @click="hourClick()">48</p>
+                    <div class="btn-div">
+                        <Button class='operate-navi' type="primary">
+                            <p style="fontSize:35px" @click="hourClick()">48</p>
                             <p>过去48时</p>
                         </Button></div>
-                    <div class="btn-div"><Button class='operate-navi' type="primary">
-                            <p style="fontSize:32px" @click="dayClick()">31</p>
+                    <div class="btn-div">
+                        <Button class='operate-navi' type="primary">
+                            <p style="fontSize:35px" @click="dayClick()">31</p>
                             <p>过去31天</p>
                         </Button></div>
-                    <div class="btn-div"><Button class='operate-navi' type="primary">
-                            <p style="fontSize:32px" @click="monthClick()">12</p>
+                    <div class="btn-div">
+                        <Button class='operate-navi' type="primary">
+                            <p style="fontSize:35px" @click="monthClick()">12</p>
                             <p>过去12月</p>
                         </Button>
                     </div>
@@ -120,6 +127,7 @@
         formatData
     } from '@/libs/tools'
     import Map from './components/Map.vue'
+    import CountTo from '_c/count-to'
     import SurveyChart from './components/survey-chart.vue'
     import TrendChart from './components/trend-chart.vue'
     import {
@@ -133,7 +141,8 @@
         components: {
             NaviCard,
             SurveyChart,
-            TrendChart
+            TrendChart,
+            CountTo
         },
         data() {
             return {
@@ -142,13 +151,13 @@
                 showList: true,
                 lineText: '',
                 naviCardData: [{
-                        title: '当日用电',
+                        title: '当日用电(kwh)',
                         icon: 'md-pulse',
                         count: 0.0,
                         color: '#2d8cf0'
                     },
                     {
-                        title: '昨日同期',
+                        title: '昨日同期(kwh)',
                         icon: 'md-pulse',
                         count: 0.0,
                         color: '#19be6b'
@@ -161,13 +170,13 @@
                     }
                 ],
                 naviCardData1: [{
-                        title: '当月用电',
+                        title: '当月用电(kwh)',
                         icon: 'md-pulse',
                         count: 0.0,
                         color: '#ed3f14'
                     },
                     {
-                        title: '上月同期',
+                        title: '上月同期(kwh)',
                         icon: 'md-pulse',
                         count: 0.0,
                         color: '#E46CBB'
@@ -324,7 +333,7 @@
         font-size: 25px;
         float: right;
         margin-top: 15px;
-        margin-right: 10px
+        margin-right: 10px;
     }
 
     .navi-div {
@@ -332,31 +341,35 @@
         min-width: 150px;
         height: 125px;
         padding-bottom: 10px;
-        padding-left: 18px;
+        float: left;
         margin: 10px;
     }
 
     .btn-div {
-        width: 8%;
-        margin: 1%;
+        width: 100px;
+        height: 100px;
+        margin: 12px;
         float: left;
     }
 
-    .btn-div1 {
-        width: 5%;
-        height: 10%;
-        margin: 1%;
-        float: left;
+    .card-div {
+        width: 80px;
+        height: 80px;
+        float: right;
+        color: white;
+        margin-top: 12px;
+        margin-right: 10px;
+        text-align: center
     }
 
     .card-area {
         float: left;
-        width: 100%;
+        width: 98.5%;
         min-width: 250px;
         background-color: #F2F2F2;
         margin-top: 5px;
-        // margin-left: 10px;
-        border: 1px solid;
+        margin-left: 10px;
+        //border: 1px solid;
 
         .ivu-card-body {
             padding: 0px;
@@ -373,6 +386,23 @@
             height: 5px;
             background-color: darkcyan;
         }
+    }
+
+    .count-style {
+        font-size: 25px;
+        color: aliceblue
+    }
+
+    .load-card {
+        float: left;
+        width: 90%;
+        margin-top: 12px;
+    }
+
+    .trend-card {
+        float: right;
+        width: 88%;
+        margin-top: 12px;
     }
 
 </style>

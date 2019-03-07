@@ -34,7 +34,7 @@
         </Row>
         <Row style="margin-top: 20px;">
             <Card shadow>
-                <user-chart style="height: 300px;" :value="electricityData" text="电表统计图" />
+                <user-chart style="height: 300px;" :value="electricityData" text="检测点电量趋势" />
             </Card>
         </Row>
     </div>
