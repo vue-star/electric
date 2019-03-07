@@ -337,7 +337,7 @@
     }
 
     .navi-div {
-        width: 30%;
+        width: 29%;
         min-width: 150px;
         height: 125px;
         padding-bottom: 10px;
@@ -355,10 +355,10 @@
     .card-div {
         width: 80px;
         height: 80px;
-        float: right;
+        float: left;
         color: white;
         margin-top: 12px;
-        margin-right: 10px;
+        margin-left: 20px;
         text-align: center
     }
 

@@ -103,11 +103,9 @@ export default {
                         this.$Message.error(error.error.message)
                         resolve()
                     }).catch(error => {
-                        console.info('11111111111',error)
                         reject(error)
                     })
                 } catch (error) {
-                    console.info('2222222222222222')
                     reject(error)
                 }
             })
