@@ -72,7 +72,7 @@
                         series: seriesData
                     }
                     this.dom = echarts.init(this.$refs.dom, 'tdTheme')
-                    this.dom.setOption(option)
+                    this.dom.setOption(option, true)
                     on(window, 'resize', this.resize)
                 })
             }
