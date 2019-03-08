@@ -20,22 +20,18 @@
                 style: {
                     width: '100%',
                     height: this.om.height + 'px'
-                },
-                data_info: [{
-                        'point1': 120.427232,
-                        'point2': 27.514563,
-                        'address': '客户：王某某<br/>地址：浙江省温州市苍南县灵溪苍南县新城农贸综合市场(东方魅力) <br/>总设备：500'
-                    },
-                    {
-                        'point1': 120.459325,
-                        'point2': 27.531903,
-                        'address': '客户：张某某<br/>地址：浙江省温州市苍南县灵溪镇山海大道288号(亚塑) <br/>总设备：500'
-                    }
-                ]
+                }
             }
         },
-
-        props: ['om'], // 通过props属性，将从父级得到的数据传给子级
+        props: {
+            om: Object,
+            customerData: Array,
+        },
+        watch: {
+            customerData() {
+                this.feathData()
+            }
+        },
         mounted() {
             this.feathData()
         },
@@ -63,17 +59,28 @@
                     title: '详细信息', // 信息窗口标题
                     enableMessage: true // 设置允许信息窗发送短息
                 }
-                for (var i = 0; i < _this.data_info.length; i++) {
-                    var marker = new BMap.Marker(new BMap.Point(_this.data_info[i].point1, _this.data_info[i].point2)) // 创建标注
-                    var content = _this.data_info[i].address
+                var localSearch = new BMap.LocalSearch(map)
+                localSearch.enableAutoViewport();
+                map.clearOverlays()
+
+                var n=0
+                localSearch.setSearchCompleteCallback(function (searchResult) {
+                    var poi = searchResult.getPoi(0)
+                    map.centerAndZoom(poi.point, 13)
+                    var marker = new BMap.Marker(new BMap.Point(poi.point.lng, poi.point.lat)) // 创建标注，为要查询的地方对应的经纬度
+                    var content = '公司名称：' + _this.customerData[n].companyName + '<br/>法人：' + _this.customerData[n].contactPerson + '<br/>地址：' + _this.customerData[n].address
                     map.addOverlay(marker) // 将标注添加到地图中
                     addClickHandler(content, marker)
+                    n++
+                });
+
+                for (var i = 0; i < _this.customerData.length; i++) {
+                    localSearch.search(_this.customerData[i].address)
                 }
 
                 function addClickHandler(content, marker) {
                     marker.addEventListener('mouseover', function (e) {
                         openInfo(content, e)
-                        changeSize()
                     })
                 }
 
@@ -83,7 +90,6 @@
                     var infoWindow = new BMap.InfoWindow(content, opts) // 创建信息窗口对象
                     map.openInfoWindow(infoWindow, point) // 开启信息窗口
                 }
-                // map.centerAndZoom("温州", 12) // 初始化地图,设置中心点坐标和地图级别
                 // 添加地图类型控件
                 map.addControl(new BMap.MapTypeControl({
                     mapTypes: [
@@ -91,7 +97,6 @@
                         BMAP_HYBRID_MAP
                     ]
                 }))
-                // map.setCurrentCity("苏州") // 设置地图显示的城市 此项是必须设置的
                 map.enableScrollWheelZoom(true) // 开启鼠标滚轮缩放
             }
         }
