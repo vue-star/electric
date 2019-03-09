@@ -64,7 +64,7 @@
                                     htmlStr += '<span style="margin-right:5px;display:inline-block;width:10px;height:10px;border-radius:5px;background-color:' + color + ';"></span>'
 
                                     // 圆点后面显示的文本
-                                    htmlStr += seriesName + '：' + value + '%'
+                                    htmlStr += seriesName + '：' + value + 'kwh'
 
                                     htmlStr += '</div>'
                                 }
@@ -88,7 +88,7 @@
                         },
                         series: [{
                             data: seriesData,
-                            name: '趋势',
+                            name: '用电量',
                             stack: '总量',
                             areaStyle: { normal: {
                                 color: '#2d8cf0'

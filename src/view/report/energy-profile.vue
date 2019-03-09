@@ -2,7 +2,7 @@
     <div>
         <div v-show='showList' class='query-wrap'>
             <div class="operate-wrap" style="margin-left: 20px">时间选择：
-                <DatePicker class='operate' type="daterange" :value="dateTime" placeholder="请选择时间" @on-change='dateChange'
+                <DatePicker class='operate' type="date" :value="dateTime" placeholder="请选择时间" @on-change='dateChange'
                     style="width: 200px">
                 </DatePicker>
             </div>
@@ -34,7 +34,7 @@
         </Row>
         <Row style="margin-top: 20px;">
             <Card shadow>
-                <user-chart style="height: 300px;" :value="electricityData" text="检测点电量趋势" />
+                <user-chart style="height: 300px;" :value="electricityData" :date-time="dateTime" text="配变日用电量趋势" />
             </Card>
         </Row>
     </div>
@@ -64,7 +64,7 @@
         },
         data() {
             return {
-                dateTime: [addDate(new Date(), -1), addDate(new Date(), 0)],
+                dateTime: addDate(new Date(),0) ,
                 showList: true,
 
                 inforCardData: [{
@@ -82,14 +82,14 @@
                         color: '#fff'
                     },
                     {
-                        title: '运行容量',
+                        title: '运行总容量(KVA)',
                         icon: 'md-calculator',
                         count: '1000KVA',
                         iconColor: '#2d8cf0',
                         color: '#fff'
                     },
                     {
-                        title: '计量点数',
+                        title: '采集点数',
                         icon: 'md-eye-off',
                         count: '30',
                         iconColor: '#2d8cf0',
@@ -155,7 +155,7 @@
             },
             getElectricityData() {
                 return new Promise((resolve, reject) => {
-                    getElectricitySummary(this.organizationUnitId,this.dateTime[0],this.dateTime[1]).then(res => {
+                    getElectricitySummary(this.organizationUnitId,this.dateTime,this.dateTime).then(res => {
                         const data = res.data.result
                         this.electricityData=data
                         resolve()

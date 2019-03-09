@@ -5,7 +5,7 @@
 <script>
     import echarts from 'echarts'
     import tdTheme from './theme.json'
-    import { on, off } from '@/libs/tools'
+    import { on, off, addDate } from '@/libs/tools'
     echarts.registerTheme('tdTheme', tdTheme)
     export default {
         name: 'SurveyChart',
@@ -14,9 +14,7 @@
             seriesData: Array,
             text: String,
             subtext: String,
-            max: String,
-            min: String,
-            average: String,
+            average: String
         },
         data () {
             return {
@@ -60,7 +58,7 @@
                                     var color = param.color// 图例颜色
 
                                     if (i === 0) {
-                                    htmlStr += xName + '点<br/>'// x轴的名称
+                                    htmlStr += addDate(new Date(),0) + ' ' + xName + ':00<br/>'// x轴的名称
                                     }
                                     htmlStr += '<div>'
                                     // 为了保证和原来的效果一样，这里自己实现了一个点的效果
@@ -75,7 +73,6 @@
                             }
                         },
                         xAxis: {
-                            name: '时辰',
                             boundaryGap: false,
                             type: 'category',
                             data: xAxisData

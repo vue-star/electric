@@ -55,7 +55,7 @@
                 </div>
                 <i-col span="24">
                     <Card shadow class="load-card">
-                        <survey-chart style="height: 340px;" :xAxisData="xAxisData" :seriesData="seriesData" :max="max" :min="min" :average="average" :text="lineText" />
+                        <survey-chart style="height: 340px;" :xAxisData="xAxisData" :seriesData="seriesData" :average="average" :text="lineText" />
                     </Card>
                     <div class="card-div">
                         <card class='operate-navi' type="primary">
@@ -276,7 +276,7 @@
 
                         this.max = capacity.length===0 ? 0 : Math.max.apply(null,capacity).toFixed(2)
                         this.min = capacity.length===0 ? 0 : Math.min.apply(null,capacity).toFixed(2)
-                        this.average = capacity.length===0 ? 0 : this.getAverage(capacity).toFixed(2)
+                        this.average = capacity.length===0 ? '0' : this.getAverage(capacity).toFixed(2)
                         resolve()
                     }).catch(err => {
                         reject(err)

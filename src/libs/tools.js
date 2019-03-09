@@ -115,6 +115,7 @@ export const formatData = (timeStamp, startType) => {
     if (startType === 'min') resStr = year + '-' + month + '-' + date + ' ' + hours + ':' + minutes + '分'
     else if (startType === 'hour') resStr = year + '-' + month + '-' + date + ' ' + hours + '时'
     else if (startType === 'day') resStr = year + '-' + month + '-' + date
+    else if (startType === 'onlyHour') resStr = hours + ':' + minutes + '分'
     else resStr = year + '年' + month + '月'
     return resStr
 }
