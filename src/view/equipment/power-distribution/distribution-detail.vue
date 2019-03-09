@@ -9,7 +9,7 @@
         <div class="list">
             <Row>
                 <Col span="21" offset="1" v-if="powerDistributionRoomId">
-                <Button type="primary" @click='addHighDataClick' style="margin: 0 0 20px 8px">新增高压信息</Button>
+                <Button type="primary" @click='addHighDataClick' style="margin: 0 0 20px 8px">新增高压设备信息</Button>
                 </Col>
             </Row>
             <Row>
@@ -29,7 +29,7 @@
         <div class="list">
             <Row>
                 <Col span="21" offset="1" v-if="powerDistributionRoomId">
-                <Button type="primary" @click='addLowDataClick' style="margin: 0 0 20px 8px">新增低压信息</Button>
+                <Button type="primary" @click='addLowDataClick' style="margin: 0 0 20px 8px">新增低压设备信息</Button>
                 </Col>
             </Row>
             <Row>
@@ -95,6 +95,12 @@
                                 :label-width="100">
                                 <Row :gutter="24" class='row-wrap'>
                                     <Col span="10" class='col-wrap'>
+                                    <FormItem label="产品型号" prop="loadSwitchType">
+                                        <Input v-model="formLoadSwitchValidate.loadSwitchType" :maxlength=20
+                                            placeholder="请输入产品型号"></Input>
+                                    </FormItem>
+                                    </Col>
+                                    <Col span="10" class='col-wrap'>
                                     <FormItem label="生产厂商" prop="loadSwitchManufacturer">
                                         <Select v-model="formLoadSwitchValidate.loadSwitchManufacturer">
                                             <Option v-for="item in manufacturerLoadSwitchList" :value="item.name" :key="item.id">{{
@@ -102,20 +108,14 @@
                                         </Select>
                                     </FormItem>
                                     </Col>
-                                    <Col span="10" class='col-wrap'>
+                                </Row>
+                                <Row :gutter="24" class='row-wrap'>
+                                   <Col span="10" class='col-wrap'>
                                     <FormItem label="生产编号" prop="loadSwitchProductionCode">
                                         <Input v-model="formLoadSwitchValidate.loadSwitchProductionCode" :maxlength=20
                                             placeholder="请输入生产编号"></Input>
                                     </FormItem>
-                                    </Col>
-                                </Row>
-                                <Row :gutter="24" class='row-wrap'>
-                                    <Col span="10" class='col-wrap'>
-                                    <FormItem label="产品型号" prop="loadSwitchType">
-                                        <Input v-model="formLoadSwitchValidate.loadSwitchType" :maxlength=20
-                                            placeholder="请输入产品型号"></Input>
-                                    </FormItem>
-                                    </Col>
+                                    </Col>  
                                 </Row>
                             </Form>
                         </div>
@@ -126,6 +126,12 @@
                                 :label-width="100">
                                 <Row :gutter="24" class='row-wrap'>
                                     <Col span="10" class='col-wrap'>
+                                    <FormItem label="产品型号" prop="currentTransformerType">
+                                        <Input v-model="formCurrentTransValidate.currentTransformerType" :maxlength=20
+                                            placeholder="请输入产品型号"></Input>
+                                    </FormItem>
+                                    </Col>
+                                    <Col span="10" class='col-wrap'>
                                     <FormItem label="生产厂商" prop="currentTransformerManufacturer">
                                         <Select v-model="formCurrentTransValidate.currentTransformerManufacturer">
                                             <Option v-for="item in manufacturerCurrentTransList" :value="item.name"
@@ -133,20 +139,14 @@
                                         </Select>
                                     </FormItem>
                                     </Col>
-                                    <Col span="10" class='col-wrap'>
+                                </Row>
+                                <Row :gutter="24" class='row-wrap'>
+                                   <Col span="10" class='col-wrap'>
                                     <FormItem label="生产编号" prop="currentTransformerProductionCode">
                                         <Input v-model="formCurrentTransValidate.currentTransformerProductionCode"
                                             :maxlength=20 placeholder="请输入生产编号"></Input>
                                     </FormItem>
-                                    </Col>
-                                </Row>
-                                <Row :gutter="24" class='row-wrap'>
-                                    <Col span="10" class='col-wrap'>
-                                    <FormItem label="产品型号" prop="currentTransformerType">
-                                        <Input v-model="formCurrentTransValidate.currentTransformerType" :maxlength=20
-                                            placeholder="请输入产品型号"></Input>
-                                    </FormItem>
-                                    </Col>
+                                    </Col>  
                                 </Row>
                             </Form>
                         </div>
@@ -157,17 +157,17 @@
                                 :label-width="100">
                                 <Row :gutter="24" class='row-wrap'>
                                     <Col span="10" class='col-wrap'>
+                                    <FormItem label="产品型号" prop="voltageTransformerType">
+                                        <Input v-model="formVoltageTransValidate.voltageTransformerType" :maxlength=20
+                                            placeholder="请输入产品型号"></Input>
+                                    </FormItem>
+                                    </Col>
+                                    <Col span="10" class='col-wrap'>
                                     <FormItem label="生产厂商" prop="voltageTransformerManufacturer">
                                         <Select v-model="formVoltageTransValidate.voltageTransformerManufacturer">
                                             <Option v-for="item in manufacturerVoltageTransList" :value="item.name"
                                                 :key="item.id">{{ item.name }}</Option>
                                         </Select>
-                                    </FormItem>
-                                    </Col>
-                                    <Col span="10" class='col-wrap'>
-                                    <FormItem label="产品型号" prop="voltageTransformerType">
-                                        <Input v-model="formVoltageTransValidate.voltageTransformerType" :maxlength=20
-                                            placeholder="请输入产品型号"></Input>
                                     </FormItem>
                                     </Col>
                                 </Row>
@@ -188,6 +188,12 @@
                                 :label-width="100">
                                 <Row :gutter="24" class='row-wrap'>
                                     <Col span="10" class='col-wrap'>
+                                    <FormItem label="产品型号" prop="highVoltageFuseType">
+                                        <Input v-model="formHighVoltageFuseValidate.highVoltageFuseType" :maxlength=20
+                                            placeholder="请输入产品型号"></Input>
+                                    </FormItem>
+                                    </Col>
+                                    <Col span="10" class='col-wrap'>
                                     <FormItem label="生产厂商" prop="highVoltageFuseManufacturer">
                                         <Select v-model="formHighVoltageFuseValidate.highVoltageFuseManufacturer">
                                             <Option v-for="item in manufacturerHighVoltageFuseList" :value="item.name"
@@ -195,36 +201,30 @@
                                         </Select>
                                     </FormItem>
                                     </Col>
-                                    <Col span="10" class='col-wrap'>
-                                    <FormItem label="产品型号" prop="highVoltageFuseType">
-                                        <Input v-model="formHighVoltageFuseValidate.highVoltageFuseType" :maxlength=20
-                                            placeholder="请输入产品型号"></Input>
-                                    </FormItem>
-                                    </Col>
                                 </Row>
                             </Form>
                         </div>
                     </Tab-pane>
-                    <Tab-pane label="新增电缆" key="key5" name="formCableValidate">
+                    <Tab-pane label="新增高压电缆" key="key5" name="formCableValidate">
                         <div>
                             <Form ref="formCableValidate" :model="formCableValidate" :rules="ruleCableValidate"
                                 :label-width="100">
                                 <Row :gutter="24" class='row-wrap'>
                                     <Col span="10" class='col-wrap'>
-                                    <FormItem label="电缆类型" prop="cableType">
-                                        <Input v-model="formCableValidate.cableType" :maxlength=20 placeholder="请输入电缆类型"></Input>
+                                    <FormItem label="电缆名称" prop="cableName">
+                                        <Input v-model="formCableValidate.cableName" :maxlength=20 placeholder="请输入电缆名称"></Input>
                                     </FormItem>
                                     </Col>
                                     <Col span="10" class='col-wrap'>
-                                    <FormItem label="电缆长度" prop="cableLength">
-                                        <Input v-model="formCableValidate.cableLength" number :maxlength=20 placeholder="请输入电缆长度"></Input>
+                                    <FormItem label="电缆型号" prop="cableType">
+                                        <Input v-model="formCableValidate.cableType" :maxlength=20 placeholder="请输入电缆类型"></Input>
                                     </FormItem>
                                     </Col>
                                 </Row>
                                 <Row :gutter="24" class='row-wrap'>
                                     <Col span="10" class='col-wrap'>
-                                    <FormItem label="电缆名称" prop="cableName">
-                                        <Input v-model="formCableValidate.cableName" :maxlength=20 placeholder="请输入电缆名称"></Input>
+                                    <FormItem label="电缆长度" prop="cableLength">
+                                        <Input v-model="formCableValidate.cableLength" number :maxlength=20 placeholder="请输入电缆长度"></Input>
                                     </FormItem>
                                     </Col>
                                 </Row>
@@ -255,6 +255,11 @@
                                 :label-width="100">
                                 <Row :gutter="24" class='row-wrap'>
                                     <Col span="10" class='col-wrap'>
+                                    <FormItem label="产品型号" prop="breakerType">
+                                        <Input v-model="formBreakerValidate.breakerType" :maxlength=200 placeholder="请输入产品型号"></Input>
+                                    </FormItem>
+                                    </Col>
+                                    <Col span="10" class='col-wrap'>
                                     <FormItem label="生产厂商" prop="breakerManufacturer">
                                         <Select v-model="formBreakerValidate.breakerManufacturer">
                                             <Option v-for="item in manufacturerBreakerList" :value="item.name" :key="item.id">{{
@@ -262,17 +267,12 @@
                                         </Select>
                                     </FormItem>
                                     </Col>
+                                </Row>
+                                <Row :gutter="24" class='row-wrap'>
                                     <Col span="10" class='col-wrap'>
                                     <FormItem label="生产编号" prop="breakerProductionCode">
                                         <Input v-model="formBreakerValidate.breakerProductionCode" :maxlength=200
                                             placeholder="请输入生产编号"></Input>
-                                    </FormItem>
-                                    </Col>
-                                </Row>
-                                <Row :gutter="24" class='row-wrap'>
-                                    <Col span="10" class='col-wrap'>
-                                    <FormItem label="产品型号" prop="breakerType">
-                                        <Input v-model="formBreakerValidate.breakerType" :maxlength=200 placeholder="请输入产品型号"></Input>
                                     </FormItem>
                                     </Col>
                                     <Col span="10" class='col-wrap'>
@@ -291,6 +291,11 @@
                                 :label-width="100">
                                 <Row :gutter="24" class='row-wrap'>
                                     <Col span="10" class='col-wrap'>
+                                    <FormItem label="产品型号" prop="capacitorType">
+                                        <Input v-model="formCapacitorValidate.capacitorType" :maxlength=200 placeholder="请输入产品型号"></Input>
+                                    </FormItem>
+                                    </Col>
+                                    <Col span="10" class='col-wrap'>
                                     <FormItem label="生产厂商" prop="capacitorManufacturer">
                                         <Select v-model="formCapacitorValidate.capacitorManufacturer">
                                             <Option v-for="item in manufacturerCapacitorList" :value="item.name" :key="item.id">{{
@@ -298,17 +303,12 @@
                                         </Select>
                                     </FormItem>
                                     </Col>
-                                    <Col span="10" class='col-wrap'>
+                                </Row>
+                                <Row :gutter="24" class='row-wrap'>
+                                     <Col span="10" class='col-wrap'>
                                     <FormItem label="生产编号" prop="capacitorProductionCode">
                                         <Input v-model="formCapacitorValidate.capacitorProductionCode" :maxlength=200
                                             placeholder="请输入生产编号"></Input>
-                                    </FormItem>
-                                    </Col>
-                                </Row>
-                                <Row :gutter="24" class='row-wrap'>
-                                    <Col span="10" class='col-wrap'>
-                                    <FormItem label="产品型号" prop="capacitorType">
-                                        <Input v-model="formCapacitorValidate.capacitorType" :maxlength=200 placeholder="请输入产品型号"></Input>
                                     </FormItem>
                                     </Col>
                                     <Col span="10" class='col-wrap'>
@@ -326,18 +326,18 @@
                             <Form ref="formIsolationSwitchValidate" :model="formIsolationSwitchValidate" :rules="ruleIsolationSwitchValidate"
                                 :label-width="100">
                                 <Row :gutter="24" class='row-wrap'>
+                                     <Col span="10" class='col-wrap'>
+                                    <FormItem label="产品型号" prop="isolationSwitchType">
+                                        <Input v-model="formIsolationSwitchValidate.isolationSwitchType" :maxlength=200
+                                            placeholder="请输入产品型号"></Input>
+                                    </FormItem>
+                                    </Col>
                                     <Col span="10" class='col-wrap'>
                                     <FormItem label="生产厂商" prop="isolationSwitchManufacturer">
                                         <Select v-model="formIsolationSwitchValidate.isolationSwitchManufacturer">
                                             <Option v-for="item in manufacturerIsolationSwitchList" :value="item.name"
                                                 :key="item.id">{{ item.name }}</Option>
                                         </Select>
-                                    </FormItem>
-                                    </Col>
-                                    <Col span="10" class='col-wrap'>
-                                    <FormItem label="产品型号" prop="isolationSwitchType">
-                                        <Input v-model="formIsolationSwitchValidate.isolationSwitchType" :maxlength=200
-                                            placeholder="请输入产品型号"></Input>
                                     </FormItem>
                                     </Col>
                                 </Row>
@@ -349,7 +349,7 @@
                                     </FormItem>
                                     </Col>
                                     <Col span="10" class='col-wrap'>
-                                    <FormItem label="备注" prop="remark">
+                                    <FormItem label="额定电流" prop="remark">
                                         <Input v-model="formIsolationSwitchValidate.remark" :maxlength=200 placeholder="请输入备注信息"></Input>
                                     </FormItem>
                                     </Col>
@@ -357,10 +357,22 @@
                             </Form>
                         </div>
                     </Tab-pane>
-                    <Tab-pane label="新增出线电缆" key="key5" name="formOutCableValidate">
+                    <Tab-pane label="新增低压电缆" key="key5" name="formOutCableValidate">
                         <div>
                             <Form ref="formOutCableValidate" :model="formOutCableValidate" :rules="ruleOutCableValidate"
                                 :label-width="100">
+                                <Row :gutter="24" class='row-wrap'>
+                                    <Col span="10" class='col-wrap'>
+                                    <FormItem label="电缆名称" prop="lineName">
+                                        <Input v-model="formOutCableValidate.lineName" :maxlength=50 placeholder="请输入电缆名称"></Input>
+                                    </FormItem>
+                                    </Col>
+                                    <Col span="10" class='col-wrap'>
+                                    <FormItem label="电缆型号" prop="outCableType">
+                                        <Input v-model="formOutCableValidate.outCableType" :maxlength=200 placeholder="请输入电缆类型"></Input>
+                                    </FormItem>
+                                    </Col>
+                                </Row>
                                 <Row :gutter="24" class='row-wrap'>
                                     <Col span="10" class='col-wrap'>
                                     <FormItem label="生产厂商" prop="outCableManufacturer">
@@ -368,18 +380,6 @@
                                             <Option v-for="item in manufacturerOutCableList" :value="item.name" :key="item.id">{{
                                                 item.name }}</Option>
                                         </Select>
-                                    </FormItem>
-                                    </Col>
-                                    <Col span="10" class='col-wrap'>
-                                    <FormItem label="电缆类型" prop="outCableType">
-                                        <Input v-model="formOutCableValidate.outCableType" :maxlength=200 placeholder="请输入电缆类型"></Input>
-                                    </FormItem>
-                                    </Col>
-                                </Row>
-                                <Row :gutter="24" class='row-wrap'>
-                                    <Col span="10" class='col-wrap'>
-                                    <FormItem label="电缆名称" prop="lineName">
-                                        <Input v-model="formOutCableValidate.lineName" :maxlength=50 placeholder="请输入电缆名称"></Input>
                                     </FormItem>
                                     </Col>
                                 </Row>
@@ -514,7 +514,7 @@
 
         <Modal v-model="showAddOrEditTransformer" :closable="false" width="800">
             <p slot="header" style="color:#2db7f5;text-align:left">
-                <span>新增变压信息</span>
+                <span>新增变压设备信息</span>
             </p>
             <div>
                 <Form ref="formTransValidate" :model="formTransValidate" :rules="ruleTransValidate" :label-width="100">
@@ -663,24 +663,8 @@
                         }
                     },
                     {
-                        title: '生产厂商',
-                        key: 'manufacturer',
-                        align: 'center'
-
-                    },
-                    {
                         title: '设备名称',
                         key: 'deviceName',
-                        align: 'center'
-                    },
-                    {
-                        title: '设备功能',
-                        key: 'deviceFunction',
-                        align: 'center'
-                    },
-                    {
-                        title: '产品型号',
-                        key: 'productType',
                         align: 'center'
                     },
                     {
@@ -689,8 +673,13 @@
                         align: 'center'
                     },
                     {
-                        title: '出厂日期',
-                        key: 'manufactureDate',
+                        title: '设备型号',
+                        key: 'productType',
+                        align: 'center'
+                    },
+                    {
+                        title: '生产厂商',
+                        key: 'manufacturer',
                         align: 'center'
                     },
                     {
@@ -698,6 +687,16 @@
                         key: 'productionCode',
                         align: 'center'
                     },
+                    {
+                        title: '生产日期',
+                        key: 'manufactureDate',
+                        align: 'center'
+                    },
+                    // {
+                    //     title: '设备功能',
+                    //     key: 'deviceFunction',
+                    //     align: 'center'
+                    // },
                     {
                         title: '操作',
                         key: 'action',
@@ -760,6 +759,21 @@
                             })
                         }
                     },
+                     {
+                        title: '设备名称',
+                        key: 'deviceFunction',
+                        align: 'center'
+                    },
+                    {
+                        title: '设备编号',
+                        key: 'deviceName',
+                        align: 'center'
+                    },
+                    {
+                        title: '设备型号',
+                        key: 'productType',
+                        align: 'center'
+                    },
                     {
                         title: '生产厂商',
                         key: 'manufacturer',
@@ -767,28 +781,13 @@
 
                     },
                     {
-                        title: '设备名称',
-                        key: 'deviceName',
-                        align: 'center'
-                    },
-                    {
-                        title: '设备功能',
-                        key: 'deviceFunction',
-                        align: 'center'
-                    },
-                    {
-                        title: '产品型号',
-                        key: 'productType',
+                        title: '生产编号',
+                        key: 'productionCode',
                         align: 'center'
                     },
                     {
                         title: '出厂日期',
                         key: 'manufactureDate',
-                        align: 'center'
-                    },
-                    {
-                        title: '生产编号',
-                        key: 'productionCode',
                         align: 'center'
                     },
                     {
@@ -849,14 +848,13 @@
                         align: 'center'
                     },
                     {
-                        title: '生产厂商',
-                        key: 'capacitorManufacturer',
-                        align: 'center'
-
-                    },
-                    {
                         title: '设备名称',
                         key: 'deviceName',
+                        align: 'center'
+                    },
+                     {
+                        title: '设备型号',
+                        key: 'deviceType',
                         align: 'center'
                     },
                     {
@@ -864,19 +862,25 @@
                         key: 'deviceCapaticy',
                         align: 'center'
                     },
-                    {
-                        title: '设备型号',
-                        key: 'deviceType',
-                        align: 'center'
-                    },
-                    {
+                     {
                         title: '联结组标',
                         key: 'connectionSymbol',
                         align: 'center'
                     },
-                    {
+                     {
                         title: '阻抗',
                         key: 'impedance',
+                        align: 'center'
+                    },
+                    {
+                        title: '生产厂商',
+                        key: 'capacitorManufacturer',
+                        align: 'center'
+
+                    },
+                     {
+                        title: '生产编号',
+                        key: 'productionCode',
                         align: 'center'
                     },
                     {
@@ -884,11 +888,7 @@
                         key: 'manufactureDate',
                         align: 'center'
                     },
-                    {
-                        title: '生产编号',
-                        key: 'productionCode',
-                        align: 'center'
-                    },
+                   
                     {
                         title: '操作',
                         key: 'action',
@@ -984,257 +984,257 @@
                 formIsolationSwitchValidate: {},
                 formOutCableValidate: {},
                 ruleHighValidate: {
-                    manufacturer: [{
-                        required: true,
-                        message: '请选择生产厂商',
-                        trigger: 'blur'
-                    }],
-                    deviceNumber: [{
-                        required: true,
-                        message: '请输入生产编号',
-                        trigger: 'blur'
-                    }],
-                    deviceName: [{
-                        required: true,
-                        message: '请输入设备名称',
-                        trigger: 'blur'
-                    }],
-                    deviceFunction: [{
-                        required: true,
-                        message: '请输入设备功能',
-                        trigger: 'blur'
-                    }],
-                    productType: [{
-                        required: true,
-                        message: '请输入产品型号',
-                        trigger: 'blur'
-                    }]
+                    // manufacturer: [{
+                    //     required: true,
+                    //     message: '请选择生产厂商',
+                    //     trigger: 'blur'
+                    // }],
+                    // deviceNumber: [{
+                    //     required: true,
+                    //     message: '请输入生产编号',
+                    //     trigger: 'blur'
+                    // }],
+                    // deviceName: [{
+                    //     required: true,
+                    //     message: '请输入设备名称',
+                    //     trigger: 'blur'
+                    // }],
+                    // deviceFunction: [{
+                    //     required: true,
+                    //     message: '请输入设备功能',
+                    //     trigger: 'blur'
+                    // }],
+                    // productType: [{
+                    //     required: true,
+                    //     message: '请输入产品型号',
+                    //     trigger: 'blur'
+                    // }]
                 },
                 ruleLowValidate: {
-                    manufacturer: [{
-                        required: true,
-                        message: '请选择生产厂商',
-                        trigger: 'blur'
-                    }],
-                    productionCode: [{
-                        required: true,
-                        message: '请输入生产编号',
-                        trigger: 'blur'
-                    }],
-                    productType: [{
-                        required: true,
-                        message: '请输入产品型号',
-                        trigger: 'blur'
-                    }],
-                    deviceName: [{
-                        required: true,
-                        message: '请输入设备名称',
-                        trigger: 'blur'
-                    }],
-                    deviceFunction: [{
-                        required: true,
-                        message: '请选择设备功能',
-                        trigger: 'blur'
-                    }],
-                    manufactureDate: [{
-                        required: true,
-                        type: 'date',
-                        message: '请选择出厂日期',
-                        trigger: 'change'
-                    }]
+                    // manufacturer: [{
+                    //     required: true,
+                    //     message: '请选择生产厂商',
+                    //     trigger: 'blur'
+                    // }],
+                    // productionCode: [{
+                    //     required: true,
+                    //     message: '请输入生产编号',
+                    //     trigger: 'blur'
+                    // }],
+                    // productType: [{
+                    //     required: true,
+                    //     message: '请输入产品型号',
+                    //     trigger: 'blur'
+                    // }],
+                    // deviceName: [{
+                    //     required: true,
+                    //     message: '请输入设备名称',
+                    //     trigger: 'blur'
+                    // }],
+                    // deviceFunction: [{
+                    //     required: true,
+                    //     message: '请选择设备功能',
+                    //     trigger: 'blur'
+                    // }],
+                    // manufactureDate: [{
+                    //     required: true,
+                    //     type: 'date',
+                    //     message: '请选择出厂日期',
+                    //     trigger: 'change'
+                    // }]
                 },
                 ruleTransValidate: {
-                    deviceName: [{
-                        required: true,
-                        message: '请选择设备名称',
-                        trigger: 'blur'
-                    }],
-                    capacitorManufacturer: [{
-                        required: true,
-                        message: '请选择生产厂商',
-                        trigger: 'blur'
-                    }],
-                    connectionSymbol: [{
-                        required: true,
-                        message: '请选择联结组标',
-                        trigger: 'blur'
-                    }],
-                    impedance: [{
-                        required: true,
-                        message: '请输入阻抗',
-                        trigger: 'blur'
-                    }],
-                    productionCode: [{
-                        required: true,
-                        message: '请选择出厂编号',
-                        trigger: 'blur'
-                    }],
-                    manufactureDate: [{
-                        required: true,
-                        type: 'date',
-                        message: '请选择出厂日期',
-                        trigger: 'change'
-                    }],
-                    deviceCapaticy: [{
-                        validator: validateNumber,
-                        trigger: 'change'
-                    }],
-                    deviceType: [{
-                        required: true,
-                        message: '请输入产品型号',
-                        trigger: 'blur'
-                    }]
+                    // deviceName: [{
+                    //     required: true,
+                    //     message: '请选择设备名称',
+                    //     trigger: 'blur'
+                    // }],
+                    // capacitorManufacturer: [{
+                    //     required: true,
+                    //     message: '请选择生产厂商',
+                    //     trigger: 'blur'
+                    // }],
+                    // connectionSymbol: [{
+                    //     required: true,
+                    //     message: '请选择联结组标',
+                    //     trigger: 'blur'
+                    // }],
+                    // impedance: [{
+                    //     required: true,
+                    //     message: '请输入阻抗',
+                    //     trigger: 'blur'
+                    // }],
+                    // productionCode: [{
+                    //     required: true,
+                    //     message: '请选择出厂编号',
+                    //     trigger: 'blur'
+                    // }],
+                    // manufactureDate: [{
+                    //     required: true,
+                    //     type: 'date',
+                    //     message: '请选择出厂日期',
+                    //     trigger: 'change'
+                    // }],
+                    // deviceCapaticy: [{
+                    //     validator: validateNumber,
+                    //     trigger: 'change'
+                    // }],
+                    // deviceType: [{
+                    //     required: true,
+                    //     message: '请输入产品型号',
+                    //     trigger: 'blur'
+                    // }]
                 },
                 ruleLoadSwitchValidate: {
-                    loadSwitchManufacturer: [{
-                        required: true,
-                        message: '请选择生产厂商',
-                        trigger: 'blur'
-                    }],
-                    loadSwitchProductionCode: [{
-                        required: true,
-                        message: '请输入生产编号',
-                        trigger: 'blur'
-                    }],
-                    loadSwitchType: [{
-                        required: true,
-                        message: '请输入产品型号',
-                        trigger: 'blur'
-                    }]
+                    // loadSwitchManufacturer: [{
+                    //     required: true,
+                    //     message: '请选择生产厂商',
+                    //     trigger: 'blur'
+                    // }],
+                    // loadSwitchProductionCode: [{
+                    //     required: true,
+                    //     message: '请输入生产编号',
+                    //     trigger: 'blur'
+                    // }],
+                    // loadSwitchType: [{
+                    //     required: true,
+                    //     message: '请输入产品型号',
+                    //     trigger: 'blur'
+                    // }]
                 },
                 ruleCurrentTransValidate: {
-                    currentTransformerManufacturer: [{
-                        required: true,
-                        message: '请选择生产厂商',
-                        trigger: 'blur'
-                    }],
-                    currentTransformerProductionCode: [{
-                        required: true,
-                        message: '请输入生产编号',
-                        trigger: 'blur'
-                    }],
-                    currentTransformerType: [{
-                        required: true,
-                        message: '请输入产品型号',
-                        trigger: 'blur'
-                    }]
+                    // currentTransformerManufacturer: [{
+                    //     required: true,
+                    //     message: '请选择生产厂商',
+                    //     trigger: 'blur'
+                    // }],
+                    // currentTransformerProductionCode: [{
+                    //     required: true,
+                    //     message: '请输入生产编号',
+                    //     trigger: 'blur'
+                    // }],
+                    // currentTransformerType: [{
+                    //     required: true,
+                    //     message: '请输入产品型号',
+                    //     trigger: 'blur'
+                    // }]
                 },
                 ruleVoltageTransValidate: {
-                    voltageTransformerManufacturer: [{
-                        required: true,
-                        message: '请选择生产厂商',
-                        trigger: 'blur'
-                    }],
-                    voltageTransformerProductionCode: [{
-                        required: true,
-                        message: '请输入生产编号',
-                        trigger: 'blur'
-                    }],
-                    voltageTransformerType: [{
-                        required: true,
-                        message: '请输入产品型号',
-                        trigger: 'blur'
-                    }]
+                    // voltageTransformerManufacturer: [{
+                    //     required: true,
+                    //     message: '请选择生产厂商',
+                    //     trigger: 'blur'
+                    // }],
+                    // voltageTransformerProductionCode: [{
+                    //     required: true,
+                    //     message: '请输入生产编号',
+                    //     trigger: 'blur'
+                    // }],
+                    // voltageTransformerType: [{
+                    //     required: true,
+                    //     message: '请输入产品型号',
+                    //     trigger: 'blur'
+                    // }]
                 },
                 ruleHighVoltageFuseValidate: {
-                    highVoltageFuseManufacturer: [{
-                        required: true,
-                        message: '请选择生产厂商',
-                        trigger: 'blur'
-                    }],
-                    highVoltageFuseType: [{
-                        required: true,
-                        message: '请输入产品型号',
-                        trigger: 'blur'
-                    }]
+                    // highVoltageFuseManufacturer: [{
+                    //     required: true,
+                    //     message: '请选择生产厂商',
+                    //     trigger: 'blur'
+                    // }],
+                    // highVoltageFuseType: [{
+                    //     required: true,
+                    //     message: '请输入产品型号',
+                    //     trigger: 'blur'
+                    // }]
                 },
                 ruleCableValidate: {
-                    cableName: [{
-                        required: true,
-                        message: '请选择电缆名称',
-                        trigger: 'blur'
-                    }],
-                    cableLength: [{
-                        validator: validateNumber,
-                        trigger: 'change'
-                    }],
-                    cableType: [{
-                        required: true,
-                        message: '请输入产品型号',
-                        trigger: 'blur'
-                    }]
+                    // cableName: [{
+                    //     required: true,
+                    //     message: '请选择电缆名称',
+                    //     trigger: 'blur'
+                    // }],
+                    // cableLength: [{
+                    //     validator: validateNumber,
+                    //     trigger: 'change'
+                    // }],
+                    // cableType: [{
+                    //     required: true,
+                    //     message: '请输入产品型号',
+                    //     trigger: 'blur'
+                    // }]
                 },
                 ruleBreakerValidate: {
-                    breakerManufacturer: [{
-                        required: true,
-                        message: '请选择生产厂商',
-                        trigger: 'blur'
-                    }],
-                    breakerProductionCode: [{
-                        required: true,
-                        message: '请输入生产编号',
-                        trigger: 'blur'
-                    }],
-                    breakerType: [{
-                        required: true,
-                        message: '请输入产品型号',
-                        trigger: 'blur'
-                    }]
+                    // breakerManufacturer: [{
+                    //     required: true,
+                    //     message: '请选择生产厂商',
+                    //     trigger: 'blur'
+                    // }],
+                    // breakerProductionCode: [{
+                    //     required: true,
+                    //     message: '请输入生产编号',
+                    //     trigger: 'blur'
+                    // }],
+                    // breakerType: [{
+                    //     required: true,
+                    //     message: '请输入产品型号',
+                    //     trigger: 'blur'
+                    // }]
                 },
                 ruleCapacitorValidate: {
-                    capacitorManufacturer: [{
-                        required: true,
-                        message: '请选择生产厂商',
-                        trigger: 'blur'
-                    }],
-                    capacitorProductionCode: [{
-                        required: true,
-                        message: '请输入生产编号',
-                        trigger: 'blur'
-                    }],
-                    capacitorCapacity: [{
-                        validator: validateNumber,
-                        trigger: 'change'
-                    }],
-                    capacitorType: [{
-                        required: true,
-                        message: '请输入产品型号',
-                        trigger: 'blur'
-                    }]
+                    // capacitorManufacturer: [{
+                    //     required: true,
+                    //     message: '请选择生产厂商',
+                    //     trigger: 'blur'
+                    // }],
+                    // capacitorProductionCode: [{
+                    //     required: true,
+                    //     message: '请输入生产编号',
+                    //     trigger: 'blur'
+                    // }],
+                    // capacitorCapacity: [{
+                    //     validator: validateNumber,
+                    //     trigger: 'change'
+                    // }],
+                    // capacitorType: [{
+                    //     required: true,
+                    //     message: '请输入产品型号',
+                    //     trigger: 'blur'
+                    // }]
                 },
                 ruleIsolationSwitchValidate: {
-                    isolationSwitchManufacturer: [{
-                        required: true,
-                        message: '请选择生产厂商',
-                        trigger: 'blur'
-                    }],
-                    isolationSwitchProductionCode: [{
-                        required: true,
-                        message: '请输入生产编号',
-                        trigger: 'blur'
-                    }],
-                    isolationSwitchType: [{
-                        required: true,
-                        message: '请输入产品型号',
-                        trigger: 'blur'
-                    }]
+                    // isolationSwitchManufacturer: [{
+                    //     required: true,
+                    //     message: '请选择生产厂商',
+                    //     trigger: 'blur'
+                    // }],
+                    // isolationSwitchProductionCode: [{
+                    //     required: true,
+                    //     message: '请输入生产编号',
+                    //     trigger: 'blur'
+                    // }],
+                    // isolationSwitchType: [{
+                    //     required: true,
+                    //     message: '请输入产品型号',
+                    //     trigger: 'blur'
+                    // }]
                 },
                 ruleOutCableValidate: {
-                    outCableManufacturer: [{
-                        required: true,
-                        message: '请选择生产厂商',
-                        trigger: 'blur'
-                    }],
-                    lineName: [{
-                        required: true,
-                        message: '请输入线路名称',
-                        trigger: 'blur'
-                    }],
-                    outCableType: [{
-                        required: true,
-                        message: '请输入产品型号',
-                        trigger: 'blur'
-                    }]
+                    // outCableManufacturer: [{
+                    //     required: true,
+                    //     message: '请选择生产厂商',
+                    //     trigger: 'blur'
+                    // }],
+                    // lineName: [{
+                    //     required: true,
+                    //     message: '请输入线路名称',
+                    //     trigger: 'blur'
+                    // }],
+                    // outCableType: [{
+                    //     required: true,
+                    //     message: '请输入产品型号',
+                    //     trigger: 'blur'
+                    // }]
                 }
             }
         },
@@ -2128,7 +2128,7 @@
                 this.add = true
                 this.showAddOrEditLowVoltage = true
                 this.isEdit = false
-                this.modelTitle = '新增低压信息'
+                this.modelTitle = '新增低压设备信息'
             },
             // 新增变压详情
             addTransDataClick() {

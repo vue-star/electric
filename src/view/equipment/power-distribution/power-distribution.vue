@@ -220,7 +220,7 @@
                 this.powerDistributionRoomId = ''
                 this.isSelect = false
                 this.getListData()
-                this.titleText = '方案列表'
+                this.titleText = '配电室信息列表'
             },
             save(powerDistributionRoomId) {
                 this.powerDistributionRoomId = powerDistributionRoomId
