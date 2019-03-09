@@ -118,89 +118,6 @@ export default [{
         ]
     },
     {
-        path: '/communication',
-        name: 'communication',
-        meta: {
-            icon: 'ios-stats',
-            title: '通讯和采集管理'
-        },
-        component: Main,
-        children: [{
-                path: 'serial_port',
-                name: 'serial_port',
-                meta: {
-                    icon: 'md-add',
-                    title: '串口信息'
-                },
-                component: () => import('@/view/communication/serial-port.vue')
-            },
-            {
-                path: 'meter_information',
-                name: 'meter_information',
-                meta: {
-                    icon: 'md-add',
-                    title: '电表信息'
-                },
-                component: () => import('@/view/communication/meter-information.vue')
-            },
-            {
-                path: 'router_info',
-                name: 'router_info',
-                meta: {
-                    icon: 'md-download',
-                    title: '路由器信息'
-                },
-                component: () => import('@/view/communication/router-info.vue')
-            },
-            {
-                path: 'router_config',
-                name: 'router_config',
-                meta: {
-                    icon: 'md-download',
-                    title: '配置信息'
-                },
-                component: () => import('@/view/communication/router-config.vue')
-            }
-        ]
-    },
-    {
-        path: '/EPU-statistics',
-        name: 'EPU-statistics',
-        meta: {
-            icon: 'md-cloud-upload',
-            title: '电力设备统计'
-        },
-        component: Main,
-        children: [{
-                path: 'power_statistics',
-                name: 'power_statistics',
-                meta: {
-                    icon: 'ios-document',
-                    title: '设备统计'
-                },
-                component: () => import('@/view/EPU-Statistics/power-distribution.vue')
-            },
-            {
-                path: 'europe_box_transformer',
-                name: 'europe_box_transformer',
-                meta: {
-                    icon: 'md-clipboard',
-                    title: '电力配件统计'
-                },
-                component: () => import('@/view/EPU-Statistics/europe-box-transformer.vue')
-            },
-            // {
-            //     path: 'american_box_transformer',
-            //     name: 'american_box_transformer',
-            //     meta: {
-            //         icon: 'md-clipboard',
-            //         title: '美式箱变'
-            //     },
-            //     component: () => import('@/view/EPU-Statistics/american-box-transformer.vue')
-            // }
-        ]
-    },
-    {
         path: '/monitor',
         name: 'monitor',
         meta: {
@@ -301,6 +218,89 @@ export default [{
             //     component: () => import('@/view/report/energy-analysis.vue')
             // },
             
+        ]
+    },
+    {
+        path: '/EPU-statistics',
+        name: 'EPU-statistics',
+        meta: {
+            icon: 'md-cloud-upload',
+            title: '电力设备统计'
+        },
+        component: Main,
+        children: [{
+                path: 'power_statistics',
+                name: 'power_statistics',
+                meta: {
+                    icon: 'ios-document',
+                    title: '设备统计'
+                },
+                component: () => import('@/view/EPU-Statistics/power-distribution.vue')
+            },
+            {
+                path: 'europe_box_transformer',
+                name: 'europe_box_transformer',
+                meta: {
+                    icon: 'md-clipboard',
+                    title: '电力配件统计'
+                },
+                component: () => import('@/view/EPU-Statistics/europe-box-transformer.vue')
+            },
+            // {
+            //     path: 'american_box_transformer',
+            //     name: 'american_box_transformer',
+            //     meta: {
+            //         icon: 'md-clipboard',
+            //         title: '美式箱变'
+            //     },
+            //     component: () => import('@/view/EPU-Statistics/american-box-transformer.vue')
+            // }
+        ]
+    },
+    {
+        path: '/communication',
+        name: 'communication',
+        meta: {
+            icon: 'ios-stats',
+            title: '通讯和采集管理'
+        },
+        component: Main,
+        children: [{
+                path: 'serial_port',
+                name: 'serial_port',
+                meta: {
+                    icon: 'md-add',
+                    title: '串口信息'
+                },
+                component: () => import('@/view/communication/serial-port.vue')
+            },
+            {
+                path: 'meter_information',
+                name: 'meter_information',
+                meta: {
+                    icon: 'md-add',
+                    title: '电表信息'
+                },
+                component: () => import('@/view/communication/meter-information.vue')
+            },
+            {
+                path: 'router_info',
+                name: 'router_info',
+                meta: {
+                    icon: 'md-download',
+                    title: '路由器信息'
+                },
+                component: () => import('@/view/communication/router-info.vue')
+            },
+            {
+                path: 'router_config',
+                name: 'router_config',
+                meta: {
+                    icon: 'md-download',
+                    title: '配置信息'
+                },
+                component: () => import('@/view/communication/router-config.vue')
+            }
         ]
     },
     {
@@ -430,23 +430,23 @@ export default [{
     //         component: () => import('@/view/repair/rush-repair.vue')
     //     }]
     // },
-    {
-        path: '/inspection',
-        name: 'inspection',
-        meta: {
-            hide: true
-        },
-        component: Main,
-        children: [{
-            path: 'inspection_manage',
-            name: 'inspection_manage',
-            meta: {
-                icon: 'ios-navigate',
-                title: '运行管理'
-            },
-            component: () => import('@/view/inspection/inspection-manage.vue')
-        }]
-    },
+    // {
+    //     path: '/inspection',
+    //     name: 'inspection',
+    //     meta: {
+    //         hide: true
+    //     },
+    //     component: Main,
+    //     children: [{
+    //         path: 'inspection_manage',
+    //         name: 'inspection_manage',
+    //         meta: {
+    //             icon: 'ios-navigate',
+    //             title: '运行管理'
+    //         },
+    //         component: () => import('@/view/inspection/inspection-manage.vue')
+    //     }]
+    // },
     {
         path: '/argu',
         name: 'argu',
