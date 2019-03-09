@@ -269,7 +269,7 @@ export default [{
                 name: 'current_analysis',
                 meta: {
                     icon: 'md-add',
-                    title: '电流检测'
+                    title: '电流监测'
                 },
                 component: () => import('@/view/report/current-analysis.vue')
             },
@@ -278,7 +278,7 @@ export default [{
                 name: 'voltage_analysis',
                 meta: {
                     icon: 'md-download',
-                    title: '电压检测'
+                    title: '电压监测'
                 },
                 component: () => import('@/view/report/voltage-analysis.vue')
             },

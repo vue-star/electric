@@ -3,13 +3,13 @@
         <Form ref="formValidate" :model="formValidate" :rules="ruleValidate" :label-width="100">
             <Row :gutter="24" class='row-wrap'>
                 <Col span="10" class='col-wrap'>
-                <FormItem label="配电室编号" prop="distributionRoomNumber">
-                    <Input v-model="formValidate.distributionRoomNumber" placeholder="请输入配电室编号"></Input>
+                <FormItem label="配电室名称" prop="distributionRoomName">
+                    <Input v-model="formValidate.distributionRoomName" placeholder="请输入配电室名称"></Input>
                 </FormItem>
                 </Col>
                 <Col span="10" class='col-wrap'>
-                <FormItem label="配电室名称" prop="distributionRoomName">
-                    <Input v-model="formValidate.distributionRoomName" placeholder="请输入配电室名称"></Input>
+                <FormItem label="配电室编号" prop="distributionRoomNumber">
+                    <Input v-model="formValidate.distributionRoomNumber" placeholder="请输入配电室编号"></Input>
                 </FormItem>
                 </Col>
             </Row>
