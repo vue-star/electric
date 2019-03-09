@@ -12,7 +12,8 @@
         props: {
             value: Array,
             text: String,
-            subtext: String
+            subtext: String,
+            dateTime: String
         },
         data () {
             return {
@@ -30,6 +31,7 @@
             },
             loadLine() {
                 this.$nextTick(() => {
+                    let dateTime=this.dateTime
                     let xAxisData = this.value.map(_ => _.creationTime)
                     let voltageAB = this.value.map(_ => _.uabVoltage)
                     let voltageBC = this.value.map(_ => _.ubcVoltage)
@@ -45,7 +47,39 @@
                             throttle: 50
                         }],
                         legend: {
-                            data: ['AB线电压', 'BC线电压', 'CA线电压']
+                            data: ['ab线电压', 'bc线电压', 'ca线电压']
+                        },
+                        tooltip: {
+                            trigger: 'axis',
+                            axisPointer: {
+                                type: 'cross',
+                                label: {
+                                    backgroundColor: '#6a7985'
+                                }
+                            },
+                            formatter: function (params, ticket, callback) {
+                                var htmlStr = ''
+                                for (var i = 0; i < params.length; i++) {
+                                    var param = params[i]
+                                    var xName = param.name// x轴的名称
+                                    var seriesName = param.seriesName// 图例名称
+                                    var value = param.value.toFixed(2)// y轴值
+                                    var color = param.color// 图例颜色
+
+                                    if (i === 0) {
+                                    htmlStr += dateTime + ' ' + xName + '<br/>'// x轴的名称
+                                    }
+                                    htmlStr += '<div>'
+                                    // 为了保证和原来的效果一样，这里自己实现了一个点的效果
+                                    htmlStr += '<span style="margin-right:5px;display:inline-block;width:10px;height:10px;border-radius:5px;background-color:' + color + ';"></span>'
+
+                                    // 圆点后面显示的文本
+                                    htmlStr += seriesName + ': ' + value + 'V'
+
+                                    htmlStr += '</div>'
+                                }
+                                return htmlStr
+                            }
                         },
                         xAxis: {
                             type: 'category',
@@ -55,6 +89,8 @@
                         yAxis: {
                             type: 'value',
                             name: '电压',
+                            max: 500,
+                            min: 300,
                             axisLabel: {
                                 formatter: function (value) {
                                     var texts = []
@@ -65,19 +101,19 @@
                         },
                         series: [
                             {
-                                name: 'AB线电压',
+                                name: 'ab线电压',
                                 type: 'line',
                                 color: '#FF8C00',
                                 data: voltageAB
                             },
                             {
-                                name: 'BC线电压',
+                                name: 'bc线电压',
                                 type: 'line',
                                 color: '#76EE00',
                                 data: voltageBC
                             },
                             {
-                                name: 'CA线电压',
+                                name: 'ca线电压',
                                 type: 'line',
                                 color: 'red',
                                 data: voltageCA

@@ -205,7 +205,7 @@ export default [{
         name: 'monitor',
         meta: {
             icon: 'md-cloud-upload',
-            title: '监测管理'
+            title: 'SCADA'
         },
         component: Main,
         children: [{
@@ -217,15 +217,15 @@ export default [{
                 },
                 component: () => import('@/view/monitor/scada.vue')
             },
-            {
-                path: 'real_time_state',
-                name: 'real_time_state',
-                meta: {
-                    icon: 'md-clipboard',
-                    title: '实时状态'
-                },
-                component: () => import('@/view/monitor/real-time-state.vue')
-            }
+            // {
+            //     path: 'real_time_state',
+            //     name: 'real_time_state',
+            //     meta: {
+            //         icon: 'md-clipboard',
+            //         title: '实时状态'
+            //     },
+            //     component: () => import('@/view/monitor/real-time-state.vue')
+            // }
         ]
     },
     {

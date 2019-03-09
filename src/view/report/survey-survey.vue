@@ -90,7 +90,7 @@
                 </div>
                 <i-col span="24">
                     <Card shadow class="trend-card" style="">
-                        <trend-chart style="height: 315px;margin-right:10px" :xAxisData="statisticXData" :seriesData="statisticSData"
+                        <trend-chart style="height: 315px;margin-right:10px" :xAxisData="statisticXData" :unit="unit" :seriesData="statisticSData"
                             :text="lineText" />
                     </Card>
                     <div class="btn-div">
@@ -192,7 +192,8 @@
                 lineData: {},
                 max:'',
                 min:'',
-                average:''
+                average:'',
+                unit: 0 // X轴数据单位
             }
         },
         computed: {
@@ -233,11 +234,12 @@
                         let XData = []
                         let SData = []
                         data.hourStatistic.forEach(element => {
-                            XData.push(element.belongsTo + '点')
+                            XData.push(element.belongsTo)
                             SData.push(((element.tendency) * 100).toFixed(2))
                         })
                         this.statisticXData = XData
                         this.statisticSData = SData
+                        this.unit=1
                         resolve()
                     }).catch(err => {
                         reject(err)
@@ -269,7 +271,7 @@
                         data.forEach(element => {
                             var val= (element.power.toFixed(2) / 1000)
                             capacity.push(val)
-                            hour.push(element.belogHour)
+                            hour.push(element.belogHour + '点')
                         })
                         this.seriesData = capacity
                         this.xAxisData = hour
@@ -295,31 +297,34 @@
                 let XData = []
                 let SData = []
                 this.lineData.hourStatistic.forEach(element => {
-                    XData.push(element.belongsTo + '点')
+                    XData.push(element.belongsTo)
                     SData.push(((element.tendency) * 100).toFixed(2))
                 })
                 this.statisticXData = XData
                 this.statisticSData = SData
+                this.unit=1
             },
             dayClick() {
                 let XData = []
                 let SData = []
                 this.lineData.dayStatistic.forEach(element => {
-                    XData.push(element.belongsTo + '日')
+                    XData.push(element.belongsTo)
                     SData.push(((element.tendency) * 100).toFixed(2))
                 })
                 this.statisticXData = XData
                 this.statisticSData = SData
+                this.unit=2
             },
             monthClick() {
                 let XData = []
                 let SData = []
                 this.lineData.monthStatistic.forEach(element => {
-                    XData.push(element.belongsTo + '月')
+                    XData.push(element.belongsTo)
                     SData.push(((element.tendency) * 100).toFixed(2))
                 })
                 this.statisticXData = XData
                 this.statisticSData = SData
+                this.unit=3
             },
             selectedChange(val) {
                 this.electricityList.forEach(element => {

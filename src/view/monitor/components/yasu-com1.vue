@@ -31,12 +31,12 @@
                         font-size="6" id="svg_175" y="347.89147" x="84.02665" stroke-opacity="null" stroke-width="0"
                         fill="#ffffff">COS:</text>
                     <text stroke="#ffff56" xml:space="preserve" text-anchor="start" font-family="Helvetica, Arial, sans-serif"
-                        font-size="6" id="svg_176" y="305.6861" x="88.68287" stroke-width="0" fill="yellow">UA:</text>
+                        font-size="6" id="svg_176" y="305.6861" x="88.68287" stroke-width="0" fill="yellow">ua:</text>
                     <text stroke="red" xml:space="preserve" text-anchor="start" font-family="Helvetica, Arial, sans-serif"
                         font-size="6" id="svg_178" y="317.99742" x="88.35475" stroke-opacity="null" stroke-width="0"
-                        fill="#ff0000">UC:</text>
+                        fill="#ff0000">uc:</text>
                     <text stroke="#ffff56" xml:space="preserve" text-anchor="start" font-family="Helvetica, Arial, sans-serif"
-                        font-size="6" id="svg_182" y="311.73074" x="88.68287" stroke-width="0" fill="#5fbf00">UB:</text>
+                        font-size="6" id="svg_182" y="311.73074" x="88.68287" stroke-width="0" fill="#5fbf00">ub:</text>
                     <text stroke="#ffff56" xml:space="preserve" text-anchor="start" font-family="Helvetica, Arial, sans-serif"
                         font-size="6" id="svg_64" y="305.6861" x="100.52691" stroke-width="0" fill="yellow">{{UA}}</text>
                     <text stroke="#ffff56" xml:space="preserve" text-anchor="start" font-family="Helvetica, Arial, sans-serif"
@@ -341,12 +341,12 @@
                         font-size="6" id="svg_1113" y="342.14182" x="93.02655" stroke-opacity="null" stroke-width="0"
                         fill="#ffffff">P:</text>
                     <text stroke="#ffff56" xml:space="preserve" text-anchor="start" font-family="Helvetica, Arial, sans-serif"
-                        font-size="6" id="svg_1114" y="323.43502" x="91.35475" stroke-width="0" fill="yellow">IA:</text>
+                        font-size="6" id="svg_1114" y="323.43502" x="91.35475" stroke-width="0" fill="yellow">ia:</text>
                     <text xml:space="preserve" text-anchor="start" font-family="Helvetica, Arial, sans-serif" font-size="6"
                         id="svg_1115" y="335.74634" x="91.02662" stroke-opacity="null" stroke-width="0" fill="#ff0000"
-                        stroke="red">IC:</text>
+                        stroke="red">ic:</text>
                     <text stroke="#ffff56" xml:space="preserve" text-anchor="start" font-family="Helvetica, Arial, sans-serif"
-                        font-size="6" id="svg_1116" y="329.47966" x="91.35475" stroke-width="0" fill="#5fbf00">IB:</text>
+                        font-size="6" id="svg_1116" y="329.47966" x="91.35475" stroke-width="0" fill="#5fbf00">ib:</text>
                     <text stroke="#ffff56" xml:space="preserve" text-anchor="start" font-family="Helvetica, Arial, sans-serif"
                         font-size="6" id="svg_1117" y="323.43502" x="100.52691" stroke-width="0" fill="yellow">{{IA}}</text>
                     <text stroke="#ffff56" xml:space="preserve" text-anchor="start" font-family="Helvetica, Arial, sans-serif"

@@ -7,14 +7,14 @@
                 </Select>
             </div>
             <div class="operate-wrap" style="margin-left: 20px">时间选择：
-                <DatePicker class='operate' type="daterange" :value="dateTime" placeholder="Select date" @on-change='dateChange'
+                <DatePicker class='operate' type="date" :value="dateTime" placeholder="Select date" @on-change='dateChange'
                     style="width: 200px">
                 </DatePicker>
             </div>
         </div>
         <Row style="margin-top: 20px;">
             <Card shadow>
-                <current-chart style="height: 500px;" :value="barData" :text="textTitle+'电流分析'" />
+                <current-chart style="height: 500px;" :value="barData" :date-time="dateTime" text='电流分析' />
             </Card>
         </Row>
     </div>
@@ -37,7 +37,7 @@
             return {
                 electricityMeterInfoId: 0,
                 showList: true,
-                dateTime: [addDate(new Date(), -1), addDate(new Date(), 0)],
+                dateTime: addDate(new Date(), 0),
                 customerId: '',
                 textTitle: '',
                 electricityList: [],
@@ -67,8 +67,8 @@
                     getElectricityDropdownList(this.organizationUnitId).then(res => {
                         const data = res.data.result
                         this.electricityList = data
-                        this.electricityMeterInfoId = data[0].id
-                        this.textTitle = data[0].alias
+                        this.electricityMeterInfoId = data.length === 0 ? 0 : data[0].id
+                        this.textTitle = data.length === 0 ? 0 : data[0].alias
                         this.getCapacityData()
                         resolve()
                     }).catch(err => {
@@ -87,11 +87,11 @@
             },
             getCapacityData() {
                 return new Promise((resolve, reject) => {
-                    getCurrentAnalysis(this.dateTime[0], this.dateTime[1], this.electricityMeterInfoId).then(res => {
+                    getCurrentAnalysis(this.dateTime, this.dateTime, this.electricityMeterInfoId).then(res => {
                         const data = res.data.result
                         this.barData = data
                         this.barData.forEach(element => {
-                            element.creationTime = formatData(element.creationTime, 'min')
+                            element.creationTime = formatData(element.creationTime, 'onlyHour')
                         })
                         resolve()
                     }).catch(err => {
