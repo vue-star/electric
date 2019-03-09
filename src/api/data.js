@@ -71,7 +71,7 @@ export const getRouterInformationList = () => {
   // 获取电表下拉列表
 export const getElectricityMeterInfoList = () => {
     return axios.request({
-        url: 'services/app/ElectricityMeterInfo/GetRouterInformationForDropdownList',
+        url: 'services/app/ElectricityMeterInfo/GetElectricityMeterInfoForBindDropdownList',
         method: 'get'
     })
 }

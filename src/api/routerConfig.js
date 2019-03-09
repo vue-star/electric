@@ -26,7 +26,7 @@ export const addRouterConfig = (RouterConfig) => {
 // 删除客户
 export const delRouterConfig = (id) => {
     return axios.request({
-        url: 'api/services/app/RouterConfiguration/Delete',
+        url: 'services/app/RouterConfiguration/Delete',
         params: {
             id
         },

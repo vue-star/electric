@@ -86,7 +86,7 @@
                 <!-- <div class="top-style"></div> -->
                 <div class="top-area">
                     <Icon type="md-trending-up" size="20" style="float:left" color="#436EEE" />
-                    <p>用电趋势</p>
+                    <p>用电统计</p>
                 </div>
                 <i-col span="24">
                     <Card shadow class="trend-card" style="">
@@ -233,7 +233,7 @@
                         let XData = []
                         let SData = []
                         data.hourStatistic.forEach(element => {
-                            XData.push(element.belongsTo)
+                            XData.push(element.belongsTo + '点')
                             SData.push(((element.tendency) * 100).toFixed(2))
                         })
                         this.statisticXData = XData
@@ -295,7 +295,7 @@
                 let XData = []
                 let SData = []
                 this.lineData.hourStatistic.forEach(element => {
-                    XData.push(element.belongsTo)
+                    XData.push(element.belongsTo + '点')
                     SData.push(((element.tendency) * 100).toFixed(2))
                 })
                 this.statisticXData = XData
@@ -305,7 +305,7 @@
                 let XData = []
                 let SData = []
                 this.lineData.dayStatistic.forEach(element => {
-                    XData.push(element.belongsTo)
+                    XData.push(element.belongsTo + '日')
                     SData.push(((element.tendency) * 100).toFixed(2))
                 })
                 this.statisticXData = XData
@@ -315,7 +315,7 @@
                 let XData = []
                 let SData = []
                 this.lineData.monthStatistic.forEach(element => {
-                    XData.push(element.belongsTo)
+                    XData.push(element.belongsTo + '月')
                     SData.push(((element.tendency) * 100).toFixed(2))
                 })
                 this.statisticXData = XData
