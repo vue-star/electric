@@ -49,7 +49,7 @@
     import YearChart from './components/year-chart.vue'
     import UserChart from './components/user-chart.vue'
     import { formatData, addDate } from '@/libs/tools'
-    import { getUsePowerSummary, getTodayPowerSummary, getMonthPowerSummary, getYearPowerSummary, getElectricitySummary } from '@/api/energyProfile'
+    import { getUsePowerSummary, getPowerSummary, getElectricitySummary } from '@/api/energyProfile'
     export default {
         name: 'energy_profile',
         components: {
@@ -102,8 +102,7 @@
                 electricityData: {},
                 dayTitle: 0,
                 monthTitle: 0,
-                yearTitle: '',
-                electricityTitle: 0,
+                yearTitle: ''
             }
         },
         computed: {
@@ -119,9 +118,7 @@
         methods:{
             init() {
                 this.getUsePowerData()
-                this.getTodayPowerData()
-                this.getMonthPowerData()
-                this.getYearPowerData()
+                this.getPowerData()
                 this.getElectricityData()
             },
             getUsePowerData() {
@@ -138,36 +135,18 @@
                     })
                 })
             },
-            getTodayPowerData() {
+            getPowerData() {
                 return new Promise((resolve, reject) => {
-                    getTodayPowerSummary(this.organizationUnitId).then(res => {
+                    getPowerSummary(this.organizationUnitId).then(res => {
                         const data = res.data.result
-                        this.dayData=data.electricityConsumptionStatisticsDtoList
-                        this.dayTitle=data.totalConsumption
-                        resolve()
-                    }).catch(err => {
-                        reject(err)
-                    })
-                })
-            },
-            getMonthPowerData() {
-                return new Promise((resolve, reject) => {
-                    getMonthPowerSummary(this.organizationUnitId).then(res => {
-                        const data = res.data.result
-                        this.monthData=data.electricityConsumptionStatisticsDtoList
-                        this.monthTitle=data.totalConsumption
-                        resolve()
-                    }).catch(err => {
-                        reject(err)
-                    })
-                })
-            },
-            getYearPowerData() {
-                return new Promise((resolve, reject) => {
-                    getYearPowerSummary(this.organizationUnitId).then(res => {
-                        const data = res.data.result
-                        this.yearData=data.electricityConsumptionStatisticsDtoList
-                        this.yearTitle=data.totalConsumption
+                        this.dayData=data.day.electricityConsumptionStatisticsDtoList
+                        this.dayTitle=data.day.totalConsumption
+
+                        this.monthData=data.month.electricityConsumptionStatisticsDtoList
+                        this.monthTitle=data.month.totalConsumption
+
+                        this.yearData=data.year.electricityConsumptionStatisticsDtoList
+                        this.yearTitle=data.year.totalConsumption
                         resolve()
                     }).catch(err => {
                         reject(err)
