@@ -55,30 +55,27 @@
                 </div>
                 <i-col span="24">
                     <Card shadow class="load-card">
-                        <survey-chart style="height: 340px;" :xAxisData="xAxisData" :seriesData="seriesData" :text="lineText" />
+                        <survey-chart style="height: 340px;" :xAxisData="xAxisData" :seriesData="seriesData" :max="max" :min="min" :average="average" :text="lineText" />
                     </Card>
                     <div class="card-div">
-                        <card class='operate-navi' style="background:#2d8cf0;" type="primary">
-                            <count-to :end="8" count-class="count-style" />
-                            <p>最大值</p>
+                        <card class='operate-navi' type="primary">
+                            <!-- <count-to :end="8" count-class="count-style" /> -->
+                            <p class="card-p">{{ max }}</p>
+                            <p>最高负荷</p>
                         </card>
                     </div>
                     <div class="card-div">
-                        <card class='operate-navi' style="background:#2d8cf0;" type="primary">
-                            <count-to :end="8" count-class="count-style" />
-                            <p>最大值</p>
+                        <card class='operate-navi' type="primary">
+                            <!-- <count-to :end="8" count-class="count-style" /> -->
+                            <p class="card-p">{{ min }}</p>
+                            <p>最低负荷</p>
                         </card>
                     </div>
                     <div class="card-div">
-                        <card class='operate-navi' style="background:#2d8cf0;" type="primary">
-                            <count-to :end="8" count-class="count-style" />
-                            <p>最大值</p>
-                        </card>
-                    </div>
-                    <div class="card-div">
-                        <card class='operate-navi' style="background:#2d8cf0;" type="primary">
-                            <count-to :end="8" count-class="count-style" />
-                            <p>最大值</p>
+                        <card class='operate-navi' type="primary">
+                            <!-- <count-to :end="8" count-class="count-style" /> -->
+                            <p class="card-p">{{ average }}</p>
+                            <p>平均负荷</p>
                         </card>
                     </div>
                 </i-col>
@@ -193,6 +190,9 @@
                 statisticXData: [],
                 statisticSData: [],
                 lineData: {},
+                max:'',
+                min:'',
+                average:''
             }
         },
         computed: {
@@ -267,16 +267,29 @@
                         var capacity = []
                         var hour = []
                         data.forEach(element => {
-                            capacity.push(element.power / 1000)
+                            var val= (element.power.toFixed(2) / 1000)
+                            capacity.push(val)
                             hour.push(element.belogHour)
                         })
                         this.seriesData = capacity
                         this.xAxisData = hour
+
+                        this.max = capacity.length===0 ? 0 : Math.max.apply(null,capacity).toFixed(2)
+                        this.min = capacity.length===0 ? 0 : Math.min.apply(null,capacity).toFixed(2)
+                        this.average = capacity.length===0 ? 0 : this.getAverage(capacity).toFixed(2)
                         resolve()
                     }).catch(err => {
                         reject(err)
                     })
                 })
+            },
+            getAverage(array){
+                var len = array.length;
+                var sum = 0;
+                for(var i = 0; i < len ; i++){
+                    sum += array[i];
+                }
+                return sum/len;
             },
             hourClick() {
                 let XData = []
@@ -337,7 +350,7 @@
     }
 
     .navi-div {
-        width: 30%;
+        width: 29%;
         min-width: 150px;
         height: 125px;
         padding-bottom: 10px;
@@ -355,11 +368,16 @@
     .card-div {
         width: 80px;
         height: 80px;
-        float: right;
+        float: left;
         color: white;
-        margin-top: 12px;
-        margin-right: 10px;
-        text-align: center
+        margin-top: 25px;
+        margin-left: 20px;
+        text-align: center;
+        .operate-navi{
+            background: #2d8cf0;
+            padding-top: 10px;
+            padding-bottom: 10px;
+        }
     }
 
     .card-area {
@@ -403,6 +421,9 @@
         float: right;
         width: 88%;
         margin-top: 12px;
+    }
+    .card-p{
+        font-size: 20px
     }
 
 </style>

@@ -124,7 +124,7 @@
                 }
                 this.$nextTick(() => {
                     this.dom = echarts.init(this.$refs.dom)
-                    this.dom.setOption(option)
+                    this.dom.setOption(option, true)
                     on(window, 'resize', this.resize())
                 })
             }

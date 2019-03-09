@@ -28,7 +28,7 @@
                 </div>
                 <div>
                     <Card shadow>
-                        <home-map :om="giveOutData"/>
+                        <home-map :om="giveOutData" :customer-data="customerData"/>
                     </Card>
                 </div>
             </div>
@@ -42,7 +42,7 @@
     import CountTo from '_c/count-to'
     import { ChartPie, ChartBar } from '_c/charts'
     import HomeMap from './home-map.vue'
-    import { getData } from '@/api/home'
+    import { getData, getCustomerInfor } from '@/api/home'
     export default {
         name: 'home',
         components: {
@@ -92,12 +92,14 @@
                     height: 600,
                     longitude: 120.427232,
                     latitude: 27.514563
-                }
+                },
+                customerData:[]
             }
         },
         methods: {
             init() {
                 this.getStatisticalData()
+                this.getCustomerData()
             },
             getStatisticalData() {
                 return new Promise((resolve, reject) => {
@@ -122,6 +124,17 @@
                                     break
                             }
                         })
+                        resolve()
+                    }).catch(err => {
+                        reject(err)
+                    })
+                })
+            },
+            getCustomerData(){
+                return new Promise((resolve, reject) => {
+                    getCustomerInfor().then(res => {
+                        const data = res.data.result
+                        this.customerData= data.items
                         resolve()
                     }).catch(err => {
                         reject(err)

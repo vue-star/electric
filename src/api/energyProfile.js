@@ -9,10 +9,10 @@ export const getUsePowerSummary = (organizationUnitId) => {
         method: 'get'
     })
 }
-// 获取日累积电力
-export const getTodayPowerSummary = (organizationUnitId) => {
+// 获取累积电力
+export const getPowerSummary = (organizationUnitId) => {
     return axios.request({
-        url: 'services/app/PowerStatistics/GetTodayPowerSummaryAsync',
+        url: 'services/app/PowerStatistics/GetPowerSummaryAsync',
         params: {
             organizationUnitId
         },
