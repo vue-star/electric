@@ -176,7 +176,7 @@ export default [{
                 name: 'power_statistics',
                 meta: {
                     icon: 'ios-document',
-                    title: '配电房'
+                    title: '设备统计'
                 },
                 component: () => import('@/view/EPU-Statistics/power-distribution.vue')
             },
@@ -185,19 +185,19 @@ export default [{
                 name: 'europe_box_transformer',
                 meta: {
                     icon: 'md-clipboard',
-                    title: '欧式箱变'
+                    title: '电力配件统计'
                 },
                 component: () => import('@/view/EPU-Statistics/europe-box-transformer.vue')
             },
-            {
-                path: 'american_box_transformer',
-                name: 'american_box_transformer',
-                meta: {
-                    icon: 'md-clipboard',
-                    title: '美式箱变'
-                },
-                component: () => import('@/view/EPU-Statistics/american-box-transformer.vue')
-            }
+            // {
+            //     path: 'american_box_transformer',
+            //     name: 'american_box_transformer',
+            //     meta: {
+            //         icon: 'md-clipboard',
+            //         title: '美式箱变'
+            //     },
+            //     component: () => import('@/view/EPU-Statistics/american-box-transformer.vue')
+            // }
         ]
     },
     {
