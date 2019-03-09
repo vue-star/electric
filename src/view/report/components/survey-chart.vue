@@ -13,7 +13,10 @@
             xAxisData: Array,
             seriesData: Array,
             text: String,
-            subtext: String
+            subtext: String,
+            max: String,
+            min: String,
+            average: String,
         },
         data () {
             return {
@@ -81,11 +84,7 @@
                             //name: '功率',
                             type: 'value',
                             axisLabel: {
-                                formatter: function (value) {
-                                    var texts = []
-                                    texts.push(value + ' kw')
-                                    return texts
-                                }
+                                formatter: '{value} kw'
                             }
                         },
                         series: [{
@@ -100,11 +99,16 @@
                                 data: [
                                     { type: 'max', name: '最大值' },
                                     { type: 'min', name: '最小值' }
-                                ]
+                                ],
+                                label: {
+                                    normal: {
+                                        formatter: '{c}kw'
+                                    }
+                                }
                             },
                             markLine: {
                                 data: [
-                                    { type: 'average', name: '平均值' }
+                                    { type: 'average', value: this.average, name: '平均值' }
                                 ]
                             }
                         }]
