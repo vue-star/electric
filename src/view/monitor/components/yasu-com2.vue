@@ -340,7 +340,7 @@
                         font-size="6" font-family="Helvetica, Arial, sans-serif" text-anchor="start" xml:space="preserve"
                         stroke="red">KW</text>
                     <text stroke="#FFDBD2" fill="#ffffff" stroke-width="0" x="352.92936" y="32.38711" id="svg_1149"
-                        font-size="8" font-family="Helvetica, Arial, sans-serif" text-anchor="start" xml:space="preserve">浙江亚设塑业厂2#欧式箱变</text>
+                        font-size="8" font-family="Helvetica, Arial, sans-serif" text-anchor="start" xml:space="preserve">浙江亚设塑业厂3#欧式箱变</text>
                     <line fill="none" fill-opacity="null" x1="216.59983" y1="75.04177" x2="234.7671" y2="75.04177" id="svg_7"
                         stroke-linejoin="null" stroke-linecap="null" stroke="#ffffff" />
                     <line fill="none" fill-opacity="null" x1="234.26395" y1="75.19117" x2="234.26395" y2="82.50675" id="svg_8"
@@ -786,7 +786,7 @@
                         id="svg_290" stroke-linejoin="null" stroke-linecap="null" stroke-width="0.5" stroke="#5fbf00"
                         transform="rotate(75 606.1474609375,299.41229248046875) " />
                     <text stroke="#ffffff" fill="#ffffff" stroke-width="0" x="343.88231" y="193.75274" id="svg_291"
-                        font-size="8" font-family="Helvetica, Arial, sans-serif" text-anchor="start" xml:space="preserve">1#变压器</text>
+                        font-size="8" font-family="Helvetica, Arial, sans-serif" text-anchor="start" xml:space="preserve">变压器</text>
                     <ellipse fill="none" fill-opacity="null" cx="221.34058" cy="52.04305" id="svg_293" rx="1.04147" ry="1.04147"
                         stroke-width="0.5" stroke="#ffffff" />
                     <ellipse fill="none" fill-opacity="null" cx="399.33758" cy="52.04305" id="svg_294" rx="1.04147" ry="1.04147"

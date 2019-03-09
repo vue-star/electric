@@ -176,7 +176,7 @@ export default [{
                 name: 'power_statistics',
                 meta: {
                     icon: 'ios-document',
-                    title: '配电房'
+                    title: '设备统计'
                 },
                 component: () => import('@/view/EPU-Statistics/power-distribution.vue')
             },
@@ -185,19 +185,19 @@ export default [{
                 name: 'europe_box_transformer',
                 meta: {
                     icon: 'md-clipboard',
-                    title: '欧式箱变'
+                    title: '电力配件统计'
                 },
                 component: () => import('@/view/EPU-Statistics/europe-box-transformer.vue')
             },
-            {
-                path: 'american_box_transformer',
-                name: 'american_box_transformer',
-                meta: {
-                    icon: 'md-clipboard',
-                    title: '美式箱变'
-                },
-                component: () => import('@/view/EPU-Statistics/american-box-transformer.vue')
-            }
+            // {
+            //     path: 'american_box_transformer',
+            //     name: 'american_box_transformer',
+            //     meta: {
+            //         icon: 'md-clipboard',
+            //         title: '美式箱变'
+            //     },
+            //     component: () => import('@/view/EPU-Statistics/american-box-transformer.vue')
+            // }
         ]
     },
     {
@@ -233,18 +233,10 @@ export default [{
         name: 'report',
         meta: {
             icon: 'ios-stats',
-            title: '电能统计'
+            title: '电能检测'
         },
         component: Main,
-        children: [{
-                path: 'survey_survey',
-                name: 'survey_survey',
-                meta: {
-                    icon: 'md-download',
-                    title: '计量概况'
-                },
-                component: () => import('@/view/report/survey-survey.vue')
-            },
+        children: [
             {
                 path: 'energy_profile',
                 name: 'energy_profile',
@@ -253,6 +245,15 @@ export default [{
                     title: '用电概括'
                 },
                 component: () => import('@/view/report/energy-profile.vue')
+            },
+            {
+                path: 'survey_survey',
+                name: 'survey_survey',
+                meta: {
+                    icon: 'md-download',
+                    title: '用电分析'
+                },
+                component: () => import('@/view/report/survey-survey.vue')
             },
             {
                 path: 'functional_factors',
@@ -268,7 +269,7 @@ export default [{
                 name: 'current_analysis',
                 meta: {
                     icon: 'md-add',
-                    title: '电流分析'
+                    title: '电流检测'
                 },
                 component: () => import('@/view/report/current-analysis.vue')
             },
@@ -277,7 +278,7 @@ export default [{
                 name: 'voltage_analysis',
                 meta: {
                     icon: 'md-download',
-                    title: '电压分析'
+                    title: '电压检测'
                 },
                 component: () => import('@/view/report/voltage-analysis.vue')
             },
@@ -286,19 +287,19 @@ export default [{
                 name: 'fault_analysis',
                 meta: {
                     icon: 'md-download',
-                    title: '故障分析'
+                    title: '故障告警'
                 },
                 component: () => import('@/view/report/fault-analysis.vue')
             },
-            {
-                path: 'energy_analysis',
-                name: 'energy_analysis',
-                meta: {
-                    icon: 'md-download',
-                    title: '能耗分析'
-                },
-                component: () => import('@/view/report/energy-analysis.vue')
-            },
+            // {
+            //     path: 'energy_analysis',
+            //     name: 'energy_analysis',
+            //     meta: {
+            //         icon: 'md-download',
+            //         title: '能耗分析'
+            //     },
+            //     component: () => import('@/view/report/energy-analysis.vue')
+            // },
             
         ]
     },
@@ -320,24 +321,24 @@ export default [{
             component: () => import('@/view/message/message-report.vue')
         }]
     },
-    {
-        path: '/fault',
-        name: 'fault',
-        meta: {
-            icon: 'md-cloud-upload',
-            title: '故障管理'
-        },
-        component: Main,
-        children: [{
-            path: 'fault_report',
-            name: 'fault_report',
-            meta: {
-                icon: 'ios-hammer',
-                title: '故障统计',
-            },
-            component: () => import('@/view/fault/fault-report.vue')
-        }]
-    },
+    // {
+    //     path: '/fault',
+    //     name: 'fault',
+    //     meta: {
+    //         icon: 'md-cloud-upload',
+    //         title: '故障管理'
+    //     },
+    //     component: Main,
+    //     children: [{
+    //         path: 'fault_report',
+    //         name: 'fault_report',
+    //         meta: {
+    //             icon: 'ios-hammer',
+    //             title: '故障统计',
+    //         },
+    //         component: () => import('@/view/fault/fault-report.vue')
+    //     }]
+    // },
     {
         path: '/system_manage',
         name: 'system_manage',
@@ -412,23 +413,23 @@ export default [{
             },
         ]
     },
-    {
-        path: '/repair',
-        name: 'repair',
-        meta: {
-            hide: true
-        },
-        component: Main,
-        children: [{
-            path: 'rush_repair',
-            name: 'rush_repair',
-            meta: {
-                icon: 'ios-hammer',
-                title: '抢修管理',
-            },
-            component: () => import('@/view/repair/rush-repair.vue')
-        }]
-    },
+    // {
+    //     path: '/repair',
+    //     name: 'repair',
+    //     meta: {
+    //         hide: true
+    //     },
+    //     component: Main,
+    //     children: [{
+    //         path: 'rush_repair',
+    //         name: 'rush_repair',
+    //         meta: {
+    //             icon: 'ios-hammer',
+    //             title: '抢修管理',
+    //         },
+    //         component: () => import('@/view/repair/rush-repair.vue')
+    //     }]
+    // },
     {
         path: '/inspection',
         name: 'inspection',
@@ -441,7 +442,7 @@ export default [{
             name: 'inspection_manage',
             meta: {
                 icon: 'ios-navigate',
-                title: '巡检管理'
+                title: '运行管理'
             },
             component: () => import('@/view/inspection/inspection-manage.vue')
         }]

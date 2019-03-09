@@ -1,5 +1,20 @@
 <template>
     <div>
+        <row>
+            <div class="list" v-show='showList'>
+                <div class='table-wrap' style="float:top;">
+                    <i-table stripe highlight-row :columns="columns1" :data="listData" @on-row-click='selectItem'>
+                    </i-table>
+                    <Spin :fix='true' v-show='isLoading'>
+                        <Icon type="load-c" size=18 class="demo-spin-icon-load"></Icon>
+                        <div>Loading</div>
+                    </Spin>
+                </div>
+                <Page style="float:right;" class='page-wrap' show-elevator show-total :total="total" :current="queryParam.pageNumber+1"
+                    @on-change='pageChange'>
+                </Page>
+            </div>
+        </row>
         <Row :gutter="20">
             <i-col :xs="12" :md="8" :lg="4" v-for="(navi, i) in naviCardData" :key="`navi-${i}`" class="navi-div">
                 <navi-card shadow :color="navi.color" :title="navi.title" style="box-shadow:5px 5px 5px #708194" :icon="navi.icon"
@@ -9,11 +24,11 @@
                 </navi-card>
             </i-col>
         </Row>
-        <Row>
+        <!-- <Row>
             <Card shadow>
                 <statistics-bar style="height: 300px;" :value="barData" text="高压信息统计图" />
             </Card>
-        </Row>
+        </Row> -->
     </div>
 </template>
 
@@ -38,6 +53,82 @@
         },
         data() {
             return {
+                columns1: [{
+                        title: '厂商名称',
+                        key: 'index',
+                        width: 100,
+                        align: 'center'
+                    },
+                    {
+                        title: '负荷开关',
+                        key: 'name',
+                        align: 'center'
+
+                    },
+                    {
+                        title: '电流互感器',
+                        key: 'faultType',
+                        width: 100,
+                        align: 'center'
+                    },
+                    {
+                        title: '电压互感器',
+                        key: 'msgContent',
+                        width: 100,
+                        align: 'center'
+                    },
+                    {
+                        title: '高压熔断器',
+                        key: 'msgNumber',
+                        width: 100,
+                        align: 'center'
+                    },
+                    {
+                        title: '电缆',
+                        key: 'sendState',
+                        align: 'center'
+                    },
+                    {
+                        title: '变压',
+                        key: 'msgTime',
+                        align: 'center'
+                    },
+                    {
+                        title: '低压',
+                        key: 'faultType',
+                        align: 'center'
+                    },
+                    {
+                        title: '隔离开关',
+                        key: 'msgContent',
+                        align: 'center'
+                    },
+                    {
+                        title: '断路器',
+                        key: 'msgNumber',
+                        align: 'center'
+                    },
+                    {
+                        title: '出线电缆',
+                        key: 'sendState',
+                        align: 'center'
+                    },
+                    {
+                        title: '电容器',
+                        key: 'msgTime',
+                        align: 'center'
+                    }
+                ],
+                queryParam: {
+                    'maxResultCount': 10,
+                    'filter': '',
+                    'pageNumber': 0,
+                    'skipCount': 0
+                },
+                total: 1,
+                showList: true,
+                isLoading: false,
+                listData: [],
                 naviCardData: [{
                         title: '负荷开关',
                         icon: 'md-pulse',
@@ -147,6 +238,25 @@
                     客户18: 163,
                     客户19: 133
                 }
+            }
+        },
+        methods: {
+            init() {
+                // this.getCustomerList();
+                this.getSelectData()
+                this.getListData()
+            },
+            selectItem(data, index) {
+                this.deleteBtn = true
+                this.editBtn = true
+                this.data = data
+                this.selectIndex = index
+                this.isSelect = true
+            },
+            pageChange(data) {
+                this.queryParam.pageNumber = data - 1
+                this.queryParam.skipCount = (data - 1) * this.queryParam.maxResultCount
+                this.getListData()
             }
         },
         mounted() {

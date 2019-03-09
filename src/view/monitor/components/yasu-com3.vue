@@ -341,7 +341,7 @@
                         font-size="6" id="svg_1124" y="341.75261" x="123.52699" stroke-opacity="null" stroke-width="0"
                         fill="#ffffff">KW</text>
                     <text xml:space="preserve" text-anchor="start" font-family="Helvetica, Arial, sans-serif" font-size="8"
-                        id="svg_1149" y="32.38711" x="352.92936" stroke-width="0" fill="#ffffff" stroke="#FFDBD2">浙江亚设塑业厂3#欧式箱变</text>
+                        id="svg_1149" y="32.38711" x="352.92936" stroke-width="0" fill="#ffffff" stroke="#FFDBD2">浙江亚设塑业厂1#欧式箱变</text>
                     <line stroke="#ffffff" stroke-linecap="null" stroke-linejoin="null" id="svg_7" y2="75.04177" x2="234.7671"
                         y1="75.04177" x1="216.59983" fill-opacity="null" fill="none" />
                     <line stroke="#ffffff" stroke-linecap="undefined" stroke-linejoin="undefined" id="svg_8" y2="82.50675"
@@ -794,7 +794,7 @@
                         stroke-linecap="null" stroke-linejoin="null" id="svg_290" y2="301.41226" x2="216.63474" y1="301.41226"
                         x1="213.0057" fill-opacity="null" fill="none" />
                     <text xml:space="preserve" text-anchor="start" font-family="Helvetica, Arial, sans-serif" font-size="8"
-                        id="svg_291" y="193.75274" x="343.88231" stroke-width="0" fill="#ffffff" stroke="#ffffff">2#变压器</text>
+                        id="svg_291" y="193.75274" x="343.88231" stroke-width="0" fill="#ffffff" stroke="#ffffff">变压器</text>
                     <ellipse stroke="#bf0000" stroke-width="0.5" ry="1.04147" rx="1.04147" id="svg_293" cy="52.04305"
                         cx="221.34058" fill-opacity="null" fill="none" />
                     <ellipse stroke="#ff0000" stroke-width="0.5" ry="1.04147" rx="1.04147" id="svg_294" cy="52.04305"
