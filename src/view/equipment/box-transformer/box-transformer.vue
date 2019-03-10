@@ -39,6 +39,7 @@
     import search from '@/view/components/search/search.vue'
     import operate from '@/view/components/button-group/index.vue'
     import transformerForm from './transformer-form.vue'
+    import expandBoxRow from './box-expend.vue'
     import transformerDetail from './transformer-detail.vue'
     import {
         getBoxTransformerList,
@@ -49,10 +50,15 @@
         data() {
             return {
                 columns1: [{
-                        title: '序号',
-                        key: 'index',
-                        width: 60,
-                        align: 'center'
+                        type: 'expand',
+                        width: 50,
+                        render: (h, params) => {
+                            return h(expandBoxRow, {
+                                props: {
+                                    row: params.row
+                                }
+                            })
+                        }
                     },
                     {
                         title: '箱变编号',
