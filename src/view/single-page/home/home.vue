@@ -67,7 +67,7 @@
                         color: '#19be6b'
                     },
                     {
-                        title: '使用电量数',
+                        title: '使用电量(万kwh)',
                         icon: 'md-calculator',
                         count: 0,
                         iconColor: '#fff',
@@ -114,7 +114,14 @@
                                     element.count = data.numberofAccessDevices
                                     break
                                 case 2:
-                                    element.count = data.numberofElectricityUsed
+                                    let num=data.numberofElectricityUsed
+                                    if(num > 1000){
+                                        element.count= Math.ceil(num/1000)
+                                        element.title = '使用电量(万kwh)'
+                                    }else{
+                                        element.count = data.numberofElectricityUsed
+                                        element.title = '使用电量(kwh)'
+                                    }
                                     break
                                 case 3:
                                     element.count = data.numberofOfflineDevices
@@ -152,7 +159,7 @@
 
 <style lang="less">
     .count-style {
-        font-size: 50px;
+        font-size: 40px;
         color: aliceblue
     }
 

@@ -72,6 +72,19 @@
                                 return htmlStr
                             }
                         },
+                        visualMap: {
+                            show: false,
+                            top: 10,
+                            right: 10,
+                            pieces: [{
+                                gt: 0,
+                                lte: 630,
+                                color: '#ffe'
+                            }],
+                            outOfRange: {
+                                color: '#096'
+                            }
+                        },
                         xAxis: {
                             boundaryGap: false,
                             type: 'category',
@@ -87,25 +100,45 @@
                         series: [{
                             name: '功率',
                             stack: '总量',
-                            areaStyle: { normal: {
-                                color: '#2d8cf0'
-                            } },
-                            data: seriesData,
-                            type: 'line',
-                            markPoint: {
-                                data: [
-                                    { type: 'max', name: '最大值' },
-                                    { type: 'min', name: '最小值' }
-                                ],
-                                label: {
-                                    normal: {
-                                        formatter: '{c}kw'
-                                    }
+                            // areaStyle: { normal: {
+                            //     color: '#2d8cf0'
+                            // } },
+                            areaStyle: {
+                                normal: {
+                                    color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [{
+                                        offset: 0,
+                                        color: '#096'
+                                    }, {
+                                        offset: 1,
+                                        color: '#ffe'
+                                    }])
                                 }
                             },
+                            data: seriesData,
+                            type: 'line',
+                            // markPoint: {
+                            //     data: [
+                            //         { type: 'max', name: '最大值' },
+                            //         { type: 'min', name: '最小值' }
+                            //     ],
+                            //     label: {
+                            //         normal: {
+                            //             formatter: '{c}kw'
+                            //         }
+                            //     }
+                            // },
                             markLine: {
                                 data: [
-                                    { type: 'average', value: this.average, name: '平均值' }
+                                    // { type: 'average', value: this.average, name: '平均值' },
+                                    { 
+                                        yAxis: 630,
+                                        itemStyle: {
+                                            normal: {
+                                                color: '#d68262'
+                                            }
+                                        },
+                                    
+                                    }
                                 ]
                             }
                         }]

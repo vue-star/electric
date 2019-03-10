@@ -75,7 +75,7 @@
                                     var param = params[i]
                                     var xName = param.name// x轴的名称
                                     var seriesName = param.seriesName// 图例名称
-                                    var value = param.value.toFixed(2)// y轴值
+                                    var value = param.value// y轴值
                                     var color = param.color// 图例颜色
 
                                     if (i === 0) {
