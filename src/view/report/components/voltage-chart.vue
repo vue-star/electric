@@ -90,7 +90,7 @@
                             type: 'value',
                             name: '电压',
                             max: 500,
-                            min: 300,
+                            // min: 300,
                             axisLabel: {
                                 formatter: function (value) {
                                     var texts = []

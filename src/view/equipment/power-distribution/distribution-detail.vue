@@ -2100,7 +2100,9 @@
                             res => {
                                 this.isLoading = false
                                 this.listData3 = res.data.result.items
+                                let size = this.queryParam.skipCount + 1
                                 this.listData3.forEach((element) => {
+                                    element.index = size++
                                     // 格式化时间
                                     element.manufactureDate = formatData(element.manufactureDate, 'day')
                                 })

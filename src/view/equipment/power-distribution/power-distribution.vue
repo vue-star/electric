@@ -42,19 +42,22 @@
     import operate from '@/view/components/button-group/index.vue'
     import distributionForm from './distribution-form.vue'
     import distributionDetail from './distribution-detail.vue'
-    import {
-        getPowerDistributionList,
-        delPowerDistribution
-    } from '@/api/powerDistribution'
+    import expandPowerRow from './power-expend.vue'
+    import { getPowerDistributionList, delPowerDistribution } from '@/api/powerDistribution'
     export default {
         name: 'power_distribution',
         data() {
             return {
                 columns1: [{
-                        title: '序号',
-                        key: 'index',
-                        width: 60,
-                        align: 'center'
+                        type: 'expand',
+                        width: 50,
+                        render: (h, params) => {
+                            return h(expandPowerRow, {
+                                props: {
+                                    row: params.row
+                                }
+                            })
+                        }
                     },
                     {
                         title: '配电室编号',
