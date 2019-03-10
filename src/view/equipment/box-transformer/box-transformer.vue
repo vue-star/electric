@@ -61,6 +61,12 @@
                         }
                     },
                     {
+                        title: '序号',
+                        key: 'index',
+                        width: 60,
+                        align: 'center'
+                    },
+                    {
                         title: '箱变编号',
                         key: 'boxTransformerNumber',
                         align: 'center'

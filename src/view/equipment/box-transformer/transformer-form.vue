@@ -53,7 +53,7 @@
                 <Col span="10" class='col-wrap'>
                 <FormItem label="组织" prop="organizationUnitId">
                     <Select v-model="formValidate.organizationUnitId">
-                        <Option v-for="item in organizationUnitIdList" :value="item.displayName" :key="item.id">{{
+                        <Option v-for="item in organizationUnitIdList" :value="item.id" :key="item.id">{{
                             item.displayName }}</Option>
                     </Select>
                 </FormItem>
@@ -137,11 +137,11 @@
                         validator: validateNumber,
                         trigger: 'change'
                     }],
-                    organizationUnitId: [{
-                        required: true,
-                        message: '请选择组织名称',
-                        trigger: 'change'
-                    }],
+                    // organizationUnitId: [{
+                    //     required: true,
+                    //     message: '请选择组织名称',
+                    //     trigger: 'change'
+                    // }],
                 },
                 boxData: [{
                         value: 1,
@@ -166,11 +166,7 @@
                 if (this.isEdit) {
                     Object.assign(this.formValidate, this.editData)
                     // this.$delete(this.formValidate,"isUseText");
-                    this.boxTransformerManufacturerList.forEach(element => {
-                        if (objEqual(this.formValidate.boxTransformerManufacturer, element.name)) {
-                            this.formValidate.boxTransformerManufacturer = element.id
-                        }
-                    })
+                    
                     this.organizationUnitIdList.forEach(element => {
                         if (objEqual(this.formValidate.organizationUnitName, element.displayName)) {
                             this.formValidate.organizationUnitId = element.id

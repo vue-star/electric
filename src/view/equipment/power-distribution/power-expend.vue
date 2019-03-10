@@ -1,10 +1,10 @@
 <template>
     <div>
         <Row>
-            <Col span="25" offset="1">
+            <Col span="25">
                 <div class="list">
                     <Row>
-                        <Col span="21" offset="1">
+                        <Col>
                             <div class="portlet-title">
                                 <Icon type="person-stalker"></Icon>
                                 <span class='title_text'>高压设备信息</span>
@@ -12,7 +12,7 @@
                         </Col>
                     </Row>
                     <Row>
-                        <Col span="21" offset="1">
+                        <Col>
                             <div class='table-wrap'>
                                 <i-table stripe highlight-row :columns="columns1" :data="listData">
                                 </i-table>
@@ -27,7 +27,7 @@
                 </div>
                 <div class="list">
                     <Row>
-                        <Col span="21" offset="1">
+                        <Col>
                             <div class="portlet-title">
                                 <Icon type="person-stalker"></Icon>
                                 <span class='title_text'>低压设备信息</span>
@@ -35,7 +35,7 @@
                         </Col>
                     </Row>
                     <Row>
-                        <Col span="21" offset="1">
+                        <Col>
                         <div class='table-wrap'>
                             <i-table stripe highlight-row :columns="columns2" :data="listData2">
                             </i-table>
@@ -50,7 +50,7 @@
                 </div>
                 <div class="list">
                     <Row>
-                        <Col span="21" offset="1">
+                        <Col>
                             <div class="portlet-title">
                                 <Icon type="person-stalker"></Icon>
                                 <span class='title_text'>变压设备信息</span>
@@ -58,7 +58,7 @@
                         </Col>
                     </Row>
                     <Row>
-                        <Col span="21" offset="1">
+                        <Col>
                         <div class='table-wrap'>
                             <i-table stripe highlight-row :columns="columns3" :data="listData3">
                             </i-table>
@@ -237,14 +237,12 @@
                     'skipCount': 0
                 },
                 type: 1,
-                powerDistributionRoomId: 0,
                 isLoading: false
             }
         },
         methods: {
             init() {
                 this.getListData()
-                this.powerDistributionRoomId=this.row.id
             },
             // 根据详细信息
             getListData() {
@@ -256,7 +254,7 @@
             // 获取高压信息
             getHighVoltageInfoData() {
                 return new Promise((resolve, reject) => {
-                    getHighVoltageInformationList(this.powerDistributionRoomId, this.queryParam, this.type).then(
+                    getHighVoltageInformationList(this.row.id, this.queryParam, this.type).then(
                             res => {
                                 this.isLoading = false
                                 this.listData = res.data.result.items
@@ -279,7 +277,7 @@
             // 获取低压信息
             getLowVoltageInfoData() {
                 return new Promise((resolve, reject) => {
-                    getLowVoltageInformationList(this.powerDistributionRoomId, this.queryParam, this.type).then(
+                    getLowVoltageInformationList(this.row.id, this.queryParam, this.type).then(
                             res => {
                                 this.isLoading = false
                                 this.listData2 = res.data.result.items
@@ -302,7 +300,7 @@
             // 获取变压信息
             getTransInfoData() {
                 return new Promise((resolve, reject) => {
-                    getTransInformationList(this.powerDistributionRoomId, this.queryParam, this.type).then(
+                    getTransInformationList(this.row.id, this.queryParam, this.type).then(
                             res => {
                                 this.isLoading = false
                                 this.listData3 = res.data.result.items

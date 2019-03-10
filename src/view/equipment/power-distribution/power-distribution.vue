@@ -60,6 +60,12 @@
                         }
                     },
                     {
+                        title: '序号',
+                        key: 'index',
+                        width: 60,
+                        align: 'center'
+                    },
+                    {
                         title: '配电室编号',
                         key: 'distributionRoomNumber',
                         align: 'center'

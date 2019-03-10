@@ -1,7 +1,7 @@
 <template>
     <div>
         <Row>
-            <Col span="25" offset="1">
+            <Col>
             <div class='table-wrap'>
                 <i-table stripe border highlight-row :columns="columns1" :data="listData">
                 </i-table>
@@ -23,18 +23,18 @@
         data() {
             let self = this;
             return {
-                columns1: [{
-                        title: '序号',
-                        key: 'index',
-                        width: 60,
-                        align: 'center'
-                    },
-                    {
+                columns1: [
+                     {
                         title: '断路器',
                         align: 'center',
                         children: [{
                                 title: '型号',
                                 key: 'breakerType',
+                                align: 'center',
+                            },
+                            {
+                                title: '生产厂家',
+                                key: 'breakerManufacturer',
                                 align: 'center',
                             },
                             {
@@ -47,36 +47,7 @@
                                 key: 'breakerRatedCurrent',
                                 align: 'center',
                             },
-                            {
-                                title: '生产厂家',
-                                key: 'breakerManufacturer',
-                                align: 'center',
-                            }
-                        ]
-                    },
-                    {
-                        title: '电容器',
-                        align: 'center',
-                        children: [{
-                                title: '型号',
-                                key: 'capacitorType',
-                                align: 'center',
-                            },
-                            {
-                                title: '生产编号',
-                                key: 'capacitorProductionCode',
-                                align: 'center',
-                            },
-                            {
-                                title: '电容容量',
-                                key: 'capacitorCapacity',
-                                align: 'center',
-                            },
-                            {
-                                title: '生产厂家',
-                                key: 'capacitorManufacturer',
-                                align: 'center',
-                            }
+                            
                         ]
                     },
                     {
@@ -98,8 +69,33 @@
                                 align: 'center',
                             },
                             {
-                                title: '备注',
-                                key: 'remark',
+                                title: '额定电流',
+                                key: 'isolationSwitchRatedCurrent',
+                                align: 'center',
+                            }
+                        ]
+                    },
+                    {
+                        title: '电容器',
+                        align: 'center',
+                        children: [{
+                                title: '型号',
+                                key: 'capacitorType',
+                                align: 'center',
+                            },
+                            {
+                                title: '生产厂家',
+                                key: 'capacitorManufacturer',
+                                align: 'center',
+                            },
+                            {
+                                title: '生产编号',
+                                key: 'capacitorProductionCode',
+                                align: 'center',
+                            },
+                            {
+                                title: '电容容量',
+                                key: 'capacitorCapacity',
                                 align: 'center',
                             }
                         ]
@@ -118,8 +114,13 @@
                                 align: 'center',
                             },
                             {
-                                title: '电缆厂家',
+                                title: '电缆厂商',
                                 key: 'outCableManufacturer',
+                                align: 'center',
+                            },
+                            {
+                                title: '电缆长度',
+                                key: 'outCableLength',
                                 align: 'center',
                             }
                         ]
@@ -141,10 +142,10 @@
                 for(let i=0;i<max;i++){
                     let data = {};
                     if(i<a){
-                        data.breakerManufacturer = row.breakerListDto[i].breakerManufacturer;
-                        data.breakerProductionCode = row.breakerListDto[i].breakerProductionCode;
-                        data.breakerRatedCurrent = row.breakerListDto[i].breakerRatedCurrent;
-                        data.breakerType = row.breakerListDto[i].breakerType;
+                        data.breakerManufacturer = row.breakerListDto[i].productManufacturer;
+                        data.breakerProductionCode = row.breakerListDto[i].productionCode;
+                        data.breakerRatedCurrent = row.breakerListDto[i].ratedCurrent;
+                        data.breakerType = row.breakerListDto[i].productType;
                     }else{
                         data.breakerManufacturer = '';
                         data.breakerProductionCode = '';
@@ -153,9 +154,9 @@
                     };
                     if(i<b){
                         data.capacitorCapacity = row.capacitorListDto[i].capacitorCapacity;
-                        data.capacitorManufacturer = row.capacitorListDto[i].capacitorManufacturer;
-                        data.capacitorProductionCode = row.capacitorListDto[i].capacitorProductionCode;
-                        data.capacitorType = row.capacitorListDto[i].capacitorType;
+                        data.capacitorManufacturer = row.capacitorListDto[i].productManufacturer;
+                        data.capacitorProductionCode = row.capacitorListDto[i].productionCode;
+                        data.capacitorType = row.capacitorListDto[i].productType;
                     }else{
                         data.capacitorCapacity = '';
                         data.capacitorManufacturer = '';
@@ -163,24 +164,26 @@
                         data.capacitorType = '';
                     };
                     if(i<c){
-                        data.isolationSwitchManufacturer = row.isolationSwitchListDto[i].isolationSwitchManufacturer;
-                        data.isolationSwitchProductionCode = row.isolationSwitchListDto[i].isolationSwitchProductionCode;
-                        data.isolationSwitchType = row.isolationSwitchListDto[i].isolationSwitchType;
-                        data.remark = row.isolationSwitchListDto[i].remark;
+                        data.isolationSwitchManufacturer = row.isolationSwitchListDto[i].productManufacturer;
+                        data.isolationSwitchProductionCode = row.isolationSwitchListDto[i].productionCode;
+                        data.isolationSwitchType = row.isolationSwitchListDto[i].productType;
+                        data.isolationSwitchRatedCurrent = row.isolationSwitchListDto[i].ratedCurrent;
                     }else{
                         data.isolationSwitchManufacturer = '';
                         data.isolationSwitchProductionCode = '';
                         data.isolationSwitchType = '';
-                        data.remark = '';
+                        data.isolationSwitchRatedCurrent = '';
                     };
                     if(i<d){
-                        data.lineName = row.outCableListDto[i].lineName;
-                        data.outCableManufacturer = row.outCableListDto[i].outCableManufacturer;
-                        data.outCableType = row.outCableListDto[i].outCableType;
+                        data.lineName = row.outCableListDto[i].cableName;
+                        data.outCableManufacturer = row.outCableListDto[i].productManufacturer;
+                        data.outCableType = row.outCableListDto[i].productType;
+                        data.outCableLength = row.outCableListDto[i].cableLength;
                     }else{
                         data.lineName = '';
                         data.outCableManufacturer = '';
                         data.outCableType = '';
+                        data.outCableLength = '';
                     };
                     this.listData.push(data);
                 }

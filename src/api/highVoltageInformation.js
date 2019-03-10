@@ -49,19 +49,19 @@ export const updataHighVoltageInformation = (HighVoltageInformation) => {
     })
 }
 // 新增负荷开关
-export const addLoadSwitch = (LoadSwitch) => {
-    const data = LoadSwitch
+export const addHighVoltageItems = (HighVoltageItem) => {
+    const data = HighVoltageItem
     return axios.request({
-        url: 'services/app/HighVoltageInformation/CreateLoadSwitch',
+        url: 'services/app/HighVoltageInformation/CreatePowerEquipmentComponent',
         data,
         method: 'post'
     })
 }
 // 修改负荷开关
-export const updataLoadSwitch = (LoadSwitch) => {
-    const data = LoadSwitch
+export const updataHighVoltageItems = (HighVoltageItem) => {
+    const data = HighVoltageItem
     return axios.request({
-        url: 'services/app/HighVoltageInformation/UpdateLoadSwitch',
+        url: 'services/app/HighVoltageInformation/UpdatePowerEquipmentComponent',
         data,
         method: 'put'
     })

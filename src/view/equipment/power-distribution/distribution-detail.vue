@@ -83,7 +83,7 @@
             </div>
         </Modal>
 
-        <Modal v-model="showAddOrEditHighItems" width="710" :styles="{top: '100px'}">
+        <Modal v-model="showAddOrEditHighItems" width="930" :styles="{top: '100px'}">
             <p slot="header" style="color:#2db7f5;text-align:left">
                 <span>{{modelTitle}}</span>
             </p>
@@ -95,45 +95,123 @@
                                 :label-width="100">
                                 <Row :gutter="24" class='row-wrap'>
                                     <Col span="10" class='col-wrap'>
-                                    <FormItem label="产品型号" prop="loadSwitchType">
-                                        <Input v-model="formLoadSwitchValidate.loadSwitchType" :maxlength=20
-                                            placeholder="请输入产品型号"></Input>
+                                        <FormItem label="产品型号" prop="productType">
+                                            <Input v-model="formLoadSwitchValidate.productType" :maxlength=20
+                                                placeholder="请输入产品型号"></Input>
+                                        </FormItem>
+                                    </Col>
+                                    <Col span="10" class='col-wrap'>
+                                        <FormItem label="生产厂商" prop="productManufacturer">
+                                            <Select v-model="formLoadSwitchValidate.productManufacturer">
+                                                <Option v-for="item in manufacturerLoadSwitchList" :value="item.name" :key="item.id">{{
+                                                    item.name }}</Option>
+                                            </Select>
+                                        </FormItem>
+                                    </Col>
+                                </Row>
+                                <Row :gutter="24" class='row-wrap'>
+                                    <Col span="10" class='col-wrap'>
+                                        <FormItem label="生产编号" prop="productionCode">
+                                            <Input v-model="formLoadSwitchValidate.productionCode" :maxlength=20
+                                                placeholder="请输入生产编号"></Input>
+                                        </FormItem>
+                                    </Col>  
+                                    <Col span="10" class='col-wrap'>
+                                        <FormItem label="额定电流" prop="ratedCurrent">
+                                            <Input v-model="formLoadSwitchValidate.ratedCurrent" :maxlength=20
+                                                placeholder="请输入额定电流"></Input>
+                                        </FormItem>
+                                    </Col>  
+                                </Row>
+                            </Form>
+                        </div>
+                    </Tab-pane>
+                    <Tab-pane label="新增断路器" key="key2" name="formBreakerValidate">
+                        <div>
+                            <Form ref="formBreakerValidate" :model="formBreakerValidate" :rules="ruleBreakerValidate"
+                                :label-width="100">
+                                <Row :gutter="24" class='row-wrap'>
+                                    <Col span="10" class='col-wrap'>
+                                    <FormItem label="产品型号" prop="productType">
+                                        <Input v-model="formBreakerValidate.productType" :maxlength=200 placeholder="请输入产品型号"></Input>
                                     </FormItem>
                                     </Col>
                                     <Col span="10" class='col-wrap'>
-                                    <FormItem label="生产厂商" prop="loadSwitchManufacturer">
-                                        <Select v-model="formLoadSwitchValidate.loadSwitchManufacturer">
-                                            <Option v-for="item in manufacturerLoadSwitchList" :value="item.name" :key="item.id">{{
+                                    <FormItem label="生产厂商" prop="productManufacturer">
+                                        <Select v-model="formBreakerValidate.productManufacturer">
+                                            <Option v-for="item in manufacturerBreakerList" :value="item.name" :key="item.id">{{
                                                 item.name }}</Option>
                                         </Select>
                                     </FormItem>
                                     </Col>
                                 </Row>
                                 <Row :gutter="24" class='row-wrap'>
-                                   <Col span="10" class='col-wrap'>
-                                    <FormItem label="生产编号" prop="loadSwitchProductionCode">
-                                        <Input v-model="formLoadSwitchValidate.loadSwitchProductionCode" :maxlength=20
+                                    <Col span="10" class='col-wrap'>
+                                    <FormItem label="生产编号" prop="productionCode">
+                                        <Input v-model="formBreakerValidate.productionCode" :maxlength=200
                                             placeholder="请输入生产编号"></Input>
                                     </FormItem>
-                                    </Col>  
+                                    </Col>
+                                    <Col span="10" class='col-wrap'>
+                                    <FormItem label="额定电流" prop="ratedCurrent">
+                                        <Input v-model="formBreakerValidate.ratedCurrent" number :maxlength=50
+                                            placeholder="请输入额定电流"></Input>
+                                    </FormItem>
+                                    </Col>
                                 </Row>
                             </Form>
                         </div>
                     </Tab-pane>
-                    <Tab-pane label="新增电流互感器" key="key2" name="formCurrentTransValidate">
+                    <Tab-pane label="新增隔离开关" key="key3" name="formIsolationSwitchValidate">
+                        <div>
+                            <Form ref="formIsolationSwitchValidate" :model="formIsolationSwitchValidate" :rules="ruleIsolationSwitchValidate"
+                                :label-width="100">
+                                <Row :gutter="24" class='row-wrap'>
+                                     <Col span="10" class='col-wrap'>
+                                    <FormItem label="产品型号" prop="productType">
+                                        <Input v-model="formIsolationSwitchValidate.productType" :maxlength=200
+                                            placeholder="请输入产品型号"></Input>
+                                    </FormItem>
+                                    </Col>
+                                    <Col span="10" class='col-wrap'>
+                                    <FormItem label="生产厂商" prop="productManufacturer">
+                                        <Select v-model="formIsolationSwitchValidate.productManufacturer">
+                                            <Option v-for="item in manufacturerIsolationSwitchList" :value="item.name"
+                                                :key="item.id">{{ item.name }}</Option>
+                                        </Select>
+                                    </FormItem>
+                                    </Col>
+                                </Row>
+                                <Row :gutter="24" class='row-wrap'>
+                                    <Col span="10" class='col-wrap'>
+                                    <FormItem label="生产编号" prop="productionCode">
+                                        <Input v-model="formIsolationSwitchValidate.productionCode"
+                                            :maxlength=50 placeholder="请输入生产编号"></Input>
+                                    </FormItem>
+                                    </Col>
+                                    <Col span="10" class='col-wrap'>
+                                    <FormItem label="额定电流" prop="ratedCurrent">
+                                        <Input v-model="formIsolationSwitchValidate.ratedCurrent" :maxlength=200 placeholder="请输入备注信息"></Input>
+                                    </FormItem>
+                                    </Col>
+                                </Row>
+                            </Form>
+                        </div>
+                    </Tab-pane>
+                    <Tab-pane label="新增电流互感器" key="key4" name="formCurrentTransValidate">
                         <div>
                             <Form ref="formCurrentTransValidate" :model="formCurrentTransValidate" :rules="ruleCurrentTransValidate"
                                 :label-width="100">
                                 <Row :gutter="24" class='row-wrap'>
                                     <Col span="10" class='col-wrap'>
-                                    <FormItem label="产品型号" prop="currentTransformerType">
-                                        <Input v-model="formCurrentTransValidate.currentTransformerType" :maxlength=20
+                                    <FormItem label="产品型号" prop="productType">
+                                        <Input v-model="formCurrentTransValidate.productType" :maxlength=20
                                             placeholder="请输入产品型号"></Input>
                                     </FormItem>
                                     </Col>
                                     <Col span="10" class='col-wrap'>
-                                    <FormItem label="生产厂商" prop="currentTransformerManufacturer">
-                                        <Select v-model="formCurrentTransValidate.currentTransformerManufacturer">
+                                    <FormItem label="生产厂商" prop="productManufacturer">
+                                        <Select v-model="formCurrentTransValidate.productManufacturer">
                                             <Option v-for="item in manufacturerCurrentTransList" :value="item.name"
                                                 :key="item.id">{{ item.name }}</Option>
                                         </Select>
@@ -141,30 +219,36 @@
                                     </Col>
                                 </Row>
                                 <Row :gutter="24" class='row-wrap'>
-                                   <Col span="10" class='col-wrap'>
-                                    <FormItem label="生产编号" prop="currentTransformerProductionCode">
-                                        <Input v-model="formCurrentTransValidate.currentTransformerProductionCode"
-                                            :maxlength=20 placeholder="请输入生产编号"></Input>
-                                    </FormItem>
+                                    <Col span="10" class='col-wrap'>
+                                        <FormItem label="生产编号" prop="productionCode">
+                                            <Input v-model="formCurrentTransValidate.productionCode"
+                                                :maxlength=20 placeholder="请输入生产编号"></Input>
+                                        </FormItem>
+                                    </Col>  
+                                    <Col span="10" class='col-wrap'>
+                                        <FormItem label="变比" prop="ratio">
+                                            <Input v-model="formCurrentTransValidate.ratio"
+                                                :maxlength=20 placeholder="请输入变比"></Input>
+                                        </FormItem>
                                     </Col>  
                                 </Row>
                             </Form>
                         </div>
                     </Tab-pane>
-                    <Tab-pane label="新增电压互感器" key="key3" name="formVoltageTransValidate">
+                    <Tab-pane label="新增电压互感器" key="key5" name="formVoltageTransValidate">
                         <div>
                             <Form ref="formVoltageTransValidate" :model="formVoltageTransValidate" :rules="ruleVoltageTransValidate"
                                 :label-width="100">
                                 <Row :gutter="24" class='row-wrap'>
                                     <Col span="10" class='col-wrap'>
-                                    <FormItem label="产品型号" prop="voltageTransformerType">
-                                        <Input v-model="formVoltageTransValidate.voltageTransformerType" :maxlength=20
+                                    <FormItem label="产品型号" prop="productType">
+                                        <Input v-model="formVoltageTransValidate.productType" :maxlength=20
                                             placeholder="请输入产品型号"></Input>
                                     </FormItem>
                                     </Col>
                                     <Col span="10" class='col-wrap'>
-                                    <FormItem label="生产厂商" prop="voltageTransformerManufacturer">
-                                        <Select v-model="formVoltageTransValidate.voltageTransformerManufacturer">
+                                    <FormItem label="生产厂商" prop="productManufacturer">
+                                        <Select v-model="formVoltageTransValidate.productManufacturer">
                                             <Option v-for="item in manufacturerVoltageTransList" :value="item.name"
                                                 :key="item.id">{{ item.name }}</Option>
                                         </Select>
@@ -173,39 +257,53 @@
                                 </Row>
                                 <Row :gutter="24" class='row-wrap'>
                                     <Col span="10" class='col-wrap'>
-                                    <FormItem label="生产编号" prop="voltageTransformerProductionCode">
-                                        <Input v-model="formVoltageTransValidate.voltageTransformerProductionCode"
+                                    <FormItem label="生产编号" prop="productionCode">
+                                        <Input v-model="formVoltageTransValidate.productionCode"
                                             :maxlength=20 placeholder="请输入生产编号"></Input>
+                                    </FormItem>
+                                    </Col>
+                                    <Col span="10" class='col-wrap'>
+                                    <FormItem label="变比" prop="ratio">
+                                        <Input v-model="formVoltageTransValidate.ratio"
+                                            :maxlength=20 placeholder="请输入变比"></Input>
                                     </FormItem>
                                     </Col>
                                 </Row>
                             </Form>
                         </div>
                     </Tab-pane>
-                    <Tab-pane label="新增高压熔断器" key="key4" name="formHighVoltageFuseValidate">
+                    <Tab-pane label="新增高压熔断器" key="key6" name="formHighVoltageFuseValidate">
                         <div>
                             <Form ref="formHighVoltageFuseValidate" :model="formHighVoltageFuseValidate" :rules="ruleHighVoltageFuseValidate"
                                 :label-width="100">
                                 <Row :gutter="24" class='row-wrap'>
                                     <Col span="10" class='col-wrap'>
-                                    <FormItem label="产品型号" prop="highVoltageFuseType">
-                                        <Input v-model="formHighVoltageFuseValidate.highVoltageFuseType" :maxlength=20
+                                    <FormItem label="产品型号" prop="productType">
+                                        <Input v-model="formHighVoltageFuseValidate.productType" :maxlength=20
                                             placeholder="请输入产品型号"></Input>
                                     </FormItem>
                                     </Col>
                                     <Col span="10" class='col-wrap'>
-                                    <FormItem label="生产厂商" prop="highVoltageFuseManufacturer">
-                                        <Select v-model="formHighVoltageFuseValidate.highVoltageFuseManufacturer">
+                                    <FormItem label="生产厂商" prop="productManufacturer">
+                                        <Select v-model="formHighVoltageFuseValidate.productManufacturer">
                                             <Option v-for="item in manufacturerHighVoltageFuseList" :value="item.name"
                                                 :key="item.id">{{ item.name }}</Option>
                                         </Select>
                                     </FormItem>
                                     </Col>
                                 </Row>
+                                <Row :gutter="24" class='row-wrap'>
+                                    <Col span="10" class='col-wrap'>
+                                    <FormItem label="额定电流" prop="ratedCurrent">
+                                        <Input v-model="formHighVoltageFuseValidate.ratedCurrent" :maxlength=20
+                                            placeholder="请输入额定电流"></Input>
+                                    </FormItem>
+                                    </Col>
+                                </Row>
                             </Form>
                         </div>
                     </Tab-pane>
-                    <Tab-pane label="新增高压电缆" key="key5" name="formCableValidate">
+                    <Tab-pane label="新增高压电缆" key="key7" name="formCableValidate">
                         <div>
                             <Form ref="formCableValidate" :model="formCableValidate" :rules="ruleCableValidate"
                                 :label-width="100">
@@ -216,12 +314,20 @@
                                     </FormItem>
                                     </Col>
                                     <Col span="10" class='col-wrap'>
-                                    <FormItem label="电缆型号" prop="cableType">
-                                        <Input v-model="formCableValidate.cableType" :maxlength=20 placeholder="请输入电缆类型"></Input>
+                                    <FormItem label="生产厂商" prop="productManufacturer">
+                                        <Select v-model="formCableValidate.productManufacturer">
+                                            <Option v-for="item in manufacturerOutCableList" :value="item.name" :key="item.id">{{
+                                                item.name }}</Option>
+                                        </Select>
                                     </FormItem>
                                     </Col>
                                 </Row>
                                 <Row :gutter="24" class='row-wrap'>
+                                    <Col span="10" class='col-wrap'>
+                                    <FormItem label="电缆型号" prop="productType">
+                                        <Input v-model="formCableValidate.productType" :maxlength=20 placeholder="请输入电缆类型"></Input>
+                                    </FormItem>
+                                    </Col>
                                     <Col span="10" class='col-wrap'>
                                     <FormItem label="电缆长度" prop="cableLength">
                                         <Input v-model="formCableValidate.cableLength" number :maxlength=20 placeholder="请输入电缆长度"></Input>
@@ -255,13 +361,13 @@
                                 :label-width="100">
                                 <Row :gutter="24" class='row-wrap'>
                                     <Col span="10" class='col-wrap'>
-                                    <FormItem label="产品型号" prop="breakerType">
-                                        <Input v-model="formBreakerValidate.breakerType" :maxlength=200 placeholder="请输入产品型号"></Input>
+                                    <FormItem label="产品型号" prop="productType">
+                                        <Input v-model="formBreakerValidate.productType" :maxlength=200 placeholder="请输入产品型号"></Input>
                                     </FormItem>
                                     </Col>
                                     <Col span="10" class='col-wrap'>
-                                    <FormItem label="生产厂商" prop="breakerManufacturer">
-                                        <Select v-model="formBreakerValidate.breakerManufacturer">
+                                    <FormItem label="生产厂商" prop="productManufacturer">
+                                        <Select v-model="formBreakerValidate.productManufacturer">
                                             <Option v-for="item in manufacturerBreakerList" :value="item.name" :key="item.id">{{
                                                 item.name }}</Option>
                                         </Select>
@@ -270,15 +376,51 @@
                                 </Row>
                                 <Row :gutter="24" class='row-wrap'>
                                     <Col span="10" class='col-wrap'>
-                                    <FormItem label="生产编号" prop="breakerProductionCode">
-                                        <Input v-model="formBreakerValidate.breakerProductionCode" :maxlength=200
+                                    <FormItem label="生产编号" prop="productionCode">
+                                        <Input v-model="formBreakerValidate.productionCode" :maxlength=200
                                             placeholder="请输入生产编号"></Input>
                                     </FormItem>
                                     </Col>
                                     <Col span="10" class='col-wrap'>
-                                    <FormItem label="额定电流" prop="breakerRatedCurrent">
-                                        <Input v-model="formBreakerValidate.breakerRatedCurrent" number :maxlength=50
+                                    <FormItem label="额定电流" prop="ratedCurrent">
+                                        <Input v-model="formBreakerValidate.ratedCurrent" number :maxlength=50
                                             placeholder="请输入额定电流"></Input>
+                                    </FormItem>
+                                    </Col>
+                                </Row>
+                            </Form>
+                        </div>
+                    </Tab-pane>
+                    <Tab-pane label="新增隔离开关" key="key3" name="formIsolationSwitchValidate">
+                        <div>
+                            <Form ref="formIsolationSwitchValidate" :model="formIsolationSwitchValidate" :rules="ruleIsolationSwitchValidate"
+                                :label-width="100">
+                                <Row :gutter="24" class='row-wrap'>
+                                     <Col span="10" class='col-wrap'>
+                                    <FormItem label="产品型号" prop="productType">
+                                        <Input v-model="formIsolationSwitchValidate.productType" :maxlength=200
+                                            placeholder="请输入产品型号"></Input>
+                                    </FormItem>
+                                    </Col>
+                                    <Col span="10" class='col-wrap'>
+                                    <FormItem label="生产厂商" prop="productManufacturer">
+                                        <Select v-model="formIsolationSwitchValidate.productManufacturer">
+                                            <Option v-for="item in manufacturerIsolationSwitchList" :value="item.name"
+                                                :key="item.id">{{ item.name }}</Option>
+                                        </Select>
+                                    </FormItem>
+                                    </Col>
+                                </Row>
+                                <Row :gutter="24" class='row-wrap'>
+                                    <Col span="10" class='col-wrap'>
+                                    <FormItem label="生产编号" prop="productionCode">
+                                        <Input v-model="formIsolationSwitchValidate.productionCode"
+                                            :maxlength=50 placeholder="请输入生产编号"></Input>
+                                    </FormItem>
+                                    </Col>
+                                    <Col span="10" class='col-wrap'>
+                                    <FormItem label="额定电流" prop="ratedCurrent">
+                                        <Input v-model="formIsolationSwitchValidate.ratedCurrent" :maxlength=200 placeholder="请输入备注信息"></Input>
                                     </FormItem>
                                     </Col>
                                 </Row>
@@ -291,13 +433,13 @@
                                 :label-width="100">
                                 <Row :gutter="24" class='row-wrap'>
                                     <Col span="10" class='col-wrap'>
-                                    <FormItem label="产品型号" prop="capacitorType">
-                                        <Input v-model="formCapacitorValidate.capacitorType" :maxlength=200 placeholder="请输入产品型号"></Input>
+                                    <FormItem label="产品型号" prop="productType">
+                                        <Input v-model="formCapacitorValidate.productType" :maxlength=200 placeholder="请输入产品型号"></Input>
                                     </FormItem>
                                     </Col>
                                     <Col span="10" class='col-wrap'>
-                                    <FormItem label="生产厂商" prop="capacitorManufacturer">
-                                        <Select v-model="formCapacitorValidate.capacitorManufacturer">
+                                    <FormItem label="生产厂商" prop="productManufacturer">
+                                        <Select v-model="formCapacitorValidate.productManufacturer">
                                             <Option v-for="item in manufacturerCapacitorList" :value="item.name" :key="item.id">{{
                                                 item.name }}</Option>
                                         </Select>
@@ -306,8 +448,8 @@
                                 </Row>
                                 <Row :gutter="24" class='row-wrap'>
                                      <Col span="10" class='col-wrap'>
-                                    <FormItem label="生产编号" prop="capacitorProductionCode">
-                                        <Input v-model="formCapacitorValidate.capacitorProductionCode" :maxlength=200
+                                    <FormItem label="生产编号" prop="productionCode">
+                                        <Input v-model="formCapacitorValidate.productionCode" :maxlength=200
                                             placeholder="请输入生产编号"></Input>
                                     </FormItem>
                                     </Col>
@@ -321,65 +463,36 @@
                             </Form>
                         </div>
                     </Tab-pane>
-                    <Tab-pane label="新增隔离开关" key="key3" name="formIsolationSwitchValidate">
-                        <div>
-                            <Form ref="formIsolationSwitchValidate" :model="formIsolationSwitchValidate" :rules="ruleIsolationSwitchValidate"
-                                :label-width="100">
-                                <Row :gutter="24" class='row-wrap'>
-                                     <Col span="10" class='col-wrap'>
-                                    <FormItem label="产品型号" prop="isolationSwitchType">
-                                        <Input v-model="formIsolationSwitchValidate.isolationSwitchType" :maxlength=200
-                                            placeholder="请输入产品型号"></Input>
-                                    </FormItem>
-                                    </Col>
-                                    <Col span="10" class='col-wrap'>
-                                    <FormItem label="生产厂商" prop="isolationSwitchManufacturer">
-                                        <Select v-model="formIsolationSwitchValidate.isolationSwitchManufacturer">
-                                            <Option v-for="item in manufacturerIsolationSwitchList" :value="item.name"
-                                                :key="item.id">{{ item.name }}</Option>
-                                        </Select>
-                                    </FormItem>
-                                    </Col>
-                                </Row>
-                                <Row :gutter="24" class='row-wrap'>
-                                    <Col span="10" class='col-wrap'>
-                                    <FormItem label="生产编号" prop="isolationSwitchProductionCode">
-                                        <Input v-model="formIsolationSwitchValidate.isolationSwitchProductionCode"
-                                            :maxlength=50 placeholder="请输入生产编号"></Input>
-                                    </FormItem>
-                                    </Col>
-                                    <Col span="10" class='col-wrap'>
-                                    <FormItem label="额定电流" prop="remark">
-                                        <Input v-model="formIsolationSwitchValidate.remark" :maxlength=200 placeholder="请输入备注信息"></Input>
-                                    </FormItem>
-                                    </Col>
-                                </Row>
-                            </Form>
-                        </div>
-                    </Tab-pane>
+                    
                     <Tab-pane label="新增低压电缆" key="key5" name="formOutCableValidate">
                         <div>
                             <Form ref="formOutCableValidate" :model="formOutCableValidate" :rules="ruleOutCableValidate"
                                 :label-width="100">
                                 <Row :gutter="24" class='row-wrap'>
                                     <Col span="10" class='col-wrap'>
-                                    <FormItem label="电缆名称" prop="lineName">
-                                        <Input v-model="formOutCableValidate.lineName" :maxlength=50 placeholder="请输入电缆名称"></Input>
+                                    <FormItem label="电缆名称" prop="cableName">
+                                        <Input v-model="formOutCableValidate.cableName" :maxlength=50 placeholder="请输入电缆名称"></Input>
                                     </FormItem>
                                     </Col>
                                     <Col span="10" class='col-wrap'>
-                                    <FormItem label="电缆型号" prop="outCableType">
-                                        <Input v-model="formOutCableValidate.outCableType" :maxlength=200 placeholder="请输入电缆类型"></Input>
-                                    </FormItem>
-                                    </Col>
-                                </Row>
-                                <Row :gutter="24" class='row-wrap'>
-                                    <Col span="10" class='col-wrap'>
-                                    <FormItem label="生产厂商" prop="outCableManufacturer">
-                                        <Select v-model="formOutCableValidate.outCableManufacturer">
+                                    <FormItem label="生产厂商" prop="productManufacturer">
+                                        <Select v-model="formOutCableValidate.productManufacturer">
                                             <Option v-for="item in manufacturerOutCableList" :value="item.name" :key="item.id">{{
                                                 item.name }}</Option>
                                         </Select>
+                                    </FormItem>
+                                    </Col>
+                                    
+                                </Row>
+                                <Row :gutter="24" class='row-wrap'>
+                                    <Col span="10" class='col-wrap'>
+                                    <FormItem label="电缆型号" prop="productType">
+                                        <Input v-model="formOutCableValidate.productType" :maxlength=200 placeholder="请输入电缆类型"></Input>
+                                    </FormItem>
+                                    </Col>
+                                    <Col span="10" class='col-wrap'>
+                                    <FormItem label="电缆长度" prop="cableLength">
+                                        <Input v-model="formOutCableValidate.cableLength" number :maxlength=20 placeholder="请输入电缆长度"></Input>
                                     </FormItem>
                                     </Col>
                                 </Row>
@@ -406,43 +519,52 @@
                 <Form ref="formHighValidate" :model="formHighValidate" :rules="ruleHighValidate" :label-width="100">
                     <Row :gutter="24" class='row-wrap'>
                         <Col span="10" class='col-wrap'>
-                        <FormItem label="生产厂商" prop="manufacturer">
-                            <Select v-model="formHighValidate.manufacturer">
-                                <Option v-for="item in manufacturerHighList" :value="item.name" :key="item.id">{{
-                                    item.name }}</Option>
-                            </Select>
-                        </FormItem>
+                            <FormItem label="设备名称" prop="deviceName">
+                                <Input v-model="formHighValidate.deviceName" :maxlength=20 placeholder="请输入设备名称"></Input>
+                            </FormItem>
                         </Col>
                         <Col span="10" class='col-wrap'>
-                        <FormItem label="设备名称" prop="deviceName">
-                            <Input v-model="formHighValidate.deviceName" :maxlength=20 placeholder="请输入设备名称"></Input>
-                        </FormItem>
+                            <FormItem label="设备编号" prop="deviceNumber">
+                                <Input v-model="formHighValidate.deviceNumber" :maxlength=20 placeholder="请输入设备编号"></Input>
+                            </FormItem>
+                        </Col>
+                        
+                        
+                    </Row>
+                    <Row :gutter="24" class='row-wrap'>
+                        <Col span="10" class='col-wrap'>
+                            <FormItem label="设备型号" prop="productType">
+                                <Input v-model="formHighValidate.productType" :maxlength=20 placeholder="请输入产品型号"></Input>
+                            </FormItem>
+                        </Col>
+                        <Col span="10" class='col-wrap'>
+                            <FormItem label="生产厂商" prop="manufacturer">
+                                <Select v-model="formHighValidate.manufacturer">
+                                    <Option v-for="item in manufacturerHighList" :value="item.name" :key="item.id">{{
+                                        item.name }}</Option>
+                                </Select>
+                            </FormItem>
                         </Col>
                     </Row>
                     <Row :gutter="24" class='row-wrap'>
                         <Col span="10" class='col-wrap'>
-                        <FormItem label="设备功能" prop="deviceFunction">
-                            <Input v-model="formHighValidate.deviceFunction" :maxlength=20 placeholder="请输入设备功能"></Input>
-                        </FormItem>
+                            <FormItem label="生产编号" prop="productionCode">
+                                <Input v-model="formHighValidate.productionCode" :maxlength=20 placeholder="请输入生产编号"></Input>
+                            </FormItem>
                         </Col>
                         <Col span="10" class='col-wrap'>
-                        <FormItem label="产品型号" prop="productType">
-                            <Input v-model="formHighValidate.productType" :maxlength=20 placeholder="请输入产品型号"></Input>
-                        </FormItem>
+                            <FormItem label="出厂日期" prop="manufactureDate">
+                                <DatePicker v-model="formHighValidate.manufactureDate" type="date" placeholder="请选择出厂日期"></DatePicker>
+                            </FormItem>
                         </Col>
                     </Row>
-                    <Row :gutter="24" class='row-wrap'>
+                    <!-- <Row :gutter="24" class='row-wrap'>
                         <Col span="10" class='col-wrap'>
-                        <FormItem label="设备编号" prop="deviceNumber">
-                            <Input v-model="formHighValidate.deviceNumber" :maxlength=20 placeholder="请输入设备编号"></Input>
-                        </FormItem>
+                            <FormItem label="设备功能" prop="deviceFunction">
+                                <Input v-model="formHighValidate.deviceFunction" :maxlength=20 placeholder="请输入设备功能"></Input>
+                            </FormItem>
                         </Col>
-                        <Col span="10" class='col-wrap'>
-                        <FormItem label="出厂日期" prop="manufactureDate">
-                            <DatePicker v-model="formHighValidate.manufactureDate" type="date" placeholder="请选择出厂日期"></DatePicker>
-                        </FormItem>
-                        </Col>
-                    </Row>
+                    </Row> -->
                 </Form>
             </div>
             <div slot="footer">
@@ -591,8 +713,8 @@
         addHighVoltageInformation,
         delHighVoltageInformation,
         updataHighVoltageInformation,
-        addLoadSwitch,
-        updataLoadSwitch,
+        addHighVoltageItems,
+        updataHighVoltageItems,
         addCurrentTransformer,
         updataCurrentTransformer,
         addVoltageTransformer,
@@ -935,6 +1057,7 @@
                 manufacturerCurrentTransList: [],
                 manufacturerVoltageTransList: [],
                 manufacturerHighVoltageFuseList: [],
+                manufacturerCableList: [],
                 manufacturerBreakerList: [],
                 manufacturerCapacitorList: [],
                 manufacturerIsolationSwitchList: [],
@@ -964,6 +1087,7 @@
                 type: 1,
                 formHighValidate: {
                     boxTransformerOrPowerDistributionRoomId: this.powerDistributionRoomId,
+                    deviceFunction:'暂时不显示',
                     belongType: 1
                 },
                 formLowValidate: {
@@ -974,15 +1098,40 @@
                     boxTransformerOrPowerDistributionRoomId: this.powerDistributionRoomId,
                     belongType: 1
                 },
-                formLoadSwitchValidate: {},
-                formCurrentTransValidate: {},
-                formVoltageTransValidate: {},
-                formHighVoltageFuseValidate: {},
-                formCableValidate: {},
-                formBreakerValidate: {},
-                formCapacitorValidate: {},
-                formIsolationSwitchValidate: {},
-                formOutCableValidate: {},
+                formLoadSwitchValidate: {
+                    powerEquipmentComponentType: 1,
+                    voltageType: 1
+                },
+                formCurrentTransValidate: {
+                    powerEquipmentComponentType: 2,
+                    voltageType: 1
+                },
+                formVoltageTransValidate: {
+                    powerEquipmentComponentType: 3,
+                    voltageType: 1
+                },
+                formHighVoltageFuseValidate: {
+                    powerEquipmentComponentType: 4,
+                    voltageType: 1
+                },
+                formCableValidate: {
+                    powerEquipmentComponentType: 5,
+                    voltageType: 1
+                },
+                formBreakerValidate: {
+                    powerEquipmentComponentType: 6
+                },
+                formCapacitorValidate: {
+                    powerEquipmentComponentType: 7,
+                    voltageType: 2
+                },
+                formIsolationSwitchValidate: {
+                    powerEquipmentComponentType: 8
+                },
+                formOutCableValidate: {
+                    powerEquipmentComponentType: 9,
+                    voltageType: 2
+                },
                 ruleHighValidate: {
                     // manufacturer: [{
                     //     required: true,
@@ -1397,11 +1546,15 @@
             // 新增高压组件
             addHighItems(index) {
                 const highVInfoId = this.listData[index].id
-                this.formLoadSwitchValidate.highVoltageInformationId = highVInfoId
-                this.formCurrentTransValidate.highVoltageInformationId = highVInfoId
-                this.formVoltageTransValidate.highVoltageInformationId = highVInfoId
-                this.formHighVoltageFuseValidate.highVoltageInformationId = highVInfoId
-                this.formCableValidate.highVoltageInformationId = highVInfoId
+                this.formLoadSwitchValidate.voltageInformationId = highVInfoId
+                this.formBreakerValidate.VoltageInformationId = highVInfoId
+                this.formIsolationSwitchValidate.VoltageInformationId = highVInfoId
+                this.formBreakerValidate.voltageType = 1
+                this.formIsolationSwitchValidate.voltageType = 1
+                this.formCurrentTransValidate.voltageInformationId = highVInfoId
+                this.formVoltageTransValidate.voltageInformationId = highVInfoId
+                this.formHighVoltageFuseValidate.voltageInformationId = highVInfoId
+                this.formCableValidate.voltageInformationId = highVInfoId
                 this.showAddOrEditHighItems = true
                 this.tabsName = 'formLoadSwitchValidate'
                 this.modelTitle = '新增高压组件'
@@ -1409,10 +1562,12 @@
             // 新增低压组件
             addLowItems(index) {
                 const lowVInfoId = this.listData2[index].id
-                this.formBreakerValidate.lowVoltageInformationId = lowVInfoId
-                this.formCapacitorValidate.lowVoltageInformationId = lowVInfoId
-                this.formIsolationSwitchValidate.lowVoltageInformationId = lowVInfoId
-                this.formOutCableValidate.lowVoltageInformationId = lowVInfoId
+                this.formBreakerValidate.voltageInformationId = lowVInfoId
+                this.formBreakerValidate.voltageType = 2
+                this.formIsolationSwitchValidate.voltageType = 2
+                this.formCapacitorValidate.voltageInformationId = lowVInfoId
+                this.formIsolationSwitchValidate.voltageInformationId = lowVInfoId
+                this.formOutCableValidate.voltageInformationId = lowVInfoId
                 this.showAddOrEditLowItems = true
                 this.tabsName = 'formBreakerValidate'
                 this.modelTitle = '新增低压组件'
@@ -1480,7 +1635,7 @@
                         this.loading = true
                         if (this.isEdit) {
                             return new Promise((resolve, reject) => {
-                                updateBreaker(this.formBreakerValidate).then(
+                                updataHighVoltageItems(this.formBreakerValidate).then(
                                     res => {
                                         this.$Message.success('修改成功')
                                         this.isEdit = false
@@ -1498,7 +1653,7 @@
                             })
                         } else {
                             return new Promise((resolve, reject) => {
-                                createBreaker(this.formBreakerValidate).then(
+                                addHighVoltageItems(this.formBreakerValidate).then(
                                     res => {
                                         this.loading = false
                                         this.$Message.success('创建成功')
@@ -1526,7 +1681,7 @@
                         this.loading = true
                         if (this.isEdit) {
                             return new Promise((resolve, reject) => {
-                                updateCapacitor(this.formCapacitorValidate).then(
+                                updataHighVoltageItems(this.formCapacitorValidate).then(
                                     res => {
                                         this.$Message.success('修改成功')
                                         this.isEdit = false
@@ -1544,7 +1699,7 @@
                             })
                         } else {
                             return new Promise((resolve, reject) => {
-                                createCapacitor(this.formCapacitorValidate).then(
+                                addHighVoltageItems(this.formCapacitorValidate).then(
                                     res => {
                                         this.loading = false
                                         this.$Message.success('创建成功')
@@ -1572,7 +1727,7 @@
                         this.loading = true
                         if (this.isEdit) {
                             return new Promise((resolve, reject) => {
-                                updateIsolationSwitch(this.formIsolationSwitchValidate).then(
+                                updataHighVoltageItems(this.formIsolationSwitchValidate).then(
                                     res => {
                                         this.$Message.success('修改成功')
                                         this.isEdit = false
@@ -1590,7 +1745,7 @@
                             })
                         } else {
                             return new Promise((resolve, reject) => {
-                                createIsolationSwitch(this.formIsolationSwitchValidate).then(
+                                addHighVoltageItems(this.formIsolationSwitchValidate).then(
                                     res => {
                                         this.loading = false
                                         this.$Message.success('创建成功')
@@ -1618,7 +1773,7 @@
                         this.loading = true
                         if (this.isEdit) {
                             return new Promise((resolve, reject) => {
-                                updateOutCable(this.formOutCableValidate).then(
+                                updataHighVoltageItems(this.formOutCableValidate).then(
                                     res => {
                                         this.$Message.success('修改成功')
                                         this.isEdit = false
@@ -1636,7 +1791,7 @@
                             })
                         } else {
                             return new Promise((resolve, reject) => {
-                                createOutCable(this.formOutCableValidate).then(
+                                addHighVoltageItems(this.formOutCableValidate).then(
                                     res => {
                                         this.loading = false
                                         this.$Message.success('创建成功')
@@ -1664,7 +1819,7 @@
                         this.loading = true
                         if (this.isEdit) {
                             return new Promise((resolve, reject) => {
-                                updataLoadSwitch(this.formLoadSwitchValidate).then(
+                                updataHighVoltageItems(this.formLoadSwitchValidate).then(
                                     res => {
                                         this.$Message.success('修改成功')
                                         this.isEdit = false
@@ -1682,7 +1837,7 @@
                             })
                         } else {
                             return new Promise((resolve, reject) => {
-                                addLoadSwitch(this.formLoadSwitchValidate).then(
+                                addHighVoltageItems(this.formLoadSwitchValidate).then(
                                     res => {
                                         this.loading = false
                                         this.$Message.success('创建成功')
@@ -1710,7 +1865,7 @@
                         this.loading = true
                         if (this.isEdit) {
                             return new Promise((resolve, reject) => {
-                                updataCurrentTransformer(this.formCurrentTransValidate).then(
+                                updataHighVoltageItems(this.formCurrentTransValidate).then(
                                     res => {
                                         this.$Message.success('修改成功')
                                         this.isEdit = false
@@ -1728,7 +1883,7 @@
                             })
                         } else {
                             return new Promise((resolve, reject) => {
-                                addCurrentTransformer(this.formCurrentTransValidate).then(
+                                addHighVoltageItems(this.formCurrentTransValidate).then(
                                     res => {
                                         this.loading = false
                                         this.$Message.success('创建成功')
@@ -1756,7 +1911,7 @@
                         this.loading = true
                         if (this.isEdit) {
                             return new Promise((resolve, reject) => {
-                                updataVoltageTransformer(this.formVoltageTransValidate).then(
+                                updataHighVoltageItems(this.formVoltageTransValidate).then(
                                     res => {
                                         this.$Message.success('修改成功')
                                         this.isEdit = false
@@ -1774,7 +1929,7 @@
                             })
                         } else {
                             return new Promise((resolve, reject) => {
-                                addVoltageTransformer(this.formVoltageTransValidate).then(
+                                addHighVoltageItems(this.formVoltageTransValidate).then(
                                     res => {
                                         this.loading = false
                                         this.$Message.success('创建成功')
@@ -1802,7 +1957,7 @@
                         this.loading = true
                         if (this.isEdit) {
                             return new Promise((resolve, reject) => {
-                                updataHighVoltageFuse(this.formHighVoltageFuseValidate).then(
+                                updataHighVoltageItems(this.formHighVoltageFuseValidate).then(
                                     res => {
                                         this.$Message.success('修改成功')
                                         this.isEdit = false
@@ -1820,7 +1975,7 @@
                             })
                         } else {
                             return new Promise((resolve, reject) => {
-                                addHighVoltageFuse(this.formHighVoltageFuseValidate).then(
+                                addHighVoltageItems(this.formHighVoltageFuseValidate).then(
                                     res => {
                                         this.loading = false
                                         this.$Message.success('创建成功')
@@ -1848,7 +2003,7 @@
                         this.loading = true
                         if (this.isEdit) {
                             return new Promise((resolve, reject) => {
-                                updataCable(this.formCableValidate).then(
+                                updataHighVoltageItems(this.formCableValidate).then(
                                     res => {
                                         this.$Message.success('修改成功')
                                         this.isEdit = false
@@ -1866,7 +2021,7 @@
                             })
                         } else {
                             return new Promise((resolve, reject) => {
-                                addCable(this.formCableValidate).then(
+                                addHighVoltageItems(this.formCableValidate).then(
                                     res => {
                                         this.loading = false
                                         this.$Message.success('创建成功')
