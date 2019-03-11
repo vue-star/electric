@@ -341,7 +341,7 @@
                         font-size="6" id="svg_1124" y="341.75261" x="123.52699" stroke-opacity="null" stroke-width="0"
                         fill="#ffffff">KW</text>
                     <text xml:space="preserve" text-anchor="start" font-family="Helvetica, Arial, sans-serif" font-size="8"
-                        id="svg_1149" y="32.38711" x="352.92936" stroke-width="0" fill="#ffffff" stroke="#FFDBD2">浙江亚设塑业厂1#欧式箱变</text>
+                        id="svg_1149" y="32.38711" x="352.92936" stroke-width="0" fill="#ffffff" stroke="#FFDBD2">浙江亚设塑业厂2#欧式箱变</text>
                     <line stroke="#ffffff" stroke-linecap="null" stroke-linejoin="null" id="svg_7" y2="75.04177" x2="234.7671"
                         y1="75.04177" x1="216.59983" fill-opacity="null" fill="none" />
                     <line stroke="#ffffff" stroke-linecap="undefined" stroke-linejoin="undefined" id="svg_8" y2="82.50675"
@@ -400,7 +400,7 @@
                     <text xml:space="preserve" text-anchor="start" font-family="Helvetica, Arial, sans-serif" font-size="12"
                         id="svg_36" y="14.38711" x="340.0153" stroke-width="0" fill="#ffffff" stroke="#FFDBD2">浙江亚设塑业厂系统图</text>
                     <text xml:space="preserve" text-anchor="start" font-family="Helvetica, Arial, sans-serif" font-size="8"
-                        id="svg_42" y="168.41934" x="357.88109" stroke-width="0" fill="#ffffff" stroke="#ffffff">至2#箱变</text>
+                        id="svg_42" y="168.41934" x="357.88109" stroke-width="0" fill="#ffffff" stroke="#ffffff">至3#箱变</text>
                     <line stroke-linecap="null" stroke-linejoin="null" id="svg_43" y2="58.05182" x2="404.7912" y1="58.05182"
                         x1="393.98443" fill-opacity="null" fill="none" transform="rotate(90 399.3877868652344,58.05182266235355) "
                         stroke="#ffffff" />
