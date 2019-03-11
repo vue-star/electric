@@ -10,7 +10,7 @@
                     </div>
                     <div v-for="(infor, i) in inforCardData" :key="`infor-${i}`" class="info-div" style="height: 120px;">
                         <infor-card shadow :color="infor.color" :icon="infor.icon" :icon-size="42" :icon-color="infor.iconColor">
-                            <count-to :end="infor.count" count-class="count-style"/>
+                            <count-to :simplify="true" :unit="unit" :end="infor.count" count-class="count-style"/>
                             <p style="color:#fff">{{ infor.title }}</p>
                         </infor-card>
                     </div>
@@ -67,7 +67,7 @@
                         color: '#19be6b'
                     },
                     {
-                        title: '使用电量(万kwh)',
+                        title: '使用电量(kwh)',
                         icon: 'md-calculator',
                         count: 0,
                         iconColor: '#fff',
@@ -93,7 +93,8 @@
                     longitude: 120.427232,
                     latitude: 27.514563
                 },
-                customerData:[]
+                customerData:[],
+                unit: [[4, '万多'], [5, '十万多'], [6, '百万多'], [7, '千万多'], [8, '亿多']],
             }
         },
         methods: {
@@ -114,14 +115,7 @@
                                     element.count = data.numberofAccessDevices
                                     break
                                 case 2:
-                                    let num=data.numberofElectricityUsed
-                                    if(num > 1000){
-                                        element.count= Math.ceil(num/1000)
-                                        element.title = '使用电量(万kwh)'
-                                    }else{
-                                        element.count = data.numberofElectricityUsed
-                                        element.title = '使用电量(kwh)'
-                                    }
+                                     element.count = data.numberofElectricityUsed
                                     break
                                 case 3:
                                     element.count = data.numberofOfflineDevices
