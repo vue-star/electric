@@ -31,21 +31,25 @@
                                 title: '型号',
                                 key: 'breakerType',
                                 align: 'center',
+                                 width: 60
                             },
                             {
                                 title: '生产厂家',
                                 key: 'breakerManufacturer',
                                 align: 'center',
+                                 width: 120
                             },
                             {
                                 title: '生产编号',
                                 key: 'breakerProductionCode',
                                 align: 'center',
+                                 width: 86
                             },
                             {
                                 title: '额定电流',
                                 key: 'breakerRatedCurrent',
                                 align: 'center',
+                                 width: 86
                             },
                             
                         ]
@@ -57,21 +61,25 @@
                                 title: '型号',
                                 key: 'isolationSwitchType',
                                 align: 'center',
+                                 width: 60
                             },
                             {
                                 title: '生产编号',
                                 key: 'isolationSwitchProductionCode',
                                 align: 'center',
+                                 width: 86
                             },
                             {
                                 title: '生产厂家',
                                 key: 'isolationSwitchManufacturer',
                                 align: 'center',
+                                 width: 120
                             },
                             {
                                 title: '额定电流',
                                 key: 'isolationSwitchRatedCurrent',
                                 align: 'center',
+                                 width: 86
                             }
                         ]
                     },
@@ -82,21 +90,25 @@
                                 title: '型号',
                                 key: 'capacitorType',
                                 align: 'center',
+                                 width: 60
                             },
                             {
                                 title: '生产厂家',
                                 key: 'capacitorManufacturer',
                                 align: 'center',
+                                 width: 120
                             },
                             {
                                 title: '生产编号',
                                 key: 'capacitorProductionCode',
                                 align: 'center',
+                                 width: 86
                             },
                             {
                                 title: '电容容量',
                                 key: 'capacitorCapacity',
                                 align: 'center',
+                                 width: 86
                             }
                         ]
                     },
@@ -107,21 +119,25 @@
                                 title: '电缆名称',
                                 key: 'lineName',
                                 align: 'center',
+                                 width: 86
                             },
                             {
                                 title: '电缆型号',
                                 key: 'outCableType',
                                 align: 'center',
+                                 width: 86
                             },
                             {
                                 title: '电缆厂商',
                                 key: 'outCableManufacturer',
                                 align: 'center',
+                                 width: 86
                             },
                             {
                                 title: '电缆长度',
                                 key: 'outCableLength',
                                 align: 'center',
+                                 width: 86
                             }
                         ]
                     },

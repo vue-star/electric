@@ -340,7 +340,7 @@
                         font-size="6" font-family="Helvetica, Arial, sans-serif" text-anchor="start" xml:space="preserve"
                         stroke="red">KW</text>
                     <text stroke="#FFDBD2" fill="#ffffff" stroke-width="0" x="352.92936" y="32.38711" id="svg_1149"
-                        font-size="8" font-family="Helvetica, Arial, sans-serif" text-anchor="start" xml:space="preserve">浙江亚设塑业厂3#欧式箱变</text>
+                        font-size="8" font-family="Helvetica, Arial, sans-serif" text-anchor="start" xml:space="preserve">浙江亚设塑业厂1#欧式箱变</text>
                     <line fill="none" fill-opacity="null" x1="216.59983" y1="75.04177" x2="234.7671" y2="75.04177" id="svg_7"
                         stroke-linejoin="null" stroke-linecap="null" stroke="#ffffff" />
                     <line fill="none" fill-opacity="null" x1="234.26395" y1="75.19117" x2="234.26395" y2="82.50675" id="svg_8"

@@ -31,21 +31,25 @@
                                 title: '型号',
                                 key: 'loadSwitchType',
                                 align: 'center',
+                                width: 60
                             },
                             {
                                 title: '生产厂家',
                                 key: 'loadSwitchManufacturer',
                                 align: 'center',
+                                width: 100
                             },
                             {
                                 title: '生产编号',
                                 key: 'loadSwitchProductionCode',
                                 align: 'center',
+                                width: 86
                             },
                             {
                                 title: '额定电流',
                                 key: 'loadSwitChratedCurrent',
                                 align: 'center',
+                                width: 86
                             }
                         ]
                     },
@@ -56,21 +60,25 @@
                                 title: '型号',
                                 key: 'breakerType',
                                 align: 'center',
+                                width: 63
                             },
                             {
                                 title: '生产厂家',
                                 key: 'breakerManufacturer',
                                 align: 'center',
+                                width: 100
                             },
                             {
                                 title: '生产编号',
                                 key: 'breakerProductionCode',
                                 align: 'center',
+                                width: 86
                             },
                             {
                                 title: '额定电流',
                                 key: 'breakerRatedCurrent',
                                 align: 'center',
+                                width: 86
                             },
                             
                         ]
@@ -82,21 +90,25 @@
                                 title: '型号',
                                 key: 'isolationSwitchType',
                                 align: 'center',
+                                width: 63
                             },
                             {
                                 title: '生产编号',
                                 key: 'isolationSwitchProductionCode',
                                 align: 'center',
+                                width: 86
                             },
                             {
                                 title: '生产厂家',
                                 key: 'isolationSwitchManufacturer',
                                 align: 'center',
+                                width: 100
                             },
                             {
                                 title: '额定电流',
                                 key: 'isolationSwitchRatedCurrent',
                                 align: 'center',
+                                width: 86
                             }
                         ]
                     },
@@ -107,21 +119,25 @@
                                 title: '型号',
                                 key: 'currentTransformerType',
                                 align: 'center',
+                                width: 63
                             },
                             {
                                 title: '生产厂家',
                                 key: 'currentTransformerManufacturer',
                                 align: 'center',
+                                width: 120
                             },
                             {
                                 title: '生产编号',
                                 key: 'currentTransformerProductionCode',
                                 align: 'center',
+                                width: 86
                             },
                             {
                                 title: '变比',
                                 key: 'currentTransformerRatio',
                                 align: 'center',
+                                width: 63
                             }
                         ]
                     },
@@ -132,21 +148,25 @@
                                 title: '型号',
                                 key: 'voltageTransformerType',
                                 align: 'center',
+                                width: 63
                             },
                             {
                                 title: '生产厂家',
                                 key: 'voltageTransformerManufacturer',
                                 align: 'center',
+                                width: 120
                             },
                             {
                                 title: '生产编号',
                                 key: 'voltageTransformerProductionCode',
                                 align: 'center',
+                                width: 86
                             },
                             {
                                 title: '变比',
                                 key: 'voltageTransformerRatio',
                                 align: 'center',
+                                width: 63
                             }
                             
                         ]
@@ -158,16 +178,19 @@
                                 title: '产品型号',
                                 key: 'highVoltageFuseType',
                                 align: 'center',
+                                width: 86
                             },
                             {
                                 title: '生产厂商',
                                 key: 'highVoltageFuseManufacturer',
                                 align: 'center',
+                                width: 120
                             },
                             {
                                 title: '额定电流',
                                 key: 'highVoltageFuseCurrent',
                                 align: 'center',
+                                width: 86
                             }
                         ]
                     },
@@ -178,27 +201,31 @@
                                 title: '电缆名称',
                                 key: 'cableName',
                                 align: 'center',
+                                width: 86
                             },
                             {
                                 title: '电缆型号',
                                 key: 'cableType',
                                 align: 'center',
+                                width: 86
                             },
                             {
                                 title: '生产厂家',
                                 key: 'cableManufacturer',
                                 align: 'center',
+                                width: 120
                             },
                             {
                                 title: '电缆长度',
                                 key: 'cableLength',
                                 align: 'center',
+                                width: 86
                             }
                         ]
-                    },
+                    }
                 ],
                 isLoading: false,
-                listData: []
+                listData: [],
             }
         },
         methods: {
