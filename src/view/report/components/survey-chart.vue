@@ -79,7 +79,7 @@
                             pieces: [{
                                 gt: 0,
                                 lte: 630,
-                                color: '#ffe'
+                                color: '#9ACD32'
                             }],
                             outOfRange: {
                                 color: '#096'

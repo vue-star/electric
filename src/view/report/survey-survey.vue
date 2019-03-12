@@ -411,11 +411,6 @@
         }
     }
 
-    .count-style {
-        font-size: 25px;
-        color: aliceblue
-    }
-
     .load-card {
         float: left;
         width: 90%;
