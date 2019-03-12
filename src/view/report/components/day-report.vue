@@ -6,10 +6,15 @@
                     style="width: 200px">
                 </DatePicker>
             </div>
+            <div class="export-div">
+                <Button class="export-btn" type="info" size="large" @click="exportData">
+                    导出表格
+                </Button>
+            </div>
         </div>
         <div class="list" v-show='showList'>
             <div class='table-wrap'>
-                <i-table stripe highlight-row :columns="columns1" :data="listData">
+                <i-table stripe highlight-row :columns="columns1" :data="listData" ref="table">
                 </i-table>
                 <Spin :fix='true' v-show='isLoading'>
                     <Icon type="load-c" size=18 class="demo-spin-icon-load"></Icon>
@@ -241,7 +246,13 @@
                 this.queryParam.pageNumber = data - 1
                 this.queryParam.skipCount = (data - 1) * this.queryParam.maxResultCount
                 this.getListData()
-            }
+            },
+            exportData () {
+                this.$refs.table.exportCsv({
+                    filename: 'dayReport',
+                    original: false
+                });
+            }     
         },
         mounted() {
             this.init()
@@ -249,7 +260,7 @@
     }
 
 </script>
-<style>
+<style lang="less">
     @import "../../components/search/searchAndOperate.less";
 
     .card-area {
@@ -285,6 +296,14 @@
         font-size: 35px;
         color: #2d8cf0;
         margin-left: 20px;
+    }
+    .export-div{
+        float: right;
+        height: 50px;
+
+        .export-btn{
+            margin: 10px;
+        }
     }
 
 </style>

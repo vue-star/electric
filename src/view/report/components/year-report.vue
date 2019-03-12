@@ -6,6 +6,11 @@
                     style="width: 200px">
                 </DatePicker>
             </div>
+            <div class="export-div">
+                <Button class="export-btn" type="info" size="large" @click="exportData">
+                    导出表格
+                </Button>
+            </div>
         </div>
         <div class="list" v-show='showList'>
             <div class='table-wrap'>
