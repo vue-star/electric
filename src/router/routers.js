@@ -208,16 +208,15 @@ export default [{
                 },
                 component: () => import('@/view/report/fault-analysis.vue')
             },
-            // {
-            //     path: 'energy_analysis',
-            //     name: 'energy_analysis',
-            //     meta: {
-            //         icon: 'md-download',
-            //         title: '能耗分析'
-            //     },
-            //     component: () => import('@/view/report/energy-analysis.vue')
-            // },
-            
+            {
+                path: 'energy_analysis',
+                name: 'energy_analysis',
+                meta: {
+                    icon: 'md-download',
+                    title: '能耗分析'
+                },
+                component: () => import('@/view/report/energy-analysis.vue')
+            }
         ]
     },
     {

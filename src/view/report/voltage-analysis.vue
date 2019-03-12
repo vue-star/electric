@@ -14,7 +14,12 @@
         </div>
         <Row style="margin-top: 20px;">
             <Card shadow>
-                <voltage-chart style="height: 500px;" :value="barData" :date-time="dateTime" text='电压分析' />
+                <voltage-chart style="height: 500px;" :value="barData" :date-time="dateTime" text='相电压分析' />
+            </Card>
+        </Row>
+        <Row style="margin-top: 20px;">
+            <Card shadow>
+                <voltage-line-chart style="height: 500px;" :value="barData" :date-time="dateTime" text='线电压分析' />
             </Card>
         </Row>
     </div>
@@ -22,6 +27,7 @@
 </template>
 <script>
     import VoltageChart from './components/voltage-chart.vue'
+    import VoltageLineChart from './components/voltage-line-chart.vue'
     import { getVoltageAnalysis, getElectricityDropdownList } from '@/api/voltageAnalysis'
     import { formatData, addDate } from '@/libs/tools'
     import {
@@ -31,20 +37,16 @@
     export default {
         name: 'voltage_analysis',
         components: {
-            VoltageChart
+            VoltageChart,
+            VoltageLineChart
         },
         data() {
             return {
                 electricityMeterInfoId: 0,
                 showList: true,
                 dateTime: addDate(new Date(), 0),
-                customerId: '',
                 textTitle: '',
                 electricityList: [],
-                itemList: [],
-                xAxisData: [],
-                seriesData: [],
-                customerList: [],
                 barData: []
             }
         },
@@ -112,21 +114,4 @@
 </script>
 <style>
     @import "../components/search/searchAndOperate.less";
-
-    .card-area {
-        background-color: white;
-        margin-top: 5px;
-        border: 1px solid;
-    }
-
-    .top-area {
-        background-color: rgb(221, 226, 226);
-        padding: 5px;
-    }
-
-    .top-style {
-        height: 5px;
-        background-color: darkcyan;
-    }
-
 </style>

@@ -393,7 +393,7 @@
 
 </script>
 <style>
-    @import "../components/search/searchAndOperate.less";
+    @import "../../components/search/searchAndOperate.less";
 
     .card-area {
         background-color: white;

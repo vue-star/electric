@@ -2,7 +2,7 @@
     <div>
         <div v-show='showList' class='query-wrap'>
             <div class="operate-wrap" style="margin-left: 20px">时间选择：
-                <DatePicker class='operate' type="date" :value="dateTime" placeholder="Select date" @on-change='dateChange'
+                <DatePicker class='operate' type="year" :value="dateTime" placeholder="Select date" @on-change='dateChange'
                     style="width: 200px">
                 </DatePicker>
             </div>
@@ -24,23 +24,13 @@
 
 </template>
 <script>
-    import {
-        InforCard
-    } from '_c/info-card'
+    import { InforCard } from '_c/info-card'
     import CountTo from '_c/count-to'
-    import {
-        getMessageList
-    } from '@/api/messageReport'
-    import {
-        formatData,
-        addDate
-    } from '@/libs/tools'
-    import {
-        getDragList,
-        getDataList
-    } from '@/api/data'
+    import { getMessageList } from '@/api/messageReport'
+    import { formatData, addDate } from '@/libs/tools'
+    import { getDragList, getDataList } from '@/api/data'
     import Mock from 'mockjs'
-
+    
     export default {
         name: 'message_report',
         components: {
@@ -50,157 +40,71 @@
         data() {
             return {
                 columns1: [{
-                        title: '设备名称',
-                        key: 'index',
-                        width: 85,
-                        fixed: 'left',
+						title: '设备名称',
+						key: 'index',
+                        width: 83,
                         align: 'center'
                     },
                     {
-                        title: '0时',
-                        key: 'name',
-                        width: 55,
-                        align: 'center'
-
-                    },
-                    {
-                        title: '1时',
-                        key: 'faultType',
-                        width: 55,
-                        align: 'center'
-                    },
-                    {
-                        title: '2时',
-                        width: 55,
-                        key: 'msgContent',
-                        align: 'center'
-                    },
-                    {
-                        title: '3时',
-                        width: 55,
-                        key: 'msgNumber',
-                        align: 'center'
-                    },
-                    {
-                        title: '4时',
-                        width: 55,
-                        key: 'sendState',
-                        align: 'center'
-                    },
-                    {
-                        title: '5时',
-                        width: 55,
-                        key: 'msgTime',
-                        align: 'center'
-                    },
-                    {
-                        title: '6时',
-                        width: 55,
-                        key: 'msgContent',
-                        align: 'center'
-                    },
-                    {
-                        title: '7时',
-                        width: 55,
-                        key: 'msgNumber',
-                        align: 'center'
-                    },
-                    {
-                        title: '8时',
-                        width: 55,
-                        key: 'sendState',
-                        align: 'center'
-                    },
-                    {
-                        title: '9时',
-                        width: 55,
-                        key: 'msgTime',
-                        align: 'center'
-                    },
-                    {
-                        title: '10时',
-                        width: 62,
+                        title: '1月',
                         key: 'name',
                         align: 'center'
 
                     },
                     {
-                        title: '11时',
-                        width: 62,
+                        title: '2月',
                         key: 'faultType',
                         align: 'center'
                     },
                     {
-                        title: '12时',
-                        width: 62,
+                        title: '3月',
                         key: 'msgContent',
                         align: 'center'
                     },
                     {
-                        title: '13时',
-                        width: 62,
+                        title: '4月',
                         key: 'msgNumber',
                         align: 'center'
                     },
                     {
-                        title: '14时',
-                        width: 62,
+                        title: '5月',
                         key: 'sendState',
                         align: 'center'
                     },
                     {
-                        title: '15时',
-                        width: 62,
+                        title: '6月',
                         key: 'msgTime',
                         align: 'center'
                     },
                     {
-                        title: '16时',
-                        width: 62,
+                        title: '7月',
                         key: 'msgContent',
                         align: 'center'
                     },
                     {
-                        title: '17时',
-                        width: 62,
+                        title: '8月',
                         key: 'msgNumber',
                         align: 'center'
                     },
                     {
-                        title: '18时',
-                        width: 62,
+                        title: '9月',
                         key: 'sendState',
                         align: 'center'
                     },
                     {
-                        title: '19时',
-                        width: 62,
+                        title: '10月',
                         key: 'msgTime',
                         align: 'center'
                     },
                     {
-                        title: '20时',
-                        width: 62,
+                        title: '11月',
                         key: 'name',
                         align: 'center'
 
                     },
                     {
-                        title: '21时',
-                        width: 62,
+                        title: '12月',
                         key: 'faultType',
-                        align: 'center'
-                    },
-                    {
-                        title: '22时',
-                        width: 62,
-                        key: 'msgContent',
-                        align: 'center'
-                    },
-                    {
-                        title: '23时',
-                        width: 62,
-                        key: 'msgNumber',
                         align: 'center'
                     },
                 ],
@@ -248,8 +152,8 @@
         methods: {
             init() {
                 // this.getCustomerList();
-                //this.getSelectData()
-                // this.getListData()
+                this.getSelectData()
+                this.getListData()
             },
             getSelectData() {
                 return new Promise((resolve, reject) => {
@@ -270,10 +174,10 @@
                         const data = res.data
                         this.listData = data
                         let size = this.queryParam.skipCount + 1
-                        // this.listData.forEach(element => {
-                        //     element.index = size++
-                        //     // element.creationTime=formatData(element.creationTime,"day");
-                        // })
+                        this.listData.forEach(element => {
+                            element.index = size++
+                            // element.creationTime=formatData(element.creationTime,"day");
+                        })
                         this.total = data.length
                         resolve()
                     }).catch(err => {
@@ -281,11 +185,11 @@
                     })
                 })
             },
-            getCountData() {
+            getCountData(){
                 const Random = Mock.Random
-                // this.inforCardData.forEach(element=>{
-                //     element.count = Random.integer(100,1000)
-                // })
+                this.inforCardData.forEach(element=>{
+                    element.count = Random.integer(100,1000)
+                })
             },
             getCustomerList() {
                 return new Promise((resolve, reject) => {
@@ -311,11 +215,11 @@
                         const data = res.data.result
                         var capacity = []
                         var hour = []
-                        // data.items.forEach(element => {
-                        //     let date = formatData(this.dateTime, 'day') + ' ' + element.hour + '时'
-                        //     capacity.push(element.capacity / 1000)
-                        //     hour.push(date)
-                        // })
+                        data.items.forEach(element => {
+                            let date = formatData(this.dateTime, 'day') + ' ' + element.hour + '时'
+                            capacity.push(element.capacity / 1000)
+                            hour.push(date)
+                        })
                         this.seriesData = capacity
                         this.xAxisData = hour
                         resolve()
@@ -349,7 +253,7 @@
 
 </script>
 <style>
-    @import "../components/search/searchAndOperate.less";
+    @import "../../components/search/searchAndOperate.less";
 
     .card-area {
         background-color: white;
@@ -373,11 +277,6 @@
         padding-bottom: 10px;
         padding-left: 10px;
         margin: 10px;
-    }
-
-    .table-wrap {
-        position: relative;
-        overflow: hidden;
     }
 
     .count-style {

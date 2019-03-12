@@ -37,3 +37,36 @@ export const getDataList = req => {
   })
   return dragList
 }
+export const getEnergyDataList = req => {
+  let dragList = []
+  doCustomTimes(8, () => {
+    dragList.push(Mock.mock({
+      name: '@cname',
+      ZeroHour: Random.integer(0,1000),
+      ZeroHour: Random.integer(0,1000),
+      ZeroHour: Random.integer(0,1000),
+      ZeroHour: Random.integer(0,1000),
+      ZeroHour: Random.integer(0,1000),
+      ZeroHour: Random.integer(0,1000),
+      ZeroHour: Random.integer(0,1000),
+      ZeroHour: Random.integer(0,1000),
+      ZeroHour: Random.integer(0,1000),
+      ZeroHour: Random.integer(0,1000),
+      ZeroHour: Random.integer(0,1000),
+      ZeroHour: Random.integer(0,1000),
+      ZeroHour: Random.integer(0,1000),
+      ZeroHour: Random.integer(0,1000),
+      ZeroHour: Random.integer(0,1000),
+      ZeroHour: Random.integer(0,1000),
+      ZeroHour: Random.integer(0,1000),
+      ZeroHour: Random.integer(0,1000),
+      ZeroHour: Random.integer(0,1000),
+      ZeroHour: Random.integer(0,1000),
+      ZeroHour: Random.integer(0,1000),
+      ZeroHour: Random.integer(0,1000),
+      ZeroHour: Random.integer(0,1000),
+      ZeroHour: Random.integer(0,1000),
+    }))
+  })
+  return dragList
+}

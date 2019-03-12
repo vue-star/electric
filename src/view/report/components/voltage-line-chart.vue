@@ -33,9 +33,9 @@
                 this.$nextTick(() => {
                     let dateTime=this.dateTime
                     let xAxisData = this.value.map(_ => _.creationTime)
-                    let voltageAB = this.value.map(_ => _.uabVoltage)
-                    let voltageBC = this.value.map(_ => _.ubcVoltage)
-                    let voltageCA = this.value.map(_ => _.ucaVoltage)
+                    let voltageAB = this.value.map(_ => _.aPhaseVoltage)
+                    let voltageBC = this.value.map(_ => _.bPhaseVoltage)
+                    let voltageCA = this.value.map(_ => _.cPhaseVoltage)
                     let option = {
                         title: {
                             text: this.text,
@@ -47,7 +47,7 @@
                             throttle: 50
                         }],
                         legend: {
-                            data: ['ab相电压', 'bc相电压', 'ca相电压']
+                            data: ['a线电压', 'b线电压', 'c线电压']
                         },
                         tooltip: {
                             trigger: 'axis',
@@ -101,19 +101,19 @@
                         },
                         series: [
                             {
-                                name: 'ab相电压',
+                                name: 'a线电压',
                                 type: 'line',
                                 color: '#FF8C00',
                                 data: voltageAB
                             },
                             {
-                                name: 'bc相电压',
+                                name: 'b线电压',
                                 type: 'line',
                                 color: '#76EE00',
                                 data: voltageBC
                             },
                             {
-                                name: 'ca相电压',
+                                name: 'c线电压',
                                 type: 'line',
                                 color: 'red',
                                 data: voltageCA
