@@ -177,12 +177,6 @@
 </script>
 
 <style lang="less">
-    .count-style {
-        font-size: 35px;
-        color: #2d8cf0;
-        margin-left: 20px;
-    }
-
     .infor-div {
         width: 23%;
         min-width: 250px;

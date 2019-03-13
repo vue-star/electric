@@ -1,5 +1,5 @@
 <template>
-    <div class="couplet-card">
+    <div style="height:100%">
         <Tabs active-key="key1" type="card" style="height: 100%">
             <Tab-pane label="日报" key="key1">
                 <day-report></day-report>

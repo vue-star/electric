@@ -21,9 +21,9 @@
                     <div>Loading</div>
                 </Spin>
             </div>
-            <Page class='page-wrap' show-elevator show-total :total="total" :current="queryParam.pageNumber+1"
+            <!-- <Page class='page-wrap' show-elevator show-total :total="total" :current="queryParam.pageNumber+1"
                 @on-change='pageChange'>
-            </Page>
+            </Page> -->
         </div>
     </div>
 
@@ -38,166 +38,13 @@
         },
         data() {
             return {
-                columns1: [{
-                        title: '设备名称',
-                        key: 'name',
-                        width: 85,
-                        fixed: 'left',
-                        align: 'center'
-                    },
-                    {
-                        title: '0时',
-                        key: 'ZeroHour',
-                        width: 80,
-                        align: 'center'
-
-                    },
-                    {
-                        title: '1时',
-                        key: 'ZeroHour',
-                        width: 80,
-                        align: 'center'
-                    },
-                    {
-                        title: '2时',
-                        width: 80,
-                        key: 'ZeroHour',
-                        align: 'center'
-                    },
-                    {
-                        title: '3时',
-                        width: 80,
-                        key: 'ZeroHour',
-                        align: 'center'
-                    },
-                    {
-                        title: '4时',
-                        width: 80,
-                        key: 'ZeroHour',
-                        align: 'center'
-                    },
-                    {
-                        title: '5时',
-                        width: 80,
-                        key: 'ZeroHour',
-                        align: 'center'
-                    },
-                    {
-                        title: '6时',
-                        width: 80,
-                        key: 'ZeroHour',
-                        align: 'center'
-                    },
-                    {
-                        title: '7时',
-                        width: 80,
-                        key: 'ZeroHour',
-                        align: 'center'
-                    },
-                    {
-                        title: '8时',
-                        width: 80,
-                        key: 'ZeroHour',
-                        align: 'center'
-                    },
-                    {
-                        title: '9时',
-                        width: 80,
-                        key: 'ZeroHour',
-                        align: 'center'
-                    },
-                    {
-                        title: '10时',
-                        width: 80,
-                        key: 'ZeroHour',
-                        align: 'center'
-
-                    },
-                    {
-                        title: '11时',
-                        width: 80,
-                        key: 'ZeroHour',
-                        align: 'center'
-                    },
-                    {
-                        title: '12时',
-                        width: 80,
-                        key: 'ZeroHour',
-                        align: 'center'
-                    },
-                    {
-                        title: '13时',
-                        width: 80,
-                        key: 'ZeroHour',
-                        align: 'center'
-                    },
-                    {
-                        title: '14时',
-                        width: 80,
-                        key: 'ZeroHour',
-                        align: 'center'
-                    },
-                    {
-                        title: '15时',
-                        width: 80,
-                        key: 'ZeroHour',
-                        align: 'center'
-                    },
-                    {
-                        title: '16时',
-                        width: 80,
-                        key: 'ZeroHour',
-                        align: 'center'
-                    },
-                    {
-                        title: '17时',
-                        width: 80,
-                        key: 'ZeroHour',
-                        align: 'center'
-                    },
-                    {
-                        title: '18时',
-                        width: 80,
-                        key: 'ZeroHour',
-                        align: 'center'
-                    },
-                    {
-                        title: '19时',
-                        width: 80,
-                        key: 'ZeroHour',
-                        align: 'center'
-                    },
-                    {
-                        title: '20时',
-                        width: 80,
-                        key: 'ZeroHour',
-                        align: 'center'
-
-                    },
-                    {
-                        title: '21时',
-                        width: 80,
-                        key: 'ZeroHour',
-                        align: 'center'
-                    },
-                    {
-                        title: '22时',
-                        width: 80,
-                        key: 'ZeroHour',
-                        align: 'center'
-                    },
-                    {
-                        title: '23时',
-                        width: 80,
-                        key: 'ZeroHour',
-                        align: 'center'
-                    },
-                ],
+                columns1: [],
                 listData: [],
                 showList: true,
                 isLoading: false,
-                dateTime: addDate(new Date(), -7),
+                dateTime: addDate(new Date(), 0),
                 total: 1,
+                electricityBelongType: 0, // 所属类别 Day=0, Month=1, Year=2
                 queryParam: {
                     'maxResultCount': 10,
                     'filter': '',
@@ -223,11 +70,48 @@
             
             getListData() {
                 return new Promise((resolve, reject) => {
-                    getEnergyDataList( this.organizationUnitId, this.queryParam).then(
+                    getEnergyDataList( this.organizationUnitId,this.electricityBelongType, this.dateTime).then(
                         res => {
-                            const data = res.data
+                            const data = res.data.result
                             this.isLoading = false
-                            this.listData = data
+                            let colList=[
+                                {
+                                    title: '设备名称',
+                                    key: 'name',
+                                    width: 85,
+                                    fixed: 'left',
+                                    align: 'center'
+                                }
+                            ]
+                            let list=[]
+                            if(data !== null){
+                                data.forEach((element,i) => {
+                                    let listItem={
+                                        name:''
+                                    }
+                                    element.forEach((item,index)=>{
+                                        let colItem={
+                                            width:80,
+                                            align:'center'
+                                        }
+                                        if(index===0){
+                                            listItem.name=item
+                                        }else{
+                                            this.$set(listItem,(index-1),parseFloat(item))
+                                            if(i===0){
+                                                colItem.title = (index-1)+'点'
+                                                colItem.key = index-1
+                                                colList.push(colItem)
+                                            }
+                                        }
+                                    })
+                                    list.push(listItem)
+                                });
+                                this.listData = list
+                                this.columns1=colList
+                            }else{
+                                this.listData=[]
+                            }
                             resolve()
                         },
                         error => {

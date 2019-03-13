@@ -109,7 +109,8 @@
                 'setTagNavList',
                 'addTag',
                 'setLocal',
-                'setHomeRoute'
+                'setHomeRoute',
+                'setCollapsed'
             ]),
             ...mapActions([
                 'handleLogin',
@@ -139,6 +140,7 @@
             },
             handleCollapsedChange(state) {
                 this.collapsed = state
+                this.setCollapsed(state)
             },
             handleCloseTag(res, type, route) {
                 if (type === 'all') {
@@ -155,7 +157,9 @@
                 this.turnToPage(item)
             },
             resize() {
-                this.collapsed = true
+                if(document.body.scrollWidth < 800){
+                    this.collapsed = true
+                }
             },
         },
         watch: {
@@ -194,6 +198,7 @@
             // 设置初始语言
             this.setLocal(this.$i18n.locale)
             on(window, 'resize', this.resize)
+            
             // 文档提示
             // this.$Notice.info({
             //   title: '想快速上手，去看文档吧',

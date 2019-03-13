@@ -14,242 +14,208 @@
         </div>
         <div class="list" v-show='showList'>
             <div class='table-wrap'>
-                <i-table stripe highlight-row :columns="columns1" :data="listData" @on-row-click='selectItem'>
+                <i-table stripe highlight-row :columns="columns1" :data="listData" ref="table">
                 </i-table>
                 <Spin :fix='true' v-show='isLoading'>
                     <Icon type="load-c" size=18 class="demo-spin-icon-load"></Icon>
                     <div>Loading</div>
                 </Spin>
             </div>
-            <Page class='page-wrap' show-elevator show-total :total="total" :current="queryParam.pageNumber+1"
+            <!-- <Page class='page-wrap' show-elevator show-total :total="total" :current="queryParam.pageNumber+1"
                 @on-change='pageChange'>
-            </Page>
+            </Page> -->
         </div>
     </div>
 
 </template>
 <script>
-    import { InforCard } from '_c/info-card'
-    import CountTo from '_c/count-to'
-    import { getMessageList } from '@/api/messageReport'
     import { formatData, addDate } from '@/libs/tools'
-    import { getDragList, getDataList } from '@/api/data'
+    import { getEnergyDataList } from '@/api/energyAnalysis'
     import Mock from 'mockjs'
-    
     export default {
-        name: 'message_report',
+        name: 'day_report',
         components: {
-            InforCard,
-            CountTo
         },
         data() {
             return {
-                columns1: [{
-						title: '设备名称',
-						key: 'index',
-                        width: 83,
+                columns1: [
+                    {
+                        title: '设备名称',
+                        key: 'name',
+                        fixed: 'left',
                         align: 'center'
                     },
                     {
                         title: '1月',
-                        key: 'name',
+                        key: 1,
+                        fixed: 'left',
                         align: 'center'
-
                     },
                     {
                         title: '2月',
-                        key: 'faultType',
+                        key: 2,
+                        fixed: 'left',
                         align: 'center'
                     },
                     {
                         title: '3月',
-                        key: 'msgContent',
+                        key: 3,
+                        fixed: 'left',
                         align: 'center'
                     },
                     {
                         title: '4月',
-                        key: 'msgNumber',
+                        key: 4,
+                        fixed: 'left',
                         align: 'center'
                     },
                     {
                         title: '5月',
-                        key: 'sendState',
+                        key: 5,
+                        fixed: 'left',
                         align: 'center'
                     },
                     {
                         title: '6月',
-                        key: 'msgTime',
+                        key: 6,
+                        fixed: 'left',
                         align: 'center'
                     },
                     {
                         title: '7月',
-                        key: 'msgContent',
+                        key: 7,
+                        fixed: 'left',
                         align: 'center'
                     },
                     {
                         title: '8月',
-                        key: 'msgNumber',
+                        key: 8,
+                        fixed: 'left',
                         align: 'center'
                     },
                     {
                         title: '9月',
-                        key: 'sendState',
+                        key: 9,
+                        fixed: 'left',
                         align: 'center'
                     },
                     {
                         title: '10月',
-                        key: 'msgTime',
+                        key: 10,
+                        fixed: 'left',
                         align: 'center'
                     },
                     {
                         title: '11月',
-                        key: 'name',
+                        key: 11,
+                        fixed: 'left',
                         align: 'center'
-
                     },
                     {
                         title: '12月',
-                        key: 'faultType',
+                        key: 12,
+                        fixed: 'left',
                         align: 'center'
                     },
                 ],
                 listData: [],
-                electricityMeterInfoId: 0,
                 showList: true,
                 isLoading: false,
-                dateTime: addDate(new Date(), -7),
-                lineText: '',
+                dateTime: addDate(new Date(), 0),
                 total: 1,
+                electricityBelongType: 2, // 所属类别 Day=0, Month=1, Year=2
                 queryParam: {
                     'maxResultCount': 10,
                     'filter': '',
                     'pageNumber': 0,
                     'skipCount': 0
-                },
-                xAxisData: [],
-                seriesData: [],
-                customerList: [],
-                itemList: [],
-                inforCardData: [{
-                        title: '短信总量（条）',
-                        icon: 'md-person-add',
-                        count: 550,
-                        iconColor: '#2d8cf0',
-                        color: '#fff'
-                    },
-                    {
-                        title: '已用短信（条）',
-                        icon: 'md-locate',
-                        count: 450,
-                        iconColor: '#2d8cf0',
-                        color: '#fff'
-                    },
-                    {
-                        title: '剩余短信（条）',
-                        icon: 'md-eye-off',
-                        count: 300,
-                        iconColor: '#2d8cf0',
-                        color: '#fff'
-                    }
-                ]
+                }
+            }
+        },
+        computed: {
+            organizationUnitId () {
+                return this.$store.state.user.organizationId
+            }
+        },
+        watch: {
+            organizationUnitId () {
+                this.init()
             }
         },
         methods: {
             init() {
-                // this.getCustomerList();
-                this.getSelectData()
                 this.getListData()
             },
-            getSelectData() {
-                return new Promise((resolve, reject) => {
-                    getDragList().then(res => {
-                        const data = res.data
-                        this.itemList = data
-                        this.customerId = this.itemList[0].name
-                        this.textTitle = this.itemList[0].name
-                        resolve()
-                    }).catch(err => {
-                        reject(err)
-                    })
-                })
-            },
+            
             getListData() {
                 return new Promise((resolve, reject) => {
-                    getMessageList(this.queryParam).then(res => {
-                        const data = res.data
-                        this.listData = data
-                        let size = this.queryParam.skipCount + 1
-                        this.listData.forEach(element => {
-                            element.index = size++
-                            // element.creationTime=formatData(element.creationTime,"day");
-                        })
-                        this.total = data.length
-                        resolve()
-                    }).catch(err => {
-                        reject(err)
-                    })
-                })
-            },
-            getCountData(){
-                const Random = Mock.Random
-                this.inforCardData.forEach(element=>{
-                    element.count = Random.integer(100,1000)
-                })
-            },
-            getCustomerList() {
-                return new Promise((resolve, reject) => {
-                    getGetAllCustomer().then(res => {
-                        const data = res.data.result
-                        this.customerList = data
-                        this.electricityMeterInfoId = data[0].meterInfosDtoList[0].id
-                        this.lineText = data[0].customerName + data[0].meterInfosDtoList[0].equipmentName
-                        this.getCapacityData()
-                        resolve()
-                    }).catch(err => {
-                        reject(err)
-                    })
-                })
-            },
-            selectedChange(val) {
-                this.getListData()
-                this.getCountData()
-            },
-            getCapacityData() {
-                return new Promise((resolve, reject) => {
-                    getCapacityData(this.electricityMeterInfoId, this.dateTime, 30, 0).then(res => {
-                        const data = res.data.result
-                        var capacity = []
-                        var hour = []
-                        data.items.forEach(element => {
-                            let date = formatData(this.dateTime, 'day') + ' ' + element.hour + '时'
-                            capacity.push(element.capacity / 1000)
-                            hour.push(date)
-                        })
-                        this.seriesData = capacity
-                        this.xAxisData = hour
-                        resolve()
-                    }).catch(err => {
+                    getEnergyDataList( this.organizationUnitId,this.electricityBelongType, this.dateTime).then(
+                        res => {
+                            const data = res.data.result
+                            this.isLoading = false
+                            let colList=[
+                                {
+                                    title: '设备名称',
+                                    key: 'name',
+                                    width: 85,
+                                    fixed: 'left',
+                                    align: 'center'
+                                }
+                            ]
+                            let list=[]
+                            if(data !== null){
+                                data.forEach((element,i) => {
+                                    let listItem={
+                                        name:''
+                                    }
+                                    element.forEach((item,index)=>{
+                                        let colItem={
+                                            width:80,
+                                            align:'center'
+                                        }
+                                        if(index===0){
+                                            listItem.name=item
+                                        }else{
+                                            this.$set(listItem,(index-1),parseFloat(item))
+                                            if(i===0){
+                                                colItem.title = (index)+'月'
+                                                colItem.key = index-1
+                                                colList.push(colItem)
+                                            }
+                                        }
+                                    })
+                                    list.push(listItem)
+                                });
+                                this.listData = list
+                                this.columns1=colList
+                            }else{
+                                this.listData=[]
+                            }
+                            resolve()
+                        },
+                        error => {
+                            this.$Message.error(error.error.message)
+                            resolve()
+                        }).catch(err => {
                         reject(err)
                     })
                 })
             },
             dateChange(val) {
-                this.dateTime = val
+                this.dateTime = val + '-01-01'
                 this.getListData()
-                this.getCountData()
-            },
-            selectItem(data, index) {
-                this.deleteBtn = true
-                this.editBtn = true
-                this.data = data
-                this.selectIndex = index
-                this.isSelect = true
             },
             pageChange(data) {
                 this.queryParam.pageNumber = data - 1
                 this.queryParam.skipCount = (data - 1) * this.queryParam.maxResultCount
                 this.getListData()
-            }
+            },
+            exportData () {
+                this.$refs.table.exportCsv({
+                    filename: 'dayReport',
+                    original: false
+                });
+            }     
         },
         mounted() {
             this.init()
@@ -257,7 +223,7 @@
     }
 
 </script>
-<style>
+<style lang="less">
     @import "../../components/search/searchAndOperate.less";
 
     .card-area {
@@ -284,10 +250,23 @@
         margin: 10px;
     }
 
+    .table-wrap {
+        position: relative;
+        overflow: hidden;
+    }
+
     .count-style {
         font-size: 35px;
         color: #2d8cf0;
         margin-left: 20px;
+    }
+    .export-div{
+        float: right;
+        height: 50px;
+
+        .export-btn{
+            margin: 10px;
+        }
     }
 
 </style>

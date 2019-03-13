@@ -1,17 +1,12 @@
 import axios from '@/libs/api.request'
 // 获取用电概况
-export const getEnergyDataList = (OrganizationUnitId,data) => {
-    const MaxResultCount = data.maxResultCount
-    const SkipCount = data.skipCount
-    const Filter = data.filter
-
+export const getEnergyDataList = (OrganizationUnitId,ElectricityBelongType,StartTime) => {
     return axios.request({
-        url: 'get_data_list/',
+        url: 'services/app/PowerStatistics/GetEnergyAnalysisAsync',
         params: {
             OrganizationUnitId,
-            MaxResultCount,
-            SkipCount,
-            Filter
+            ElectricityBelongType,
+            StartTime
         },
         method: 'get'
     })

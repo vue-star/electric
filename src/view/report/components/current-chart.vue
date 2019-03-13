@@ -17,26 +17,34 @@
         },
         data () {
             return {
-                dom: null
+                dom: null,
+                option: null
+            }
+        },
+        computed: {
+            collapsed () {
+                return this.$store.state.app.collapsed
             }
         },
         watch: {
             value() {
                 this.loadLine()
-            }
+            },
+            // collapsed() {
+            //     this.resize()
+            // }
         },
         methods: {
             resize () {
                 this.dom.resize()
             },
             loadLine() {
-                this.$nextTick(() => {
                     let dateTime=this.dateTime
                     let xAxisData = this.value.map(_ => _.creationTime)
                     let currentA = this.value.map(_ => _.aPhaseCurrent)
                     let currentB = this.value.map(_ => _.bPhaseCurrent)
                     let currentC = this.value.map(_ => _.cPhaseCurrent)
-                    let option = {
+                    this.option = {
                         title: {
                             text: this.text,
                             subtext: this.subtext,
@@ -49,6 +57,9 @@
                         legend: {
                             data: ['a相电流', 'b相电流', 'c相电流']
                         },
+                        grid: [{
+                            width:'80%'
+                        }],
                         tooltip: {
                             trigger: 'axis',
                             axisPointer: {
@@ -118,8 +129,9 @@
                             }
                         ]
                     }
+                this.$nextTick(() => {
                     this.dom = echarts.init(this.$refs.dom, 'tdTheme')
-                    this.dom.setOption(option, true)
+                    this.dom.setOption(this.option, true)
                     on(window, 'resize', this.resize)
                 })
             }

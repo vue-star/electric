@@ -28,7 +28,8 @@ export default {
     breadCrumbList: [],
     tagNavList: [],
     homeRoute: {},
-    local: ''
+    local: '',
+    collapsed: false
   },
   getters: {
     menuList: (state, getters, rootState) => getMenuByRouter(routers, rootState.user.access)
@@ -73,6 +74,9 @@ export default {
     },
     setLocal (state, lang) {
       state.local = lang
+    },
+    setCollapsed (state, collapsed) {
+      state.collapsed = collapsed
     }
   }
 }

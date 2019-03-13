@@ -51,12 +51,18 @@
         computed: {
             organizationUnitId () {
                 return this.$store.state.user.organizationId
+            },
+            collapsed () {
+                return this.$store.state.app.collapsed
             }
         },
         watch: {
             organizationUnitId () {
                 this.init()
-            }
+            },
+            // collapsed() {
+            //     this.init()
+            // }
         },
         methods: {
             init() {
