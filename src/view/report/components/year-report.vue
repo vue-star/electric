@@ -229,7 +229,6 @@
     .card-area {
         background-color: white;
         margin-top: 5px;
-        border: 1px solid;
     }
 
     .top-area {

@@ -13,9 +13,16 @@
             </div>
         </div>
         <Row style="margin-top: 20px;">
+            <div class="card-area">
+                    <!-- <div class="top-style"></div> -->
+                    <div class="top-area">
+                        <Icon type="md-trending-up" size="20" style="float:left" color="#436EEE" />
+                        <p>日环比</p>
+                    </div>
             <Card shadow>
                 <fault-chart style="height: 300px;" :value="barData" :text="textTitle+'故障类型统计'" />
             </Card>
+            </div>
         </Row>
         <div class="list" v-show='showList'>
             <div class='table-wrap'>
@@ -190,7 +197,7 @@
     .card-area {
         background-color: white;
         margin-top: 5px;
-        border: 1px solid;
+        /* border: 1px solid; */
     }
 
     .top-area {

@@ -13,9 +13,16 @@
             </div>
         </div>
         <Row style="margin-top: 20px;">
+            <div class="card-area">
+                    <!-- <div class="top-style"></div> -->
+                    <div class="top-area">
+                        <Icon type="md-trending-up" size="20" style="float:left" color="#436EEE" />
+                        <p>日环比</p>
+                    </div>
             <Card shadow>
                 <current-chart style="height: 500px;" :value="barData" :date-time="dateTime" text='母线电流' />
             </Card>
+            </div>
         </Row>
     </div>
 
@@ -122,7 +129,7 @@
     .card-area {
         background-color: white;
         margin-top: 5px;
-        border: 1px solid;
+        /* border: 1px solid; */
     }
 
     .top-area {

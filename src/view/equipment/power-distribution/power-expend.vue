@@ -210,12 +210,7 @@
                         key: 'impedance',
                         align: 'center'
                     },
-                    {
-                        title: '生产厂商',
-                        key: 'capacitorManufacturer',
-                        align: 'center'
-
-                    },
+                    
                      {
                         title: '生产编号',
                         key: 'productionCode',

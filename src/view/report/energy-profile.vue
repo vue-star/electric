@@ -8,34 +8,55 @@
             </div>
         </div>
         <Row :gutter="20">
+            <div class="card-area">
+                    <!-- <div class="top-style"></div> -->
+                    <div class="top-area">
+                        <Icon type="md-trending-up" size="20" style="float:left" color="#436EEE" />
+                        <p>日环比</p>
+                    </div>
             <i-col :xs="12" :md="8" :lg="4" v-for="(infor, i) in inforCardData" :key="`infor-${i}`" class="infor-div">
                 <infor-card :color="infor.color" :icon="infor.icon" :icon-size="42" :icon-color="infor.iconColor">
                     <p style="color: #000; padding-bottom: 20px;">{{ infor.title }}</p>
                     <p style="color: #2d8cf0;font-size: 35px;">{{ infor.count }}</p>
                 </infor-card>
             </i-col>
+            </div>
         </Row>
         <Row :gutter="20">
+            <div class="card-area">
+                    <!-- <div class="top-style"></div> -->
+                    <div class="top-area">
+                        <Icon type="md-trending-up" size="20" style="float:left" color="#436EEE" />
+                        <p>日环比</p>
+                    </div>
             <i-col :xs="12" :md="8" :lg="4" class="power-div">
-                <Card shadow style="box-shadow:5px 5px 5px #708194">
+                <Card>
                     <day-chart style="height: 200px;" :value="dayData" text="本日电量" :subtext="dayTitle + 'kwh'"/>
                 </Card>
             </i-col>
             <i-col :xs="12" :md="8" :lg="4" class="power-div">
-                <Card shadow style="box-shadow:5px 5px 5px #708194">
+                <Card>
                     <mon-chart style="height: 200px;" :value="monthData" text="本月电量" :subtext="monthTitle + 'kwh'"/>
                 </Card>
             </i-col>
             <i-col :xs="12" :md="8" :lg="4" class="power-div">
-                <Card shadow style="box-shadow:5px 5px 5px #708194">
+                <Card>
                     <year-chart style="height: 200px;" :value="yearData" text="本年电量" :subtext="yearTitle + 'kwh'"/>
                 </Card>
             </i-col>
+            </div>
         </Row>
-        <Row style="margin-top: 20px;">
-            <Card shadow>
-                <user-chart style="height: 300px;" :value="electricityData" :date-time="dateTime" text="配变日用电量趋势" />
+        <Row style="margin-top: 20px;margin-right:1px;" >
+            <div class="card-area">
+                    <!-- <div class="top-style"></div> -->
+                    <div class="top-area">
+                        <Icon type="md-trending-up" size="20" style="float:left" color="#436EEE" />
+                        <p>配变日用电量趋势</p>
+                    </div>
+            <Card>
+                <user-chart style="height: 300px;" :value="electricityData" :date-time="dateTime"/>
             </Card>
+            </div>
         </Row>
     </div>
 </template>
@@ -191,6 +212,31 @@
         height: 240px;
         padding-left: 10px;
         margin: 20px;
+    }
+    .card-area {
+        float: left;
+        width: 98.5%;
+        min-width: 250px;
+        background-color: #F2F2F2;
+        margin-top: 5px;
+        margin-left: 10px;
+        //border: 1px solid;
+
+        .ivu-card-body {
+            padding: 0px;
+        }
+
+        ;
+
+        .top-area {
+            background-color: rgb(223, 230, 230);
+            padding: 8px;
+        }
+
+        .top-style {
+            height: 5px;
+            background-color: darkcyan;
+        }
     }
 
 </style>

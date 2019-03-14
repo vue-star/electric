@@ -3,7 +3,7 @@
         <Row :gutter="20">
             <i-col span="24">
                 <div class="card-area">
-                    <div class="top-style"></div>
+                    <!-- <div class="top-style"></div> -->
                     <div class="top-area">
                         <Icon type="md-trending-up" size="20" style="float:left" color="#436EEE" />
                         <p>数据实时指标</p>
@@ -21,7 +21,7 @@
 
         <Row style="margin-top: 20px;">
             <div class="card-area">
-                <div class="top-style"></div>
+                <!-- <div class="top-style"></div> -->
                 <div class="top-area">
                     <Icon type="md-book" size="20" style="float:left" color="#436EEE" />
                     <p>设备定位</p>
@@ -168,7 +168,7 @@
         width: 100%;
         background-color: white;
         margin-top: 5px;
-        border: 1px solid;
+        //border: 1px solid;
 
         .ivu-card-body {
             padding: 0px;

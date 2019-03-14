@@ -373,7 +373,6 @@ export default {
 .card-area{
   background-color: white;
   margin-top: 5px;
-  border: 1px solid;
   .ivu-card-body{
     padding: 0px;
   };

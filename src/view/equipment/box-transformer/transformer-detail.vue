@@ -881,26 +881,26 @@
                             })
                         }
                     },
-                     {
-                        title: '设备名称',
-                        key: 'deviceFunction',
-                        align: 'center'
-                    },
-                    {
-                        title: '设备编号',
-                        key: 'deviceName',
-                        align: 'center'
-                    },
-                    {
-                        title: '设备型号',
-                        key: 'productType',
-                        align: 'center'
-                    },
                     {
                         title: '生产厂商',
                         key: 'manufacturer',
                         align: 'center'
 
+                    },
+                    {
+                        title: '设备名称',
+                        key: 'deviceName',
+                        align: 'center'
+                    },
+                     {
+                        title: '设备功能',
+                        key: 'deviceFunction',
+                        align: 'center'
+                    },
+                    {
+                        title: '产品型号',
+                        key: 'productType',
+                        align: 'center'
                     },
                     {
                         title: '生产编号',
@@ -970,18 +970,24 @@
                         align: 'center'
                     },
                     {
+                        title: '生产厂商',
+                        key: 'capacitorManufacturer',
+                        align: 'center'
+
+                    },
+                    {
                         title: '设备名称',
                         key: 'deviceName',
-                        align: 'center'
-                    },
-                     {
-                        title: '设备型号',
-                        key: 'deviceType',
                         align: 'center'
                     },
                     {
                         title: '设备容量 kVA',
                         key: 'deviceCapaticy',
+                        align: 'center'
+                    },
+                     {
+                        title: '设备型号',
+                        key: 'deviceType',
                         align: 'center'
                     },
                      {
@@ -994,14 +1000,8 @@
                         key: 'impedance',
                         align: 'center'
                     },
-                    {
-                        title: '生产厂商',
-                        key: 'capacitorManufacturer',
-                        align: 'center'
-
-                    },
                      {
-                        title: '生产编号',
+                        title: '出厂编号',
                         key: 'productionCode',
                         align: 'center'
                     },
@@ -1010,7 +1010,6 @@
                         key: 'manufactureDate',
                         align: 'center'
                     },
-                   
                     {
                         title: '操作',
                         key: 'action',
