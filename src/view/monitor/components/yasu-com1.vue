@@ -425,7 +425,7 @@
                     <path stroke="#ffffff" transform="rotate(180 225.9687042236328,75.60751342773438) " id="svg_35" d="m223.50725,77.77499l2.46144,-4.33497l2.46144,4.33497l-4.92288,0l0,0z"
                         fill-opacity="null" stroke-width="null" fill="none" />
                     <text xml:space="preserve" text-anchor="start" font-family="Helvetica, Arial, sans-serif" font-size="12"
-                        id="svg_36" y="14.38711" x="340.0153" stroke-width="0" fill="#ffffff" stroke="#FFDBD2">浙江亚设塑业厂系统图</text>
+                        id="svg_36" y="14.38711" x="310.0153" stroke-width="0" fill="#ffffff" stroke="#FFDBD2">浙江亚设塑业厂3#箱变一次系统图</text>
                     <text xml:space="preserve" text-anchor="start" font-family="Helvetica, Arial, sans-serif" font-size="8"
                         id="svg_42" y="158.41916" x="362.54784" stroke-width="0" fill="#ffffff" stroke="#ffffff">备用</text>
                     <line stroke-linecap="null" stroke-linejoin="null" id="svg_43" y2="58.05182" x2="404.7912" y1="58.05182"
@@ -885,7 +885,6 @@
                         stroke-linecap="null" stroke-linejoin="null" id="svg_290" y2="299.41229" x2="607.96293" y1="299.41229"
                         x1="604.33389" fill-opacity="null" fill="none" />
                     <text xml:space="preserve" text-anchor="start" font-family="Helvetica, Arial, sans-serif" font-size="8"
-                        id="svg_291" y="193.75274" x="343.88231" stroke-width="0" fill="#ffffff" stroke="#ffffff">变压器</text>
                     <ellipse stroke="#ffffff" stroke-width="0.5" ry="1.04147" rx="1.04147" id="svg_293" cy="52.04305"
                         cx="221.34058" fill-opacity="null" fill="none" />
                     <ellipse stroke="#ffffff" stroke-width="0.5" ry="1.04147" rx="1.04147" id="svg_294" cy="52.04305"
@@ -896,6 +895,38 @@
                         cx="347.58846" fill-opacity="null" fill="none" />
                     <ellipse stroke="#ff0000" stroke-width="0.5" ry="1.04147" rx="1.04147" id="svg_297" cy="52.54305"
                         cx="307.33914" fill-opacity="null" fill="none" />
+
+  <line stroke-dasharray="13.87 13.87" :stroke-dashoffset="speedd" stroke="#FFD700" stroke-linecap="undefined" stroke-linejoin="undefined" id="svg_14" y2="52.12311" x2="307.43417" y1="52.12311" x1="209.18026" fill="none"/>
+  <line stroke-dasharray="13.87 13.87" :stroke-dashoffset="speedd" stroke="#FFD700" fill="none" fill-opacity="null" x1="306.58721" y1="77.06249" x2="348.78286" y2="77.06249" id="svg_19" stroke-linejoin="null" stroke-linecap="null"/>
+  <line stroke-dasharray="13.87 13.87" :stroke-dashoffset="speedd" stroke="#FFD700" fill="none" fill-opacity="null" x1="347.25383" y1="52.39584" x2="570.11613" y2="52.39584" id="svg_37" stroke-linejoin="null" stroke-linecap="null"/>
+  <line stroke-dasharray="13.87 13.87" :stroke-dashoffset="speedd" stroke="#FFD700" stroke-linecap="undefined" stroke-linejoin="undefined" id="svg_38" y2="357.12565" x2="156.28905" y1="357.12565" x1="132.36844" fill="none"/>
+  <line stroke-dasharray="13.87 13.87" :stroke-dashoffset="speedd" stroke="#FFD700" stroke-linecap="undefined" stroke-linejoin="undefined" id="svg_39" y2="271.79226" x2="614.47106" y1="271.79226" x1="155.36843" fill="none"/>
+  <line stroke-dasharray="13.87 13.87" :stroke-dashoffset="speedd" stroke="#FFD700" stroke-linecap="undefined" stroke-linejoin="undefined" id="svg_41" y2="303.12573" x2="267.78773" y1="303.12573" x1="180.03521" fill="none"/>
+  <line stroke-dasharray="13.87 13.87" :stroke-dashoffset="speedd" stroke="#FFD700" stroke-linecap="undefined" stroke-linejoin="undefined" id="svg_103" y2="303.12573" x2="396.28746" y1="303.12573" x1="304.53494" fill="none"/>
+  <line stroke-dasharray="13.87 13.87" :stroke-dashoffset="speedd" stroke="#FFD700" stroke-linecap="undefined" stroke-linejoin="undefined" id="svg_104" y2="303.12573" x2="510.78713" y1="303.12573" x1="418.36794" fill="none"/>
+
+  <line stroke-dasharray="13.87 13.87" :stroke-dashoffset="speedd" stroke="#FFD700" fill="none" fill-opacity="null" x1="307.17108" y1="52.12361" x2="307.17108" y2="76.81358" id="svg_105" stroke-linejoin="undefined" stroke-linecap="undefined"/>
+  <line stroke-dasharray="13.87 13.87" :stroke-dashoffset="speedd" stroke="#FFD700" fill="none" fill-opacity="null" x1="507.50455" y1="166.36039" x2="507.50455" y2="177.06346" id="svg_106" stroke-linejoin="undefined" stroke-linecap="undefined"/>
+  <line stroke-dasharray="13.87 13.87" :stroke-dashoffset="speedd" stroke="#FFD700" transform="rotate(90 361.7299194335938,183.7595367431641) " fill="none" fill-opacity="null" x1="355.53478" y1="183.75954" x2="367.92502" y2="183.75954" id="svg_107" stroke-linejoin="null" stroke-linecap="null"/>
+  <line stroke-dasharray="13.87 13.87" :stroke-dashoffset="speedd" stroke="#FFD700" fill="none" fill-opacity="null" x1="361.31103" y1="234.74506" x2="361.31103" y2="254.1253" id="svg_138" stroke-linejoin="undefined" stroke-linecap="undefined"/>
+  <line stroke-dasharray="13.87 13.87" :stroke-dashoffset="speedd" stroke="#FFD700" fill="none" fill-opacity="null" x1="132.65391" y1="254.74692" x2="132.65391" y2="267.45758" id="svg_162" stroke-linejoin="undefined" stroke-linecap="undefined"/>
+  <line stroke-dasharray="13.87 13.87" :stroke-dashoffset="speedd" stroke="#FFD700" fill="none" fill-opacity="null" x1="132.65391" y1="312.07786" x2="132.65391" y2="357.45432" id="svg_163" stroke-linejoin="undefined" stroke-linecap="undefined"/>
+  <line stroke-dasharray="13.87 13.87" :stroke-dashoffset="speedd" stroke="#FFD700" fill="none" stroke-width="null" fill-opacity="null" x1="179.96008" y1="337.73838" x2="179.96008" y2="371.48063" id="svg_186" stroke-linejoin="null" stroke-linecap="null"/>
+  <line stroke-dasharray="13.87 13.87" :stroke-dashoffset="speedd" stroke="#FFD700" fill="none" stroke-width="null" fill-opacity="null" x1="212.95937" y1="337.73838" x2="212.95937" y2="370.1473" id="svg_276" stroke-linejoin="null" stroke-linecap="null"/>
+  <line stroke-dasharray="13.87 13.87" :stroke-dashoffset="speedd" stroke="#FFD700" fill="none" stroke-width="null" fill-opacity="null" x1="251.45872" y1="337.73838" x2="251.45872" y2="371.48063" id="svg_292" stroke-linejoin="null" stroke-linecap="null"/>
+  <line stroke-dasharray="13.87 13.87" :stroke-dashoffset="speedd" stroke="#FFD700" fill="none" stroke-width="null" fill-opacity="null" x1="304.4598" y1="337.73838" x2="304.4598" y2="371.48063" id="svg_298" stroke-linejoin="null" stroke-linecap="null"/>
+  <line stroke-dasharray="13.87 13.87" :stroke-dashoffset="speedd" stroke="#FFD700" fill="none" stroke-width="null" fill-opacity="null" x1="344.79242" y1="337.73838" x2="344.79242" y2="370.1473" id="svg_299" stroke-linejoin="null" stroke-linecap="null"/>
+  <line stroke-dasharray="13.87 13.87" :stroke-dashoffset="speedd" stroke="#FFD700" fill="none" stroke-width="null" fill-opacity="null" x1="379.95844" y1="337.73838" x2="379.95844" y2="371.48063" id="svg_300" stroke-linejoin="null" stroke-linecap="null"/>
+  <line stroke-dasharray="13.87 13.87" :stroke-dashoffset="speedd" stroke="#FFD700" fill="none" stroke-width="null" fill-opacity="null" x1="418.29281" y1="337.73838" x2="418.29281" y2="371.48063" id="svg_301" stroke-linejoin="null" stroke-linecap="null"/>
+  <line stroke-dasharray="13.87 13.87" :stroke-dashoffset="speedd" stroke="#FFD700" fill="none" stroke-width="null" fill-opacity="null" x1="457.2921" y1="337.73838" x2="457.2921" y2="370.1473" id="svg_302" stroke-linejoin="null" stroke-linecap="null"/>
+  <line stroke-dasharray="13.87 13.87" :stroke-dashoffset="speedd" stroke="#FFD700" fill="none" stroke-width="null" fill-opacity="null" x1="495.79145" y1="337.73838" x2="495.79145" y2="371.48063" id="svg_303" stroke-linejoin="null" stroke-linecap="null"/>
+
+  <line stroke-dasharray="13.87 13.87" :stroke-dashoffset="speeded" stroke="#FFD700" fill="none" fill-opacity="null" x1="361.2708" y1="176.56308" x2="507.61823" y2="176.56308" id="svg_304" stroke-linejoin="null" stroke-linecap="null"/>
+  <line stroke-dasharray="13.87 13.87" :stroke-dashoffset="speeded" stroke="#FFD700" stroke-linecap="undefined" stroke-linejoin="undefined" id="svg_305" y2="254.45989" x2="361.79214" y1="254.45989" x1="132.03607" fill="none"/>
+
+  <line stroke-dasharray="13.87 13.87" :stroke-dashoffset="speeded" stroke="#FFD700" fill="none" fill-opacity="null" x1="347.83777" y1="52.79029" x2="347.83777" y2="77.4802" id="svg_306" stroke-linejoin="undefined" stroke-linecap="undefined"/>
+  <line stroke-dasharray="13.87 13.87" :stroke-dashoffset="speeded" stroke="#FFD700" fill="none" fill-opacity="null" x1="156.15392" y1="271.99452" x2="156.15392" y2="357.45433" id="svg_307" stroke-linejoin="undefined" stroke-linecap="undefined"/>
+                    
                 </g>
             </svg>
             <Icon @click.native="toggleFullScreen" :type="fullscreen ? 'md-contract' : 'md-expand'" class="btn btn-default btn-map-fullscreen"
@@ -923,6 +954,8 @@
 
                 customerId: 2,
                 MaxResultCount: 1,
+                speedd: 0,
+                speeded: 0,
                 ElectricityMeterList: [],
 
                 fullscreen: false,
@@ -978,7 +1011,18 @@
         },
         mounted() {
             this.init();
-            this.scadaInit();
+            this.scadaInit()
+            if (this.timer) {
+                clearInterval(this.timer)
+            } else {
+                this.timer = setInterval(() => {
+                    this.speedd -= 5
+                    this.speeded += 5
+                }, 500)
+            }
+        },
+        beforeDestroy() {
+            clearInterval(this.timer)
         }
     }
 

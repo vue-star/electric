@@ -881,21 +881,6 @@
                             })
                         }
                     },
-                     {
-                        title: '设备名称',
-                        key: 'deviceFunction',
-                        align: 'center'
-                    },
-                    {
-                        title: '设备编号',
-                        key: 'deviceName',
-                        align: 'center'
-                    },
-                    {
-                        title: '设备型号',
-                        key: 'productType',
-                        align: 'center'
-                    },
                     {
                         title: '生产厂商',
                         key: 'manufacturer',
@@ -903,7 +888,22 @@
 
                     },
                     {
-                        title: '生产编号',
+                        title: '设备名称',
+                        key: 'deviceName',
+                        align: 'center'
+                    },
+                     {
+                        title: '设备功能',
+                        key: 'deviceFunction',
+                        align: 'center'
+                    },
+                    {
+                        title: '产品型号',
+                        key: 'productType',
+                        align: 'center'
+                    },
+                    {
+                        title: '设备编号',
                         key: 'productionCode',
                         align: 'center'
                     },

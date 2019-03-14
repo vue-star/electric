@@ -398,7 +398,7 @@
                     <path stroke="#ffffff" transform="rotate(180 225.9687042236328,75.60751342773438) " id="svg_35" d="m223.50725,77.77499l2.46144,-4.33497l2.46144,4.33497l-4.92288,0l0,0z"
                         fill-opacity="null" stroke-width="null" fill="none" />
                     <text xml:space="preserve" text-anchor="start" font-family="Helvetica, Arial, sans-serif" font-size="12"
-                        id="svg_36" y="14.38711" x="340.0153" stroke-width="0" fill="#ffffff" stroke="#FFDBD2">浙江亚设塑业厂系统图</text>
+                        id="svg_36" y="14.38711" x="310.0153" stroke-width="0" fill="#ffffff" stroke="#FFDBD2">浙江亚设塑业厂2#箱变一次系统图</text>
                     <text xml:space="preserve" text-anchor="start" font-family="Helvetica, Arial, sans-serif" font-size="8"
                         id="svg_42" y="168.41934" x="357.88109" stroke-width="0" fill="#ffffff" stroke="#ffffff">至3#箱变</text>
                     <line stroke-linecap="null" stroke-linejoin="null" id="svg_43" y2="58.05182" x2="404.7912" y1="58.05182"
@@ -837,6 +837,34 @@
                         id="svg_138" y="310.90626" x="582.16474" stroke-width="0" fill="#ffffff" stroke="#FFDBD2">JOM1-225H</text>
                     <text xml:space="preserve" text-anchor="start" font-family="Helvetica, Arial, sans-serif" font-size="3"
                         id="svg_139" y="317.40602" x="584.16463" stroke-width="0" fill="#ffffff" stroke="#FFDBD2">160A</text>
+
+  <line stroke-dasharray="13.87 13.87" :stroke-dashoffset="speedd" stroke="#FFD700" stroke-linecap="undefined" stroke-linejoin="undefined" id="svg_162" y2="52.12311" x2="307.43417" y1="52.12311" x1="209.18026" fill="none"/>
+  <line stroke-dasharray="13.87 13.87" :stroke-dashoffset="speedd" stroke="#FFD700" fill="none" fill-opacity="null" x1="306.58721" y1="77.06249" x2="348.78286" y2="77.06249" id="svg_163" stroke-linejoin="null" stroke-linecap="null"/>
+  <line stroke-dasharray="13.87 13.87" :stroke-dashoffset="speedd" stroke="#FFD700" fill="none" fill-opacity="null" x1="347.25383" y1="52.39584" x2="570.11613" y2="52.39584" id="svg_186" stroke-linejoin="null" stroke-linecap="null"/>
+  <line stroke-dasharray="13.87 13.87" :stroke-dashoffset="speedd" stroke="#FFD700" stroke-linecap="undefined" stroke-linejoin="undefined" id="svg_194" y2="357.12565" x2="156.28905" y1="357.12565" x1="132.36844" fill="none"/>
+  <line stroke-dasharray="13.87 13.87" :stroke-dashoffset="speedd" stroke="#FFD700" stroke-linecap="undefined" stroke-linejoin="undefined" id="svg_195" y2="271.79226" x2="614.47106" y1="271.79226" x1="155.36843" fill="none"/>
+  <line stroke-dasharray="13.87 13.87" :stroke-dashoffset="speedd" stroke="#FFD700" stroke-linecap="undefined" stroke-linejoin="undefined" id="svg_196" y2="303.79245" x2="402.95892" y1="303.79245" x1="274.52944" fill="none"/>
+  <line stroke-dasharray="13.87 13.87" :stroke-dashoffset="speedd" stroke="#FFD700" stroke-linecap="undefined" stroke-linejoin="undefined" id="svg_197" y2="303.79245" x2="606.6229" y1="303.79245" x1="415.52759" fill="none"/>
+
+  <line stroke-dasharray="13.87 13.87" :stroke-dashoffset="speedd" stroke="#FFD700" fill="none" fill-opacity="null" x1="307.17108" y1="52.12361" x2="307.17108" y2="76.81358" id="svg_198" stroke-linejoin="undefined" stroke-linecap="undefined"/>
+  <line stroke-dasharray="13.87 13.87" :stroke-dashoffset="speedd" stroke="#FFD700" fill="none" fill-opacity="null" x1="507.50455" y1="166.36039" x2="507.50455" y2="177.06346" id="svg_227" stroke-linejoin="undefined" stroke-linecap="undefined"/>
+  <line stroke-dasharray="13.87 13.87" :stroke-dashoffset="speedd" stroke="#FFD700" transform="rotate(90 361.7299194335938,183.7595367431641) " fill="none" fill-opacity="null" x1="355.53478" y1="183.75954" x2="367.92502" y2="183.75954" id="svg_228" stroke-linejoin="null" stroke-linecap="null"/>
+  <line stroke-dasharray="13.87 13.87" :stroke-dashoffset="speedd" stroke="#FFD700" fill="none" fill-opacity="null" x1="361.31103" y1="234.74506" x2="361.31103" y2="254.1253" id="svg_229" stroke-linejoin="undefined" stroke-linecap="undefined"/>
+  <line stroke-dasharray="13.87 13.87" :stroke-dashoffset="speedd" stroke="#FFD700" fill="none" fill-opacity="null" x1="132.65391" y1="254.74692" x2="132.65391" y2="267.45758" id="svg_230" stroke-linejoin="undefined" stroke-linecap="undefined"/>
+  <line stroke-dasharray="13.87 13.87" :stroke-dashoffset="speedd" stroke="#FFD700" fill="none" fill-opacity="null" x1="132.65391" y1="312.07786" x2="132.65391" y2="357.45432" id="svg_231" stroke-linejoin="undefined" stroke-linecap="undefined"/>
+  <line stroke-dasharray="13.87 13.87" :stroke-dashoffset="speedd" stroke="#FFD700" fill="none" stroke-width="null" fill-opacity="null" x1="275.62663" y1="337.73838" x2="275.62663" y2="370.1473" id="svg_232" stroke-linejoin="null" stroke-linecap="null"/>
+  <line stroke-dasharray="13.87 13.87" :stroke-dashoffset="speedd" stroke="#FFD700" fill="none" stroke-width="null" fill-opacity="null" x1="324.12585" y1="337.73838" x2="324.12585" y2="371.48063" id="svg_255" stroke-linejoin="null" stroke-linecap="null"/>
+  <line stroke-dasharray="13.87 13.87" :stroke-dashoffset="speedd" stroke="#FFD700" fill="none" stroke-width="null" fill-opacity="null" x1="362.45904" y1="337.73838" x2="362.45904" y2="371.48063" id="svg_256" stroke-linejoin="null" stroke-linecap="null"/>
+  <line stroke-dasharray="13.87 13.87" :stroke-dashoffset="speedd" stroke="#FFD700" fill="none" stroke-width="null" fill-opacity="null" x1="416.12482" y1="337.73838" x2="416.12482" y2="370.1473" id="svg_257" stroke-linejoin="null" stroke-linecap="null"/>
+  <line stroke-dasharray="13.87 13.87" :stroke-dashoffset="speedd" stroke="#FFD700" fill="none" stroke-width="null" fill-opacity="null" x1="461.95736" y1="337.73838" x2="461.95736" y2="371.48063" id="svg_258" stroke-linejoin="null" stroke-linecap="null"/>
+  <line stroke-dasharray="13.87 13.87" :stroke-dashoffset="speedd" stroke="#FFD700" fill="none" stroke-width="null" fill-opacity="null" x1="518.95816" y1="337.73838" x2="518.95816" y2="371.48063" id="svg_259" stroke-linejoin="null" stroke-linecap="null"/>
+  <line stroke-dasharray="13.87 13.87" :stroke-dashoffset="speedd" stroke="#FFD700" fill="none" stroke-width="null" fill-opacity="null" x1="576.62387" y1="337.73838" x2="576.62387" y2="370.1473" id="svg_260" stroke-linejoin="null" stroke-linecap="null"/>
+
+  <line stroke-dasharray="13.87 13.87" :stroke-dashoffset="speeded" stroke="#FFD700" fill="none" fill-opacity="null" x1="361.2708" y1="176.56308" x2="507.61823" y2="176.56308" id="svg_261" stroke-linejoin="null" stroke-linecap="null"/>
+  <line stroke-dasharray="13.87 13.87" :stroke-dashoffset="speeded" stroke="#FFD700" stroke-linecap="undefined" stroke-linejoin="undefined" id="svg_262" y2="254.45989" x2="361.79214" y1="254.45989" x1="132.03607" fill="none"/>
+
+  <line stroke-dasharray="13.87 13.87" :stroke-dashoffset="speeded" stroke="#FFD700" fill="none" fill-opacity="null" x1="347.83777" y1="52.79029" x2="347.83777" y2="77.4802" id="svg_263" stroke-linejoin="undefined" stroke-linecap="undefined"/>
+  <line stroke-dasharray="13.87 13.87" :stroke-dashoffset="speeded" stroke="#FFD700" fill="none" fill-opacity="null" x1="156.15392" y1="271.99452" x2="156.15392" y2="357.45433" id="svg_264" stroke-linejoin="undefined" stroke-linecap="undefined"/>  
                 </g>
             </svg>
             <Icon @click.native="toggleFullScreen" :type="fullscreen ? 'md-contract' : 'md-expand'" class="btn btn-default btn-map-fullscreen"
@@ -864,6 +892,8 @@
 
                 customerId: 2,
                 MaxResultCount: 1,
+                speedd: 0,
+                speeded: 0,
                 ElectricityMeterList: [],
 
                 fullscreen: false,
@@ -919,6 +949,17 @@
         mounted() {
             this.init()
             this.scadaInit()
+            if (this.timer) {
+                clearInterval(this.timer)
+            } else {
+                this.timer = setInterval(() => {
+                    this.speedd -= 5
+                    this.speeded += 5
+                }, 500)
+            }
+        },
+        beforeDestroy() {
+            clearInterval(this.timer)
         }
     }
 
