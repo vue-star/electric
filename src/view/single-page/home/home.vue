@@ -67,7 +67,7 @@
                         color: '#19be6b'
                     },
                     {
-                        title: '使用电量(kwh)',
+                        title: '使用电量(Mkwh)',
                         icon: 'md-calculator',
                         count: 0,
                         iconColor: '#fff',
@@ -179,6 +179,7 @@
         .top-area {
             background-color: rgb(221, 226, 226);
             padding: 5px;
+            font-weight: bold;
         }
 
         .top-style {

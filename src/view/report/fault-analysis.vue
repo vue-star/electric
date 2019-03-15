@@ -203,6 +203,7 @@
     .top-area {
         background-color: rgb(221, 226, 226);
         padding: 5px;
+        font-weight: bold;
     }
 
     .top-style {

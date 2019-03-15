@@ -17,10 +17,10 @@
                     <!-- <div class="top-style"></div> -->
                     <div class="top-area">
                         <Icon type="md-trending-up" size="20" style="float:left" color="#436EEE" />
-                        <p>日环比</p>
+                        <p>相电压监测</p>
                     </div>
             <Card shadow>
-                <voltage-chart style="height: 500px;" :value="barData" :date-time="dateTime" text='相电压分析' />
+                <voltage-chart style="height: 500px;" :value="barData" :date-time="dateTime"/>
             </Card>
             </div>
         </Row>
@@ -29,10 +29,10 @@
                     <!-- <div class="top-style"></div> -->
                     <div class="top-area">
                         <Icon type="md-trending-up" size="20" style="float:left" color="#436EEE" />
-                        <p>日环比</p>
+                        <p>线电压监测</p>
                     </div>
             <Card shadow>
-                <voltage-line-chart style="height: 500px;" :value="barData" :date-time="dateTime" text='线电压分析' />
+                <voltage-line-chart style="height: 500px;" :value="barData" :date-time="dateTime"/>
             </Card>
             </div>
         </Row>
@@ -128,4 +128,22 @@
 </script>
 <style>
     @import "../components/search/searchAndOperate.less";
+
+    .card-area {
+        background-color: white;
+        margin-top: 5px;
+        /* border: 1px solid; */
+    }
+
+    .top-area {
+        background-color: rgb(221, 226, 226);
+        padding: 5px;
+        font-weight: bold;
+    }
+
+    .top-style {
+        height: 5px;
+        background-color: darkcyan;
+    }
+
 </style>

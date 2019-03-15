@@ -17,10 +17,10 @@
                     <!-- <div class="top-style"></div> -->
                     <div class="top-area">
                         <Icon type="md-trending-up" size="20" style="float:left" color="#436EEE" />
-                        <p>日环比</p>
+                        <p>功率因数监测</p>
                     </div>
             <Card shadow>
-                <factors-chart style="height: 500px;" :value="barData" :date-time="dateTime" text= '功率因数' />
+                <factors-chart style="height: 500px;" :value="barData" :date-time="dateTime"/>
             </Card>
             </div>
         </Row>
@@ -134,6 +134,7 @@
     .top-area {
         background-color: rgb(221, 226, 226);
         padding: 5px;
+        font-weight: bold;
     }
 
     .top-style {

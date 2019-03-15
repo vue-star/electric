@@ -403,6 +403,7 @@
         .top-area {
             background-color: rgb(223, 230, 230);
             padding: 5px;
+            font-weight: bold;
         }
 
         .top-style {

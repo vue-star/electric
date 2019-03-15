@@ -226,21 +226,6 @@
 <style lang="less">
     @import "../../components/search/searchAndOperate.less";
 
-    .card-area {
-        background-color: white;
-        margin-top: 5px;
-    }
-
-    .top-area {
-        background-color: rgb(221, 226, 226);
-        padding: 5px;
-    }
-
-    .top-style {
-        height: 5px;
-        background-color: darkcyan;
-    }
-
     .infor-div {
         width: 23%;
         height: 150px;

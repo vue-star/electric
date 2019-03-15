@@ -12,7 +12,7 @@
                     <!-- <div class="top-style"></div> -->
                     <div class="top-area">
                         <Icon type="md-trending-up" size="20" style="float:left" color="#436EEE" />
-                        <p>日环比</p>
+                        <p>用户信息</p>
                     </div>
             <i-col :xs="12" :md="8" :lg="4" v-for="(infor, i) in inforCardData" :key="`infor-${i}`" class="infor-div">
                 <infor-card :color="infor.color" :icon="infor.icon" :icon-size="42" :icon-color="infor.iconColor">
@@ -27,21 +27,21 @@
                     <!-- <div class="top-style"></div> -->
                     <div class="top-area">
                         <Icon type="md-trending-up" size="20" style="float:left" color="#436EEE" />
-                        <p>日环比</p>
+                        <p>用电量统计</p>
                     </div>
             <i-col :xs="12" :md="8" :lg="4" class="power-div">
                 <Card>
-                    <day-chart style="height: 200px;" :value="dayData" text="本日电量" :subtext="dayTitle + 'kwh'"/>
+                    <day-chart style="height: 200px;" :value="dayData" text="本日用电量" :subtext="dayTitle + 'kwh'"/>
                 </Card>
             </i-col>
             <i-col :xs="12" :md="8" :lg="4" class="power-div">
                 <Card>
-                    <mon-chart style="height: 200px;" :value="monthData" text="本月电量" :subtext="monthTitle + 'kwh'"/>
+                    <mon-chart style="height: 200px;" :value="monthData" text="本月用电量" :subtext="monthTitle + 'kwh'"/>
                 </Card>
             </i-col>
             <i-col :xs="12" :md="8" :lg="4" class="power-div">
                 <Card>
-                    <year-chart style="height: 200px;" :value="yearData" text="本年电量" :subtext="yearTitle + 'kwh'"/>
+                    <year-chart style="height: 200px;" :value="yearData" text="本年用电量" :subtext="yearTitle + 'kwh'"/>
                 </Card>
             </i-col>
             </div>
@@ -231,6 +231,7 @@
         .top-area {
             background-color: rgb(223, 230, 230);
             padding: 8px;
+            font-weight: bold;
         }
 
         .top-style {
