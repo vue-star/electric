@@ -46,7 +46,7 @@
             </i-col>
             </div>
         </Row>
-        <Row style="margin-top: 20px;margin-right:1px;" >
+        <Row :gutter="20" >
             <div class="card-area">
                     <!-- <div class="top-style"></div> -->
                     <div class="top-area">

@@ -554,7 +554,7 @@
                         </Col>
                         <Col span="10" class='col-wrap'>
                             <FormItem label="出厂日期" prop="manufactureDate">
-                                <DatePicker v-model="formHighValidate.manufactureDate" type="date" placeholder="请选择出厂日期"></DatePicker>
+                                <DatePicker v-model="formHighValidate.manufactureDate" type="date" @on-change='dateChange' placeholder="请选择出厂日期"></DatePicker>
                             </FormItem>
                         </Col>
                     </Row>
@@ -618,7 +618,7 @@
                         </Col>
                         <Col span="10" class='col-wrap'>
                         <FormItem label="出厂日期" prop="manufactureDate">
-                            <DatePicker v-model="formLowValidate.manufactureDate" type="date" placeholder="请选择出厂日期"></DatePicker>
+                            <DatePicker v-model="formLowValidate.manufactureDate" type="date" @on-change='dateChange' placeholder="请选择出厂日期"></DatePicker>
                         </FormItem>
                         </Col>
                     </Row>
@@ -687,7 +687,7 @@
                         </Col>
                         <Col span="10" class='col-wrap'>
                         <FormItem label="出厂日期" prop="manufactureDate">
-                            <DatePicker v-model="formTransValidate.manufactureDate" type="date" placeholder="请选择出厂日期"></DatePicker>
+                            <DatePicker v-model="formTransValidate.manufactureDate" type="date" @on-change='dateChange' placeholder="请选择出厂日期"></DatePicker>
                         </FormItem>
                         </Col>
                     </Row>
@@ -2293,6 +2293,11 @@
                 this.showAddOrEditTransformer = true
                 this.isEdit = false
                 this.modelTitle = '新增变压信息'
+            },
+            dateChange(val){
+                this.formHighValidate.manufactureDate=val
+                this.formLowValidate.manufactureDate=val
+                this.formTransValidate.manufactureDate=val
             }
         },
         components: {},

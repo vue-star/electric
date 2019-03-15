@@ -7,7 +7,7 @@
                 </Select>
             </div>
             <div class="operate-wrap" style="margin-left: 20px">时间选择：
-                <DatePicker class='operate' type="date" :value="dateTime" placeholder="Select date" @on-change='dateChange'
+                <DatePicker class='operate' type="date" :value="dateTime" placeholder="选择时间" @on-change='dateChange'
                     style="width: 200px">
                 </DatePicker>
             </div>
