@@ -235,7 +235,7 @@
                         let SData = []
                         data.hourStatistic.forEach(element => {
                             XData.push(element.belongsTo)
-                            SData.push(((element.tendency) * 100).toFixed(2))
+                            SData.push((element.tendency).toFixed(2))
                         })
                         this.statisticXData = XData
                         this.statisticSData = SData
@@ -298,7 +298,7 @@
                 let SData = []
                 this.lineData.hourStatistic.forEach(element => {
                     XData.push(element.belongsTo)
-                    SData.push(((element.tendency) * 100).toFixed(2))
+                    SData.push((element.tendency).toFixed(2))
                 })
                 this.statisticXData = XData
                 this.statisticSData = SData
@@ -309,7 +309,7 @@
                 let SData = []
                 this.lineData.dayStatistic.forEach(element => {
                     XData.push(element.belongsTo)
-                    SData.push(((element.tendency) * 100).toFixed(2))
+                    SData.push((element.tendency).toFixed(2))
                 })
                 this.statisticXData = XData
                 this.statisticSData = SData
@@ -320,7 +320,7 @@
                 let SData = []
                 this.lineData.monthStatistic.forEach(element => {
                     XData.push(element.belongsTo)
-                    SData.push(((element.tendency) * 100).toFixed(2))
+                    SData.push((element.tendency).toFixed(2))
                 })
                 this.statisticXData = XData
                 this.statisticSData = SData
