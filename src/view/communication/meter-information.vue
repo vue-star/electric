@@ -361,6 +361,7 @@
                 this.$refs[name].resetFields()
             },
             handelSave(name) {
+                this.saving=true
                 this.$refs[name].validate((valid) => {
                     if (valid) {
                         if (this.isEdit) {
@@ -370,6 +371,7 @@
                                         this.$Message.success('修改设备成功')
                                         this.isAddElectricityMeter = false
                                         this.isEdit = false
+                                        this.saving = false
                                         this.$refs[name].resetFields()
                                         this.getListData()
                                         resolve()
@@ -387,6 +389,7 @@
                                 res => {
                                     this.$Message.success('新增设备成功')
                                     this.isAddElectricityMeter = false
+                                    this.saving = false
                                     this.$refs[name].resetFields()
                                     this.getListData()
                                     resolve()

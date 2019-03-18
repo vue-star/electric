@@ -2,7 +2,7 @@
   <div class="tables-edit-outer">
     <div v-if="!isEditting" class="tables-edit-con">
       <span class="value-con">{{ value }}</span>
-      <Button v-if="editable" @click="startEdit" class="tables-edit-btn" style="padding: 2px 4px;" type="text"><Icon type="md-create"></Icon></Button>
+      <Button v-if="editable" @click="startEdit" class="tables-edit-btn" style="padding: 0px 4px;" type="text"><Icon type="md-create"></Icon></Button>
     </div>
     <div v-else class="tables-editting-con">
       <Input :value="value" @input="handleInput" class="tables-edit-input"/>
@@ -54,7 +54,7 @@ export default {
     }
     .tables-edit-btn{
       position: absolute;
-      right: 10px;
+      right: 5px;
       top: 0;
       display: none;
     }

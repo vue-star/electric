@@ -69,7 +69,7 @@
                         </Col>
                         <Col span="10" class='col-wrap'>
                         <FormItem label="投运日期" prop="commissioningDate">
-                            <DatePicker type="date" v-model="formValidate.commissioningDate" placeholder="请选择投运日期"></DatePicker>
+                            <DatePicker v-model="formValidate.commissioningDate" type="date" @on-change='dateChange' placeholder="请选择投运日期"></DatePicker>
                         </FormItem>
                         </Col>
                     </Row>
@@ -247,9 +247,8 @@
                     }],
                     commissioningDate: [{
                         required: true,
-                        type: 'date',
                         message: '请选择投运日期',
-                        trigger: 'change'
+                        trigger: 'blur'
                     }],
                     organizationUnitId: [{
                         required: true,
@@ -417,7 +416,10 @@
                         this.$Message.error('输入有误!')
                     }
                 })
-            }
+            },
+            dateChange(val){
+                this.formValidate.commissioningDate = val
+            },
         },
         components: {
             search,

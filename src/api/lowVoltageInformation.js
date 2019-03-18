@@ -47,6 +47,38 @@ export const updataLowVoltageInformation = (LowVoltageInformation) => {
         method: 'put'
     })
 }
+
+// 根据Id获取高压组件信息
+export const getLowById = (LowVoltageId) => {
+    const Id = LowVoltageId
+    return axios.request({
+        url: 'services/app/LowVoltageInformation/GetById',
+        params: {
+            Id
+        },
+        method: 'get'
+    })
+}
+// 删除高压组件
+export const delLowVoltageItems = (LowVoltageItemId) => {
+    const Id = LowVoltageItemId
+    return axios.request({
+        url: 'services/app/HighVoltageInformation/DeleteEquipmentComponentAsync',
+        params: {
+            Id
+        },
+        method: 'delete'
+    })
+}
+// 编辑高压组件
+export const updataLowVoltageItems = (LowVoltageItem) => {
+    const data = LowVoltageItem
+    return axios.request({
+        url: 'services/app/HighVoltageInformation/UpdatePowerEquipmentComponent',
+        data,
+        method: 'put'
+    })
+}
 // 新增断路器信息
 export const createBreaker = (Breaker) => {
     const data = Breaker

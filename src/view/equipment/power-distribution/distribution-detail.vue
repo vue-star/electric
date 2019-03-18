@@ -345,7 +345,7 @@
                     返回
                 </Button>
                 <Button type="info" size="large" @click="handelSaveItems(tabsName)" :loading="loading">
-                    保存
+                    {{saveName}}
                 </Button>
             </div>
         </Modal>
@@ -506,7 +506,7 @@
                     返回
                 </Button>
                 <Button type="info" size="large" @click="handelSaveItems(tabsName)" :loading="loading">
-                    保存
+                    {{saveName}}
                 </Button>
             </div>
         </Modal>
@@ -714,29 +714,13 @@
         delHighVoltageInformation,
         updataHighVoltageInformation,
         addHighVoltageItems,
-        updataHighVoltageItems,
-        addCurrentTransformer,
-        updataCurrentTransformer,
-        addVoltageTransformer,
-        updataVoltageTransformer,
-        addHighVoltageFuse,
-        updataHighVoltageFuse,
-        addCable,
-        updataCable
+        updataHighVoltageItems
     } from '@/api/highVoltageInformation'
     import {
         getLowVoltageInformationList,
         addLowVoltageInformation,
         delLowVoltageInformation,
-        updataLowVoltageInformation,
-        createBreaker,
-        updateBreaker,
-        createCapacitor,
-        updateCapacitor,
-        createIsolationSwitch,
-        updateIsolationSwitch,
-        createOutCable,
-        updateOutCable
+        updataLowVoltageInformation
     } from '@/api/lowVoltageInformation'
     import {
         getTransInformationList,
@@ -744,12 +728,8 @@
         delTransInformation,
         updataTransInformation
     } from '@/api/transInformation'
-    import {
-        getDataDicConfigList
-    } from '@/api/data'
-    import {
-        formatData
-    } from '@/libs/tools'
+    import { getDataDicConfigList } from '@/api/data'
+    import { formatData } from '@/libs/tools'
     export default {
         name: 'distribution-detail',
         props: {
@@ -779,7 +759,8 @@
                         render: (h, params) => {
                             return h(expandHighRow, {
                                 props: {
-                                    row: params.row
+                                    row: params.row,
+                                    isEdit: true
                                 }
                             })
                         }
@@ -876,7 +857,8 @@
                         render: (h, params) => {
                             return h(expandLowRow, {
                                 props: {
-                                    row: params.row
+                                    row: params.row,
+                                    isEdit: true
                                 }
                             })
                         }
@@ -1065,6 +1047,7 @@
                 data: {},
                 modelTitle: '',
                 tabsName: '',
+                saveName: '',
                 add: false, // 点击添加切换
                 isEdit: false, // 点击编辑切换
                 isLoading: false,
@@ -2298,6 +2281,42 @@
                 this.formHighValidate.manufactureDate=val
                 this.formLowValidate.manufactureDate=val
                 this.formTransValidate.manufactureDate=val
+            },
+
+            // 根据tab不同，保存按钮改变
+            changeSaveName(){
+                switch (this.tabsName) {
+                    case 'formLoadSwitchValidate':
+                        this.saveName='保存负载开关'
+                        break
+                    case 'formCurrentTransValidate':
+                        this.saveName='保存电流互感器'
+                        break
+                    case 'formVoltageTransValidate':
+                        this.saveName='保存电压互感器'
+                        break
+                    case 'formHighVoltageFuseValidate':
+                        this.saveName='保存熔断器'
+                        break
+                    case 'formCableValidate':
+                        this.saveName='保存高压电缆'
+                        break
+                    case 'formBreakerValidate':
+                        this.saveName='保存断路器'
+                        break
+                    case 'formCapacitorValidate':
+                        this.saveName='保存电容器'
+                        break
+                    case 'formIsolationSwitchValidate':
+                        this.saveName='保存隔离开关'
+                        break
+                    case 'formOutCableValidate':
+                        this.saveName='保存低压电缆'
+                        break
+
+                    default:
+                        break
+                }
             }
         },
         components: {},
@@ -2312,6 +2331,9 @@
                         this.getListData()
                     }
                 }
+            },
+            tabsName() {
+                this.changeSaveName()
             }
         }
 

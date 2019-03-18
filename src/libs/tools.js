@@ -112,12 +112,12 @@ export const formatData = (timeStamp, startType) => {
     const minutes = getHandledValue(d.getMinutes())
     const second = getHandledValue(d.getSeconds())
     let resStr = ''
-    if (startType === 'min') resStr = year + '-' + month + '-' + date + ' ' + hours + ':' + minutes + '分'
-    else if (startType === 'hour') resStr = year + '-' + month + '-' + date + ' ' + hours + '点'
-    else if (startType === 'day') resStr = year + '-' + month + '-' + date + '日'
-    else if (startType === 'dayMon') resStr = month + '-' + date + '日'
+    if (startType === 'min') resStr = year + '-' + month + '-' + date + ' ' + hours + ':' + minutes
+    else if (startType === 'hour') resStr = year + '-' + month + '-' + date + ' ' + hours
+    else if (startType === 'day') resStr = year + '-' + month + '-' + date
+    else if (startType === 'dayMon') resStr = month + '-' + date
     else if (startType === 'mon') resStr = month + '月'
-    else if (startType === 'onlyHour') resStr = hours + ':' + minutes + '分'
+    else if (startType === 'onlyHour') resStr = hours + ':' + minutes
     else resStr = year + '年' + month + '月'
     return resStr
 }

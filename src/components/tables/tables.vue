@@ -189,10 +189,12 @@
                     let res = item
                     if (res.editable) res = this.suportEdit(res, index)
                     if (res.key === 'handle') res = this.surportHandle(res)
-                    if (res.children.length > 0) {
-                        res.children.forEach(element=>{
+                    // 复杂表头时判断条件
+                    if (res.children) {
+                        res.children.forEach((element, i)=>{
                             let ele = element
-                            if(ele.key === 'handle') ele= this.surportHandle(ele)
+                            if (ele.editable) ele = this.suportEdit(ele, i)
+                            if (ele.key === 'handle') ele= this.surportHandle(ele)
                         })
                     }
                     return res

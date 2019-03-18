@@ -48,7 +48,7 @@ export const updataHighVoltageInformation = (HighVoltageInformation) => {
         method: 'put'
     })
 }
-// 新增负荷开关
+// 新增高压组件
 export const addHighVoltageItems = (HighVoltageItem) => {
     const data = HighVoltageItem
     return axios.request({
@@ -57,7 +57,7 @@ export const addHighVoltageItems = (HighVoltageItem) => {
         method: 'post'
     })
 }
-// 修改负荷开关
+// 编辑高压组件
 export const updataHighVoltageItems = (HighVoltageItem) => {
     const data = HighVoltageItem
     return axios.request({
@@ -66,75 +66,26 @@ export const updataHighVoltageItems = (HighVoltageItem) => {
         method: 'put'
     })
 }
-// 新增电流互感器
-export const addCurrentTransformer = (CurrentTransformer) => {
-    const data = CurrentTransformer
+
+// 根据Id获取高压组件信息
+export const getHighById = (HighVoltageId) => {
+    const Id = HighVoltageId
     return axios.request({
-        url: 'services/app/HighVoltageInformation/CreateCurrentTransformer',
-        data,
-        method: 'post'
+        url: 'services/app/HighVoltageInformation/GetById',
+        params: {
+            Id
+        },
+        method: 'get'
     })
 }
-// 修改电流互感器
-export const updataCurrentTransformer = (CurrentTransformer) => {
-    const data = CurrentTransformer
+// 删除高压组件
+export const delHighVoltageItems = (HighVoltageItemId) => {
+    const Id = HighVoltageItemId
     return axios.request({
-        url: 'services/app/HighVoltageInformation/UpdateCurrentTransformer',
-        data,
-        method: 'put'
-    })
-}
-// 新增电压互感器
-export const addVoltageTransformer = (VoltageTransformer) => {
-    const data = VoltageTransformer
-    return axios.request({
-        url: 'services/app/HighVoltageInformation/CreateVoltageTransformer',
-        data,
-        method: 'post'
-    })
-}
-// 修改电压互感器
-export const updataVoltageTransformer = (VoltageTransformer) => {
-    const data = VoltageTransformer
-    return axios.request({
-        url: 'services/app/HighVoltageInformation/UpdateVoltageTransformer',
-        data,
-        method: 'put'
-    })
-}
-// 新增高压熔断器
-export const addHighVoltageFuse = (HighVoltageFuse) => {
-    const data = HighVoltageFuse
-    return axios.request({
-        url: 'services/app/HighVoltageInformation/CreateHighVoltageFuse',
-        data,
-        method: 'post'
-    })
-}
-// 修改高压熔断器
-export const updataHighVoltageFuse = (HighVoltageFuse) => {
-    const data = HighVoltageFuse
-    return axios.request({
-        url: 'services/app/HighVoltageInformation/UpdateHighVoltageFuse',
-        data,
-        method: 'put'
-    })
-}
-// 新增电缆
-export const addCable = (Cable) => {
-    const data = Cable
-    return axios.request({
-        url: 'services/app/HighVoltageInformation/CreateCable',
-        data,
-        method: 'post'
-    })
-}
-// 修改电缆
-export const updataCable = (Cable) => {
-    const data = Cable
-    return axios.request({
-        url: 'services/app/HighVoltageInformation/UpdateCable',
-        data,
-        method: 'put'
+        url: 'services/app/HighVoltageInformation/DeleteEquipmentComponentAsync',
+        params: {
+            Id
+        },
+        method: 'delete'
     })
 }
